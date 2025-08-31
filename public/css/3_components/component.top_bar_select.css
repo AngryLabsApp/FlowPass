@@ -1,0 +1,48 @@
+@layer components {
+  /* Selects del topbar */
+  .topbar__select {
+    /* tokens (puedes ajustar) */
+    --sel-h: 40px;
+    --sel-px: 12px;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    display: inline-flex;
+    align-items: center;
+    height: var(--sel-h);
+    padding: 0 2rem 0 var(--sel-px); /* espacio derecha para la flecha */
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+
+    /* flecha (SVG) usando currentColor */
+    background-image: url("data:image/svg+xml;utf8,\<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>\<path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+
+    color: var(--text);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .topbar__select:hover {
+    border-color: color-mix(in srgb, var(--border) 60%, var(--c8) 40%);
+  }
+
+  .topbar__select:focus {
+    outline: none;
+    border-color: var(--c8);
+    box-shadow: 0 0 0 2px rgba(238, 66, 102, 0.25); /* halo suave basado en --c8 */
+  }
+
+  .topbar__select:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+  }
+
+
+
+}

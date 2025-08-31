@@ -1,0 +1,42 @@
+/* FlowPass — component.modal.css */
+@layer components {
+  .modal { position: fixed; inset: 0; display: none; z-index: 1000; }
+  .modal[aria-hidden="false"] { display: block; }
+  .modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+
+  .modal__dialog {
+    position: relative;
+    margin: 5vh auto;
+    max-width: 880px;
+    width: min(96vw, 880px);
+    /* .card ya aporta fondo, borde, sombra, radio */
+    padding: 16px 16px 20px;
+    outline: 0;
+  }
+
+  .modal__header {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .modal__title { margin: 0; font-size: 20px; font-weight: 800; }
+  .modal__body { display: grid; gap: 16px; padding-top: 12px; }
+  .modal__section { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px; }
+  .modal__subtitle { margin: 0 0 8px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .02em; }
+  .modal__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+
+  /* Info de usuario en 2 columnas; 1 col en móvil */
+  .user-info { display: grid; grid-template-columns: 1fr 2fr; gap: 8px 12px; }
+  .user-info__label { font-weight: 600; color: var(--muted); }
+  .user-info__value { color: var(--text); }
+  @media (width <= 560px) { .user-info { grid-template-columns: 1fr; } }
+
+  /* Form */
+  .form { display: grid; gap: 10px; }
+  .form__row { display: grid; gap: 6px; }
+  .form__label { font-size: 12px; color: var(--muted); text-transform: uppercase; }
+  .form__control {
+    padding: 10px 12px; border: 1px solid var(--border);
+    border-radius: 10px; background: #fff; color: var(--text);
+  }
+  .form__actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+}

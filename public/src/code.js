@@ -74,7 +74,9 @@ function statusBadgeClass(status) {
 /** Renderiza una fila de usuario */
 function renderUserRow(user) {
   return `
-    <tr class="table__row">
+    <tr class="table__row" role="button" tabindex="0"
+        onclick="openModal()"
+        onkeypress="if(event.key==='Enter') openModal()">
       <td class="table__cell table__col--user-id">${safe(user.ID)}</td>
       <td class="table__cell table__col--first-name">${safe(user.Nombre)}</td>
       <td class="table__cell table__col--last-name">${safe(user.Apellidos)}</td>
