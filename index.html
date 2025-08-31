@@ -49,16 +49,11 @@
             aria-label="Buscar"
           />
           <div class="topbar__actions">
-            <a
-              href="https://TU-DOMINIO-N8N/form/XXXXXXXXXXXXXXXX"
-              class="btn btn--primary"
-              target="_blank"
-              rel="noopener"
-              >➕ Nuevo usuario</a
-            >
+             <button id="nuevoUsuario" class="btn btn--primary">➕ Nuevo usuario</button>
           </div>
         </div>
 
+   
         <main class="main">
           <h1 class="main__title">Usuarios</h1>
           <div class="card" aria-label="Tabla de usuarios">
@@ -105,7 +100,7 @@
                   </th>
                 </tr>
               </thead>
-              <tbody class="table__body">
+              <tbody class="table__body" id="usersTbody">
                 <!-- Fila ejemplo 1 -->
                 <tr class="table__row">
                   <td class="table__cell table__col--user-id">USR-0001</td>
@@ -156,5 +151,6 @@
         </main>
       </div>
     </div>
+     <script src="/public/src/code.js"></script>
   </body>
 </html>
