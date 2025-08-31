@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FlowPass — Usuarios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./public/css/index.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <a href="#" class="sidebar__brand">
+          <span class="logo logo--lg" aria-hidden="true">
+            <!-- Icono inline (SVG) con color adaptable a la marca mediante currentColor -->
+            <svg
+              class="logo__svg"
+              viewBox="0 0 512 512"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M156.7 256H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h142.2c15.9 0 30.8 10.9 33.4 26.6 3.3 20-12.1 37.4-31.6 37.4-14.1 0-26.1-9.2-30.4-21.9-2.1-6.3-8.6-10.1-15.2-10.1H81.6c-9.8 0-17.7 8.8-15.9 18.4 8.6 44.1 47.6 77.6 94.2 77.6 57.1 0 102.7-50.1 95.2-108.6C249 291 205.4 256 156.7 256zM16 224h336c59.7 0 106.8-54.8 93.8-116.7-7.6-36.2-36.9-65.5-73.1-73.1-55.4-11.6-105.1 24.9-114.9 75.5-1.9 9.6 6.1 18.3 15.8 18.3h32.8c6.7 0 13.1-3.8 15.2-10.1C325.9 105.2 337.9 96 352 96c19.4 0 34.9 17.4 31.6 37.4-2.6 15.7-17.4 26.6-33.4 26.6H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16zm384 32H243.7c19.3 16.6 33.2 38.8 39.8 64H400c26.5 0 48 21.5 48 48s-21.5 48-48 48c-17.9 0-33.3-9.9-41.6-24.4-2.9-5-8.7-7.6-14.5-7.6h-33.8c-10.9 0-19 10.8-15.3 21.1 17.8 50.6 70.5 84.8 129.4 72.3 41.2-8.7 75.1-41.6 84.7-82.7C526 321.5 470.5 256 400 256z"
+              />
+            </svg>
+          </span>
+          <span class="sidebar__name">FlowPass</span>
+        </a>
+        <nav class="sidebar__nav" aria-label="Menú principal">
+          <a href="#" class="sidebar__link sidebar__link--active">Usuarios</a>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <div class="content">
+        <div class="topbar">
+          <input
+            class="topbar__search-input"
+            type="text"
+            placeholder="Buscar por nombre o email…"
+            aria-label="Buscar"
+          />
+          <div class="topbar__actions">
+            <a
+              href="https://TU-DOMINIO-N8N/form/XXXXXXXXXXXXXXXX"
+              class="btn btn--primary"
+              target="_blank"
+              rel="noopener"
+              >➕ Nuevo usuario</a
+            >
+          </div>
+        </div>
+
+        <main class="main">
+          <h1 class="main__title">Usuarios</h1>
+          <div class="card" aria-label="Tabla de usuarios">
+            <table class="table">
+              <thead class="table__head">
+                <tr class="table__row">
+                  <th class="table__head-cell table__col--user-id">
+                    ID de usuario
+                  </th>
+                  <th class="table__head-cell table__col--first-name">
+                    Nombre(s)
+                  </th>
+                  <th class="table__head-cell table__col--last-name">
+                    Apellido(s)
+                  </th>
+                  <th class="table__head-cell table__col--phone">Teléfono</th>
+                  <th class="table__head-cell table__col--email">
+                    Correo electrónico
+                  </th>
+                  <th class="table__head-cell table__col--plan">Plan</th>
+                  <th class="table__head-cell table__col--amount">
+                    Monto de pago
+                  </th>
+                  <th class="table__head-cell table__col--method">
+                    Método de pago
+                  </th>
+                  <th class="table__head-cell table__col--status">
+                    Estado de pago
+                  </th>
+                  <th class="table__head-cell table__col--classes">
+                    Número de clases tomadas
+                  </th>
+                  <th class="table__head-cell table__col--grace">
+                    Días de gracia
+                  </th>
+                  <th class="table__head-cell table__col--start">
+                    Fecha de inicio
+                  </th>
+                  <th class="table__head-cell table__col--end">
+                    Fecha de término
+                  </th>
+                  <th class="table__head-cell table__col--birth">
+                    Fecha de cumpleaños
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="table__body">
+                <!-- Fila ejemplo 1 -->
+                <tr class="table__row">
+                  <td class="table__cell table__col--user-id">USR-0001</td>
+                  <td class="table__cell table__col--first-name">James</td>
+                  <td class="table__cell table__col--last-name">Brown</td>
+                  <td class="table__cell table__col--phone">+51 999 111 222</td>
+                  <td class="table__cell table__col--email">james@gmail.com</td>
+                  <td class="table__cell table__col--plan">Mensual</td>
+                  <td class="table__cell table__col--amount">S/ 120.00</td>
+                  <td class="table__cell table__col--method">
+                    <span class="badge badge--method">Tarjeta</span>
+                  </td>
+                  <td class="table__cell table__col--status">
+                    <span class="badge badge--paid">Pagado</span>
+                  </td>
+                  <td class="table__cell table__col--classes">8</td>
+                  <td class="table__cell table__col--grace">3</td>
+                  <td class="table__cell table__col--start">2025-02-05</td>
+                  <td class="table__cell table__col--end">2025-03-05</td>
+                  <td class="table__cell table__col--birth">1994-07-22</td>
+                </tr>
+                <!-- Fila ejemplo 2 -->
+                <tr class="table__row">
+                  <td class="table__cell table__col--user-id">USR-0002</td>
+                  <td class="table__cell table__col--first-name">Arthur</td>
+                  <td class="table__cell table__col--last-name">Taylor</td>
+                  <td class="table__cell table__col--phone">+51 987 654 321</td>
+                  <td class="table__cell table__col--email">
+                    arthur@gmail.com
+                  </td>
+                  <td class="table__cell table__col--plan">Trimestral</td>
+                  <td class="table__cell table__col--amount">S/ 300.00</td>
+                  <td class="table__cell table__col--method">
+                    <span class="badge badge--method">Efectivo</span>
+                  </td>
+                  <td class="table__cell table__col--status">
+                    <span class="badge badge--pending">Pendiente</span>
+                  </td>
+                  <td class="table__cell table__col--classes">2</td>
+                  <td class="table__cell table__col--grace">0</td>
+                  <td class="table__cell table__col--start">2025-02-08</td>
+                  <td class="table__cell table__col--end">2025-05-08</td>
+                  <td class="table__cell table__col--birth">1990-11-05</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

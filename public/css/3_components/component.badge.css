@@ -1,0 +1,33 @@
+/* FlowPass — component.badge.css */
+@layer components {
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .badge--active {
+    background: var(--c5);
+    color: var(--text);
+  }
+  .badge--pending {
+    background: var(--c4);
+    color: var(--text);
+  }
+  .badge--overdue {
+    background: #ffe4e9;
+    color: #7a0930;
+    border-color: #ffd0dc;
+  }
+  .badge--paid {
+    background: #e8fff1;
+    color: #0a6b3e;
+    border-color: #d2f6e0;
+  }
+  .badge--method {
+    background: #f1f5f9;
+    color: var(--text);
+  }
+}

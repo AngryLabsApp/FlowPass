@@ -1,0 +1,19 @@
+/* FlowPass — component.search.css */
+@layer components {
+  .search {
+    position: relative;
+  }
+  .search__input {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    width: 420px;
+    max-width: 50vw;
+  }
+  @media (width <= 900px) {
+    .search__input {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}

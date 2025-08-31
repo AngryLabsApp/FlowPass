@@ -1,0 +1,28 @@
+/* FlowPass — index.css (agregador MVP)
+   Carga en este orden para controlar la cascada mediante @layer
+*/
+
+/* 0) Reset */
+@import url("./1_foundations/reset.css") layer(reset);
+
+/* 1) Tokens */
+@import url("./1_foundations/tokens.css") layer(tokens);
+
+/* 2) Base */
+@import url("./1_foundations/typography.css") layer(base);
+@import url("./1_foundations/globals.css")    layer(base);
+
+/* 3) Layouts */
+@import url("./2_layouts/app.css") layer(layouts);
+
+/* 4) Components (separados) */
+@import url("./3_components/component.logo.css")   layer(components);
+@import url("./3_components/component.button.css") layer(components);
+@import url("./3_components/component.card.css")   layer(components);
+@import url("./3_components/component.table.css")  layer(components);
+@import url("./3_components/component.badge.css")  layer(components);
+@import url("./3_components/component.user.css")   layer(components);
+@import url("./3_components/component.search.css") layer(components);
+
+/* 5) Utilities */
+@import url("./4_utilities/utilities.css") layer(utilities);

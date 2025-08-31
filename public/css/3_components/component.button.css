@@ -1,0 +1,20 @@
+/* FlowPass — component.button.css */
+@layer components {
+  .btn {
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn--primary {
+    background: var(--c8);
+    color: #fff;
+    border-color: transparent;
+  }
+}

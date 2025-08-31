@@ -1,0 +1,48 @@
+/* FlowPass — component.table.css */
+@layer components {
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table__head-cell {
+    background: #fafafa;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 12px;
+    position: sticky;
+    top: 0;
+  }
+  .table__cell {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .table__row:hover {
+    background: #fbfef9;
+  }
+
+  /* Responsivo por columnas */
+  @media (width <= 1100px) {
+    .table__col--start,
+    .table__col--end,
+    .table__col--birth {
+      display: none;
+    }
+  }
+  @media (width <= 900px) {
+    .table__col--email,
+    .table__col--classes,
+    .table__col--grace,
+    .table__col--method {
+      display: none;
+    }
+  }
+  @media (width <= 640px) {
+    .table__col--phone,
+    .table__col--plan,
+    .table__col--user-id {
+      display: none;
+    }
+  }
+}

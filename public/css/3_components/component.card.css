@@ -1,0 +1,10 @@
+/* FlowPass — component.card.css */
+@layer components {
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: auto;
+  }
+}

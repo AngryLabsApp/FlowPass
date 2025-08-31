@@ -1,0 +1,18 @@
+/* FlowPass — component.user.css */
+@layer components {
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .user__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e5e7eb;
+  }
+  .user__email {
+    color: var(--muted);
+    font-size: 12px;
+  }
+}
