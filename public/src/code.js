@@ -1,80 +1,206 @@
 const ENV_VARS = {
-    url_form:"https://n8n.angrylabs.app/form/54f40a75-b183-4483-9c51-82d281c6b504"
+    url_form:"https://n8n.angrylabs.app/form/54f40a75-b183-4483-9c51-82d281c6b504",
+    url_get_users:"https://n8n.angrylabs.app/webhook/9ecc1791-c157-4084-8de6-6924235d95cd"
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("nuevoUsuario");
+// =======================
+// Config
+// =======================
+const DEBOUNCE_MS = 350;
+const TABLE_COLSPAN = 14; // cantidad de columnas de tu tabla
 
-  btn.addEventListener("click", () => {
-    const url = ENV_VARS.url_form; 
-    window.open(url, "_blank"); 
+// Espera que tengas estas variables definidas en algún lado
+// const ENV_VARS = { url_form: "...", url_get_users: "..." };
+
+// =======================
+// Utils
+// =======================
+
+/** Atajo de querySelector */
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+
+/** Debounce sencillo */
+function debounce(fn, wait = 300) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), wait);
+  };
+}
+
+/** Construye URL con query params de forma segura */
+function buildUrl(base, params = {}) {
+  const url = new URL(base, location.origin);
+  Object.entries(params).forEach(([k, v]) => {
+    if (v !== undefined && v !== null && String(v).trim() !== "") {
+      url.searchParams.set(k, v);
+    }
   });
-});
-
-function mapTableBody(user){
-    return `
-    <tr class="table__row">
-        <td class="table__cell table__col--user-id">${user.ID}</td>
-        <td class="table__cell table__col--first-name">${user.Nombre}</td>
-        <td class="table__cell table__col--last-name">${user.Apellidos}</td>
-        <td class="table__cell table__col--phone">${user.Telefono}</td>
-        <td class="table__cell table__col--email">${user.Email}</td>
-        <td class="table__cell table__col--plan">${user.Plan}</td>
-        <td class="table__cell table__col--amount">${user.Monto}</td>
-        <td class="table__cell table__col--method">
-            <span class="badge badge--method">${user.Medio_de_pago}</span>
-        </td>
-        <td class="table__cell table__col--status">
-            <span class="badge badge--paid">${user.Estado}</span>
-        </td>
-        <td class="table__cell table__col--classes">${user.Clases_tomadas}</td>
-        <td class="table__cell table__col--grace">${user.Dias_de_Gracia}</td>
-        <td class="table__cell table__col--start">${user.Fecha_Alta}</td>
-        <td class="table__cell table__col--end">${user.Proxima_Fecha_Pago}</td>
-        <td class="table__cell table__col--birth">${user.Cumpleaños}</td>
-    </tr>
-    `
+  return url.toString();
 }
 
-async function loadUsers() {
-    const tbody =  document.getElementById("usersTbody");
+/** Formatea fecha a YYYY-MM-DD si es posible */
+function formatDate(value) {
+  if (!value) return "-";
+  const raw = String(value);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  const d = new Date(raw);
+  if (isNaN(d)) return raw;
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${m}-${day}`;
+}
 
-    if (!tbody) return;
+/** Escapa texto para evitar inyecciones si renderizas con innerHTML */
+function safe(text) {
+  const span = document.createElement("span");
+  span.textContent = text ?? "";
+  return span.innerHTML;
+}
 
-    tbody.innerHTML = `
-        <tr class="table__row"><td class="table__cell" colspan="14">Cargando...</td></tr>
-    `;
+/** Mapea estado a clase de badge (opcional) */
+function statusBadgeClass(status) {
+  const s = String(status || "").toLowerCase();
+  if (["pagado", "paid", "completo", "completed"].includes(s)) return "badge--paid";
+  if (["pendiente", "pending"].includes(s)) return "badge--method";
+  if (["vencido", "overdue", "failed", "atrasado"].includes(s)) return "badge--overdue";
+  return "badge--method";
+}
 
-    try {
-        const res = await fetch("https://n8n.angrylabs.app/webhook/9ecc1791-c157-4084-8de6-6924235d95cd");
-        if (!res.ok) throw new Error("Error en la respuesta del servidor");
+// =======================
+// Render (Tabla)
+// =======================
 
-        const data = await res.json();
+/** Renderiza una fila de usuario */
+function renderUserRow(user) {
+  return `
+    <tr class="table__row">
+      <td class="table__cell table__col--user-id">${safe(user.ID)}</td>
+      <td class="table__cell table__col--first-name">${safe(user.Nombre)}</td>
+      <td class="table__cell table__col--last-name">${safe(user.Apellidos)}</td>
+      <td class="table__cell table__col--phone">${safe(user.Telefono)}</td>
+      <td class="table__cell table__col--email">${safe(user.Email)}</td>
+      <td class="table__cell table__col--plan">${safe(user.Plan)}</td>
+      <td class="table__cell table__col--amount">${safe(user.Monto)}</td>
+      <td class="table__cell table__col--method">
+        <span class="badge badge--method">${safe(user.Medio_de_pago)}</span>
+      </td>
+      <td class="table__cell table__col--status">
+        <span class="badge ${statusBadgeClass(user.Estado)}">${safe(user.Estado)}</span>
+      </td>
+      <td class="table__cell table__col--classes">${safe(user.Clases_tomadas)}</td>
+      <td class="table__cell table__col--grace">${safe(user.Dias_de_Gracia)}</td>
+      <td class="table__cell table__col--start">${formatDate(user.Fecha_Alta)}</td>
+      <td class="table__cell table__col--end">${formatDate(user.Proxima_Fecha_Pago)}</td>
+      <td class="table__cell table__col--birth">${formatDate(user.Cumpleaños)}</td>
+    </tr>
+  `;
+}
 
-        // ⚡ Ajusta según cómo responda tu webhook
-        const items = Array.isArray(data) ? data : data?.data || [];
+/** Estados de tabla */
+function renderLoading(tbody) {
+  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${TABLE_COLSPAN}">Cargando...</td></tr>`;
+}
+function renderEmpty(tbody, msg = "Sin registros") {
+  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${TABLE_COLSPAN}">${safe(msg)}</td></tr>`;
+}
+function renderError(tbody, msg = "Error al cargar datos. Intenta nuevamente.") {
+  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${TABLE_COLSPAN}">${safe(msg)}</td></tr>`;
+}
 
+// =======================
+// Data (Fetch)
+// =======================
 
-        if (!items.length || items.length<= 0) {
-            tbody.innerHTML = `<tr><td colspan="14">Sin registros</td></tr>`;
-            return;
-        }
-        let total =items[0].total;
-        let users = items[0].data;
-        let tableBody = "";
-        users.forEach(user => {
-            tableBody+= mapTableBody(user);
-        });
-        tbody.innerHTML = tableBody;
-        
-        console.log(total, users);
+let currentAbort = null;
 
-    }catch(error){
+/**
+ * Carga usuarios desde el backend.
+ * params: objeto de filtros. En tu backend actual usas:
+ *   field1=Nombre, value1=<texto>
+ */
+async function loadUsers(params = {}) {
+  const tbody = $("#usersTbody");
+  if (!tbody) return;
+  renderLoading(tbody);
 
+  // Cancela petición anterior si existe
+  if (currentAbort) currentAbort.abort();
+  currentAbort = new AbortController();
+
+  try {
+    // arma tus query params como tu backend espera:
+    const queryParams = {};
+    if (params.search && String(params.search).trim() !== "") {
+      queryParams.field1 = "Nombre";         // <-- puedes cambiar a "Email" si buscas por email
+      queryParams.value1 = String(params.search).trim();
     }
 
+    const url = buildUrl(ENV_VARS.url_get_users, queryParams);
+    const res = await fetch(url, { signal: currentAbort.signal, headers: { Accept: "application/json" } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = await res.json();
+
+    // Tu flujo actual devuelve algo como [{ total, data: [...] }]
+    const items = Array.isArray(data) ? data : data?.data || [];
+    if (!items.length) return renderEmpty(tbody);
+
+    const { total, data: users } = items[0] || {};
+    if (!Array.isArray(users) || users.length === 0) return renderEmpty(tbody);
+
+    tbody.innerHTML = users.map(renderUserRow).join("");
+
+    // Si quieres usar 'total' para paginación o mostrar un contador:
+    // console.log("Total:", total);
+
+  } catch (err) {
+    if (err.name === "AbortError") return; // petición cancelada: ignorar
+    console.error(err);
+    renderError(tbody);
+  } finally {
+    currentAbort = null;
+  }
 }
 
+// =======================
+// UI (Eventos)
+// =======================
 
-// ===== Init =====
-document.addEventListener("DOMContentLoaded", loadUsers);
+/** Botón “Nuevo usuario” abre el form en nueva pestaña */
+function initAddNewUser() {
+  const btn = $("#nuevoUsuario");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    if (!ENV_VARS?.url_form) return;
+    window.open(ENV_VARS.url_form, "_blank");
+  });
+}
+
+/** Buscador con debounce. Enter busca inmediato. ESC limpia. */
+function initSearch() {
+  const input = $("#searchInput");
+  if (!input) return;
+
+  const run = debounce(() => loadUsers({ search: input.value }), DEBOUNCE_MS);
+
+  input.addEventListener("input", run);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      loadUsers({ search: input.value });
+    } else if (e.key === "Escape") {
+      input.value = "";
+      loadUsers({ search: "" });
+    }
+  });
+}
+
+// =======================
+// Init
+// =======================
+document.addEventListener("DOMContentLoaded", () => {
+  initSearch();
+  initAddNewUser();
+  loadUsers(); // carga inicial sin filtros
+});
