@@ -188,10 +188,11 @@ async function loadUsers() {
 
 /** Botón “Nuevo usuario” abre el form en nueva pestaña */
 function initAddNewUser() {
+    console.log("holaa");
   const btn = $("#nuevoUsuario");
   if (!btn) return;
   btn.addEventListener("click", () => {
-    if (!ENV_VARS?.url_form) return;
+
     window.open(ENV_VARS.url_form, "_blank");
   });
 }
