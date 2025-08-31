@@ -73,10 +73,9 @@ function statusBadgeClass(status) {
 
 /** Renderiza una fila de usuario */
 function renderUserRow(user) {
+    const payload = encodeURIComponent(JSON.stringify(user));
   return `
-    <tr class="table__row" role="button" tabindex="0"
-        onclick="openModal()"
-        onkeypress="if(event.key==='Enter') openModal()">
+    <tr class="table__row" role="button" tabindex="0" data-user="${payload}">
       <td class="table__cell table__col--user-id">${safe(user.ID)}</td>
       <td class="table__cell table__col--first-name">${safe(user.Nombre)}</td>
       <td class="table__cell table__col--last-name">${safe(user.Apellidos)}</td>
@@ -225,17 +224,26 @@ document.addEventListener("DOMContentLoaded", () => {
     loadUsers(); // carga inicial sin filtros
 
     document.getElementById("statusSelect").addEventListener("change", () => {
-    const value = document.getElementById("statusSelect").value;
-    console.log("Nuevo estado:", value);
-    loadUsers(); // tu función que vuelve a cargar con filtros
+        const value = document.getElementById("statusSelect").value;
+        console.log("Nuevo estado:", value);
+        loadUsers(); // tu función que vuelve a cargar con filtros
     });
 
     document.getElementById("methodSelect").addEventListener("change", () => {
-    const value = document.getElementById("methodSelect").value;
-    console.log("Nuevo método:", value);
-    loadUsers();
+        const value = document.getElementById("methodSelect").value;
+        console.log("Nuevo método:", value);
+        loadUsers();
     });
 
+    
+     const tbody = $("#usersTbody");
+    tbody.addEventListener('click', (e) => {
+        const row = e.target.closest('.table__row');
+        if (!row) return;
+        const raw = row.dataset.user || '';
+        const user = raw ? JSON.parse(decodeURIComponent(raw)) : null;
+        if (user) openModal(user);
+    });
 
 });
 
