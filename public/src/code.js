@@ -119,7 +119,30 @@ let currentAbort = null;
  * params: objeto de filtros. En tu backend actual usas:
  *   field1=Nombre, value1=<texto>
  */
-async function loadUsers(params = {}) {
+function buildQueryParams(){
+     const queryParams = {};
+
+    const input = $("#searchInput").value;
+    const status = $("#statusSelect").value;
+    const method = $("#methodSelect").value;  
+    
+    if (input && String(input).trim() !== "") {
+      queryParams.field1 = "Nombre";
+      queryParams.value1 = String(input).trim();
+    }
+
+    if (status && String(status).trim() !== ""){
+        queryParams.field2 = "Estado";         // <-- puedes cambiar a "Email" si buscas por email
+        queryParams.value2 = String(status).trim();
+    }
+    if (method && String(method).trim() !== ""){
+        queryParams.field3 = "Medio_de_pago";         // <-- puedes cambiar a "Email" si buscas por email
+        queryParams.value3 = String(method).trim();
+    }
+    return queryParams;
+}
+
+async function loadUsers() {
   const tbody = $("#usersTbody");
   if (!tbody) return;
   renderLoading(tbody);
@@ -130,12 +153,7 @@ async function loadUsers(params = {}) {
 
   try {
     // arma tus query params como tu backend espera:
-    const queryParams = {};
-    if (params.search && String(params.search).trim() !== "") {
-      queryParams.field1 = "Nombre";         // <-- puedes cambiar a "Email" si buscas por email
-      queryParams.value1 = String(params.search).trim();
-    }
-
+    const queryParams = buildQueryParams();
     const url = buildUrl(ENV_VARS.url_get_users, queryParams);
     const res = await fetch(url, { signal: currentAbort.signal, headers: { Accept: "application/json" } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -182,16 +200,16 @@ function initSearch() {
   const input = $("#searchInput");
   if (!input) return;
 
-  const run = debounce(() => loadUsers({ search: input.value }), DEBOUNCE_MS);
+  const run = debounce(() => loadUsers(), DEBOUNCE_MS);
 
   input.addEventListener("input", run);
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      loadUsers({ search: input.value });
+      loadUsers();
     } else if (e.key === "Escape") {
       input.value = "";
-      loadUsers({ search: "" });
+      loadUsers();
     }
   });
 }
@@ -200,7 +218,23 @@ function initSearch() {
 // Init
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
-  initSearch();
-  initAddNewUser();
-  loadUsers(); // carga inicial sin filtros
+    initSearch();
+    initAddNewUser();
+    loadUsers(); // carga inicial sin filtros
+
+    document.getElementById("statusSelect").addEventListener("change", () => {
+    const value = document.getElementById("statusSelect").value;
+    console.log("Nuevo estado:", value);
+    loadUsers(); // tu función que vuelve a cargar con filtros
+    });
+
+    document.getElementById("methodSelect").addEventListener("change", () => {
+    const value = document.getElementById("methodSelect").value;
+    console.log("Nuevo método:", value);
+    loadUsers();
+    });
+
+
 });
+
+

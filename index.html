@@ -40,19 +40,40 @@
       </aside>
 
       <!-- Content -->
-      <div class="content">
-        <div class="topbar">
-          <input
-            id="searchInput"
-            class="topbar__search-input"
-            type="text"
-            placeholder="Buscar por nombre o email…"
-            aria-label="Buscar"
-          />
-          <div class="topbar__actions">
-             <button id="nuevoUsuario" class="btn btn--primary">➕ Nuevo usuario</button>
-          </div>
-        </div>
+<!-- Content -->
+<div class="content">
+  <div class="topbar">
+    <!-- Filtros -->
+    <div class="topbar__filters">
+      <input
+        id="searchInput"
+        class="topbar__search-input"
+        type="text"
+        placeholder="Buscar por nombre…"
+        aria-label="Buscar por nombre"
+      />
+
+      <select id="statusSelect" class="topbar__select" aria-label="Filtrar por estado">
+        <option value="">Estado: Todos</option>
+        <option value="Pagado">Pagado</option>
+        <option value="Pendiente">Pendiente</option>
+        <option value="Vencido">Vencido</option>
+      </select>
+
+      <select id="methodSelect" class="topbar__select" aria-label="Filtrar por método de pago">
+        <option value="">Método: Todos</option>
+        <option value="Tarjeta">Tarjeta</option>
+        <option value="Efectivo">Efectivo</option>
+        <option value="Transferencia">Transferencia</option>
+      </select>
+
+    </div>
+
+    <!-- Acción principal -->
+    <div class="topbar__actions">
+      <button id="nuevoUsuario" class="btn btn--primary">➕ Nuevo usuario</button>
+    </div>
+  </div>
    
         <main class="main">
           <h1 class="main__title">Usuarios</h1>
