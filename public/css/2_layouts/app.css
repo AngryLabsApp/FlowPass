@@ -1,5 +1,6 @@
 /* FlowPass — app.css (layouts) */
 @layer layouts {
+  /* ======== Grid base ======== */
   .layout {
     display: grid;
     grid-template-columns: 220px 1fr;
@@ -10,23 +11,34 @@
       grid-template-columns: 140px 1fr;
     }
   }
+
+  /* En tablets y abajo: sidebar pasa a horizontal arriba */
   @media (width <= 900px) {
     .layout {
-      grid-template-columns: 80px 1fr;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr; /* sidebar (header-tabs) + contenido */
+      min-height: 100vh;
     }
   }
 
+  /* ======== Sidebar ======== */
   .sidebar {
     background: #fff;
     border-right: 1px solid var(--border);
     padding: var(--space-6);
+    position: sticky; /* permanece visible al hacer scroll */
+    top: 0;
+    height: 100dvh; /* ocupa todo el alto de la ventana en desktop */
+    overflow-y: auto; /* scroll si el contenido excede */
   }
+
   .sidebar__brand {
     display: flex;
     gap: var(--space-2);
     text-decoration: none;
     color: inherit;
     align-items: center;
+    padding-inline: max(var(--space-2), env(safe-area-inset-left));
   }
   .sidebar__name {
     font-family: "Plus Jakarta Sans", sans-serif;
@@ -49,12 +61,44 @@
   .sidebar__link:hover {
     background: #f2f5f3;
   }
+
+  /* Compactar nombre en pantallas medianas */
   @media (width <= 1100px) {
     .sidebar__name {
       display: none;
     }
   }
 
+  /* ======== Sidebar como tabs (horizontal) ======== */
+  @media (width <= 900px) {
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: auto; /* ya no 100vh */
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: var(--space-4) max(var(--space-4), env(safe-area-inset-left))
+        var(--space-4) max(var(--space-4), env(safe-area-inset-left));
+      z-index: 6; /* por encima del contenido */
+    }
+    .sidebar__nav {
+      margin-top: var(--space-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+    }
+    .sidebar__link {
+      border-radius: 999px; /* apariencia de tab/pill */
+      white-space: nowrap;
+      scroll-snap-align: start;
+      padding: 10px 14px;
+    }
+  }
+
+  /* ======== Topbar ======== */
   .topbar {
     background: rgba(255, 255, 255, 0.9);
     border-bottom: 1px solid var(--border);
@@ -66,6 +110,7 @@
     position: sticky;
     top: 0;
     z-index: 5;
+    backdrop-filter: saturate(1.1) blur(6px);
   }
   .topbar__search-input {
     padding: 10px 12px;
@@ -78,24 +123,34 @@
     display: flex;
     gap: var(--space-3);
   }
+
+  /* En tablets/móvil, la topbar deja de ser sticky para no chocar con la sidebar-tabs */
   @media (width <= 900px) {
     .topbar {
-      flex-wrap: wrap;
+      position: static;
+      padding: var(--space-4);
     }
     .topbar__search-input {
       width: 100%;
       max-width: 100%;
     }
+    .topbar__actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
   }
 
+  /* ======== Main ======== */
   .main {
     padding: var(--space-6);
-    margin: 0 auto;
+    max-width: var(--container);
+
   }
   .main__title {
     margin: 0 0 var(--space-4);
   }
 
+  /* ======== Card ======== */
   .card {
     background: #fff;
     border: 1px solid var(--border);
