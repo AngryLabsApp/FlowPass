@@ -31,6 +31,7 @@ function closeModal(){
     const m =$("#userModal")
     if (!m) return;
     m.setAttribute('aria-hidden', 'true');
+    showUpdateForm(false)
 }
 function initModal() {
   const btn = $("#btn-close");
@@ -43,11 +44,37 @@ function initModal() {
 function getUserSelected(){
     return user_selected;
 }
+
+
+function showUpdateForm(show) {
+    const modal = document.getElementById('userModal');
+    const body = modal.querySelector('.modal__body');
+    const btnToggle = modal.querySelector('#btnToggleForm');
+    body.classList.toggle('modal__body--form-open', !!show);
+    btnToggle?.setAttribute('aria-expanded', show ? 'true' : 'false');
+}
+
+function openUpdateForm(){
+   const modal = document.getElementById('userModal');
+  if (!modal) return;
+
+  const body = modal.querySelector('.modal__body');
+  const btnToggle = modal.querySelector('#btnToggleForm');
+  const btnCancel = modal.querySelector('#btnCancelForm');
+  btnToggle?.addEventListener('click', () => {
+    const isOpen = body.classList.contains('modal__body--form-open');
+    showUpdateForm(!isOpen);
+  });
+
+  btnCancel?.addEventListener('click', () => showUpdateForm(false));
+}
+
 // =======================
 // Init
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
     initModal();
+    openUpdateForm();
 });
 
 

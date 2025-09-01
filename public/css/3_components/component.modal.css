@@ -7,8 +7,10 @@
   .modal__dialog {
     position: relative;
     margin: 5vh auto;
-    max-width: 880px;
-    width: min(96vw, 880px);
+    max-width: 980px;                 /* ↑ un poco más ancho para la 2ª columna */
+    width: min(96vw, 980px);
+    max-height: 85vh;                 /* para que el panel derecho pueda scrollear */
+    overflow: hidden;                 /* recorta overflow del contenedor */
     /* .card ya aporta fondo, borde, sombra, radio */
     padding: 16px 16px 20px;
     outline: 0;
@@ -19,16 +21,54 @@
     padding-bottom: 8px; border-bottom: 1px solid var(--border);
   }
   .modal__title { margin: 0; font-size: 20px; font-weight: 800; }
-  .modal__body { display: grid; gap: 16px; padding-top: 12px; }
+
+  /* ----- Layout del cuerpo ----- */
+  .modal__body {
+    display: grid;
+    gap: 16px;
+    padding-top: 12px;
+    /* móvil: apilado */
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  /* Desktop: 2 columnas; la derecha (form) inicia colapsada */
+  @media (width >= 800px) {
+    .modal__body { grid-template-columns: 1fr 0; }
+    .modal__body.modal__body--form-open { grid-template-columns: 1fr 380px; } /* ajusta 380px si quieres */
+  }
+
   .modal__section { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px; }
   .modal__subtitle { margin: 0 0 8px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .02em; }
   .modal__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
 
-  /* Info de usuario en 2 columnas; 1 col en móvil */
+  /* Panel izquierdo: tabla de info (igual que ya tenías) */
   .user-info { display: grid; grid-template-columns: 1fr 2fr; gap: 8px 12px; }
   .user-info__label { font-weight: 600; color: var(--muted); }
   .user-info__value { color: var(--text); }
   @media (width <= 560px) { .user-info { grid-template-columns: 1fr; } }
+
+  /* ----- Form en panel derecho ----- */
+  #updateForm { overflow: auto; } /* scrollea su propio contenido */
+
+  /* En desktop, cuando el panel está cerrado (no tiene clase --form-open en el body) */
+  @media (width >= 800px) {
+    .modal__body:not(.modal__body--form-open) #updateForm {
+      width: 0 !important;
+      opacity: 0;
+      padding: 0;
+      border: 0;
+      pointer-events: none; /* que no reciba focus/click */
+    }
+    /* Cuando está abierto, usa su estilo base y un separador visual izquierdo */
+    .modal__body.modal__body--form-open #updateForm {
+      width: 100%;
+      opacity: 1;
+      /* la .modal__section ya pone padding + borde + radio */
+      border-left: 1px solid var(--border);
+      transition: width .25s ease, opacity .2s ease, padding .2s ease, border-color .2s ease;
+    }
+  }
 
   /* Form */
   .form { display: grid; gap: 10px; }
