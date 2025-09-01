@@ -136,13 +136,16 @@ let currentAbort = null;
  * params: objeto de filtros. En tu backend actual usas:
  *   field1=Nombre, value1=<texto>
  */
-function buildQueryParams() {
+function buildQueryParams(page) {
   const queryParams = {};
 
   const input = $("#searchInput").value;
   const status = $("#statusSelect").value;
   // const method = $("#methodSelect").value;
 
+  if (page){
+    queryParams.page = page
+  }
   if (input && String(input).trim() !== "") {
     queryParams.field1 = "Nombre";
     queryParams.value1 = String(input).trim();
@@ -156,7 +159,10 @@ function buildQueryParams() {
   return queryParams;
 }
 
-async function loadUsers() {
+async function loadUsers(page) {
+    if (page){
+        setPage(page);
+    }
   const tbody = $("#usersTbody");
   if (!tbody) return;
   renderLoading(tbody);
@@ -167,7 +173,7 @@ async function loadUsers() {
 
   try {
     // arma tus query params como tu backend espera:
-    const queryParams = buildQueryParams();
+    const queryParams = buildQueryParams(page);
     const url = buildUrl(ENV_VARS.url_get_users, queryParams);
     const res = await fetch(url, {
       signal: currentAbort.signal,
@@ -185,13 +191,14 @@ async function loadUsers() {
     if (!Array.isArray(users) || users.length === 0) return renderEmpty(tbody);
 
     tbody.innerHTML = users.map(renderUserRow).join("");
-
+    renderPagination(total);
     // Si quieres usar 'total' para paginación o mostrar un contador:
     // console.log("Total:", total);
   } catch (err) {
     if (err.name === "AbortError") return; // petición cancelada: ignorar
     console.error(err);
     renderError(tbody);
+    renderPagination(0);
   } finally {
     currentAbort = null;
   }

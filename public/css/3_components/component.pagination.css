@@ -1,0 +1,68 @@
+@layer components {
+  .table__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .pagination__status {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .pagination__nav {
+    margin-left: auto;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .pager-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .pager-chip:hover { background: #fafafa; }
+  .pager-chip[aria-current="page"] {
+    background: var(--c8);
+    color: #fff;
+    border-color: transparent;
+    cursor: default;
+  }
+  .pager-chip--icon { padding: 0 12px; }
+  .pager-chip[aria-disabled="true"] {
+    opacity: .5; cursor: not-allowed;
+  }
+  .pager-ellipsis {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 26px; padding: 0 4px; color: var(--muted);
+  }
+
+  /* Responsive: que las fichas no empujen todo */
+  @media (width <= 560px) {
+    .pagination__status { order: 2; width: 100%; }
+    .pagination__nav    { order: 1; margin-left: 0; }
+  }
+}
