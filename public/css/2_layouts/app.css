@@ -143,8 +143,6 @@
   /* ======== Main ======== */
   .main {
     padding: var(--space-6);
-    max-width: var(--container);
-
   }
   .main__title {
     margin: 0 0 var(--space-4);

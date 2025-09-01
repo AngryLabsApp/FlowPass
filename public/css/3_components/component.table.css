@@ -22,6 +22,11 @@
     background: #fbfef9;
   }
 
+  .table__col--classes,
+  .table__col--grace {
+    text-align: center;
+  }
+
   /* Responsivo por columnas */
   @media (width <= 1100px) {
     .table__col--start,
@@ -46,5 +51,7 @@
     }
   }
 
-  .table__row[role="button"] { cursor: pointer; }
+  .table__row[role="button"] {
+    cursor: pointer;
+  }
 }

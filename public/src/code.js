@@ -83,16 +83,9 @@ function renderUserRow(user) {
   const payload = encodeURIComponent(JSON.stringify(user));
   return `
     <tr class="table__row" role="button" tabindex="0" data-user="${payload}">
-      <td class="table__cell table__col--user-id">${safe(user.ID)}</td>
       <td class="table__cell table__col--first-name">${safe(user.Nombre)}</td>
       <td class="table__cell table__col--last-name">${safe(user.Apellidos)}</td>
       <td class="table__cell table__col--plan">${safe(user.Plan)}</td>
-      <td class="table__cell table__col--amount">${safe(user.Monto)}</td>
-      <td class="table__cell table__col--status">
-      <span class="badge ${statusBadgeClass(user.Estado)}">${safe(
-    user.Estado
-  )}</span>
-      </td>
       <td class="table__cell table__col--classes">${safe(
         user.Clases_tomadas
       )}</td>
@@ -105,6 +98,11 @@ function renderUserRow(user) {
       <td class="table__cell table__col--end">${formatDate(
         user.Proxima_Fecha_Pago
       )}</td>
+      <td class="table__cell table__col--status">
+        <span class="badge ${statusBadgeClass(user.Estado)}">${safe(
+        user.Estado
+        )}</span>
+      </td>
     </tr>
   `;
 }

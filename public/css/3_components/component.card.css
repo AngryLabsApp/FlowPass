@@ -6,6 +6,5 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
     overflow: auto;
-    width: fit-content;
   }
 }
