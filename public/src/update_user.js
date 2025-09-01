@@ -16,12 +16,14 @@ function update_form_submit () {
     // Leemos campos del form
     const payload = {
         ID: user.ID,
-        Plan:{ value: document.getElementById('Plan').value},
         Dias_de_Gracia: {value:document.getElementById('Dias_de_Gracia').value || 0},
         Monto: {value:document.getElementById('Monto').value || 0},
         Medio_de_pago: {value:document.getElementById('Medio_de_pago').value},
         Estado: {value:document.getElementById('Estado').value},
     };
+    if ( document.getElementById('Plan').value)
+        payload.Plan = {value:document.getElementById('Plan').value};
+ 
 
     try {
       const res = await fetch(ENV_VARS.url_update, {
