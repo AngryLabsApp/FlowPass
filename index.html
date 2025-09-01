@@ -40,26 +40,30 @@
       </aside>
 
       <!-- Content -->
-<!-- Content -->
-<div class="content">
-  <div class="topbar">
-    <!-- Filtros -->
-    <div class="topbar__filters">
-      <input
-        id="searchInput"
-        class="topbar__search-input"
-        type="text"
-        placeholder="Buscar por nombre o email…"
-        aria-label="Buscar por nombre o email…"
-      />
+      <!-- Content -->
+      <div class="content">
+        <div class="topbar">
+          <!-- Filtros -->
+          <div class="topbar__filters">
+            <input
+              id="searchInput"
+              class="topbar__search-input"
+              type="text"
+              placeholder="Buscar por nombre o email…"
+              aria-label="Buscar por nombre o email…"
+            />
 
-      <select id="statusSelect" class="topbar__select" aria-label="Filtrar por estado">
-        <option value="">Estado: Todos</option>
-        <option value="Pagado">Pagado</option>
-        <option value="Pendiente">Pendiente</option>
-        <option value="Vencido">Vencido</option>
-      </select>
- <!--       
+            <select
+              id="statusSelect"
+              class="topbar__select"
+              aria-label="Filtrar por estado"
+            >
+              <option value="">Estado: Todos</option>
+              <option value="Pagado">Pagado</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Vencido">Vencido</option>
+            </select>
+            <!--       
       <select id="methodSelect" class="topbar__select" aria-label="Filtrar por método de pago">
         <option value="">Método: Todos</option>
         <option value="Tarjeta">Tarjeta</option>
@@ -67,15 +71,16 @@
         <option value="Transferencia">Transferencia</option>
       </select>
  -->
+          </div>
 
-    </div>
+          <!-- Acción principal -->
+          <div class="topbar__actions">
+            <button id="nuevoUsuario" class="btn btn--primary">
+              ➕ Nuevo usuario
+            </button>
+          </div>
+        </div>
 
-    <!-- Acción principal -->
-    <div class="topbar__actions">
-      <button id="nuevoUsuario" class="btn btn--primary">➕ Nuevo usuario</button>
-    </div>
-  </div>
-   
         <main class="main">
           <h1 class="main__title">Usuarios</h1>
           <div class="card" aria-label="Tabla de usuarios">
@@ -91,16 +96,9 @@
                   <th class="table__head-cell table__col--last-name">
                     Apellido(s)
                   </th>
-                  <th class="table__head-cell table__col--phone">Teléfono</th>
-                  <th class="table__head-cell table__col--email">
-                    Correo electrónico
-                  </th>
                   <th class="table__head-cell table__col--plan">Plan</th>
                   <th class="table__head-cell table__col--amount">
-                    Monto de pago
-                  </th>
-                  <th class="table__head-cell table__col--method">
-                    Método de pago
+                    Monto (S/.)
                   </th>
                   <th class="table__head-cell table__col--status">
                     Estado de pago
@@ -112,61 +110,14 @@
                     Días de gracia
                   </th>
                   <th class="table__head-cell table__col--start">
-                    Fecha de inicio
+                    Fecha de inicio del plan
                   </th>
                   <th class="table__head-cell table__col--end">
                     Fecha de término
                   </th>
-                  <th class="table__head-cell table__col--birth">
-                    Fecha de cumpleaños
-                  </th>
                 </tr>
               </thead>
               <tbody class="table__body" id="usersTbody">
-                <!-- Fila ejemplo 1 -->
-                <tr class="table__row">
-                  <td class="table__cell table__col--user-id">USR-0001</td>
-                  <td class="table__cell table__col--first-name">James</td>
-                  <td class="table__cell table__col--last-name">Brown</td>
-                  <td class="table__cell table__col--phone">+51 999 111 222</td>
-                  <td class="table__cell table__col--email">james@gmail.com</td>
-                  <td class="table__cell table__col--plan">Mensual</td>
-                  <td class="table__cell table__col--amount">S/ 120.00</td>
-                  <td class="table__cell table__col--method">
-                    <span class="badge badge--method">Tarjeta</span>
-                  </td>
-                  <td class="table__cell table__col--status">
-                    <span class="badge badge--paid">Pagado</span>
-                  </td>
-                  <td class="table__cell table__col--classes">8</td>
-                  <td class="table__cell table__col--grace">3</td>
-                  <td class="table__cell table__col--start">2025-02-05</td>
-                  <td class="table__cell table__col--end">2025-03-05</td>
-                  <td class="table__cell table__col--birth">1994-07-22</td>
-                </tr>
-                <!-- Fila ejemplo 2 -->
-                <tr class="table__row">
-                  <td class="table__cell table__col--user-id">USR-0002</td>
-                  <td class="table__cell table__col--first-name">Arthur</td>
-                  <td class="table__cell table__col--last-name">Taylor</td>
-                  <td class="table__cell table__col--phone">+51 987 654 321</td>
-                  <td class="table__cell table__col--email">
-                    arthur@gmail.com
-                  </td>
-                  <td class="table__cell table__col--plan">Trimestral</td>
-                  <td class="table__cell table__col--amount">S/ 300.00</td>
-                  <td class="table__cell table__col--method">
-                    <span class="badge badge--method">Efectivo</span>
-                  </td>
-                  <td class="table__cell table__col--status">
-                    <span class="badge badge--pending">Pendiente</span>
-                  </td>
-                  <td class="table__cell table__col--classes">2</td>
-                  <td class="table__cell table__col--grace">0</td>
-                  <td class="table__cell table__col--start">2025-02-08</td>
-                  <td class="table__cell table__col--end">2025-05-08</td>
-                  <td class="table__cell table__col--birth">1990-11-05</td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -174,135 +125,196 @@
       </div>
     </div>
 
+    <!-- Modal: Ficha de usuario -->
+    <div
+      class="modal"
+      id="userModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="userModalTitle"
+    >
+      <div class="modal__overlay" data-close></div>
 
-<!-- Modal: Ficha de usuario -->
-<div class="modal" id="userModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="userModalTitle">
-  <div class="modal__overlay" data-close></div>
+      <!-- Usa tu .card como diálogo -->
+      <div class="modal__dialog card" role="document">
+        <header class="modal__header">
+          <h2 class="modal__title" id="userModalTitle">Ficha del usuario</h2>
+          <button
+            class="modal__close btn"
+            type="button"
+            aria-label="Cerrar"
+            id="btn-close"
+            data-close
+          >
+            ✕
+          </button>
+        </header>
 
-  <!-- Usa tu .card como diálogo -->
-  <div class="modal__dialog card" role="document">
-    <header class="modal__header">
-      <h2 class="modal__title" id="userModalTitle">Ficha del usuario</h2>
-      <button class="modal__close btn" type="button" aria-label="Cerrar" id="btn-close" data-close>✕</button>
-    </header>
+        <div class="modal__body">
+          <!-- Datos -->
+          <section class="modal__section">
+            <dl class="user-info">
+              <div class="user-info__row">
+                <dt class="user-info__label">ID</dt>
+                <dd class="user-info__value" data-field="UserID">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Nombre(s)</dt>
+                <dd class="user-info__value" data-field="UserName">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Apellido(s)</dt>
+                <dd class="user-info__value" data-field="UserLastName">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Teléfono</dt>
+                <dd class="user-info__value" data-field="UserPhone">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Email</dt>
+                <dd class="user-info__value" data-field="UserEmail">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Plan</dt>
+                <dd class="user-info__value" data-field="UserPlan">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Monto de pago</dt>
+                <dd class="user-info__value" data-field="PaymentAmount">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Método</dt>
+                <dd class="user-info__value" data-field="PaymentMethod">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Estado</dt>
+                <dd class="user-info__value" data-field="PaymentStatus">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Clases</dt>
+                <dd class="user-info__value" data-field="NumberOfClases">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Días de gracia</dt>
+                <dd class="user-info__value" data-field="FreeDays">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Fecha inicio</dt>
+                <dd class="user-info__value" data-field="DateOfSubcription">
+                  —
+                </dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Próximo pago</dt>
+                <dd class="user-info__value" data-field="NextPaymentDay">—</dd>
+              </div>
+              <div class="user-info__row">
+                <dt class="user-info__label">Cumpleaños</dt>
+                <dd class="user-info__value" data-field="UserBirthday">—</dd>
+              </div>
+            </dl>
 
-    <div class="modal__body">
-      <!-- Datos -->
-      <section class="modal__section">
-        <dl class="user-info">
-          <div class="user-info__row">
-            <dt class="user-info__label">ID</dt>
-            <dd class="user-info__value" data-field="UserID">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Nombre(s)</dt>
-            <dd class="user-info__value" data-field="UserName">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Apellido(s)</dt>
-            <dd class="user-info__value" data-field="UserLastName">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Teléfono</dt>
-            <dd class="user-info__value" data-field="UserPhone">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Email</dt>
-            <dd class="user-info__value" data-field="UserEmail">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Plan</dt>
-            <dd class="user-info__value" data-field="UserPlan">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Monto de pago</dt>
-            <dd class="user-info__value" data-field="PaymentAmount">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Método</dt>
-            <dd class="user-info__value" data-field="PaymentMethod">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Estado</dt>
-            <dd class="user-info__value" data-field="PaymentStatus">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Clases</dt>
-            <dd class="user-info__value" data-field="NumberOfClases">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Días de gracia</dt>
-            <dd class="user-info__value" data-field="FreeDays">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Fecha inicio</dt>
-            <dd class="user-info__value" data-field="DateOfSubcription">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Próximo pago</dt>
-            <dd class="user-info__value" data-field="NextPaymentDay">—</dd>
-          </div>
-          <div class="user-info__row">
-            <dt class="user-info__label">Cumpleaños</dt>
-            <dd class="user-info__value" data-field="UserBirthday">—</dd>
-          </div>
-        </dl>
+            <div class="modal__actions">
+              <button class="btn btn--primary" id="btnCheckIn">
+                Registrar ingreso
+              </button>
+              <button
+                class="btn"
+                id="btnToggleForm"
+                aria-expanded="false"
+                aria-controls="updateForm"
+              >
+                Actualizar mensualidad
+              </button>
+            </div>
+          </section>
 
-        <div class="modal__actions">
-          <button class="btn btn--primary" id="btnCheckIn">Registrar ingreso</button>
-          <button class="btn" id="btnToggleForm" aria-expanded="false" aria-controls="updateForm">Actualizar mensualidad</button>
+          <!-- Formulario de actualización -->
+          <section class="modal__section" id="updateForm">
+            <h3 class="modal__subtitle">Actualizar mensualidad</h3>
+
+            <form class="form" id="subscriptionForm">
+              <div class="form__row">
+                <label class="form__label" for="userPlanInput">Plan</label>
+                <select
+                  class="form__control"
+                  id="userPlanInput"
+                  name="UserPlan"
+                  required
+                >
+                  <option value="">Selecciona…</option>
+                  <option>Mensual</option>
+                  <option>Bimestral</option>
+                  <option>Trimestral</option>
+                  <option>Semestral</option>
+                  <option>Anual</option>
+                </select>
+              </div>
+
+              <div class="form__row">
+                <label class="form__label" for="paymentAmount"
+                  >Monto de pago</label
+                >
+                <input
+                  class="form__control"
+                  id="paymentAmount"
+                  name="PaymentAmount"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  required
+                />
+              </div>
+
+              <div class="form__row">
+                <label class="form__label" for="paymentMethod"
+                  >Método de pago</label
+                >
+                <select
+                  class="form__control"
+                  id="paymentMethod"
+                  name="PaymentMethod"
+                  required
+                >
+                  <option value="">Selecciona…</option>
+                  <option>Efectivo</option>
+                  <option>Tarjeta</option>
+                  <option>Transferencia</option>
+                </select>
+              </div>
+
+              <div class="form__row">
+                <label class="form__label" for="paymentStatusInput"
+                  >Estado de pago</label
+                >
+                <select
+                  class="form__control"
+                  id="paymentStatusInput"
+                  name="PaymentStatus"
+                  required
+                >
+                  <option value="">Selecciona…</option>
+                  <option>Pagado</option>
+                  <option>Pendiente</option>
+                  <option>Vencido</option>
+                </select>
+              </div>
+
+              <div class="form__actions">
+                <button class="btn" type="button" id="btnCancelForm">
+                  Cancelar
+                </button>
+                <button class="btn btn--primary" type="submit">
+                  Guardar cambios
+                </button>
+              </div>
+            </form>
+          </section>
         </div>
-      </section>
-
-      <!-- Formulario de actualización -->
-      <section class="modal__section" id="updateForm" >
-        <h3 class="modal__subtitle">Actualizar mensualidad</h3>
-
-        <form class="form" id="subscriptionForm">
-          <div class="form__row">
-            <label class="form__label" for="userPlanInput">Plan</label>
-            <select class="form__control" id="userPlanInput" name="UserPlan" required>
-              <option value="">Selecciona…</option>
-              <option>Mensual</option>
-              <option>Bimestral</option>
-              <option>Trimestral</option>
-              <option>Semestral</option>
-              <option>Anual</option>
-            </select>
-          </div>
-
-          <div class="form__row">
-            <label class="form__label" for="paymentAmount">Monto de pago</label>
-            <input class="form__control" id="paymentAmount" name="PaymentAmount" type="number" step="0.01" min="0" required />
-          </div>
-
-          <div class="form__row">
-            <label class="form__label" for="paymentMethod">Método de pago</label>
-            <select class="form__control" id="paymentMethod" name="PaymentMethod" required>
-              <option value="">Selecciona…</option>
-              <option>Efectivo</option>
-              <option>Tarjeta</option>
-              <option>Transferencia</option>
-            </select>
-          </div>
-
-          <div class="form__row">
-            <label class="form__label" for="paymentStatusInput">Estado de pago</label>
-            <select class="form__control" id="paymentStatusInput" name="PaymentStatus" required>
-              <option value="">Selecciona…</option>
-              <option>Pagado</option>
-              <option>Pendiente</option>
-              <option>Vencido</option>
-            </select>
-          </div>
-
-          <div class="form__actions">
-            <button class="btn" type="button" id="btnCancelForm">Cancelar</button>
-            <button class="btn btn--primary" type="submit">Guardar cambios</button>
-          </div>
-        </form>
-      </section>
+      </div>
     </div>
+<<<<<<< HEAD
   </div>
 </div>
 
@@ -320,6 +332,9 @@
 
 
     <script src="/public/src/spinner.js"></script>
+=======
+
+>>>>>>> b8660284bbb71d10d74b62721d08bb345466253c
     <script src="/public/src/code.js"></script>
     <script src="/public/src/modal.js"></script>
     <script src="/public/src/registrar_Ingreso.js"></script>
