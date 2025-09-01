@@ -27,14 +27,16 @@ function openModal(user) {
     setField(m, 'UserBirthday',      formatDate(user.Cumpleaños));
     user_selected = user;
 }
-
+function closeModal(){
+    const m =$("#userModal")
+    if (!m) return;
+    m.setAttribute('aria-hidden', 'true');
+}
 function initModal() {
   const btn = $("#btn-close");
   if (!btn) return;
   btn.addEventListener("click", () => {
-        const m =$("#userModal")
-        if (!m) return;
-        m.setAttribute('aria-hidden', 'true');
+        closeModal();
   });
 }
 

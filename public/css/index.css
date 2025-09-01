@@ -25,6 +25,8 @@
 @import url("./3_components/component.search.css") layer(components);
 @import url("./3_components/component.modal.css") layer(components);
 @import url("./3_components/component.top_bar_select.css") layer(components);
+@import url("./3_components/component.loader.css") layer(components);
 
 /* 5) Utilities */
 @import url("./4_utilities/utilities.css") layer(utilities);
+
