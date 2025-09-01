@@ -67,7 +67,8 @@ function statusBadgeClass(status) {
   const s = String(status || "").toLowerCase();
   if (["pagado", "paid", "completo", "completed"].includes(s))
     return "badge--paid";
-  if (["pendiente", "pending"].includes(s)) return "badge--method";
+  if (["pendiente", "pendiente de pago", "pending"].includes(s))
+    return "badge--pending";
   if (["vencido", "overdue", "failed", "atrasado"].includes(s))
     return "badge--overdue";
   return "badge--method";

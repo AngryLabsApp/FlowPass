@@ -13,18 +13,18 @@
     color: var(--text);
   }
   .badge--pending {
-    background: var(--c4);
-    color: var(--text);
+    background: var(--bg-warning);
+    color: var(--text-warning);
   }
   .badge--overdue {
-    background: #ffe4e9;
-    color: #7a0930;
-    border-color: #ffd0dc;
+    background: var(--bg-danger);
+    color: var(--text-danger);
+    border-color: var(--border-danger);
   }
   .badge--paid {
-    background: #e8fff1;
-    color: #0a6b3e;
-    border-color: #d2f6e0;
+    background: var(--bg-success);
+    color: var(--text-success);
+    border-color: var(--border-success);
   }
   .badge--method {
     background: #f1f5f9;
