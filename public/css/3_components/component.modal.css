@@ -1,26 +1,45 @@
 /* FlowPass — component.modal.css */
 @layer components {
-  .modal { position: fixed; inset: 0; display: none; z-index: 1000; }
-  .modal[aria-hidden="false"] { display: block; }
-  .modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+  .modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 1000;
+  }
+  .modal[aria-hidden="false"] {
+    display: block;
+  }
+  .modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+  }
 
   .modal__dialog {
     position: relative;
     margin: 5vh auto;
-    max-width: 980px;                 /* ↑ un poco más ancho para la 2ª columna */
+    max-width: 980px; /* ↑ un poco más ancho para la 2ª columna */
     width: min(96vw, 980px);
-    max-height: 85vh;                 /* para que el panel derecho pueda scrollear */
-    overflow: hidden;                 /* recorta overflow del contenedor */
+    max-height: 85vh; /* para que el panel derecho pueda scrollear */
+    overflow: hidden; /* recorta overflow del contenedor */
     /* .card ya aporta fondo, borde, sombra, radio */
     padding: 16px 16px 20px;
     outline: 0;
   }
 
   .modal__header {
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
   }
-  .modal__title { margin: 0; font-size: 20px; font-weight: 800; }
+  .modal__title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+  }
 
   /* ----- Layout del cuerpo ----- */
   .modal__body {
@@ -34,22 +53,59 @@
 
   /* Desktop: 2 columnas; la derecha (form) inicia colapsada */
   @media (width >= 800px) {
-    .modal__body { grid-template-columns: 1fr 0; }
-    .modal__body.modal__body--form-open { grid-template-columns: 1fr 380px; } /* ajusta 380px si quieres */
+    .modal__body {
+      grid-template-columns: 1fr 0;
+    }
+    .modal__body.modal__body--form-open {
+      grid-template-columns: 1fr 380px;
+    } /* ajusta 380px si quieres */
   }
 
-  .modal__section { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px; }
-  .modal__subtitle { margin: 0 0 8px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .02em; }
-  .modal__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .modal__section {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+  }
+  .modal__subtitle {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .modal__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
 
   /* Panel izquierdo: tabla de info (igual que ya tenías) */
-  .user-info { display: grid; grid-template-columns: 1fr 2fr; gap: 8px 12px; }
-  .user-info__label { font-weight: 600; color: var(--muted); }
-  .user-info__value { color: var(--text); }
-  @media (width <= 560px) { .user-info { grid-template-columns: 1fr; } }
+  .user-info {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 8px 12px;
+  }
+  .user-info__label {
+    font-weight: 600;
+    color: var(--muted);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .user-info__value {
+    color: var(--text);
+  }
+  @media (width <= 560px) {
+    .user-info {
+      grid-template-columns: 1fr;
+    }
+  }
 
   /* ----- Form en panel derecho ----- */
-  #updateForm { overflow: auto; } /* scrollea su propio contenido */
+  #updateForm {
+    overflow: auto;
+  } /* scrollea su propio contenido */
 
   /* En desktop, cuando el panel está cerrado (no tiene clase --form-open en el body) */
   @media (width >= 800px) {
@@ -66,17 +122,36 @@
       opacity: 1;
       /* la .modal__section ya pone padding + borde + radio */
       border-left: 1px solid var(--border);
-      transition: width .25s ease, opacity .2s ease, padding .2s ease, border-color .2s ease;
+      transition: width 0.25s ease, opacity 0.2s ease, padding 0.2s ease,
+        border-color 0.2s ease;
     }
   }
 
   /* Form */
-  .form { display: grid; gap: 10px; }
-  .form__row { display: grid; gap: 6px; }
-  .form__label { font-size: 12px; color: var(--muted); text-transform: uppercase; }
-  .form__control {
-    padding: 10px 12px; border: 1px solid var(--border);
-    border-radius: 10px; background: #fff; color: var(--text);
+  .form {
+    display: grid;
+    gap: 10px;
   }
-  .form__actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+  .form__row {
+    display: grid;
+    gap: 6px;
+  }
+  .form__label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .form__control {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--text);
+  }
+  .form__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 6px;
+  }
 }
