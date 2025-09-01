@@ -1,4 +1,5 @@
 
+let user_selected = null;
 
 function setField(modalEl, field, value) {
   const el = modalEl.querySelector(`[data-field="${field}"]`);
@@ -24,6 +25,7 @@ function openModal(user) {
     setField(m, 'DateOfSubcription', formatDate(user.Fecha_Alta));
     setField(m, 'NextPaymentDay',    formatDate(user.Proxima_Fecha_Pago));
     setField(m, 'UserBirthday',      formatDate(user.Cumpleaños));
+    user_selected = user;
 }
 
 function initModal() {
@@ -36,7 +38,9 @@ function initModal() {
   });
 }
 
-
+function getUserSelected(){
+    return user_selected;
+}
 // =======================
 // Init
 // =======================

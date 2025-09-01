@@ -1,6 +1,7 @@
 const ENV_VARS = {
     url_form:"https://n8n.angrylabs.app/form/54f40a75-b183-4483-9c51-82d281c6b504",
-    url_get_users:"https://n8n.angrylabs.app/webhook/9ecc1791-c157-4084-8de6-6924235d95cd"
+    url_get_users:"https://n8n.angrylabs.app/webhook/9ecc1791-c157-4084-8de6-6924235d95cd",
+    url_update: "https://n8n.angrylabs.app/webhook/afd7e9b5-36c7-40de-956c-c23631d804b1",
 }
 
 // =======================
@@ -125,7 +126,7 @@ function buildQueryParams(){
 
     const input = $("#searchInput").value;
     const status = $("#statusSelect").value;
-    const method = $("#methodSelect").value;  
+   // const method = $("#methodSelect").value;  
     
     if (input && String(input).trim() !== "") {
       queryParams.field1 = "Nombre";
@@ -136,10 +137,7 @@ function buildQueryParams(){
         queryParams.field2 = "Estado";         // <-- puedes cambiar a "Email" si buscas por email
         queryParams.value2 = String(status).trim();
     }
-    if (method && String(method).trim() !== ""){
-        queryParams.field3 = "Medio_de_pago";         // <-- puedes cambiar a "Email" si buscas por email
-        queryParams.value3 = String(method).trim();
-    }
+    
     return queryParams;
 }
 
@@ -188,7 +186,6 @@ async function loadUsers() {
 
 /** Botón “Nuevo usuario” abre el form en nueva pestaña */
 function initAddNewUser() {
-    console.log("holaa");
   const btn = $("#nuevoUsuario");
   if (!btn) return;
   btn.addEventListener("click", () => {
@@ -229,13 +226,13 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Nuevo estado:", value);
         loadUsers(); // tu función que vuelve a cargar con filtros
     });
-
+/*
     document.getElementById("methodSelect").addEventListener("change", () => {
         const value = document.getElementById("methodSelect").value;
         console.log("Nuevo método:", value);
         loadUsers();
     });
-
+*/
     
      const tbody = $("#usersTbody");
     tbody.addEventListener('click', (e) => {
