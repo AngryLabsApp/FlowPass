@@ -26,6 +26,7 @@ function openModal(user) {
     setField(m, 'NextPaymentDay',    formatDate(user.Proxima_Fecha_Pago));
     setField(m, 'UserBirthday',      formatDate(user.Cumpleaños));
     user_selected = user;
+    $('#userModalTitle').textContent = user.Nombre + " " + user.Apellidos;
 }
 function closeModal(){
     const m =$("#userModal")
