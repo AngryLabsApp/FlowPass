@@ -88,7 +88,7 @@ function renderUserRow(user) {
       <td class="table__cell table__col--plan">${safe(user.Plan)}</td>
       <td class="table__cell table__col--classes">${safe(
         user.Clases_tomadas
-      )}</td>
+      )}/${safe(user.Limite_clases)}</td>
       <td class="table__cell table__col--grace">${safe(
         user.Dias_de_Gracia
       )}</td>
