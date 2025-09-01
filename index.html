@@ -1,69 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FlowPass — Usuarios</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./public/css/index.css" />
-  </head>
-  <body>
-    <div class="layout">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <a href="#" class="sidebar__brand">
-          <span class="logo logo--lg" aria-hidden="true">
-            <!-- Icono inline (SVG) con color adaptable a la marca mediante currentColor -->
-            <svg
-              class="logo__svg"
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                fill="currentColor"
-                d="M156.7 256H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h142.2c15.9 0 30.8 10.9 33.4 26.6 3.3 20-12.1 37.4-31.6 37.4-14.1 0-26.1-9.2-30.4-21.9-2.1-6.3-8.6-10.1-15.2-10.1H81.6c-9.8 0-17.7 8.8-15.9 18.4 8.6 44.1 47.6 77.6 94.2 77.6 57.1 0 102.7-50.1 95.2-108.6C249 291 205.4 256 156.7 256zM16 224h336c59.7 0 106.8-54.8 93.8-116.7-7.6-36.2-36.9-65.5-73.1-73.1-55.4-11.6-105.1 24.9-114.9 75.5-1.9 9.6 6.1 18.3 15.8 18.3h32.8c6.7 0 13.1-3.8 15.2-10.1C325.9 105.2 337.9 96 352 96c19.4 0 34.9 17.4 31.6 37.4-2.6 15.7-17.4 26.6-33.4 26.6H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16zm384 32H243.7c19.3 16.6 33.2 38.8 39.8 64H400c26.5 0 48 21.5 48 48s-21.5 48-48 48c-17.9 0-33.3-9.9-41.6-24.4-2.9-5-8.7-7.6-14.5-7.6h-33.8c-10.9 0-19 10.8-15.3 21.1 17.8 50.6 70.5 84.8 129.4 72.3 41.2-8.7 75.1-41.6 84.7-82.7C526 321.5 470.5 256 400 256z"
-              />
-            </svg>
-          </span>
-          <span class="sidebar__name">FlowPass</span>
-        </a>
-        <nav class="sidebar__nav" aria-label="Menú principal">
-          <a href="#" class="sidebar__link sidebar__link--active">Usuarios</a>
-        </nav>
-      </aside>
 
-      <!-- Content -->
-      <!-- Content -->
-      <div class="content">
-        <div class="topbar">
-          <!-- Filtros -->
-          <div class="topbar__filters">
-            <input
-              id="searchInput"
-              class="topbar__search-input"
-              type="text"
-              placeholder="Buscar por nombre o email…"
-              aria-label="Buscar por nombre o email…"
-            />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FlowPass — Usuarios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./public/css/index.css" />
+</head>
 
-            <select
-              id="statusSelect"
-              class="topbar__select"
-              aria-label="Filtrar por estado"
-            >
-              <option value="">Estado: Todos</option>
-              <option value="Pagado">Pagado</option>
-              <option value="Pendiente">Pendiente</option>
-              <option value="Vencido">Vencido</option>
-            </select>
-            <!--       
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="#" class="sidebar__brand">
+        <span class="logo logo--lg" aria-hidden="true">
+          <!-- Icono inline (SVG) con color adaptable a la marca mediante currentColor -->
+          <svg class="logo__svg" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+            focusable="false">
+            <path fill="currentColor"
+              d="M156.7 256H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h142.2c15.9 0 30.8 10.9 33.4 26.6 3.3 20-12.1 37.4-31.6 37.4-14.1 0-26.1-9.2-30.4-21.9-2.1-6.3-8.6-10.1-15.2-10.1H81.6c-9.8 0-17.7 8.8-15.9 18.4 8.6 44.1 47.6 77.6 94.2 77.6 57.1 0 102.7-50.1 95.2-108.6C249 291 205.4 256 156.7 256zM16 224h336c59.7 0 106.8-54.8 93.8-116.7-7.6-36.2-36.9-65.5-73.1-73.1-55.4-11.6-105.1 24.9-114.9 75.5-1.9 9.6 6.1 18.3 15.8 18.3h32.8c6.7 0 13.1-3.8 15.2-10.1C325.9 105.2 337.9 96 352 96c19.4 0 34.9 17.4 31.6 37.4-2.6 15.7-17.4 26.6-33.4 26.6H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16zm384 32H243.7c19.3 16.6 33.2 38.8 39.8 64H400c26.5 0 48 21.5 48 48s-21.5 48-48 48c-17.9 0-33.3-9.9-41.6-24.4-2.9-5-8.7-7.6-14.5-7.6h-33.8c-10.9 0-19 10.8-15.3 21.1 17.8 50.6 70.5 84.8 129.4 72.3 41.2-8.7 75.1-41.6 84.7-82.7C526 321.5 470.5 256 400 256z" />
+          </svg>
+        </span>
+        <span class="sidebar__name">FlowPass</span>
+      </a>
+      <nav class="sidebar__nav" aria-label="Menú principal">
+        <a href="#" class="sidebar__link sidebar__link--active">Usuarios</a>
+      </nav>
+    </aside>
+
+    <!-- Content -->
+    <!-- Content -->
+    <div class="content">
+      <div class="topbar">
+        <!-- Filtros -->
+        <div class="topbar__filters">
+          <input id="searchInput" class="topbar__search-input" type="text" placeholder="Buscar por nombre o email…"
+            aria-label="Buscar por nombre o email…" />
+
+          <select id="statusSelect" class="topbar__select" aria-label="Filtrar por estado">
+            <option value="">Estado: Todos</option>
+            <option value="Pagado">Pagado</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Vencido">Vencido</option>
+          </select>
+          <!--       
       <select id="methodSelect" class="topbar__select" aria-label="Filtrar por método de pago">
         <option value="">Método: Todos</option>
         <option value="Tarjeta">Tarjeta</option>
@@ -71,288 +56,249 @@
         <option value="Transferencia">Transferencia</option>
       </select>
  -->
-          </div>
-
-          <!-- Acción principal -->
-          <div class="topbar__actions">
-            <button id="nuevoUsuario" class="btn btn--primary">
-              ➕ Nuevo usuario
-            </button>
-          </div>
         </div>
 
-        <main class="main">
-          <h1 class="main__title">Usuarios</h1>
-          <div class="card" aria-label="Tabla de usuarios">
-            <table class="table">
-              <thead class="table__head">
-                <tr class="table__row">
-                  <th class="table__head-cell table__col--first-name">
-                    Nombre(s)
-                  </th>
-                  <th class="table__head-cell table__col--last-name">
-                    Apellido(s)
-                  </th>
-                  <th class="table__head-cell table__col--plan">Plan</th>
-                  <th class="table__head-cell table__col--classes">
-                    Clases realizadas
-                  </th>
-                  <th class="table__head-cell table__col--grace">
-                    Días de cortesía
-                  </th>
-                  <th class="table__head-cell table__col--start">
-                    Inicio de plan
-                  </th>
-                  <th class="table__head-cell table__col--end">
-                    Fin de plan
-                  </th>
-                  <th class="table__head-cell table__col--status">
-                    Estado
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="table__body" id="usersTbody">
-              </tbody>
-            </table>
-            <div class="table__footer" id="usersPager">
+        <!-- Acción principal -->
+        <div class="topbar__actions">
+          <button id="nuevoUsuario" class="btn btn--primary">
+            ➕ Nuevo usuario
+          </button>
+        </div>
+      </div>
+
+      <main class="main">
+        <h1 class="main__title">Usuarios</h1>
+        <div class="card" aria-label="Tabla de usuarios">
+          <table class="table">
+            <thead class="table__head">
+              <tr class="table__row">
+                <th class="table__head-cell table__col--first-name">
+                  Nombre(s)
+                </th>
+                <th class="table__head-cell table__col--last-name">
+                  Apellido(s)
+                </th>
+                <th class="table__head-cell table__col--plan">Plan</th>
+                <th class="table__head-cell table__col--classes">
+                  Clases realizadas
+                </th>
+                <th class="table__head-cell table__col--grace">
+                  Días de cortesía
+                </th>
+                <th class="table__head-cell table__col--start">
+                  Inicio de plan
+                </th>
+                <th class="table__head-cell table__col--end">
+                  Fin de plan
+                </th>
+                <th class="table__head-cell table__col--status">
+                  Estado
+                </th>
+              </tr>
+            </thead>
+            <tbody class="table__body" id="usersTbody">
+            </tbody>
+
+            
+          </table>
+                      <div class="table__footer" id="usersPager">
 
               <div class="pagination">
                 <div class="pagination__status" id="pagerStatus"></div>
                   <nav class="pagination__nav" aria-label="Paginación" id="pagination"></nav>
                 </div>
             </div>
-
-
-          </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
+  </div>
 
-   
 
- <!-- Modal: Ficha de usuario -->
-    <div
-      class="modal"
-      id="userModal"
-      aria-hidden="true"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="userModalTitle"
-    >
-      <div class="modal__overlay" data-close></div>
 
-      <!-- Usa tu .card como diálogo -->
-      <div class="modal__dialog card" role="document">
-        <header class="modal__header">
-          <h2 class="modal__title" id="userModalTitle">Ficha del usuario</h2>
-          <button
-            class="modal__close btn"
-            type="button"
-            aria-label="Cerrar"
-            id="btn-close"
-            data-close
-          >
-            ✕
-          </button>
-        </header>
+  <!-- Modal: Ficha de usuario -->
+  <div class="modal" id="userModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="userModalTitle">
+    <div class="modal__overlay" data-close></div>
 
-        <div class="modal__body">
-          <!-- Datos -->
-          <section class="modal__section">
-            <dl class="user-info">
-              <div class="user-info__row">
-                <dt class="user-info__label">ID</dt>
-                <dd class="user-info__value" data-field="UserID">—</dd>
-              </div>
-              <!--<div class="user-info__row">
-                <dt class="user-info__label">Nombre(s)</dt>
-                <dd class="user-info__value" data-field="UserName">—</dd>
-              </div>-->
-              <!--<div class="user-info__row">
-                <dt class="user-info__label">Apellido(s)</dt>
-                <dd class="user-info__value" data-field="UserLastName">—</dd>
-              </div>-->
-              <div class="user-info__row">
-                <dt class="user-info__label">Teléfono</dt>
-                <dd class="user-info__value" data-field="UserPhone">—</dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">Email</dt>
-                <dd class="user-info__value" data-field="UserEmail">—</dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">Plan</dt>
-                <dd class="user-info__value" data-field="UserPlan">—</dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">Monto de pago</dt>
-                <dd class="user-info__value" data-field="PaymentAmount">—</dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">Método</dt>
-                <dd class="user-info__value" data-field="PaymentMethod">—</dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">Estado</dt>
-                <dd class="user-info__value" data-field="PaymentStatus">—</dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">
-                  <svg class="icon"><use href="/public/icons/sprites.svg#class-icon"></use></svg>
-                  Clases
-                </dt>
-                <dd class="user-info__value" data-field="NumberOfClases">—</dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">Días de gracia</dt>
-                <dd class="user-info__value" data-field="FreeDays">—</dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">Fecha inicio</dt>
-                <dd class="user-info__value" data-field="DateOfSubcription">
-                  —
-                </dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">Próximo pago</dt>
-                <dd class="user-info__value" data-field="NextPaymentDay">—</dd>
-              </div>
-              <div class="user-info__row">
-                <dt class="user-info__label">
-                   <svg class="icon"><use href="/public/icons/sprites.svg#birthday"></use></svg>
-                  Cumpleaños</dt>
-                <dd class="user-info__value" data-field="UserBirthday">—</dd>
-              </div>
-            </dl>
+    <div class="modal__dialog card" role="document">
+      <!-- Header -->
+      <header class="modal__header">
+        <h2 class="modal__title" id="userModalTitle">Ficha del usuario</h2>
+        <button class="modal__close" type="button" aria-label="Cerrar" data-close>
+          ✕
+        </button>
+      </header>
 
-            <div class="modal__actions">
-              <button class="btn btn--primary" id="btnCheckIn">
-                Registrar ingreso
-              </button>
-              <button
-                class="btn"
-                id="btnToggleForm"
-                aria-expanded="false"
-                aria-controls="updateForm"
-              >
-                Actualizar mensualidad
-              </button>
+      <div class="modal__body">
+        <!-- Panel principal -->
+        <div class="modal__main">
+          <!-- Sección: Datos personales -->
+          <section class="section">
+            <h3 class="section__title">Datos personales</h3>
+            <div class="info-grid">
+              <div class="row">
+                <div class="label">ID</div>
+                <div class="value value--muted" data-field="UserID">—</div>
+              </div>
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#phone"></use>
+                  </svg>
+                  Teléfono
+                </div>
+                <div class="value" data-field="UserPhone">—</div>
+              </div>
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#mail"></use>
+                  </svg>
+                  Email
+                </div>
+                <div class="value" data-field="UserEmail">—</div>
+              </div>
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#birthday"></use>
+                  </svg>
+                  Cumpleaños
+                </div>
+                <div class="value" data-field="UserBirthday">—</div>
+              </div>
             </div>
           </section>
 
-          <!-- Formulario de actualización -->
-          <section class="modal__section" id="updateForm">
-            <h3 class="modal__subtitle">Actualizar mensualidad</h3>
-
-            <form class="form" id="updateUserForm">
-              <div class="form__row">
-                <label class="form__label" for="Plan">Plan</label>
-                <select
-                  class="form__control"
-                  id="Plan"
-                  name="Plan"
-                >
-                  <option value="">Selecciona…</option>
-                  <option>Mensual</option>
-                  <option>Bimestral</option>
-                  <option>Trimestral</option>
-                  <option>Semestral</option>
-                  <option>Anual</option>
-                </select>
+          <!-- Sección: Plan -->
+          <section class="section">
+            <h3 class="section__title">Plan actual</h3>
+            <div class="info-grid">
+              <div class="row">
+                <div class="label">Plan</div>
+                <div class="value" data-field="UserPlan">—</div>
               </div>
-
-              <div class="form__row">
-                <label class="form__label" for="Dias_de_Gracia"
-                  >Días de gracia</label
-                >
-                <input
-                  class="form__control"
-                  id="Dias_de_Gracia"
-                  name="Dias_de_Gracia"
-                  type="number"
-                  step="1"
-                  min="0"
-                  
-                />
+              <div class="row">
+                <div class="label">Método de pago</div>
+                <div class="value" data-field="PaymentMethod">—</div>
               </div>
-
-              <div class="form__row">
-                <label class="form__label" for="Monto"
-                  >Monto de pago</label
-                >
-                <input
-                  class="form__control"
-                  id="Monto"
-                  name="Monto"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  
-                />
+              <div class="row">
+                <div class="label">Monto</div>
+                <div class="value" data-field="PaymentAmount">—</div>
               </div>
-
-              <div class="form__row">
-                <label class="form__label" for="Medio_de_pago"
-                  >Método de pago</label
-                >
-                <select
-                  class="form__control"
-                  id="Medio_de_pago"
-                  name="Medio_de_pago"
-                  
-                >
-                  <option value="">Selecciona…</option>
-                  <option>Efectivo</option>
-                  <option>Tarjeta</option>
-                  <option>Transferencia</option>
-                </select>
+              <div class="row">
+                <div class="label">Estado</div>
+                <div class="value" data-field="PaymentStatus">—</div>
               </div>
-
-              <div class="form__row">
-                <label class="form__label" for="Estado"
-                  >Estado de pago</label
-                >
-                <select
-                  class="form__control"
-                  id="Estado"
-                  name="PaymentStatus"
-                  required
-                >
-                  <option value="">Selecciona…</option>
-                  <option>Pagado</option>
-                  <option>Pendiente</option>
-                  <option>Vencido</option>
-                </select>
-              </div>
-
-              <div class="form__actions">
-                <button class="btn" type="button" id="btnCancelForm">
-                  Cancelar
-                </button>
-                <button class="btn btn--primary" type="submit">
-                  Guardar cambios
-                </button>
-              </div>
-            </form>
+            </div>
           </section>
+
+          <!-- Sección: Clases y Fechas -->
+          <section class="section">
+            <h3 class="section__title">Asistencia y fechas</h3>
+            <div class="info-grid">
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#class-icon"></use>
+                  </svg>
+                  Clases realizadas
+                </div>
+                <div class="value" data-field="NumberOfClases">—</div>
+              </div>
+              <div class="row">
+                <div class="label">Días de gracia</div>
+                <div class="value" data-field="FreeDays">—</div>
+              </div>
+              <div class="row">
+                <div class="label">Inicio del plan</div>
+                <div class="value" data-field="DateOfSubcription">—</div>
+              </div>
+              <div class="row">
+                <div class="label">Próximo pago</div>
+                <div class="value" data-field="NextPaymentDay">—</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Acciones -->
+          <div class="modal__actions">
+            <button class="btn btn--primary" id="btnCheckIn">
+              Registrar ingreso
+            </button>
+            <button class="btn" id="btnToggleForm" aria-expanded="false" aria-controls="updateForm">
+              Actualizar Plan
+            </button>
+          </div>
         </div>
+
+        <!-- Formulario de actualización (inicialmente oculto) -->
+        <aside class="modal__side" id="updateForm" hidden>
+          <h3 class="modal__subtitle">Actualizar Plan</h3>
+          <form class="form" id="updateUserForm">
+            <div class="form__row">
+              <label class="form__label" for="Plan">Plan</label>
+              <select class="form__control" id="Plan" name="Plan">
+                <option value="">Selecciona…</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Semestral</option>
+                <option>Anual</option>
+              </select>
+            </div>
+
+            <div class="form__row">
+              <label class="form__label" for="Dias_de_Gracia">Días de gracia</label>
+              <input class="form__control" id="Dias_de_Gracia" name="Dias_de_Gracia" type="number" step="1" min="0" />
+            </div>
+
+            <div class="form__row">
+              <label class="form__label" for="Monto">Monto de pago</label>
+              <input class="form__control" id="Monto" name="Monto" type="number" step="0.01" min="0" />
+            </div>
+
+            <div class="form__row">
+              <label class="form__label" for="Medio_de_pago">Método de pago</label>
+              <select class="form__control" id="Medio_de_pago" name="Medio_de_pago">
+                <option value="">Selecciona…</option>
+                <option>Efectivo</option>
+                <option>Tarjeta</option>
+                <option>Transferencia</option>
+              </select>
+            </div>
+
+            <div class="form__row">
+              <label class="form__label" for="Estado">Estado de pago</label>
+              <select class="form__control" id="Estado" name="PaymentStatus" required>
+                <option value="">Selecciona…</option>
+                <option>Pagado</option>
+                <option>Pendiente</option>
+                <option>Vencido</option>
+              </select>
+            </div>
+
+            <div class="form__actions">
+              <button class="btn" type="button" id="btnCancelForm">
+                Cancelar
+              </button>
+              <button class="btn btn--primary" type="submit">
+                Guardar cambios
+              </button>
+            </div>
+          </form>
+        </aside>
       </div>
     </div>
   </div>
-</div>
 
-
-
-
-
-<!-- Loader modal -->
-<div class="modal" id="loaderModal" aria-hidden="true" role="alert" aria-modal="true">
-  <div class="modal__overlay"></div>
-  <div class="modal__dialog card loader__dialog">
-    <div class="loader__spinner"></div>
-    <p class="loader__text">Procesando...</p>
+  <!-- Loader modal -->
+  <div class="modal" id="loaderModal" aria-hidden="true" role="alert" aria-modal="true">
+    <div class="modal__overlay"></div>
+    <div class="modal__dialog card loader__dialog">
+      <div class="loader__spinner"></div>
+      <p class="loader__text">Procesando...</p>
+    </div>
   </div>
-</div>
 
 
 

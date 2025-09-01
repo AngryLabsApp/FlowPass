@@ -1,157 +1,277 @@
-/* FlowPass — component.modal.css */
 @layer components {
   .modal {
     position: fixed;
     inset: 0;
-    display: none;
     z-index: 1000;
+    display: none;
+    padding: 16px;
+    overflow-y: auto;
   }
+
   .modal[aria-hidden="false"] {
-    display: block;
+    display: grid;
+    place-items: center;
   }
+
   .modal__overlay {
-    position: absolute;
+    position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
   }
 
   .modal__dialog {
     position: relative;
-    margin: 5vh auto;
-    max-width: 980px; /* ↑ un poco más ancho para la 2ª columna */
-    width: min(96vw, 980px);
-    max-height: 85vh; /* para que el panel derecho pueda scrollear */
-    overflow: hidden; /* recorta overflow del contenedor */
-    /* .card ya aporta fondo, borde, sombra, radio */
-    padding: 16px 16px 20px;
-    outline: 0;
+    width: 100%;
+    max-width: 980px;
+    margin: 32px auto;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
   }
 
   .modal__header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
+    background: var(--surface, #fafafa);
   }
+
   .modal__title {
+    font-size: 18px;
+    font-weight: 700;
     margin: 0;
-    font-size: 20px;
-    font-weight: 800;
-  }
-
-  /* ----- Layout del cuerpo ----- */
-  .modal__body {
-    display: grid;
-    gap: 16px;
-    padding-top: 12px;
-    /* móvil: apilado */
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  /* Desktop: 2 columnas; la derecha (form) inicia colapsada */
-  @media (width >= 800px) {
-    .modal__body {
-      grid-template-columns: 1fr 0;
-    }
-    .modal__body.modal__body--form-open {
-      grid-template-columns: 1fr 380px;
-    } /* ajusta 380px si quieres */
-  }
-
-  .modal__section {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 14px;
-  }
-  .modal__subtitle {
-    margin: 0 0 8px;
-    font-size: 14px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-  }
-  .modal__actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-  }
-
-  /* Panel izquierdo: tabla de info (igual que ya tenías) */
-  .user-info {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 8px 12px;
-  }
-  .user-info__label {
-    font-weight: 600;
-    color: var(--muted);
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-  }
-  .user-info__value {
     color: var(--text);
   }
-  @media (width <= 560px) {
-    .user-info {
-      grid-template-columns: 1fr;
-    }
+
+  .modal__close {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
   }
 
-  /* ----- Form en panel derecho ----- */
-  #updateForm {
-    overflow: auto;
-  } /* scrollea su propio contenido */
-
-  /* En desktop, cuando el panel está cerrado (no tiene clase --form-open en el body) */
-  @media (width >= 800px) {
-    .modal__body:not(.modal__body--form-open) #updateForm {
-      width: 0 !important;
-      opacity: 0;
-      padding: 0;
-      border: 0;
-      pointer-events: none; /* que no reciba focus/click */
-    }
-    /* Cuando está abierto, usa su estilo base y un separador visual izquierdo */
-    .modal__body.modal__body--form-open #updateForm {
-      width: 100%;
-      opacity: 1;
-      /* la .modal__section ya pone padding + borde + radio */
-      border-left: 1px solid var(--border);
-      transition: width 0.25s ease, opacity 0.2s ease, padding 0.2s ease,
-        border-color 0.2s ease;
-    }
+  .modal__close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text);
   }
 
-  /* Form */
-  .form {
+  .modal__body {
     display: grid;
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
   }
-  .form__row {
+
+  /* Grid layout cuando el form está visible */
+  .modal__body:has(#updateForm:not([hidden])) {
+    grid-template-columns: 1fr 320px;
+  }
+
+  .modal__main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .modal__side {
+    background: var(--surface, #fafafa);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  /* Animación del formulario */
+  .modal__side {
+    transition: transform 0.3s ease-out;
+    transform: translateX(100%);
+  }
+
+  .modal__side:not([hidden]) {
+    transform: translateX(0);
+  }
+
+  /* Secciones */
+  .section {
+    padding: 24px;
+    background: var(--surface, #fafafa);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .section__title {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin: 0 0 16px 0;
+  }
+
+  /* Grid de información */
+  .info-grid {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .label {
+    color: var(--muted);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
     gap: 6px;
   }
-  .form__label {
-    font-size: 12px;
-    color: var(--muted);
-    text-transform: uppercase;
+
+  .value {
+    color: var(--text);
+    font-size: 15px;
   }
+
+  .value--muted {
+    color: var(--muted);
+  }
+
+  /* Formulario */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form__row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
   .form__control {
     padding: 10px 12px;
     border: 1px solid var(--border);
-    border-radius: 10px;
-    background: #fff;
-    color: var(--text);
+    border-radius: 8px;
+    font-size: 14px;
+    width: 100%;
+    transition: border-color 0.2s;
   }
+
+  .form__control:focus {
+    outline: none;
+    border-color: var(--c4);
+  }
+
+  .form__control:hover {
+    border-color: var(--muted);
+  }
+
+  /* Acciones */
+  .modal__actions,
   .form__actions {
     display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 6px;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  /* Loader */
+  .loader__dialog {
+    max-width: 300px;
+    text-align: center;
+    padding: 32px 20px;
+  }
+
+  .loader__spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 16px;
+    border: 3px solid var(--border);
+    border-top-color: var(--c5);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loader__text {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .modal {
+      padding: 12px;
+    }
+
+    .modal__dialog {
+      margin: 16px auto;
+    }
+
+    .modal__body,
+    .modal__body:has(#updateForm:not([hidden])) {
+      grid-template-columns: 1fr;
+      padding: 16px;
+      gap: 16px;
+    }
+
+    .modal__side {
+      transform: translateY(100%);
+    }
+
+    .modal__side:not([hidden]) {
+      transform: translateY(0);
+    }
+
+    .modal__actions,
+    .form__actions {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .modal__header {
+      padding: 16px;
+    }
+
+    .modal__title {
+      font-size: 16px;
+    }
+
+    .section {
+      padding: 16px;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
   }
 }
