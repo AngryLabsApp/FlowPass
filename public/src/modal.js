@@ -70,14 +70,6 @@ function openUpdateForm() {
 
 
 function handleOnSelectPlanChange(){
-  const planToAmount = {
-    '12 Sesiones Mensuales': 150,
-    '16 Sesiones Mensuales': 180,
-    '20 Sesiones Mensuales': 200,
-    'Clase Libre': 15,
-    'Clase Gratis': 0
-  };
-
   const planEl = document.getElementById('Plan');
   const montoEl = document.getElementById('Monto');
 

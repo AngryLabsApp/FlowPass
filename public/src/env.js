@@ -8,6 +8,14 @@ const ENV_VARS = {
   url_ingreso:"https://n8n.angrylabs.app/webhook/b9a49ebc-c1cc-4551-bca6-21832295b34c"
 };
 
+const planToAmount = {
+    '12 Sesiones Mensuales': 150,
+    '16 Sesiones Mensuales': 180,
+    '20 Sesiones Mensuales': 200,
+    'Clase Libre': 15,
+    'Clase Gratis': 0
+};
+
 /** Atajo de querySelector */
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 
