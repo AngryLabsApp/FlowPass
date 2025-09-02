@@ -37,17 +37,28 @@ function applyCheckinUI({ ok, user, message }) {
 
 
 // Función que quieres ejecutar con el valor del input
-function handleCheckin(query) {
+async function handleCheckin(query) {
   // aquí haces lo que necesites
-    const ok = true; // o true cuando sea éxito real
+    
+    const queryParams = {code: query};
+    const url = buildUrl(ENV_VARS.url_ingreso, queryParams);
+    const res = await fetch(url, {
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = await res.json();
+    console.log(data);
+  
+  const ok = !data.error; 
 
   if (ok) {
     applyCheckinUI({ ok: true, user: { Nombre: 'James', Apellidos: 'Brown' } });
     openModal();
-    clean(true); // ← limpia SOLO cuando fue éxito
+    clean(); // ← limpia SOLO cuando fue éxito
   } else {
     applyCheckinUI({ ok: false, message: 'El código no existe.' });
-     clean()
+     clean(true)
     // NO limpies aquí; deja el mensaje visible
   }
 }

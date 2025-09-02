@@ -5,6 +5,7 @@ const ENV_VARS = {
     "https://n8n.angrylabs.app/webhook/9ecc1791-c157-4084-8de6-6924235d95cd",
   url_update:
     "https://n8n.angrylabs.app/webhook/afd7e9b5-36c7-40de-956c-c23631d804b1",
+  url_ingreso:"https://n8n.angrylabs.app/webhook/b9a49ebc-c1cc-4551-bca6-21832295b34c"
 };
 
 /** Atajo de querySelector */
