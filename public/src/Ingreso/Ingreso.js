@@ -61,7 +61,7 @@ async function handleCheckin(query) {
         const ok = !data.error; 
         if (ok) {
             applyCheckinUI({ ok: true, user: { Nombre: 'James', Apellidos: 'Brown' } });
-            openModal();
+            openModal(data.user);
             clean(); // ← limpia SOLO cuando fue éxito
         } else {
             user = data.user;
@@ -174,11 +174,18 @@ function initModal() {
 }
 
 
-function openModal() {
+function openModal(user) {
   const m = document.getElementById("userModal");
   if (!m) return;
   Is_Modal_Open = true;
   m.setAttribute("aria-hidden", "false");
+  setField(m, "NumberOfClases",  `${user.Clases_tomadas}/${user.Limite_clases}`);
+  setField(m, "DateOfSubcription", formatDate(user.Fecha_Alta));
+  setField(m, "NextPaymentDay", formatDate(user.Proxima_Fecha_Pago));
+
+  $("#userModalTitle").textContent = user.Nombre + " " + user.Apellidos;
+
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -274,4 +274,13 @@
       grid-template-columns: 1fr;
     }
   }
+
+  #userModal.modal--success .modal__header {
+    background: #e8fff1;
+    border-bottom-color: #d2f6e0;
+  }
+  #userModal.modal--success .modal__title {
+    color: #0a6b3e;
+  }
+
 }

@@ -41,3 +41,9 @@ function safe(text) {
   span.textContent = text ?? "";
   return span.innerHTML;
 }
+
+
+function setField(modalEl, field, value) {
+  const el = modalEl.querySelector(`[data-field="${field}"]`);
+  if (el) el.textContent = value ?? "—";
+}

@@ -1,9 +1,6 @@
 let user_selected = null;
 
-function setField(modalEl, field, value) {
-  const el = modalEl.querySelector(`[data-field="${field}"]`);
-  if (el) el.textContent = value ?? "—";
-}
+
 
 function openModal(user) {
   const m = $("#userModal");
@@ -18,7 +15,7 @@ function openModal(user) {
   setField(m, "PaymentAmount", user.Monto); // ya viene formateado en tu tabla
   setField(m, "PaymentMethod", user.Medio_de_pago);
   setField(m, "PaymentStatus", user.Estado);
-  setField(m, "NumberOfClases", user.Clases_tomadas);
+  setField(m, "NumberOfClases", `${user.Clases_tomadas}/${user.Limite_clases}`);
   setField(m, "FreeDays", user.Dias_de_Gracia);
   setField(m, "DateOfSubcription", formatDate(user.Fecha_Alta));
   setField(m, "NextPaymentDay", formatDate(user.Proxima_Fecha_Pago));
