@@ -39,28 +39,52 @@ function applyCheckinUI({ ok, user, message }) {
 // Función que quieres ejecutar con el valor del input
 async function handleCheckin(query) {
   // aquí haces lo que necesites
-    
-    const queryParams = {code: query};
-    const url = buildUrl(ENV_VARS.url_ingreso, queryParams);
-    const res = await fetch(url, {
-      headers: { Accept: "application/json" },
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-    const data = await res.json();
-    console.log(data);
   
-  const ok = !data.error; 
+    if (query && (query.length < 4|| query.length > 6)){
+        applyCheckinUI({ ok: false, message: 'El código no existe.' });
+        clean(true)
+        return;
+    }
+    let user = null;
+    try {
+        showLoader('Registrando ingreso...');
+        const queryParams = {code: query};
+        const url = buildUrl(ENV_VARS.url_ingreso, queryParams);
+        const res = await fetch(url, {
+        headers: { Accept: "application/json" },
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-  if (ok) {
-    applyCheckinUI({ ok: true, user: { Nombre: 'James', Apellidos: 'Brown' } });
-    openModal();
-    clean(); // ← limpia SOLO cuando fue éxito
-  } else {
-    applyCheckinUI({ ok: false, message: 'El código no existe.' });
-     clean(true)
-    // NO limpies aquí; deja el mensaje visible
-  }
+        const data = await res.json();
+        console.log(data);
+    
+        const ok = !data.error; 
+        if (ok) {
+            applyCheckinUI({ ok: true, user: { Nombre: 'James', Apellidos: 'Brown' } });
+            openModal();
+            clean(); // ← limpia SOLO cuando fue éxito
+        } else {
+            user = data.user;
+            throw new Error(data.reason);
+        }
+            
+    } catch (error) {
+        let error_message = error.message;
+        let text = "El código no existe.";
+        switch(error_message){
+            case "PLAN_VENCIDO":
+                text= "";
+                break;
+            case "LIMITE_CLASES_SUPERADO":
+                text= `Límite de clases alcanzado (${user.Clases_tomadas}/${user.Limite_clases})`;
+                break;
+        };
+        
+        applyCheckinUI({ ok: false, message: text });
+        clean(true)
+    }
+    hideLoader();
+    
 }
 
 function clean(onlyForm){
