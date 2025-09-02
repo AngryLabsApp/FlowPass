@@ -5,8 +5,11 @@ let user_selected = null;
 function openModal(user) {
   const m = $("#userModal");
   if (!m) return;
+
+
   m.setAttribute("aria-hidden", "false");
   setField(m, "UserID", user.ID);
+  setField(m, "UserCode", (user.Codigo_ingreso || "").replace(/^c-/i, ''));
   setField(m, "UserName", user.Nombre);
   setField(m, "UserLastName", user.Apellidos);
   setField(m, "UserPhone", user.Telefono);
