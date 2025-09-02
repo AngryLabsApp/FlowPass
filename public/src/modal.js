@@ -67,17 +67,48 @@ function openUpdateForm() {
   btnCancel?.addEventListener("click", () => showUpdateForm(false));
 }
 
+
+
+function handleOnSelectPlanChange(){
+  const planToAmount = {
+    '12 Sesiones Mensuales': 150,
+    '16 Sesiones Mensuales': 180,
+    '20 Sesiones Mensuales': 200,
+    'Clase Libre': 15,
+    'Clase Gratis': 0
+  };
+
+  const planEl = document.getElementById('Plan');
+  const montoEl = document.getElementById('Monto');
+
+  planEl.addEventListener('change', () => {
+    const plan = planEl.value; // cuando no hay value en <option>, usa el texto
+    const amount = planToAmount[plan];
+
+    if (typeof amount === 'number') {
+      montoEl.value = amount.toFixed(2);
+      // Si es gratis, bloquea edición; si no, permite editar por si quieres ajustar
+      const esGratis = plan === 'Clase Gratis';
+      montoEl.readOnly = esGratis;
+    } else {
+      montoEl.value = '';
+      montoEl.readOnly = false;
+    }
+  });
+}
+
+
 // =======================
 // Init
 // =======================
-document.addEventListener("DOMContentLoaded", () => {
-  initModal();
-  openUpdateForm();
-});
 
 // Agregar este código a tu archivo modal.js
 document.addEventListener("DOMContentLoaded", () => {
   // Elementos del modal
+  initModal();
+  openUpdateForm();
+  handleOnSelectPlanChange();
+
   const modal = document.getElementById("userModal");
   const btnToggleForm = document.getElementById("btnToggleForm");
   const btnCancelForm = document.getElementById("btnCancelForm");

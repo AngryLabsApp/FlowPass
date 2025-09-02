@@ -48,7 +48,7 @@
             <option value="">Estado: Todos</option>
             <option value="Pagado">Pagado</option>
             <option value="Pendiente">Pendiente</option>
-            <option value="Vencido">Vencido</option>
+            <option  value="Vencido">Vencido</option>
           </select>
           <!--       
       <select id="methodSelect" class="topbar__select" aria-label="Filtrar por método de pago">
@@ -288,22 +288,22 @@
               <label class="form__label" for="Plan">Plan</label>
               <select class="form__control" id="Plan" name="Plan">
                 <option value="">Selecciona…</option>
-                <option>Mensual</option>
-                <option>Bimestral</option>
-                <option>Trimestral</option>
-                <option>Semestral</option>
-                <option>Anual</option>
+                <option>12 Sesiones Mensuales</option>
+                <option>16 Sesiones Mensuales</option>
+                <option>20 Sesiones Mensuales</option>
+                <option>Clase Libre</option>
+                <option>Clase Gratis</option>
               </select>
-            </div>
-
-            <div class="form__row">
-              <label class="form__label" for="Dias_de_Gracia">Días de gracia</label>
-              <input class="form__control" id="Dias_de_Gracia" name="Dias_de_Gracia" type="number" step="1" min="0" />
             </div>
 
             <div class="form__row">
               <label class="form__label" for="Monto">Monto de pago</label>
               <input class="form__control" id="Monto" name="Monto" type="number" step="0.01" min="0" />
+            </div>
+
+            <div class="form__row">
+              <label class="form__label" for="Dias_de_Gracia">Días de gracia</label>
+              <input class="form__control" id="Dias_de_Gracia" name="Dias_de_Gracia" type="number" step="1" min="0" />
             </div>
 
             <div class="form__row">
@@ -322,7 +322,6 @@
                 <option value="">Selecciona…</option>
                 <option>Pagado</option>
                 <option>Pendiente</option>
-                <option>Vencido</option>
               </select>
             </div>
 
