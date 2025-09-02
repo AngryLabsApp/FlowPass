@@ -73,7 +73,7 @@ async function handleCheckin(query) {
         let text = "El código no existe.";
         switch(error_message){
             case "PLAN_VENCIDO":
-                text= "";
+                text= `El plan de ${user.Nombre} ${user.Apellidos} venció el ${formatDate(user.Proxima_Fecha_Pago)}.`;
                 break;
             case "LIMITE_CLASES_SUPERADO":
                 text= `Límite de clases alcanzado (${user.Clases_tomadas}/${user.Limite_clases})`;
