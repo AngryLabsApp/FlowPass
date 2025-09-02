@@ -32,121 +32,115 @@
         <a href="index.html" class="sidebar__link">Usuarios</a>
         <a href="ingreso.html" class="sidebar__link sidebar__link--active">Ingreso</a>
       </nav>
-        <nav class="sidebar__nav" aria-label="Menú principal">
-   
-  </nav>
+      <nav class="sidebar__nav" aria-label="Menú principal">
+
+      </nav>
     </aside>
 
     <!-- Content -->
-  
+
     <div class="content">
 
       <main class="main">
         <h1 class="main__title">Ingreso</h1>
         <!-- Card de Ingreso -->
-<div class="card checkin" aria-label="Registro de ingreso">
+        <div class="card checkin" aria-label="Registro de ingreso">
 
-     <!-- Foto -->
-    <div class="checkin__avatar-wrap">
-    <div class="checkin__avatar" id="checkinAvatar" aria-hidden="true">
-        <img id="checkinAvatarImg" alt="" />
-        <span id="checkinAvatarInitials"></span>
-    </div>
-    <div class="checkin__display-name" id="checkinAvatarName">Invitado</div>
-    </div>
-
-    
-
-  <form id="checkinForm" class="checkin__form" autocomplete="off">
-    <div class="form__row">
-      <label class="form__label" for="checkinQuery">Código</label>
-      <input
-        class="form__control"
-        id="checkinQuery"
-        name="q"
-        placeholder="Ej. 0001"
-        aria-autocomplete="list"
-        aria-expanded="false"
-        aria-controls="checkinResults"
-      />
-    </div>
-
-    <!-- dropdown de sugerencias -->
-    <div id="checkinResults" class="checkin__results" role="listbox" hidden></div>
-
-    <!-- selección -->
-    <div id="checkinSelected" class="checkin__selected" hidden></div>
-
-    <div class="form__actions checkin__actions">
-      <button class="btn btn--primary" type="submit">Registrar ingreso</button>
-      <button class="btn" type="button" id="checkinClear">Limpiar</button>
-    </div>
-
-    <p class="checkin__status" id="checkinStatus" aria-live="polite"></p>
-  </form>
-</div>
+          <!-- Foto -->
+          <div class="checkin__avatar-wrap">
+            <div class="checkin__avatar" id="checkinAvatar" aria-hidden="true">
+              <img id="checkinAvatarImg" alt="" />
+              <span id="checkinAvatarInitials"></span>
+            </div>
+            <div class="checkin__display-name" id="checkinAvatarName">Invitado</div>
+          </div>
 
 
-  <!-- Modal: Ficha de usuario -->
-  <div class="modal modal--success" id="userModal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="userModalTitle">
-    <div class="modal__overlay" data-close></div>
-    <div class="modal__dialog card" role="document">
-      <!-- Header -->
-      <header class="modal__header">
-        <h2 class="modal__title" id="userModalTitle">INGRESO CORRECTO</h2>
-        <button class="modal__close" type="button" aria-label="Cerrar" data-close>
-          ✕
-        </button>
-      </header>
 
-      <div class="modal__body">
-        <!-- Panel principal -->
-        <div class="modal__main">
-          <!-- Sección: Datos personales -->
+          <form id="checkinForm" class="checkin__form" autocomplete="off">
+            <div class="form__row">
+              <label class="form__label" for="checkinQuery">Código</label>
+              <input class="form__control" id="checkinQuery" name="q" placeholder="Ej. 0001" aria-autocomplete="list"
+                aria-expanded="false" aria-controls="checkinResults" />
+            </div>
+
+            <!-- dropdown de sugerencias -->
+            <div id="checkinResults" class="checkin__results" role="listbox" hidden></div>
+
+            <!-- selección -->
+            <div id="checkinSelected" class="checkin__selected" hidden></div>
+
+            <div class="form__actions checkin__actions">
+              <button class="btn btn--primary" type="submit">Registrar ingreso</button>
+              <button class="btn" type="button" id="checkinClear">Limpiar</button>
+            </div>
+
+            <p class="checkin__status" id="checkinStatus" aria-live="polite"></p>
+          </form>
+        </div>
+
+
+        <!-- Modal: Ficha de usuario -->
+        <div class="modal modal--success" id="userModal" aria-hidden="true" role="dialog" aria-modal="false"
+          aria-labelledby="userModalTitle">
+          <div class="modal__overlay" data-close></div>
+          <div class="modal__dialog card" role="document">
+            <!-- Header -->
+            <header class="modal__header">
+              <h2 class="modal__title" id="userModalTitle">INGRESO CORRECTO</h2>
+              <button class="modal__close" type="button" aria-label="Cerrar" data-close>
+                ✕
+              </button>
+            </header>
+
+            <div class="modal__body">
+              <!-- Panel principal -->
+              <div class="modal__main">
+                <!-- Sección: Datos personales -->
                 <section class="section">
-            <h3 class="section__title">Asistencia y fechas</h3>
-            <div class="info-grid">
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#class-icon"></use>
-                  </svg>
-                  Clases realizadas
-                </div>
-                <div class="value" data-field="NumberOfClases">—</div>
-              </div>
-              <div class="row">
-                <div class="label">Inicio del plan</div>
-                <div class="value" data-field="DateOfSubcription">—</div>
-              </div>
-              <div class="row">
-                <div class="label">Próximo pago</div>
-                <div class="value" data-field="NextPaymentDay">—</div>
-              </div>
-            </div>
-          </section>
-      
-            </div>
-          </section>
+                  <h3 class="section__title">Asistencia y fechas</h3>
+                  <div class="info-grid">
+                    <div class="row">
+                      <div class="label">
+                        <svg class="icon">
+                          <use href="/public/icons/sprites.svg#class-icon"></use>
+                        </svg>
+                        Clases realizadas
+                      </div>
+                      <div class="value" data-field="NumberOfClases">—</div>
+                    </div>
+                    <div class="row">
+                      <div class="label">Inicio del plan</div>
+                      <div class="value" data-field="DateOfSubcription">—</div>
+                    </div>
+                    <div class="row">
+                      <div class="label">Próximo pago</div>
+                      <div class="value" data-field="NextPaymentDay">—</div>
+                    </div>
+                  </div>
+                </section>
 
-          <!-- Acciones -->
-          <div class="modal__actions">
-            <button class="btn btn--primary" id="ok_modal">
-              OK
-            </button>
-           
+              </div>
+              </section>
+
+              <!-- Acciones -->
+              <div class="modal__actions">
+                <button class="btn btn--primary" id="ok_modal">
+                  OK
+                </button>
+
+              </div>
+            </div>
           </div>
         </div>
-      </div>
     </div>
+
+
+
+
+
+    </main>
   </div>
-
-
-
-
-
-</main>      
-    </div>
   </div>
 
   <!-- Loader modal -->
@@ -158,8 +152,8 @@
     </div>
   </div>
   <script src="/public/src/spinner.js"></script>
-    <script src="/public/src/env.js"></script>
-    <script src="/public/src/Ingreso/Ingreso.js"></script>
+  <script src="/public/src/env.js"></script>
+  <script src="/public/src/Ingreso/Ingreso.js"></script>
 </body>
 
 </html>

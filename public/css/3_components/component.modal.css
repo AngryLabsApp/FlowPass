@@ -110,9 +110,9 @@
   }
 
   .section__title {
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--c10);
     letter-spacing: 0.08em;
     margin: 0 0 16px 0;
   }
@@ -131,7 +131,8 @@
   }
 
   .label {
-    color: var(--muted);
+    color: var(--c1);
+    font-weight: 700;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -139,8 +140,9 @@
   }
 
   .value {
-    color: var(--text);
+    color: var(--c2);
     font-size: 15px;
+    font-weight: lighter;
   }
 
   .value--muted {
@@ -282,5 +284,4 @@
   #userModal.modal--success .modal__title {
     color: #0a6b3e;
   }
-
 }

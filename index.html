@@ -32,9 +32,7 @@
         <a href="index.html" class="sidebar__link sidebar__link--active">Usuarios</a>
         <a href="ingreso.html" class="sidebar__link">Ingreso</a>
       </nav>
-        <nav class="sidebar__nav" aria-label="Menú principal">
-   
-  </nav>
+      <nav class="sidebar__nav" aria-label="Menú principal"></nav>
     </aside>
 
     <!-- Content -->
@@ -65,7 +63,11 @@
         <!-- Acción principal -->
         <div class="topbar__actions">
           <button id="nuevoUsuario" class="btn btn--primary">
-            ➕ Nuevo usuario
+            Nuevo usuario
+            <svg class="icon button__icon">
+              <use href="/public/icons/sprites.svg#plus"></use>
+            </svg>
+            
           </button>
         </div>
       </div>
@@ -100,24 +102,19 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="table__body" id="usersTbody">
-            </tbody>
-
-
+            <tbody class="table__body" id="usersTbody"></tbody>
           </table>
           <div class="table__footer" id="usersPager">
-
             <div class="pagination">
               <div class="pagination__status" id="pagerStatus"></div>
-              <nav class="pagination__nav" aria-label="Paginación" id="pagination"></nav>
+              <nav class="pagination__nav" aria-label="Paginación" id="pagination">
+              </nav>
             </div>
           </div>
         </div>
       </main>
     </div>
   </div>
-
-
 
   <!-- Modal: Ficha de usuario -->
   <div class="modal" id="userModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="userModalTitle">
@@ -140,13 +137,24 @@
             <h3 class="section__title">Datos personales</h3>
             <div class="info-grid">
               <div class="row">
-                <div class="label">ID</div>
-                <div class="value value--muted" data-field="UserID">—</div>
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-id"></use>
+                  </svg>ID
+                </div>
+                <div class="value" data-field="UserID">—</div>
               </div>
-                <div class="row">
-                <div class="label">Codigo</div>
-                <div class="value value--muted" data-field="UserCode">—</div>
+
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-code"></use>
+                  </svg>
+                  Codigo de ingreso
+                </div>
+                <div class="value" data-field="UserCode">—</div>
               </div>
+
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -156,6 +164,7 @@
                 </div>
                 <div class="value" data-field="UserPhone">—</div>
               </div>
+
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -165,6 +174,7 @@
                 </div>
                 <div class="value" data-field="UserEmail">—</div>
               </div>
+
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -182,19 +192,35 @@
             <h3 class="section__title">Plan actual</h3>
             <div class="info-grid">
               <div class="row">
-                <div class="label">Plan</div>
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-plan"></use>
+                  </svg>Plan
+                </div>
                 <div class="value" data-field="UserPlan">—</div>
               </div>
               <div class="row">
-                <div class="label">Método de pago</div>
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#money-hand"></use>
+                  </svg>Método de pago
+                </div>
                 <div class="value" data-field="PaymentMethod">—</div>
               </div>
               <div class="row">
-                <div class="label">Monto</div>
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#money"></use>
+                  </svg>Monto
+                </div>
                 <div class="value" data-field="PaymentAmount">—</div>
               </div>
               <div class="row">
-                <div class="label">Estado</div>
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-status"></use>
+                  </svg>Estado
+                </div>
                 <div class="value" data-field="PaymentStatus">—</div>
               </div>
             </div>
@@ -214,15 +240,30 @@
                 <div class="value" data-field="NumberOfClases">—</div>
               </div>
               <div class="row">
-                <div class="label">Días de gracia</div>
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#gift"></use>
+                  </svg>
+                  Días de gracia
+                </div>
                 <div class="value" data-field="FreeDays">—</div>
               </div>
               <div class="row">
-                <div class="label">Inicio del plan</div>
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#calendar"></use>
+                  </svg>
+                  Inicio del plan
+                </div>
                 <div class="value" data-field="DateOfSubcription">—</div>
               </div>
               <div class="row">
-                <div class="label">Próximo pago</div>
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#calendar-payday"></use>
+                  </svg>
+                  Próximo pago
+                </div>
                 <div class="value" data-field="NextPaymentDay">—</div>
               </div>
             </div>
@@ -307,7 +348,6 @@
       <p class="loader__text">Procesando...</p>
     </div>
   </div>
-
 
   <script src="/public/src/env.js"></script>
   <script src="/public/src/pagination.js"></script>

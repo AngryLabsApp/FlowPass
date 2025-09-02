@@ -10,6 +10,7 @@
     --c6: #daa588;
     --c8: #ee4266;
     --c9: #fff0bd;
+    --c10: #66be4c;
 
     --success: #0a6b3e;
     --success-light: #e8fff1;
@@ -26,7 +27,7 @@
     /* Roles */
     --bg: #f6f7fb;
     --text: var(--c1);
-    
+
     --text-success: var(--success);
     --border-success: var(--success-lighter);
     --bg-success: var(--success-light);
