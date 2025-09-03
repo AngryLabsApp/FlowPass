@@ -128,8 +128,76 @@
     color: var(--muted);
     user-select: none;
   }
+  /* Movimiento sutil y brillo del ícono del avatar */
+  .checkin__avatar .icon {
+    color: var(--c10);
+    transform-origin: 50% 50%;
+    will-change: transform, color, filter;
+    filter: drop-shadow(0 2px 6px color-mix(in oklab, var(--c10) 25%, transparent));
+    animation: checkinIconPulse 2.6s ease-in-out infinite;
+  }
+
+  @keyframes checkinIconPulse {
+    0%   { transform: translateY(0) scale(1);   color: var(--c10); }
+    50%  { transform: translateY(-2px) scale(1.06); color: var(--c4); }
+    100% { transform: translateY(0) scale(1);  color: var(--c10); }
+  }
   .checkin__display-name {
-    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: var(--c10); /* Fallback con mejor contraste */
+    /* Gradiente con colores de marca (verdes armónicos) */
+    background-image: linear-gradient(90deg, var(--c10), var(--c4));
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+    animation: checkinNameGradient 6s ease-in-out infinite;
+  }
+
+  /* Aplica el clip solo si es soportado; evita dejar texto transparente sin soporte */
+  @supports (-webkit-background-clip: text) {
+    .checkin__display-name {
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+  }
+
+  /* Subrayado suave con brillo sutil */
+  .checkin__display-name::after {
+    content: "";
+    display: block;
+    height: 4px;
+    width: 60%;
+    margin: 6px auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--c10), var(--c4));
+    box-shadow: 0 2px 12px color-mix(in oklab, var(--c10) 30%, transparent);
+    transform-origin: center;
+    animation: checkinUnderlinePulse 2.6s ease-in-out infinite;
+  }
+
+  @keyframes checkinNameGradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes checkinUnderlinePulse {
+    0%   { transform: scaleX(0.95); opacity: 0.9; }
+    50%  { transform: scaleX(1.06); opacity: 1; }
+    100% { transform: scaleX(0.95); opacity: 0.9; }
+  }
+
+  /* Accesibilidad: reducir movimiento si el usuario lo prefiere */
+  @media (prefers-reduced-motion: reduce) {
+    .checkin__display-name { animation: none; }
+    .checkin__display-name::after { animation: none; }
+    .checkin__avatar .icon { animation: none; }
   }
 }
 
