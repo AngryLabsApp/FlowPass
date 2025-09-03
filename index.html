@@ -147,6 +147,8 @@
                 </div>
                 <div class="value" data-field="UserID">—</div>
               </div>
+
+
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -154,8 +156,16 @@
                   </svg>
                   Teléfono
                 </div>
-                <div class="value" data-field="UserPhone">—</div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="UserPhone">—</span>
+                  <button class="edit-btn" aria-label="Editar teléfono" id="btn-edit-phone">
+                    <svg class="icon">
+                      <use href="/public/icons/sprites.svg#edit"></use>
+                    </svg>
+                  </button>
+                </div>
               </div>
+
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -172,7 +182,14 @@
                   </svg>
                   Email
                 </div>
-                <div class="value" data-field="UserEmail">—</div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="UserEmail">—</span>
+                  <button class="edit-btn" aria-label="Editar email" id="btn-edit-email">
+                    <svg class="icon">
+                      <use href="/public/icons/sprites.svg#edit"></use>
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               <div class="row">
@@ -191,7 +208,14 @@
                   </svg>
                   Notificar
                 </div>
-                <div class="value" data-field="UserNotificar">—</div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="UserNotificar">—</span>
+                  <button class="edit-btn" aria-label="Editar nofity" id="btn-edit-notify">
+                    <svg class="icon">
+                      <use href="/public/icons/sprites.svg#edit"></use>
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               <div class="row">
@@ -201,7 +225,15 @@
                   </svg>
                   Enfermedad / Patología
                 </div>
-                <div class="value" data-field="UserPatologias">—</div>
+
+                <div class="value value--editable">
+                  <span class="value__content" data-field="UserPatologias">—</span>
+                  <button class="edit-btn" aria-label="Editar patoligias" id="btn-edit-patologias">
+                    <svg class="icon">
+                      <use href="/public/icons/sprites.svg#edit"></use>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </section>
@@ -260,7 +292,14 @@
                     <use href="/public/icons/sprites.svg#user-status"></use>
                   </svg>Estado
                 </div>
-                <div class="value" data-field="PlanStatus">—</div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="PlanStatus">—</span>
+                  <button class="edit-btn" aria-label="Editar" id="btn-edit-status">
+                    <svg class="icon">
+                      <use href="/public/icons/sprites.svg#edit"></use>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </section>
@@ -367,6 +406,48 @@
             </div>
           </form>
         </aside>
+
+         <!-- Formulario para actualizar campos individuales-->
+        <aside class="modal__side" id="edit-single-form-aside" hidden>
+          <h3 class="modal__subtitle" id="edit-single-form-title">Actualizar</h3>
+          <form class="form" id="edit-single-form" >
+            <div class="form__row">
+              <label class="form__label" for="Plan">Plan</label>
+              <select class="form__control" id="Plan" name="Plan">
+                <option value="">Selecciona…</option>
+                <option>12 Sesiones Mensuales</option>
+                <option>16 Sesiones Mensuales</option>
+                <option>20 Sesiones Mensuales</option>
+                <option>Clase Libre</option>
+                <option>Clase Gratis</option>
+                <option>12 Sesiones Personalizadas</option>
+                <option>16 Sesiones Personalizadas</option>
+                <option>20 Sesiones Personalizadas</option>
+              </select>
+            </div>
+
+            <div class="form__row">
+              <label class="form__label" for="Monto">Monto de pago</label>
+              <input class="form__control" id="Monto" name="Monto" type="number" step="0.01" min="0" />
+            </div>
+
+            <div class="form__actions">
+              <button class="btn" type="button" id="btnCancelForm-single">
+                Cancelar
+              </button>
+              <button class="btn btn--primary" type="submit">
+                Guardar cambios
+              </button>
+            </div>
+          </form>
+        </aside>
+
+
+
+
+
+
+
       </div>
     </div>
   </div>
@@ -381,6 +462,7 @@
   </div>
 
   <script src="/public/src/env.js"></script>
+  <script src="/public/src/update-single-form.js"></script>
   <script src="/public/src/pagination.js"></script>
   <script src="/public/src/update_user.js"></script>
   <script src="/public/src/spinner.js"></script>

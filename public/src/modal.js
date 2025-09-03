@@ -22,7 +22,7 @@ function openModal(user) {
   setField(m, "NextPaymentDay", formatDate(user.Proxima_Fecha_Pago));
   setField(m, "UserBirthday", formatDate(user.Cumpleaños));
   setField(m, "UserNotificar", user.Notificar || "No");
-  setField(m, "UserPatologias", user.Patologias);
+  setField(m, "UserPatologias", user?.Patologias.length > 0 ? user.Patologias : "-");
   user_selected = user;
   $("#userModalTitle").textContent = user.Nombre + " " + user.Apellidos;
 }
@@ -32,6 +32,7 @@ function closeModal() {
   if (!m) return;
   m.setAttribute("aria-hidden", "true");
   showUpdateForm(false);
+  showSingleFormAside(false);
 }
 
 function getUserSelected() {
@@ -39,14 +40,8 @@ function getUserSelected() {
 }
 
 function showUpdateForm(show) {
-  const modal = document.getElementById("userModal");
-  const body = modal.querySelector(".modal__body");
-  const btnToggle = modal.querySelector("#btnToggleForm");
-  body.classList.toggle("modal__body--form-open", !!show);
-  btnToggle?.setAttribute("aria-expanded", show ? "true" : "false");
-
   const updateForm = document.getElementById("updateForm");
-  updateForm.hidden = true;
+  updateForm.hidden = !show;
 }
 
 function handleOnSelectPlanChange() {
@@ -79,6 +74,8 @@ function initModal() {
     closeModal();
   });
 }
+
+
 // Agregar este código a tu archivo modal.js
 document.addEventListener("DOMContentLoaded", () => {
   // Elementos del modal
@@ -88,13 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("userModal");
   const btnToggleForm = document.getElementById("btnToggleForm");
   const btnCancelForm = document.getElementById("btnCancelForm");
-  const updateForm = document.getElementById("updateForm");
 
   // Manejadores para cerrar el modal
   const closeUpdateForm = () => {
     modal.setAttribute("aria-hidden", "true");
-    // Resetear el estado del formulario al cerrar el modal
-    updateForm.hidden = true;
+    showUpdateForm(false);
     btnToggleForm.setAttribute("aria-expanded", "false");
   };
 
@@ -109,18 +104,20 @@ document.addEventListener("DOMContentLoaded", () => {
       event.key === "Escape" &&
       modal.getAttribute("aria-hidden") === "false"
     ) {
-      closeUpdateForm();
+      closeModal();
     }
   });
 
   // Toggle del formulario
   btnToggleForm.addEventListener("click", () => {
+    showSingleFormAside(false);
+    const updateForm = document.getElementById("updateForm");
     const isHidden = updateForm.hidden;
-    updateForm.hidden = !isHidden;
+    showUpdateForm(isHidden);
   });
 
   // Cancelar actualización
   btnCancelForm.addEventListener("click", () => {
-    updateForm.hidden = true;
+      showUpdateForm(false);
   });
 });
