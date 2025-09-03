@@ -20,3 +20,7 @@
   width: 36px;
   height: 36px;
 }
+
+.icon-rose {
+  fill: var(--c8);
+}
