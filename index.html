@@ -48,7 +48,7 @@
             <option value="">Estado: Todos</option>
             <option value="Pagado">Pagado</option>
             <option value="Pendiente">Pendiente</option>
-            <option  value="Vencido">Vencido</option>
+            <option value="Vencido">Vencido</option>
           </select>
           <!--       
       <select id="methodSelect" class="topbar__select" aria-label="Filtrar por método de pago">
@@ -67,7 +67,7 @@
             <svg class="icon button__icon">
               <use href="/public/icons/sprites.svg#plus"></use>
             </svg>
-            
+
           </button>
         </div>
       </div>
@@ -144,17 +144,6 @@
                 </div>
                 <div class="value" data-field="UserID">—</div>
               </div>
-
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#user-code"></use>
-                  </svg>
-                  Codigo de ingreso
-                </div>
-                <div class="value" data-field="UserCode">—</div>
-              </div>
-
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -164,7 +153,15 @@
                 </div>
                 <div class="value" data-field="UserPhone">—</div>
               </div>
-
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-code"></use>
+                  </svg>
+                  Codigo de ingreso
+                </div>
+                <div class="value" data-field="UserCode">—</div>
+              </div>
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -202,34 +199,21 @@
               <div class="row">
                 <div class="label">
                   <svg class="icon">
-                    <use href="/public/icons/sprites.svg#money-hand"></use>
-                  </svg>Método de pago
+                    <use href="/public/icons/sprites.svg#calendar"></use>
+                  </svg>
+                  Inicio del plan
                 </div>
-                <div class="value" data-field="PaymentMethod">—</div>
+                <div class="value" data-field="DateOfSubcription">—</div>
               </div>
               <div class="row">
                 <div class="label">
                   <svg class="icon">
-                    <use href="/public/icons/sprites.svg#money"></use>
-                  </svg>Monto
+                    <use href="/public/icons/sprites.svg#calendar-payday"></use>
+                  </svg>
+                  Próximo pago
                 </div>
-                <div class="value" data-field="PaymentAmount">—</div>
+                <div class="value" data-field="NextPaymentDay">—</div>
               </div>
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#user-status"></use>
-                  </svg>Estado
-                </div>
-                <div class="value" data-field="PaymentStatus">—</div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Sección: Clases y Fechas -->
-          <section class="section">
-            <h3 class="section__title">Asistencia y fechas</h3>
-            <div class="info-grid">
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -251,21 +235,44 @@
               <div class="row">
                 <div class="label">
                   <svg class="icon">
-                    <use href="/public/icons/sprites.svg#calendar"></use>
-                  </svg>
-                  Inicio del plan
+                    <use href="/public/icons/sprites.svg#user-status"></use>
+                  </svg>Estado
                 </div>
-                <div class="value" data-field="DateOfSubcription">—</div>
+                <div class="value" data-field="PlanStatus">—</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Sección: Clases y Fechas -->
+          <section class="section">
+            <h3 class="section__title">Detalle de pago</h3>
+            <div class="info-grid">
+
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#money-hand"></use>
+                  </svg>Método de pago
+                </div>
+                <div class="value" data-field="PaymentMethod">—</div>
               </div>
               <div class="row">
                 <div class="label">
                   <svg class="icon">
-                    <use href="/public/icons/sprites.svg#calendar-payday"></use>
-                  </svg>
-                  Próximo pago
+                    <use href="/public/icons/sprites.svg#money"></use>
+                  </svg>Monto
                 </div>
-                <div class="value" data-field="NextPaymentDay">—</div>
+                <div class="value" data-field="PaymentAmount">—</div>
               </div>
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-status"></use>
+                  </svg>Estado del Pago
+                </div>
+                <div class="value" data-field="PaymentStatus">—</div>
+              </div>
+
             </div>
           </section>
 
