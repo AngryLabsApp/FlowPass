@@ -69,6 +69,8 @@
     margin-top: 8px;
     font-size: 13px;
     color: var(--muted);
+    /* Transición para animar salida suave */
+    transition: transform 220ms ease, opacity 220ms ease;
   }
   .checkin__status--ok {
     color: #0a6b3e;
@@ -82,6 +84,8 @@
     margin: 16px auto; /* ← centra horizontal */
     width: min(720px, 100%); /* ancho cómodo */
     padding: 16px; /* ya tienes padding, por si acaso */
+    /* Transiciones suaves al entrar/salir de estado de error */
+    transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
   }
 
   .checkin__avatar-wrap {
@@ -249,5 +253,53 @@
     .checkin__key:active {
       transform: none;
     }
+  }
+}
+
+@layer components {
+  /* Estado de error para el contenedor de contenido (afecta solo al card de checkin) */
+  .content--error .card.checkin {
+    border-color: var(--border-danger);
+    background: var(--bg-danger);
+    animation: content-error-shake 0.32s ease;
+    /* Al salir del estado de error, que el retorno sea más suave */
+    transition: background-color 400ms ease, border-color 400ms ease, box-shadow 400ms ease;
+  }
+
+  @keyframes content-error-shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+  }
+
+  /* Mensaje de error más claro y visible */
+  .checkin__status.checkin__status--err {
+    background: var(--bg-danger);
+    border: 1px solid var(--border-danger);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    font-weight: 600;
+    font-size: 14px; /* un poco más grande para legibilidad */
+    animation: status-pop 160ms ease-out;
+  }
+
+  /* Estado de salida: desliza y desvanece el mensaje */
+  .checkin__status--slide-out {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  @keyframes status-pop {
+    from { transform: scale(0.98); opacity: 0.75; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  /* Respeta accesibilidad si el usuario prefiere menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    .content--error .card.checkin { animation: none; }
+    .checkin__status.checkin__status--err { animation: none; }
   }
 }

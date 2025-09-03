@@ -66,9 +66,12 @@
           <form id="checkinForm" class="checkin__form" autocomplete="off">
             <div class="form__row">
               <label class="checkin_form__label" for="checkinQuery">Código</label>
-              <input class="form__control form__control--code" id="checkinQuery" name="q" placeholder="Ej. 0001" aria-autocomplete="list"
+              <input class="form__control-ingreso form__control--code" id="checkinQuery" name="q" placeholder="Ej. 0001" aria-autocomplete="list"
                 aria-expanded="false" aria-controls="checkinResults" inputmode="numeric" />
             </div>
+
+            <!-- Estado / mensaje (debajo del input) -->
+            <p class="checkin__status" id="checkinStatus" aria-live="polite"></p>
 
             <!-- dropdown de sugerencias -->
             <div id="checkinResults" class="checkin__results" role="listbox" hidden></div>
@@ -105,7 +108,7 @@
               <button class="btn" type="button" id="checkinClear">Limpiar</button>
             </div>
 
-            <p class="checkin__status" id="checkinStatus" aria-live="polite"></p>
+            
           </form>
         </div>
 

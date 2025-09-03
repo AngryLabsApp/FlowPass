@@ -4,6 +4,7 @@ function applyCheckinUI({ ok, user, message }) {
   const statusEl  = document.getElementById('checkinStatus');
   const resultsEl = document.getElementById('checkinResults');
   const selEl     = document.getElementById('checkinSelected');
+  const contentEl = document.querySelector('.content');
 
   if (!statusEl) return;
 
@@ -15,6 +16,20 @@ function applyCheckinUI({ ok, user, message }) {
     const fullName = [user?.Nombre, user?.Apellidos].filter(Boolean).join(' ');
     statusEl.textContent = message || `Ingreso registrado para ${fullName || 'usuario'} ✅`;
     statusEl.classList.add('checkin__status--ok');
+
+    // Limpia timers/estilos de mensaje previo
+    if (statusEl) {
+      window.clearTimeout(statusEl.__msgTimer);
+      statusEl.style.removeProperty('opacity');
+      statusEl.style.removeProperty('transition');
+    }
+
+    // Limpia cualquier estado de error visual en el contenedor
+    const contentEl2 = document.querySelector('.content');
+    if (contentEl2) {
+      contentEl2.classList.remove('content--error');
+      window.clearTimeout(contentEl2.__errTimer);
+    }
 
     // Oculta lista de resultados
     resultsEl?.setAttribute('hidden', '');
@@ -29,11 +44,45 @@ function applyCheckinUI({ ok, user, message }) {
     // ❌ Error
     statusEl.textContent = message || 'No se pudo registrar el ingreso. Intenta de nuevo.';
     statusEl.classList.add('checkin__status--err');
+    // Asegura estado visible (por si venía saliendo)
+    statusEl.classList.remove('checkin__status--slide-out');
 
     // Mantén visible la selección y/o resultados para corregir/reintentar
     // (no escondemos nada aquí)
     // Si quieres volver a mostrar sugerencias:
     // resultsEl?.removeAttribute('hidden');
+
+    // Marca el contenedor principal con estado de error y ligera animación
+    if (contentEl) {
+      contentEl.classList.add('content--error');
+      // Remueve la marca después de una breve pausa (3s) para no quedarse rojo permanente
+      window.clearTimeout(contentEl.__errTimer);
+      contentEl.__errTimer = window.setTimeout(() => {
+        contentEl.classList.remove('content--error');
+      }, 3000);
+    }
+
+    // Oculta el mensaje de error automáticamente tras 3s con un deslizamiento suave
+    window.clearTimeout(statusEl.__msgTimer);
+    statusEl.__msgTimer = window.setTimeout(() => {
+      statusEl.classList.add('checkin__status--slide-out');
+
+      const cleanup = () => {
+        statusEl.textContent = '';
+        statusEl.classList.remove('checkin__status--err');
+        statusEl.classList.remove('checkin__status--slide-out');
+        statusEl.removeEventListener('transitionend', onEnd);
+      };
+      const onEnd = (ev) => {
+        if (ev.target === statusEl && (ev.propertyName === 'transform' || ev.propertyName === 'opacity')) {
+          cleanup();
+        }
+      };
+      statusEl.addEventListener('transitionend', onEnd);
+      // Fallback por si el evento no dispara
+      window.clearTimeout(statusEl.__msgHideTimer);
+      statusEl.__msgHideTimer = window.setTimeout(cleanup, 320);
+    }, 3000);
   }
 }
 
