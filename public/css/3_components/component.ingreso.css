@@ -1,8 +1,20 @@
 @layer components {
-  .checkin { padding: 16px; width: min(720px, 100%); }
+  .checkin {
+    padding: 16px;
+    width: min(720px, 100%);
+  }
 
-  .checkin__header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
-  .checkin__title { margin:0; font-size:18px; font-weight:800; }
+  .checkin__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .checkin__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+  }
 
   .checkin__results {
     margin-top: 6px;
@@ -13,73 +25,120 @@
     overflow: auto;
   }
   .checkin__item {
-    display:flex; align-items:center; gap:10px;
-    padding:10px 12px; cursor:pointer; border-bottom:1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
   }
-  .checkin__item:last-child { border-bottom:0; }
-  .checkin__item:hover { background:#fbfef9; }
+  .checkin__item:last-child {
+    border-bottom: 0;
+  }
+  .checkin__item:hover {
+    background: #fbfef9;
+  }
 
-  .checkin__name { font-weight:600; }
-  .checkin__meta { color:var(--muted); font-size:12px; }
+  .checkin__name {
+    font-weight: 600;
+  }
+  .checkin__meta {
+    color: var(--muted);
+    font-size: 12px;
+  }
 
   .checkin__selected {
     margin-top: 10px;
     padding: 10px 12px;
     border: 1px solid var(--border);
     border-radius: 10px;
-    background:#fafafa;
+    background: #fafafa;
   }
 
-  .checkin__actions { margin-top: 10px; }
+  .checkin__actions {
+    margin-top: 10px;
+  }
 
-  .checkin__status { margin-top: 8px; font-size: 13px; color: var(--muted); }
-  .checkin__status--ok { color: #0a6b3e; }
-  .checkin__status--err { color: #7a0930; }
+  .checkin__status {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .checkin__status--ok {
+    color: #0a6b3e;
+  }
+  .checkin__status--err {
+    color: #7a0930;
+  }
 
- .card.checkin {
+  .card.checkin {
     display: block;
-    margin: 16px auto;              /* ← centra horizontal */
-    width: min(720px, 100%);        /* ancho cómodo */
-    padding: 16px;                  /* ya tienes padding, por si acaso */
+    margin: 16px auto; /* ← centra horizontal */
+    width: min(720px, 100%); /* ancho cómodo */
+    padding: 16px; /* ya tienes padding, por si acaso */
   }
-
-
 
   .checkin__avatar-wrap {
-    display: flex; flex-direction: column; align-items: center;
-    gap: 8px; margin: 8px 0 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 14px;
   }
   .checkin__avatar {
-    width: 96px; height: 96px; border-radius: 999px; overflow: hidden;
-    position: relative; border: 2px solid var(--border);
+    width: 96px;
+    height: 96px;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--border);
     background: #f1f5f9; /* fondo suave si no hay imagen */
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   .checkin__avatar img {
-    width: 100%; height: 100%; object-fit: cover; display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
   }
-  .checkin__avatar--has-img img { display: block; }
-  .checkin__avatar--has-img #checkinAvatarInitials { display: none; }
+  .checkin__avatar--has-img img {
+    display: block;
+  }
+  .checkin__avatar--has-img #checkinAvatarInitials {
+    display: none;
+  }
 
   .checkin__avatar span {
-    font-weight: 800; font-size: 22px; color: var(--muted);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--muted);
     user-select: none;
   }
-  .checkin__display-name { font-weight: 700; }
-
+  .checkin__display-name {
+    font-weight: 700;
+  }
 }
 
 @layer components {
   /* Teclado numérico para checkin */
-  .checkin__keypad { margin-top: 12px; }
+  .checkin__keypad {
+    margin-top: 12px;
+  }
 
   .checkin__keypad-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
+    width: 100%;
+    /* max-width: clamp(100px, 90vw, 400px); */
+    margin: 0 auto;
   }
 
   .checkin__key {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -89,18 +148,100 @@
     border: 1px solid var(--border);
     background: #fff;
     font-weight: 700;
-    font-size: 20px;
+    font-size: clamp(18px, 2.6vw, 22px);
     color: var(--text);
     cursor: pointer;
     user-select: none;
-    transition: border-color 0.2s, background-color 0.2s;
+    -webkit-user-select: none;
+    will-change: transform, background-color, border-color, color, box-shadow;
+    transition: transform 0.08s ease, background-color 0.15s ease,
+      border-color 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
-  .checkin__key:hover { border-color: var(--muted); }
+  .checkin__key:hover {
+    border-color: var(--c4);
+    background-color: var(--c4-lighter);
+    color: #0a6b3e;
+  }
 
-  .checkin__key--action { font-size: 16px; color: var(--muted); }
+  .checkin__key:focus-visible {
+    outline: 2px solid var(--c4);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--c4) 10%, transparent);
+  }
+
+  /* Feedback visual mientras se presiona */
+  .checkin__key:active {
+    background: var(--bg-success);
+    border-color: var(--border-success);
+    color: var(--text-success);
+    transform: scale(0.98);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .checkin__key::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      120% 120% at 50% 50%,
+      color-mix(in oklab, var(--c4) 25%, transparent) 0%,
+      transparent 60%
+    );
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.22s ease-out, transform 0.22s ease-out;
+  }
+
+  .checkin__key:active::after {
+    opacity: 0.35;
+    transform: scale(1.05);
+  }
+
+  .checkin__key--action {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  .checkin__key--action:active {
+    background: var(--bg-danger);
+    border-color: var(--border-danger);
+    color: var(--text-danger);
+  }
+
+  /* Efecto de onda específico para teclas de acción */
+  .checkin__key--action::after {
+    background: radial-gradient(
+      120% 120% at 50% 50%,
+      color-mix(in oklab, var(--danger) 22%, transparent) 0%,
+      transparent 60%
+    );
+  }
 
   @media (max-width: 480px) {
-    .checkin__key { min-height: 52px; font-size: 18px; }
+    .checkin__key {
+      min-height: 52px;
+    }
+  }
+
+  /* Coarse pointer: targets más grandes en dispositivos táctiles */
+  @media (pointer: coarse) {
+    .checkin__key {
+      min-height: 64px;
+      font-size: 22px;
+    }
+  }
+
+  /* Reduce motion: conserva experiencia sin mareo */
+  @media (prefers-reduced-motion: reduce) {
+    .checkin__key {
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+    .checkin__key:active {
+      transform: none;
+    }
   }
 }
