@@ -65,7 +65,7 @@
 
           <form id="checkinForm" class="checkin__form" autocomplete="off">
             <div class="form__row">
-              <label class="form__label" for="checkinQuery">Código</label>
+              <label class="checkin_form__label" for="checkinQuery">Código</label>
               <input class="form__control" id="checkinQuery" name="q" placeholder="Ej. 0001" aria-autocomplete="list"
                 aria-expanded="false" aria-controls="checkinResults" inputmode="numeric" />
             </div>
@@ -88,9 +88,13 @@
                 <button type="button" class="checkin__key" data-key="7">7</button>
                 <button type="button" class="checkin__key" data-key="8">8</button>
                 <button type="button" class="checkin__key" data-key="9">9</button>
-                <button type="button" class="checkin__key checkin__key--action" data-key="clear" aria-label="Limpiar">C</button>
+                <button type="button" class="checkin__key checkin__key--action" data-key="clear" aria-label="Limpiar"><svg class="icon--md">
+                    <use href="/public/icons/sprites.svg#clean-key"></use>
+                  </svg></button>
                 <button type="button" class="checkin__key" data-key="0">0</button>
-                <button type="button" class="checkin__key checkin__key--action" data-key="back" aria-label="Borrar">⌫</button>
+                <button type="button" class="checkin__key checkin__key--action" data-key="back" aria-label="Borrar"><svg class="icon--md">
+                    <use href="/public/icons/sprites.svg#delete-key"></use>
+                  </svg></button>
               </div>
             </div>
 

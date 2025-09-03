@@ -11,6 +11,11 @@
   height: 20px;
 }
 
+.icon--md {
+  width: 24px;
+  height: 24px;
+}
+
 .icon--lg {
   width: 36px;
   height: 36px;
