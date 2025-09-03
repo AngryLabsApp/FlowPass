@@ -1,5 +1,11 @@
 let Is_Modal_Open = false;
 let Is_Mobile = false;
+function updateSubmitState() {
+  const input = document.getElementById('checkinQuery');
+  const submit = document.getElementById('checkinSubmit') || document.querySelector('#checkinForm button[type="submit"]');
+  if (!input || !submit) return;
+  submit.disabled = (input.value.trim().length < 4);
+}
 function applyCheckinUI({ ok, user, message }) {
   const statusEl  = document.getElementById('checkinStatus');
   const resultsEl = document.getElementById('checkinResults');
@@ -40,6 +46,7 @@ function applyCheckinUI({ ok, user, message }) {
     document.getElementById('checkinForm')?.reset();
     if(!Is_Mobile)
       document.getElementById('checkinQuery')?.focus();
+    updateSubmitState();
   } else {
     // ❌ Error
     statusEl.textContent = message || 'No se pudo registrar el ingreso. Intenta de nuevo.';
@@ -145,6 +152,7 @@ function clean(onlyForm){
     form.reset();
     if(!Is_Mobile)
       input.focus();
+    updateSubmitState();
 
     if(!onlyForm ){
         const statusEl  = document.getElementById('checkinStatus');
@@ -162,9 +170,13 @@ function clean(onlyForm){
 function loadForm () {
   const form  = document.getElementById('checkinForm');
   const input = document.getElementById('checkinQuery');
-  const clear  = document.getElementById('checkinClear'); 
+  const submit = document.getElementById('checkinSubmit') || form?.querySelector('button[type="submit"]');
 
   if (!form || !input) return;
+
+  // Estado inicial y escucha para habilitar/deshabilitar el submit
+  updateSubmitState();
+  input.addEventListener('input', updateSubmitState);
 
   // 1) Enter o click en el botón (porque es type="submit")
   form.addEventListener('submit', (e) => {
@@ -197,13 +209,6 @@ function loadForm () {
 
   });
 
-
-    clear?.addEventListener('click', (e) => {
-        e.preventDefault();
-       clean();
-    });
-
-
 };
 
 // Teclado numérico: llena el input #checkinQuery
@@ -227,6 +232,7 @@ function initKeypad() {
 
     if(!Is_Mobile)
       input.focus();
+    updateSubmitState();
   });
 }
 
