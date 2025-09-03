@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     const btn = $("#btnCheckIn");
     if (!btn) return;
 

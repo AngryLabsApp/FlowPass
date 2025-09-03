@@ -1,4 +1,5 @@
 let Is_Modal_Open = false;
+let Is_Mobile = false;
 function applyCheckinUI({ ok, user, message }) {
   const statusEl  = document.getElementById('checkinStatus');
   const resultsEl = document.getElementById('checkinResults');
@@ -173,9 +174,8 @@ function initKeypad() {
       input.value += key;
     }
 
-    // Notifica cambios y mantiene foco
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.focus();
+    if(!Is_Mobile)
+      input.focus();
   });
 }
 
@@ -214,6 +214,7 @@ function openModal(user) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    Is_Mobile = isMobile();
     loadForm();
     initModal();
     initKeypad();
