@@ -16,7 +16,8 @@
     font-weight: 800;
   }
 
-  .checkin_form__label {
+  /* Etiqueta grande para el formulario de ingreso (BEM: form--checkin) */
+  .form--checkin .form__label {
     font-size: 24px;
     font-weight: 700;
     color: var(--text);
@@ -61,7 +62,8 @@
     background: #fafafa;
   }
 
-  .checkin__actions {
+  /* Ajuste de separación de acciones en el formulario de ingreso */
+  .form--checkin .form__actions {
     margin-top: 10px;
   }
 
