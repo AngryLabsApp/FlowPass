@@ -13,7 +13,10 @@ const planToAmount = {
     '16 Sesiones Mensuales': 180,
     '20 Sesiones Mensuales': 200,
     'Clase Libre': 15,
-    'Clase Gratis': 0
+    'Clase Gratis': 0,
+    '12 Sesiones Personalizadas': 0,
+    '16 Sesiones Personalizadas': 0,
+    '20 Sesiones Personalizadas': 0,
 };
 
 /** Atajo de querySelector */
