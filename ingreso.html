@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FlowPass — Usuarios</title>
+  <title>FlowPass — Ingreso</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -19,7 +19,6 @@
     <aside class="sidebar">
       <a href="#" class="sidebar__brand">
         <span class="logo logo--lg" aria-hidden="true">
-          <!-- Icono inline (SVG) con color adaptable a la marca mediante currentColor -->
           <svg class="logo__svg" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
             focusable="false">
             <path fill="currentColor"
@@ -32,15 +31,10 @@
         <a href="index.html" class="sidebar__link">Usuarios</a>
         <a href="ingreso.html" class="sidebar__link sidebar__link--active">Ingreso</a>
       </nav>
-      <nav class="sidebar__nav" aria-label="Menú principal">
-
-      </nav>
     </aside>
 
     <!-- Content -->
-
     <div class="content">
-
       <main class="main">
         <h1 class="main__title">Ingreso</h1>
         <!-- Card de Ingreso -->
@@ -54,19 +48,13 @@
               </svg>
               <span id="checkinAvatarInitials"></span>
             </div>
-            <div class="checkin__display-name" id="checkinAvatarName">
-
-              Invitado
-
-            </div>
+            <div class="checkin__display-name" id="checkinAvatarName">Invitado</div>
           </div>
 
-
-
-          <form id="checkinForm" class="checkin__form" autocomplete="off">
+          <form id="checkinForm" class="form form--checkin checkin__form" autocomplete="off">
             <div class="form__row">
-              <label class="checkin_form__label" for="checkinQuery">Código</label>
-              <input class="form__control-ingreso form__control--code" id="checkinQuery" name="q" placeholder="Ej. 0001" aria-autocomplete="list"
+              <label class="form__label" for="checkinQuery">Código</label>
+              <input class="form__control form__control--ingreso form__control--code" id="checkinQuery" name="q" placeholder="Ej. 0001" aria-autocomplete="list"
                 aria-expanded="false" aria-controls="checkinResults" inputmode="numeric" />
             </div>
 
@@ -91,89 +79,75 @@
                 <button type="button" class="checkin__key" data-key="7">7</button>
                 <button type="button" class="checkin__key" data-key="8">8</button>
                 <button type="button" class="checkin__key" data-key="9">9</button>
-                <button type="button" class="checkin__key checkin__key--action" data-key="clear"
-                  aria-label="Limpiar"><svg class="icon--md">
+                <button type="button" class="checkin__key checkin__key--action" data-key="clear" aria-label="Limpiar">
+                  <svg class="icon icon--md">
                     <use href="/public/icons/sprites.svg#clean-key"></use>
-                  </svg></button>
+                  </svg>
+                </button>
                 <button type="button" class="checkin__key" data-key="0">0</button>
-                <button type="button" class="checkin__key checkin__key--action" data-key="back" aria-label="Borrar"><svg
-                    class="icon--md">
+                <button type="button" class="checkin__key checkin__key--action" data-key="back" aria-label="Borrar">
+                  <svg class="icon icon--md">
                     <use href="/public/icons/sprites.svg#delete-key"></use>
-                  </svg></button>
+                  </svg>
+                </button>
               </div>
             </div>
 
-            <div class="form__actions checkin__actions">
+            <div class="form__actions">
               <button class="btn btn--primary" type="submit">Registrar ingreso</button>
               <button class="btn" type="button" id="checkinClear">Limpiar</button>
             </div>
-
-            
           </form>
         </div>
+      </main>
+    </div>
+  </div>
 
+  <!-- Modal: Ficha de usuario -->
+  <div class="modal modal--success" id="userModal" aria-hidden="true" role="dialog" aria-modal="false"
+    aria-labelledby="userModalTitle">
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__dialog card" role="document">
+      <!-- Header -->
+      <header class="modal__header">
+        <h2 class="modal__title" id="userModalTitle">INGRESO CORRECTO</h2>
+        <button class="modal__close" type="button" aria-label="Cerrar" data-close>✕</button>
+      </header>
 
-        <!-- Modal: Ficha de usuario -->
-        <div class="modal modal--success" id="userModal" aria-hidden="true" role="dialog" aria-modal="false"
-          aria-labelledby="userModalTitle">
-          <div class="modal__overlay" data-close></div>
-          <div class="modal__dialog card" role="document">
-            <!-- Header -->
-            <header class="modal__header">
-              <h2 class="modal__title" id="userModalTitle">INGRESO CORRECTO</h2>
-              <button class="modal__close" type="button" aria-label="Cerrar" data-close>
-                ✕
-              </button>
-            </header>
-
-            <div class="modal__body">
-              <!-- Panel principal -->
-              <div class="modal__main">
-                <!-- Sección: Datos personales -->
-                <section class="section">
-                  <h3 class="section__title">Asistencia y fechas</h3>
-                  <div class="info-grid">
-                    <div class="row">
-                      <div class="label">
-                        <svg class="icon">
-                          <use href="/public/icons/sprites.svg#class-icon"></use>
-                        </svg>
-                        Clases realizadas
-                      </div>
-                      <div class="value" data-field="NumberOfClases">—</div>
-                    </div>
-                    <div class="row">
-                      <div class="label">Inicio del plan</div>
-                      <div class="value" data-field="DateOfSubcription">—</div>
-                    </div>
-                    <div class="row">
-                      <div class="label">Próximo pago</div>
-                      <div class="value" data-field="NextPaymentDay">—</div>
-                    </div>
-                  </div>
-                </section>
-
+      <div class="modal__body">
+        <!-- Panel principal -->
+        <div class="modal__main">
+          <!-- Sección: Datos personales -->
+          <section class="section">
+            <h3 class="section__title">Asistencia y fechas</h3>
+            <div class="info-grid">
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#class-icon"></use>
+                  </svg>
+                  Clases realizadas
+                </div>
+                <div class="value" data-field="NumberOfClases">—</div>
               </div>
-              </section>
-
-              <!-- Acciones -->
-              <div class="modal__actions">
-                <button class="btn btn--primary" id="ok_modal">
-                  OK
-                </button>
-
+              <div class="row">
+                <div class="label">Inicio del plan</div>
+                <div class="value" data-field="DateOfSubcription">—</div>
+              </div>
+              <div class="row">
+                <div class="label">Próximo pago</div>
+                <div class="value" data-field="NextPaymentDay">—</div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
+
+        <!-- Acciones -->
+        <div class="modal__actions">
+          <button class="btn btn--primary" id="ok_modal">OK</button>
+        </div>
+      </div>
     </div>
-
-
-
-
-
-    </main>
-  </div>
   </div>
 
   <!-- Loader modal -->
@@ -190,3 +164,4 @@
 </body>
 
 </html>
+
