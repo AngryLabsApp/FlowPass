@@ -65,6 +65,11 @@ function renderUserRow(user) {
         user.Estado
         )}</span>
       </td>
+       <td class="table__cell table__col--status">
+        <span class="badge ${statusBadgeClass(user.Estado_Pago)}">${safe(
+        user.Estado_Pago
+        )}</span>
+      </td>
     </tr>
   `;
 }
