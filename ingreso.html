@@ -67,7 +67,7 @@
             <div class="form__row">
               <label class="form__label" for="checkinQuery">Código</label>
               <input class="form__control" id="checkinQuery" name="q" placeholder="Ej. 0001" aria-autocomplete="list"
-                aria-expanded="false" aria-controls="checkinResults" />
+                aria-expanded="false" aria-controls="checkinResults" inputmode="numeric" />
             </div>
 
             <!-- dropdown de sugerencias -->
@@ -75,6 +75,24 @@
 
             <!-- selección -->
             <div id="checkinSelected" class="checkin__selected" hidden></div>
+
+            <!-- Teclado numérico -->
+            <div class="checkin__keypad" aria-label="Teclado numérico" role="group">
+              <div class="checkin__keypad-grid">
+                <button type="button" class="checkin__key" data-key="1">1</button>
+                <button type="button" class="checkin__key" data-key="2">2</button>
+                <button type="button" class="checkin__key" data-key="3">3</button>
+                <button type="button" class="checkin__key" data-key="4">4</button>
+                <button type="button" class="checkin__key" data-key="5">5</button>
+                <button type="button" class="checkin__key" data-key="6">6</button>
+                <button type="button" class="checkin__key" data-key="7">7</button>
+                <button type="button" class="checkin__key" data-key="8">8</button>
+                <button type="button" class="checkin__key" data-key="9">9</button>
+                <button type="button" class="checkin__key checkin__key--action" data-key="clear" aria-label="Limpiar">C</button>
+                <button type="button" class="checkin__key" data-key="0">0</button>
+                <button type="button" class="checkin__key checkin__key--action" data-key="back" aria-label="Borrar">⌫</button>
+              </div>
+            </div>
 
             <div class="form__actions checkin__actions">
               <button class="btn btn--primary" type="submit">Registrar ingreso</button>

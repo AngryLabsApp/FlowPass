@@ -154,6 +154,31 @@ function loadForm () {
 
 };
 
+// Teclado numérico: llena el input #checkinQuery
+function initKeypad() {
+  const keypad = document.querySelector('.checkin__keypad');
+  const input = document.getElementById('checkinQuery');
+  if (!keypad || !input) return;
+
+  keypad.addEventListener('click', (e) => {
+    const btn = e.target.closest('.checkin__key');
+    if (!btn) return;
+    const key = btn.dataset.key;
+
+    if (key === 'back') {
+      input.value = input.value.slice(0, -1);
+    } else if (key === 'clear') {
+      input.value = '';
+    } else if (/^\d$/.test(key)) {
+      input.value += key;
+    }
+
+    // Notifica cambios y mantiene foco
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.focus();
+  });
+}
+
 function closeModal() {
   const m = document.getElementById("userModal");
   if (!m) return;
@@ -191,5 +216,6 @@ function openModal(user) {
 document.addEventListener("DOMContentLoaded", () => {
     loadForm();
     initModal();
+    initKeypad();
 
 });
