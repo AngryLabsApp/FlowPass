@@ -23,7 +23,8 @@ function applyCheckinUI({ ok, user, message }) {
     // Si quieres dejar seleccionado, comenta estas 2 líneas:
     if (selEl) { selEl.hidden = true; selEl.innerHTML = ''; }
     document.getElementById('checkinForm')?.reset();
-    document.getElementById('checkinQuery')?.focus();
+    if(!Is_Mobile)
+      document.getElementById('checkinQuery')?.focus();
   } else {
     // ❌ Error
     statusEl.textContent = message || 'No se pudo registrar el ingreso. Intenta de nuevo.';
@@ -93,7 +94,8 @@ function clean(onlyForm){
     const form  = document.getElementById('checkinForm');
     const input = document.getElementById('checkinQuery');
     form.reset();
-    input.focus();
+    if(!Is_Mobile)
+      input.focus();
 
     if(!onlyForm ){
         const statusEl  = document.getElementById('checkinStatus');
