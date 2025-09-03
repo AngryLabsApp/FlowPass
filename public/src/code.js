@@ -27,11 +27,11 @@ function debounce(fn, wait = 300) {
 /** Mapea estado a clase de badge (opcional) */
 function statusBadgeClass(status) {
   const s = String(status || "").toLowerCase();
-  if (["pagado", "paid", "completo", "completed"].includes(s))
+  if (["pagado","activo", "paid", "completo", "completed"].includes(s))
     return "badge--paid";
-  if (["pendiente", "pendiente de pago", "pending"].includes(s))
+  if (["pendiente","pausado", "pendiente de pago", "pending"].includes(s))
     return "badge--pending";
-  if (["vencido", "overdue", "failed", "atrasado"].includes(s))
+  if (["vencido","inactivo", "overdue", "failed", "atrasado"].includes(s))
     return "badge--overdue";
   return "badge--method";
 }

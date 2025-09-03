@@ -15,7 +15,7 @@ function openModal(user) {
   setField(m, "PaymentAmount", user.Monto); // ya viene formateado en tu tabla
   setField(m, "PaymentMethod", user.Medio_de_pago);
   setField(m, "PlanStatus", user.Estado);
-  setField(m, "PaymentStatus", user.Estado);
+  setField(m, "PaymentStatus", user.Estado_Pago);
   setField(m, "NumberOfClases", `${user.Clases_tomadas}/${user.Limite_clases}`);
   setField(m, "FreeDays", user.Dias_de_Gracia);
   setField(m, "DateOfSubcription", formatDate(user.Fecha_Alta));

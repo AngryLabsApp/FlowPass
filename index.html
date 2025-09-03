@@ -46,9 +46,9 @@
 
           <select id="statusSelect" class="topbar__select" aria-label="Filtrar por estado">
             <option value="">Estado: Todos</option>
-            <option value="Pagado">Pagado</option>
-            <option value="Pendiente">Pendiente</option>
-            <option value="Vencido">Vencido</option>
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+            <option value="Pausado">Pausado</option>
           </select>
           <!--       
       <select id="methodSelect" class="topbar__select" aria-label="Filtrar por método de pago">
@@ -288,7 +288,7 @@
         </div>
 
         <!-- Formulario de actualización (inicialmente oculto) -->
-        <aside class="modal__side" id="updateForm" hidden>
+        <aside class="modal__side" id="updateForm" >
           <h3 class="modal__subtitle">Actualizar Plan</h3>
           <form class="form" id="updateUserForm">
             <div class="form__row">
@@ -325,7 +325,7 @@
 
             <div class="form__row">
               <label class="form__label" for="Estado">Estado de pago</label>
-              <select class="form__control" id="Estado" name="PaymentStatus" required>
+              <select class="form__control" id="PaymentStatus" name="PaymentStatus" required>
                 <option value="">Selecciona…</option>
                 <option>Pagado</option>
                 <option>Pendiente</option>
