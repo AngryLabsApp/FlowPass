@@ -22,6 +22,7 @@ function openModal(user) {
   setField(m, "NextPaymentDay", formatDate(user.Proxima_Fecha_Pago));
   setField(m, "UserBirthday", formatDate(user.Cumpleaños));
   setField(m, "UserNotificar", user.Notificar || "No");
+  setField(m, "UserPatologias", user.Patologias);
   user_selected = user;
   $("#userModalTitle").textContent = user.Nombre + " " + user.Apellidos;
 }
