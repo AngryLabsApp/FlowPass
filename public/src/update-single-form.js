@@ -1,3 +1,6 @@
+
+
+let FIELD_SELECTED = null;
 function showSingleFormAside(show){
     const editForm = document.getElementById("edit-single-form-aside");
     editForm.hidden = !show;
@@ -25,10 +28,11 @@ function buildEditFormByField(field){
 
     btnEdit.addEventListener("click", () => {
         showUpdateForm(false);
-        setFormRows(form_id, FIELD_VALUES[field].html);
+        FIELD_SELECTED = field;
+        setFormRows(form_id, FIELD_VALUES[FIELD_SELECTED].html);
         const title = document.getElementById("edit-single-form-title");
         if (title) {
-        title.textContent = FIELD_VALUES[field].title;
+        title.textContent = FIELD_VALUES[FIELD_SELECTED].title;
         }
 
         showSingleFormAside(true);
@@ -50,4 +54,52 @@ document.addEventListener("DOMContentLoaded", () => {
     EDITABLE_FIELD.forEach( (field) =>{
         buildEditFormByField(field);
     });
+
+    update_single_form_submit();
 });
+
+
+
+function update_single_form_submit () {
+    const form_id = "edit-single-form";
+    const form = document.getElementById(form_id);
+    if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+     showLoader('Actualizando los datos...');
+    e.preventDefault();
+    const formEl = e.currentTarget;
+
+    const submitBtn = form.querySelector('[type="submit"]');
+    submitBtn.disabled = true;
+
+    // Tomamos el ID de la ficha visible en el modal
+    
+    user = getUserSelected();
+    // Leemos campos del form
+    const payload = {
+        ID: user.ID,
+        Type: "SINGLE",
+        [FIELD_VALUES[FIELD_SELECTED].sheet_name]: {value:document.getElementById( FIELD_VALUES[FIELD_SELECTED].id).value},
+    };
+     
+    try {
+      const res = await fetch(ENV_VARS.url_update, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      formEl.reset();
+    } catch (err) {
+      console.error(err);
+    } finally {
+        submitBtn.disabled = false;
+        loadUsers();
+        hideLoader();
+        closeModal();
+    }
+
+  });
+}

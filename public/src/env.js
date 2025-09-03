@@ -24,22 +24,32 @@ const FIELD_VALUES ={
   "phone":{
     title: "Teléfono",
     html:update_phone_form(),
+    id:"edit-phone",
+    sheet_name:"Telefono"
   },
   "email":{
     title: "E-mail",
     html:update_email_form(),
+    id:"edit-email",
+    sheet_name:"Email"
   },
   "notify":{
     title: "Notificar",
     html:update_notify_form(),
+    id:"edit-notify",
+    sheet_name:"Notificar"
   },
   "patologias":{
     title: "Enfermedad / Patología",
     html:update_patologia_form(),
+    id:"edit-patologia",
+    sheet_name:"Patologias"
   },
   "status":{
     title: "Estado del Plan",
     html:update_status_form(),
+    id:"edit-status",
+    sheet_name:"Estado"
   },
 }
 
@@ -98,7 +108,7 @@ function update_notify_form(){
   return `
          <div class="form__row">
               <label class="form__label" for="Estado"> </label>
-              <select class="form__control" id="PaymentStatus" name="PaymentStatus" required>
+              <select class="form__control" id="edit-notify" name="edit-notify" required>
                 <option value="">Selecciona…</option>
                 <option>Si</option>
                 <option>No</option>
@@ -111,7 +121,7 @@ function update_status_form(){
   return `
          <div class="form__row">
               <label class="form__label" for="Estado"> </label>
-              <select class="form__control" id="PaymentStatus" name="PaymentStatus" required>
+              <select class="form__control" id="edit-status" name="edit-status" required>
                 <option value="">Selecciona…</option>
                 <option>Activo</option>
                 <option>Inactivo</option>
@@ -124,11 +134,11 @@ function update_status_form(){
 function update_phone_form(){
   return `
         <div class="form__row">
-          <label class="form__phone" for="phone"> </label>
+          <label class="form__phone" for="edit-phone"> </label>
           <input 
             class="form__control" 
-            id="Phone" 
-            name="Phone" 
+            id="edit-phone" 
+            name="edit-phone" 
             type="text" 
             required 
             placeholder="Escribe el telefono..." />
@@ -142,8 +152,8 @@ function update_patologia_form(){
           <label class="form__label" for="Notes"> </label>
           <textarea
             class="form__control"
-            id="Notes"
-            name="Notes"
+            id="edit-patologia"
+            name="edit-patologia"
             rows="4"
             placeholder="Escribe tus notas aquí..."
             required
@@ -157,8 +167,8 @@ function update_email_form(){
           <label class="form__label" for="Email"> </label>
           <input 
             class="form__control" 
-            id="Email" 
-            name="Email" 
+            id="edit-email" 
+            name="edit-email" 
             type="email" 
             required 
             placeholder="Escribe tu correo..." />
