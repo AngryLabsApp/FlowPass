@@ -1,15 +1,12 @@
 let user_selected = null;
 
-
-
 function openModal(user) {
   const m = $("#userModal");
   if (!m) return;
 
-
   m.setAttribute("aria-hidden", "false");
   setField(m, "UserID", user.ID);
-  setField(m, "UserCode", (user.Codigo_ingreso || "").replace(/^c-/i, ''));
+  setField(m, "UserCode", (user.Codigo_ingreso || "").replace(/^c-/i, ""));
   setField(m, "UserName", user.Nombre);
   setField(m, "UserLastName", user.Apellidos);
   setField(m, "UserPhone", user.Telefono);
@@ -17,7 +14,8 @@ function openModal(user) {
   setField(m, "UserPlan", user.Plan);
   setField(m, "PaymentAmount", user.Monto); // ya viene formateado en tu tabla
   setField(m, "PaymentMethod", user.Medio_de_pago);
-  setField(m, "PaymentStatus", user.Estado);
+  setField(m, "PlanStatus", user.Estado);
+  setField(m, "PaymentStatus", user.Estado_Pago);
   setField(m, "NumberOfClases", `${user.Clases_tomadas}/${user.Limite_clases}`);
   setField(m, "FreeDays", user.Dias_de_Gracia);
   setField(m, "DateOfSubcription", formatDate(user.Fecha_Alta));
@@ -26,18 +24,12 @@ function openModal(user) {
   user_selected = user;
   $("#userModalTitle").textContent = user.Nombre + " " + user.Apellidos;
 }
+
 function closeModal() {
   const m = $("#userModal");
   if (!m) return;
   m.setAttribute("aria-hidden", "true");
   showUpdateForm(false);
-}
-function initModal() {
-  const btn = $("#btn-close");
-  if (!btn) return;
-  btn.addEventListener("click", () => {
-    closeModal();
-  });
 }
 
 function getUserSelected() {
@@ -50,41 +42,54 @@ function showUpdateForm(show) {
   const btnToggle = modal.querySelector("#btnToggleForm");
   body.classList.toggle("modal__body--form-open", !!show);
   btnToggle?.setAttribute("aria-expanded", show ? "true" : "false");
+
+  const updateForm = document.getElementById("updateForm");
+  updateForm.hidden = true;
 }
 
-function openUpdateForm() {
-  const modal = document.getElementById("userModal");
-  if (!modal) return;
+function handleOnSelectPlanChange() {
+  const planEl = document.getElementById("Plan");
+  const montoEl = document.getElementById("Monto");
 
-  const body = modal.querySelector(".modal__body");
-  const btnToggle = modal.querySelector("#btnToggleForm");
-  const btnCancel = modal.querySelector("#btnCancelForm");
-  btnToggle?.addEventListener("click", () => {
-    const isOpen = body.classList.contains("modal__body--form-open");
-    showUpdateForm(!isOpen);
+  planEl.addEventListener("change", () => {
+    const plan = planEl.value; // cuando no hay value en <option>, usa el texto
+    const amount = planToAmount[plan];
+
+    if (typeof amount === "number") {
+      montoEl.value = amount.toFixed(2);
+      // Si es gratis, bloquea edición; si no, permite editar por si quieres ajustar
+      const esGratis = plan === "Clase Gratis";
+      montoEl.readOnly = esGratis;
+    } else {
+      montoEl.value = "";
+      montoEl.readOnly = false;
+    }
   });
-
-  btnCancel?.addEventListener("click", () => showUpdateForm(false));
 }
 
 // =======================
 // Init
 // =======================
-document.addEventListener("DOMContentLoaded", () => {
-  initModal();
-  openUpdateForm();
-});
-
+function initModal() {
+  const btn = $("#btn-close");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    closeModal();
+  });
+}
 // Agregar este código a tu archivo modal.js
 document.addEventListener("DOMContentLoaded", () => {
   // Elementos del modal
+  initModal();
+  handleOnSelectPlanChange();
+
   const modal = document.getElementById("userModal");
   const btnToggleForm = document.getElementById("btnToggleForm");
   const btnCancelForm = document.getElementById("btnCancelForm");
   const updateForm = document.getElementById("updateForm");
 
   // Manejadores para cerrar el modal
-  const closeModal = () => {
+  const closeUpdateForm = () => {
     modal.setAttribute("aria-hidden", "true");
     // Resetear el estado del formulario al cerrar el modal
     updateForm.hidden = true;
@@ -93,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Cerrar con el botón X o click en overlay
   document.querySelectorAll("[data-close]").forEach((element) => {
-    element.addEventListener("click", closeModal);
+    element.addEventListener("click", closeUpdateForm);
   });
 
   // Cerrar con la tecla Escape
@@ -102,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       event.key === "Escape" &&
       modal.getAttribute("aria-hidden") === "false"
     ) {
-      closeModal();
+      closeUpdateForm();
     }
   });
 
@@ -110,12 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
   btnToggleForm.addEventListener("click", () => {
     const isHidden = updateForm.hidden;
     updateForm.hidden = !isHidden;
-    btnToggleForm.setAttribute("aria-expanded", !isHidden);
   });
 
   // Cancelar actualización
   btnCancelForm.addEventListener("click", () => {
     updateForm.hidden = true;
-    btnToggleForm.setAttribute("aria-expanded", "false");
   });
 });
