@@ -135,19 +135,79 @@
       <div class="modal__body">
         <!-- Panel principal -->
         <div class="modal__main">
-          <!-- Sección: Datos personales -->
+
+          <!-- Sección: Plan -->
           <section class="section">
-            <h3 class="section__title">Datos personales</h3>
+            <h3 class="section__title">Plan actual</h3>
             <div class="info-grid">
               <div class="row">
                 <div class="label">
                   <svg class="icon">
-                    <use href="/public/icons/sprites.svg#user-id"></use>
-                  </svg>ID
+                    <use href="/public/icons/sprites.svg#user-plan"></use>
+                  </svg>Plan
                 </div>
-                <div class="value" data-field="UserID">—</div>
+                <div class="value" data-field="UserPlan">—</div>
+              </div>
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#class-icon"></use>
+                  </svg>
+                  Clases realizadas
+                </div>
+                <div class="value" data-field="NumberOfClases">—</div>
               </div>
 
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-status"></use>
+                  </svg>Estado
+                </div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="PlanStatus">—</span>
+                  <button class="edit-btn" aria-label="Editar" id="btn-edit-status">
+                    <svg class="icon icon-rose">
+                      <use href="/public/icons/sprites.svg#edit"></use>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#calendar"></use>
+                  </svg>
+                  Inicio del plan
+                </div>
+                <div class="value" data-field="DateOfSubcription">—</div>
+              </div>
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#calendar-payday"></use>
+                  </svg>
+                  Próximo pago
+                </div>
+                <div class="value" data-field="NextPaymentDay">—</div>
+              </div>
+
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#gift"></use>
+                  </svg>
+                  Días de cortesía
+                </div>
+                <div class="value" data-field="FreeDays">—</div>
+              </div>
+
+            </div>
+          </section>
+          <!-- Sección: Datos personales -->
+          <section class="section">
+            <h3 class="section__title">Datos personales</h3>
+            <div class="info-grid">
 
               <div class="row">
                 <div class="label">
@@ -169,15 +229,6 @@
               <div class="row">
                 <div class="label">
                   <svg class="icon">
-                    <use href="/public/icons/sprites.svg#user-code"></use>
-                  </svg>
-                  Codigo de ingreso
-                </div>
-                <div class="value" data-field="UserCode">—</div>
-              </div>
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
                     <use href="/public/icons/sprites.svg#mail"></use>
                   </svg>
                   Email
@@ -190,6 +241,15 @@
                     </svg>
                   </button>
                 </div>
+              </div>
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-code"></use>
+                  </svg>
+                  Codigo de ingreso
+                </div>
+                <div class="value" data-field="UserCode">—</div>
               </div>
 
               <div class="row">
@@ -217,7 +277,14 @@
                   </button>
                 </div>
               </div>
-
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-id"></use>
+                  </svg>ID
+                </div>
+                <div class="value" data-field="UserID">—</div>
+              </div>
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -238,75 +305,9 @@
             </div>
           </section>
 
-          <!-- Sección: Plan -->
-          <section class="section">
-            <h3 class="section__title">Plan actual</h3>
-            <div class="info-grid">
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#user-plan"></use>
-                  </svg>Plan
-                </div>
-                <div class="value" data-field="UserPlan">—</div>
-              </div>
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#calendar"></use>
-                  </svg>
-                  Inicio del plan
-                </div>
-                <div class="value" data-field="DateOfSubcription">—</div>
-              </div>
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#calendar-payday"></use>
-                  </svg>
-                  Próximo pago
-                </div>
-                <div class="value" data-field="NextPaymentDay">—</div>
-              </div>
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#class-icon"></use>
-                  </svg>
-                  Clases realizadas
-                </div>
-                <div class="value" data-field="NumberOfClases">—</div>
-              </div>
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#gift"></use>
-                  </svg>
-                  Días de gracia
-                </div>
-                <div class="value" data-field="FreeDays">—</div>
-              </div>
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#user-status"></use>
-                  </svg>Estado
-                </div>
-                <div class="value value--editable">
-                  <span class="value__content" data-field="PlanStatus">—</span>
-                  <button class="edit-btn" aria-label="Editar" id="btn-edit-status">
-                    <svg class="icon icon-rose">
-                      <use href="/public/icons/sprites.svg#edit"></use>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-
           <!-- Sección: Clases y Fechas -->
           <section class="section">
-            <h3 class="section__title">Detalle de pago</h3>
+            <h3 class="section__title">Detalle del ultimo pago</h3>
             <div class="info-grid">
 
               <div class="row">
@@ -407,10 +408,10 @@
           </form>
         </aside>
 
-         <!-- Formulario para actualizar campos individuales-->
+        <!-- Formulario para actualizar campos individuales-->
         <aside class="modal__side" id="edit-single-form-aside" hidden>
           <h3 class="modal__subtitle" id="edit-single-form-title">Actualizar</h3>
-          <form class="form" id="edit-single-form" >
+          <form class="form" id="edit-single-form">
             <div class="form__row">
               <label class="form__label" for="Plan">Plan</label>
               <select class="form__control" id="Plan" name="Plan">
