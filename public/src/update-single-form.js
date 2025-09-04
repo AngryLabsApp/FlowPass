@@ -1,5 +1,4 @@
 
-
 let FIELD_SELECTED = null;
 function showSingleFormAside(show){
     const editForm = document.getElementById("edit-single-form-aside");
@@ -32,7 +31,7 @@ function buildEditFormByField(field){
         setFormRows(form_id, FIELD_VALUES[FIELD_SELECTED].html);
         const title = document.getElementById("edit-single-form-title");
         if (title) {
-        title.textContent = FIELD_VALUES[FIELD_SELECTED].title;
+          title.textContent = FIELD_VALUES[FIELD_SELECTED].title;
         }
 
         showSingleFormAside(true);
@@ -66,7 +65,7 @@ function update_single_form_submit () {
     if (!form) return;
 
   form.addEventListener('submit', async (e) => {
-     showLoader('Actualizando los datos...');
+    
     e.preventDefault();
     const formEl = e.currentTarget;
 
@@ -82,7 +81,27 @@ function update_single_form_submit () {
         Type: "SINGLE",
         [FIELD_VALUES[FIELD_SELECTED].sheet_name]: {value:document.getElementById( FIELD_VALUES[FIELD_SELECTED].id).value},
     };
-     
+    let valid = false;
+    const value = document.getElementById( FIELD_VALUES[FIELD_SELECTED].id).value
+    if (value){
+      valid = true;
+      payload[FIELD_VALUES[FIELD_SELECTED].sheet_name] = {value};
+    }
+
+    if (FIELD_VALUES[FIELD_SELECTED].id2){
+      const value2 = document.getElementById(FIELD_VALUES[FIELD_SELECTED].id2).value;
+      if (value2){
+        valid = true;
+        payload[FIELD_VALUES[FIELD_SELECTED].sheet_name2] = {value: value2};
+      }
+    }
+    if (!valid){
+      submitBtn.disabled = false;
+      return;
+    }
+
+    showLoader('Actualizando los datos...');
+
     try {
       const res = await fetch(ENV_VARS.url_update, {
         method: 'POST',

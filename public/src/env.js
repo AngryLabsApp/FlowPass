@@ -19,8 +19,16 @@ const planToAmount = {
     '20 Sesiones Personalizadas': 0,
 };
 
-const EDITABLE_FIELD = ["phone","email","notify","patologias","status"];
+const EDITABLE_FIELD = ["phone","email","notify","patologias","status","clases"];
 const FIELD_VALUES ={
+  "clases":{
+    title:"Clases",
+    html:update_clases_form(),
+    id:"clases",
+    id2:"clases-limite",
+    sheet_name:"Clases_tomadas",
+    sheet_name2:"Limite_clases"
+  },
   "phone":{
     title: "Teléfono",
     html:update_phone_form(),
@@ -175,5 +183,16 @@ function update_email_form(){
         </div>
         `;
 }
-
+function update_clases_form(){
+  return `
+            <div class="form__row">
+              <label class="form__label" for="clases">Clases realizadas</label>
+              <input class="form__control" id="clases" name="clases" type="number" step="1" min="0"  />
+            </div>
+             <div class="form__row">
+              <label class="form__label" for="clases-limite">Limite de clases</label>
+              <input class="form__control" id="clases-limite" name="clases-limite" type="number" step="1" min="0" />
+            </div>
+        `;
+}
 
