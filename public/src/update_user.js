@@ -15,14 +15,14 @@ function update_form_submit () {
     user = getUserSelected();
     // Leemos campos del form
     const payload = {
-        ID: user.ID,
-        Dias_de_Gracia: {value:document.getElementById('Dias_de_Gracia').value || 0},
-        Monto: {value:document.getElementById('Monto').value || 0},
-        Medio_de_pago: {value:document.getElementById('Medio_de_pago').value},
-        Estado_Pago: {value:document.getElementById('PaymentStatus').value},
+        id: user.id,
+        dias_de_gracia: {value:document.getElementById('Dias_de_Gracia').value || 0},
+        monto: {value:document.getElementById('Monto').value || 0},
+        medio_de_pago: {value:document.getElementById('Medio_de_pago').value},
+        estado_Pago: {value:document.getElementById('PaymentStatus').value},
     };
     if ( document.getElementById('Plan').value)
-        payload.Plan = {value:document.getElementById('Plan').value};
+        payload.plan = {value:document.getElementById('Plan').value};
  
 
     try {

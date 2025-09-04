@@ -23,8 +23,8 @@ async function registrarIngreso(user) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        ID: user.ID,
-        Clases_tomadas:{"value":user.Clases_tomadas},
+        id: user.id,
+        clases_tomadas:{"value":user.clases_tomadas},
       }),
     });
     loadUsers();

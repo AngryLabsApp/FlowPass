@@ -45,29 +45,29 @@ function renderUserRow(user) {
   const payload = encodeURIComponent(JSON.stringify(user));
   return `
     <tr class="table__row" role="button" tabindex="0" data-user="${payload}">
-      <td class="table__cell table__col--first-name">${safe(user.Nombre)}</td>
-      <td class="table__cell table__col--last-name">${safe(user.Apellidos)}</td>
-      <td class="table__cell table__col--plan">${safe(user.Plan)}</td>
+      <td class="table__cell table__col--first-name">${safe(user.nombre)}</td>
+      <td class="table__cell table__col--last-name">${safe(user.apellidos)}</td>
+      <td class="table__cell table__col--plan">${safe(user.plan)}</td>
       <td class="table__cell table__col--classes">${safe(
-        user.Clases_tomadas
-      )}/${safe(user.Limite_clases)}</td>
+        user.clases_tomadas
+      )}/${safe(user.limite_clases)}</td>
       <td class="table__cell table__col--grace">${safe(
-        user.Dias_de_Gracia
+        user.dias_de_gracia
       )}</td>
       <td class="table__cell table__col--start">${formatDate(
-        user.Fecha_Inicio_Plan
+        user.fecha_inicio_plan
       )}</td>
       <td class="table__cell table__col--end">${formatDate(
-        user.Proxima_Fecha_Pago
+        user.proxima_fecha_pago
       )}</td>
       <td class="table__cell table__col--status">
-        <span class="badge ${statusBadgeClass(user.Estado)}">${safe(
-        user.Estado
+        <span class="badge ${statusBadgeClass(user.estado)}">${safe(
+        user.estado
         )}</span>
       </td>
        <td class="table__cell table__col--status">
-        <span class="badge ${statusBadgeClass(user.Estado_Pago)}">${safe(
-        user.Estado_Pago
+        <span class="badge ${statusBadgeClass(user.estado_pago)}">${safe(
+        user.estado_pago
         )}</span>
       </td>
     </tr>
@@ -114,12 +114,12 @@ function buildQueryParams(page) {
     queryParams.page = page
   }
   if (input && String(input).trim() !== "") {
-    queryParams.field1 = "Nombre";
+    queryParams.field1 = "nombre";
     queryParams.value1 = String(input).trim();
   }
 
   if (status && String(status).trim() !== "") {
-    queryParams.field2 = "Estado"; // <-- puedes cambiar a "Email" si buscas por email
+    queryParams.field2 = "estado"; // <-- puedes cambiar a "Email" si buscas por email
     queryParams.value2 = String(status).trim();
   }
 

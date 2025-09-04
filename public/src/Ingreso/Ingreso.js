@@ -118,7 +118,7 @@ async function handleCheckin(query) {
     
         const ok = !data.error; 
         if (ok) {
-            applyCheckinUI({ ok: true, user: { Nombre: 'James', Apellidos: 'Brown' } });
+
             openModal(data.user);
             clean(); // ← limpia SOLO cuando fue éxito
         } else {
@@ -131,10 +131,10 @@ async function handleCheckin(query) {
         let text = "El código no existe.";
         switch(error_message){
             case "PLAN_VENCIDO":
-                text= `El plan de ${user.Nombre} ${user.Apellidos} venció el ${formatDate(user.Proxima_Fecha_Pago)}.`;
+                text= `El plan de ${user.nombre} ${user.apellidos} venció el ${formatDate(user.proxima_fecha_pago)}.`;
                 break;
             case "LIMITE_CLASES_SUPERADO":
-                text= `Límite de clases alcanzado (${user.Clases_tomadas}/${user.Limite_clases})`;
+                text= `Límite de clases alcanzado (${user.clases_tomadas}/${user.limite_clases})`;
                 break;
         };
         
@@ -261,11 +261,11 @@ function openModal(user) {
   if (!m) return;
   Is_Modal_Open = true;
   m.setAttribute("aria-hidden", "false");
-  setField(m, "NumberOfClases",  `${user.Clases_tomadas}/${user.Limite_clases}`);
-  setField(m, "DateOfSubcription", formatDate(user.Fecha_Inicio_Plan));
-  setField(m, "NextPaymentDay", formatDate(user.Proxima_Fecha_Pago));
+  setField(m, "NumberOfClases",  `${user.clases_tomadas}/${user.limite_clases}`);
+  setField(m, "DateOfSubcription", formatDate(user.fecha_inicio_plan));
+  setField(m, "NextPaymentDay", formatDate(user.proxima_fecha_pago));
 
-  $("#userModalTitle").textContent = user.Nombre + " " + user.Apellidos;
+  $("#userModalTitle").textContent = user.nombre + " " + user.apellidos;
 
 
 }

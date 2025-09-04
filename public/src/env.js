@@ -26,38 +26,38 @@ const FIELD_VALUES ={
     html:update_clases_form(),
     id:"clases",
     id2:"clases-limite",
-    sheet_name:"Clases_tomadas",
-    sheet_name2:"Limite_clases"
+    sheet_name:"clases_tomadas",
+    sheet_name2:"limite_clases"
   },
   "phone":{
     title: "Teléfono",
     html:update_phone_form(),
     id:"edit-phone",
-    sheet_name:"Telefono"
+    sheet_name:"telefono"
   },
   "email":{
     title: "E-mail",
     html:update_email_form(),
     id:"edit-email",
-    sheet_name:"Email"
+    sheet_name:"email"
   },
   "notify":{
     title: "Notificar",
     html:update_notify_form(),
     id:"edit-notify",
-    sheet_name:"Notificar"
+    sheet_name:"notificar"
   },
   "patologias":{
     title: "Enfermedad / Patología",
     html:update_patologia_form(),
     id:"edit-patologia",
-    sheet_name:"Patologias"
+    sheet_name:"patologias"
   },
   "status":{
     title: "Estado del Plan",
     html:update_status_form(),
     id:"edit-status",
-    sheet_name:"Estado"
+    sheet_name:"estado"
   },
 }
 

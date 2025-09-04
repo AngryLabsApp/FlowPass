@@ -5,26 +5,26 @@ function openModal(user) {
   if (!m) return;
 
   m.setAttribute("aria-hidden", "false");
-  setField(m, "UserID", user.ID);
-  setField(m, "UserCode", (user.Codigo_ingreso || "").replace(/^c-/i, ""));
-  setField(m, "UserName", user.Nombre);
-  setField(m, "UserLastName", user.Apellidos);
-  setField(m, "UserPhone", user.Telefono);
-  setField(m, "UserEmail", user.Email);
-  setField(m, "UserPlan", user.Plan);
-  setField(m, "PaymentAmount", user.Monto); // ya viene formateado en tu tabla
-  setField(m, "PaymentMethod", user.Medio_de_pago);
-  setField(m, "PlanStatus", user.Estado);
-  setField(m, "PaymentStatus", user.Estado_Pago);
-  setField(m, "NumberOfClases", `${user.Clases_tomadas}/${user.Limite_clases}`);
-  setField(m, "FreeDays", user.Dias_de_Gracia);
-  setField(m, "DateOfSubcription", formatDate(user.Fecha_Alta));
-  setField(m, "NextPaymentDay", formatDate(user.Proxima_Fecha_Pago));
-  setField(m, "UserBirthday", formatDate(user.Cumpleaños));
-  setField(m, "UserNotificar", user.Notificar || "No");
-  setField(m, "UserPatologias", user?.Patologias.length > 0 ? user.Patologias : "-");
+  setField(m, "UserID", user.id);
+  setField(m, "UserCode", (user.codigo_ingreso || "").replace(/^c-/i, ""));
+  setField(m, "UserName", user.nombre);
+  setField(m, "UserLastName", user.apellidos);
+  setField(m, "UserPhone", user.telefono);
+  setField(m, "UserEmail", user.email);
+  setField(m, "UserPlan", user.plan);
+  setField(m, "PaymentAmount", user.monto); // ya viene formateado en tu tabla
+  setField(m, "PaymentMethod", user.medio_de_pago);
+  setField(m, "PlanStatus", user.estado);
+  setField(m, "PaymentStatus", user.estado_pago);
+  setField(m, "NumberOfClases", `${user.clases_tomadas}/${user.limite_clases}`);
+  setField(m, "FreeDays", user.dias_de_gracia);
+  setField(m, "DateOfSubcription", formatDate(user.fecha_alta));
+  setField(m, "NextPaymentDay", formatDate(user.proxima_fecha_pago));
+  setField(m, "UserBirthday", formatDate(user.cumpleanos));
+  setField(m, "UserNotificar", user.notificar || "No");
+  setField(m, "UserPatologias", user?.patologias.length > 0 ? user.patologias : "-");
   user_selected = user;
-  $("#userModalTitle").textContent = user.Nombre + " " + user.Apellidos;
+  $("#userModalTitle").textContent = user.nombre + " " + user.apellidos;
 }
 
 function closeModal() {
