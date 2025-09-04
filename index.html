@@ -162,15 +162,17 @@
                 <div class="label">
                   <svg class="icon">
                     <use href="/public/icons/sprites.svg#user-status"></use>
-                  </svg>Estado
-                </div>
-                <div class="value value--editable">
-                  <span class="value__content" data-field="PlanStatus">—</span>
+                  </svg>
+                  Estado
                   <button class="edit-btn" aria-label="Editar" id="btn-edit-status">
                     <svg class="icon icon-rose">
                       <use href="/public/icons/sprites.svg#edit"></use>
                     </svg>
                   </button>
+                </div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="PlanStatus">—</span>
+
                 </div>
               </div>
               <div class="row">
@@ -215,14 +217,15 @@
                     <use href="/public/icons/sprites.svg#phone"></use>
                   </svg>
                   Teléfono
-                </div>
-                <div class="value value--editable">
-                  <span class="value__content" data-field="UserPhone">—</span>
                   <button class="edit-btn" aria-label="Editar teléfono" id="btn-edit-phone">
                     <svg class="icon icon-rose">
                       <use href="/public/icons/sprites.svg#edit"></use>
                     </svg>
                   </button>
+                </div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="UserPhone">—</span>
+
                 </div>
               </div>
 
@@ -232,14 +235,15 @@
                     <use href="/public/icons/sprites.svg#mail"></use>
                   </svg>
                   Email
-                </div>
-                <div class="value value--editable">
-                  <span class="value__content" data-field="UserEmail">—</span>
                   <button class="edit-btn" aria-label="Editar email" id="btn-edit-email">
                     <svg class="icon icon-rose">
                       <use href="/public/icons/sprites.svg#edit"></use>
                     </svg>
                   </button>
+                </div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="UserEmail">—</span>
+
                 </div>
               </div>
               <div class="row">
@@ -267,14 +271,15 @@
                     <use href="/public/icons/sprites.svg#notify-icon"></use>
                   </svg>
                   Notificar
-                </div>
-                <div class="value value--editable">
-                  <span class="value__content" data-field="UserNotificar">—</span>
                   <button class="edit-btn" aria-label="Editar nofity" id="btn-edit-notify">
                     <svg class="icon icon-rose">
                       <use href="/public/icons/sprites.svg#edit"></use>
                     </svg>
                   </button>
+                </div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="UserNotificar">—</span>
+
                 </div>
               </div>
               <div class="row">
@@ -291,15 +296,16 @@
                     <use href="/public/icons/sprites.svg#hospital"></use>
                   </svg>
                   Enfermedad / Patología
-                </div>
-
-                <div class="value value--editable">
-                  <span class="value__content" data-field="UserPatologias">—</span>
                   <button class="edit-btn" aria-label="Editar patoligias" id="btn-edit-patologias">
                     <svg class="icon icon-rose">
                       <use href="/public/icons/sprites.svg#edit"></use>
                     </svg>
                   </button>
+                </div>
+
+                <div class="value value--editable">
+                  <span class="value__content" data-field="UserPatologias">—</span>
+
                 </div>
               </div>
             </div>
@@ -343,7 +349,7 @@
             <button class="btn btn--primary" id="btnCheckIn">
               Registrar ingreso
             </button>
-            <button class="btn" id="btnToggleForm" aria-expanded="false" aria-controls="updateForm">
+            <button class="btn btn--secondary" id="btnToggleForm" aria-expanded="false" aria-controls="updateForm">
               Actualizar Plan
             </button>
           </div>
@@ -398,7 +404,7 @@
             </div>
 
             <div class="form__actions">
-              <button class="btn" type="button" id="btnCancelForm">
+              <button class="btn btn--secondary" type="button" id="btnCancelForm">
                 Cancelar
               </button>
               <button class="btn btn--primary" type="submit">
@@ -433,7 +439,7 @@
             </div>
 
             <div class="form__actions">
-              <button class="btn" type="button" id="btnCancelForm-single">
+              <button class="btn btn--secondary" type="button" id="btnCancelForm-single">
                 Cancelar
               </button>
               <button class="btn btn--primary" type="submit">

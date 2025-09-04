@@ -12,6 +12,12 @@
     align-items: center;
     gap: 10px;
   }
+
+  .btn--secondary {
+    background: #fff;
+    color: var(--text);
+  }
+
   .btn--primary {
     background: var(--c8);
     color: #fff;
@@ -32,5 +38,11 @@
   .btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  /* Hover específico para secundario: solo baja un poco la opacidad */
+  .btn--secondary:not(:disabled):hover {
+    opacity: 0.88;
+    background: var(--danger-transparent); /* mantiene el fondo, evita el mix del hover genérico */
   }
 }

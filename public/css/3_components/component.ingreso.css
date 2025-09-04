@@ -146,7 +146,7 @@
     position: relative;
     display: inline-block;
     font-weight: 800;
-    font-size: 2rem;
+    font-size: clamp(20px, 5.5vw, 32px);
     letter-spacing: 0.02em;
     text-align: center;
     color: var(--c10); /* Fallback con mejor contraste */
@@ -154,6 +154,7 @@
     background-image: linear-gradient(90deg, var(--c10), var(--c4));
     background-size: 200% 100%;
     background-position: 0% 50%;
+    will-change: background-position;
     animation: checkinNameGradient 6s ease-in-out infinite;
   }
 
@@ -191,6 +192,34 @@
     0%   { transform: scaleX(0.95); opacity: 0.9; }
     50%  { transform: scaleX(1.06); opacity: 1; }
     100% { transform: scaleX(0.95); opacity: 0.9; }
+  }
+
+  /* Adaptaciones para tablets y móviles */
+  @media (max-width: 768px) {
+    .checkin__display-name {
+      font-size: clamp(20px, 7vw, 28px);
+      animation-duration: 5.2s;
+    }
+    .checkin__display-name::after {
+      width: 70%;
+    }
+    .checkin__avatar .icon {
+      animation-duration: 2.2s;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .checkin__display-name {
+      font-size: clamp(20px, 8.5vw, 26px);
+      animation-duration: 4.8s;
+    }
+    .checkin__display-name::after {
+      width: 80%;
+      height: 3px;
+    }
+    .checkin__avatar .icon {
+      animation-duration: 2s;
+    }
   }
 
   /* Accesibilidad: reducir movimiento si el usuario lo prefiere */

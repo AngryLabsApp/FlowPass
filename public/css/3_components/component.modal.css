@@ -74,7 +74,7 @@
   }
 
   /* Grid layout cuando el form está visible */
-  .modal__body:has(#edit-single-form-aside:not([hidden])), 
+  .modal__body:has(#edit-single-form-aside:not([hidden])),
   .modal__body:has(#updateForm:not([hidden])) {
     grid-template-columns: 1fr 320px;
   }
@@ -255,7 +255,6 @@
       padding: 16px;
       gap: 16px;
     }
-    
 
     .modal__side {
       transform: translateY(100%);
@@ -325,33 +324,30 @@
   }
 
   .value.value--editable {
-  display: inline-flex;        /* texto + botón en la misma línea */
-  align-items: center;
-  gap: 6px;                    /* espacio entre texto y botón */
-}
+    display: inline-flex; /* texto + botón en la misma línea */
+    align-items: center;
+    gap: 6px; /* espacio entre texto y botón */
+  }
 
-.value.value--editable .value__content {
-  display: inline;             /* se comporta como texto normal */
-}
+  .value.value--editable .value__content {
+    display: inline; /* se comporta como texto normal */
+  }
 
-.value.value--editable .edit-btn {
-  background: none;
-  border: none;
-  padding: 2px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 4px;
-}
+  .edit-btn {
+    cursor: pointer;
+    border: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+  }
 
-.value.value--editable .edit-btn:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
+  .value.value--editable .edit-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
 
-.value.value--editable .icon {
-  width: 1em;
-  height: 1em;
-}
-
-
+  .value.value--editable .icon {
+    width: 1em;
+    height: 1em;
+  }
 }
