@@ -262,7 +262,7 @@ function openModal(user) {
   Is_Modal_Open = true;
   m.setAttribute("aria-hidden", "false");
   setField(m, "NumberOfClases",  `${user.Clases_tomadas}/${user.Limite_clases}`);
-  setField(m, "DateOfSubcription", formatDate(user.Fecha_Alta));
+  setField(m, "DateOfSubcription", formatDate(user.Fecha_Inicio_Plan));
   setField(m, "NextPaymentDay", formatDate(user.Proxima_Fecha_Pago));
 
   $("#userModalTitle").textContent = user.Nombre + " " + user.Apellidos;
