@@ -19,7 +19,7 @@ const planToAmount = {
     '20 Sesiones Personalizadas': 0,
 };
 
-const EDITABLE_FIELD = ["phone","email","notify","patologias","status","clases"];
+const EDITABLE_FIELD = ["phone","email","notify","patologias","status","clases","viaje","direccion"];
 const FIELD_VALUES ={
   "clases":{
     title:"Clases",
@@ -57,7 +57,21 @@ const FIELD_VALUES ={
     title: "Estado del Plan",
     html:update_status_form(),
     id:"edit-status",
-    sheet_name:"estado"
+    sheet_name:"estado",
+    id2:"dias_extra",
+    sheet_name2:"dias_extra"
+  }, 
+    "viaje":{
+    title: "¿Está de viaje?",
+    html:update_viaje_form(),
+    id:"edit-viaje",
+    sheet_name:"de_viaje"
+  },
+    "direccion":{
+    title: "Dirección",
+    html:update_direccion_form(),
+    id:"edit-direccion",
+    sheet_name:"direccion"
   },
 }
 
@@ -143,7 +157,18 @@ function isMobile() {
 };
 
 
-
+function update_viaje_form(){
+  return `
+         <div class="form__row">
+              <label class="form__label" for="viaje"> </label>
+              <select class="form__control" id="edit-viaje" name="edit-viaje" required>
+                <option value="">Selecciona…</option>
+                <option>Si</option>
+                <option>No</option>
+              </select>
+            </div>
+        `;
+}
 function update_notify_form(){
   return `
          <div class="form__row">
@@ -168,6 +193,10 @@ function update_status_form(){
                 <option>Pausado</option>
               </select>
             </div>
+            <div class="form__row">
+              <label class="form__label" for="dias_extra">Agregar días extra</label>
+              <input class="form__control" id="dias_extra" name="clases-limite" type="number" step="1" min="0" />
+            </div>
         `;
 }
 
@@ -182,6 +211,21 @@ function update_phone_form(){
             type="text" 
             required 
             placeholder="Escribe el telefono..." />
+        </div>
+        `;
+}
+
+function update_direccion_form(){
+  return `
+        <div class="form__row">
+          <label class="form__label" for="edit-direccion"> </label>
+          <input 
+            class="form__control" 
+            id="edit-direccion" 
+            name="edit-direccion" 
+            type="text" 
+            required 
+            placeholder="" />
         </div>
         `;
 }
