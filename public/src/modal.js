@@ -26,6 +26,7 @@ function openModal(user) {
   setField(m, "UserPhone", user.telefono);
   setField(m, "UserEmail", user.email);
   setField(m, "UserPlan", user.plan);
+  setField(m, "UserIsOnTravel", user.de_viaje);
   setField(m, "PaymentAmount", user.monto); // ya viene formateado en tu tabla
   setField(m, "PaymentMethod", user.medio_de_pago);
   setField(m, "PlanStatus", user.estado);
