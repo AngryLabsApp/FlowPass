@@ -42,6 +42,7 @@ async function registrarIngreso(user) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: user.id,
+        type: "SINGLE",
         clases_tomadas: { value: nuevasTomadas },
       }),
     });
