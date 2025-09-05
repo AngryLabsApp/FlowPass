@@ -78,7 +78,7 @@ function applyCheckinUI({ ok, user, message }) {
       window.clearTimeout(contentEl.__errTimer);
       contentEl.__errTimer = window.setTimeout(() => {
         contentEl.classList.remove("content--error");
-      }, 3000);
+      }, 5000);
     }
 
     // Oculta el mensaje de error automáticamente tras 3s con un deslizamiento suave
@@ -104,7 +104,7 @@ function applyCheckinUI({ ok, user, message }) {
       // Fallback por si el evento no dispara
       window.clearTimeout(statusEl.__msgHideTimer);
       statusEl.__msgHideTimer = window.setTimeout(cleanup, 320);
-    }, 3000);
+    }, 4000);
   }
 }
 
