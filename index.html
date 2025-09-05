@@ -29,7 +29,8 @@
         <span class="sidebar__name">FlowPass</span>
       </a>
       <nav class="sidebar__nav" aria-label="Menú principal">
-        <a href="index.html" class="sidebar__link sidebar__link--active">Usuarios</a>
+        <a href="index.html" class="sidebar__link sidebar__link--active">
+          Usuarios</a>
         <a href="ingreso.html" class="sidebar__link">Ingreso</a>
       </nav>
       <nav class="sidebar__nav" aria-label="Menú principal"></nav>
@@ -67,7 +68,6 @@
             <svg class="icon button__icon">
               <use href="/public/icons/sprites.svg#plus"></use>
             </svg>
-
           </button>
         </div>
       </div>
@@ -94,12 +94,8 @@
                 <th class="table__head-cell table__col--start">
                   Inicio de plan
                 </th>
-                <th class="table__head-cell table__col--end">
-                  Fin de plan
-                </th>
-                <th class="table__head-cell table__col--status">
-                  Estado
-                </th>
+                <th class="table__head-cell table__col--end">Fin de plan</th>
+                <th class="table__head-cell table__col--status">Estado</th>
                 <th class="table__head-cell table__col--status">
                   Estatus de pago
                 </th>
@@ -110,8 +106,7 @@
           <div class="table__footer" id="usersPager">
             <div class="pagination">
               <div class="pagination__status" id="pagerStatus"></div>
-              <nav class="pagination__nav" aria-label="Paginación" id="pagination">
-              </nav>
+              <nav class="pagination__nav" aria-label="Paginación" id="pagination"></nav>
             </div>
           </div>
         </div>
@@ -126,7 +121,16 @@
     <div class="modal__dialog card" role="document">
       <!-- Header -->
       <header class="modal__header">
-        <h2 class="modal__title" id="userModalTitle">Ficha del usuario</h2>
+        <h2 class="modal__title">
+          <span id="userModalTitle">Ficha del usuario</span>
+
+          <span id="checkInStatusChip" class="badge badge--pending badge--flex hidden">
+            <svg class="icon" aria-hidden="true">
+              <use href="/public/icons/sprites.svg#warn"></use>
+            </svg>
+            <span id="checkInStatusChipText"></span>
+          </span>
+        </h2>
         <button class="modal__close" type="button" aria-label="Cerrar" data-close>
           ✕
         </button>
@@ -135,7 +139,6 @@
       <div class="modal__body">
         <!-- Panel principal -->
         <div class="modal__main">
-
           <!-- Sección: Plan -->
           <section class="section">
             <h3 class="section__title">Plan actual</h3>
@@ -154,7 +157,7 @@
                     <use href="/public/icons/sprites.svg#class-icon"></use>
                   </svg>
                   Clases realizadas
-                   <button class="edit-btn" aria-label="Editar" id="btn-edit-clases">
+                  <button class="edit-btn" aria-label="Editar" id="btn-edit-clases">
                     <svg class="icon icon-rose">
                       <use href="/public/icons/sprites.svg#edit"></use>
                     </svg>
@@ -177,7 +180,6 @@
                 </div>
                 <div class="value value--editable">
                   <span class="value__content" data-field="PlanStatus">—</span>
-
                 </div>
               </div>
               <div class="row">
@@ -208,14 +210,12 @@
                 </div>
                 <div class="value" data-field="FreeDays">—</div>
               </div>
-
             </div>
           </section>
           <!-- Sección: Datos personales -->
           <section class="section">
             <h3 class="section__title">Datos personales</h3>
             <div class="info-grid">
-
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -230,7 +230,6 @@
                 </div>
                 <div class="value value--editable">
                   <span class="value__content" data-field="UserPhone">—</span>
-
                 </div>
               </div>
 
@@ -248,7 +247,6 @@
                 </div>
                 <div class="value value--editable">
                   <span class="value__content" data-field="UserEmail">—</span>
-
                 </div>
               </div>
               <div class="row">
@@ -284,7 +282,6 @@
                 </div>
                 <div class="value value--editable">
                   <span class="value__content" data-field="UserNotificar">—</span>
-
                 </div>
               </div>
               <div class="row">
@@ -310,7 +307,6 @@
 
                 <div class="value value--editable">
                   <span class="value__content" data-field="UserPatologias">—</span>
-
                 </div>
               </div>
             </div>
@@ -320,7 +316,6 @@
           <section class="section">
             <h3 class="section__title">Detalle del ultimo pago</h3>
             <div class="info-grid">
-
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -345,7 +340,6 @@
                 </div>
                 <div class="value" data-field="PaymentStatus">—</div>
               </div>
-
             </div>
           </section>
 
@@ -355,7 +349,7 @@
               Registrar ingreso
             </button>
             <button class="btn btn--secondary" id="btnToggleForm" aria-expanded="false" aria-controls="updateForm">
-              Actualizar Plan
+              Renovar plan
             </button>
           </div>
         </div>
@@ -421,7 +415,9 @@
 
         <!-- Formulario para actualizar campos individuales-->
         <aside class="modal__side" id="edit-single-form-aside" hidden>
-          <h3 class="modal__subtitle" id="edit-single-form-title">Actualizar</h3>
+          <h3 class="modal__subtitle" id="edit-single-form-title">
+            Actualizar
+          </h3>
           <form class="form" id="edit-single-form">
             <div class="form__row">
               <label class="form__label" for="Plan">Plan</label>
@@ -453,13 +449,6 @@
             </div>
           </form>
         </aside>
-
-
-
-
-
-
-
       </div>
     </div>
   </div>

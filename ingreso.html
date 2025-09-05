@@ -71,7 +71,9 @@
               autocomplete="off"
             >
               <div class="form__row">
-                <label class="form__label" for="checkinQuery">Ingresa tu código:</label>
+                <label class="form__label" for="checkinQuery"
+                  >Ingresa tu código:</label
+                >
                 <input
                   class="form__control form__control--ingreso form__control--code"
                   id="checkinQuery"
@@ -85,11 +87,11 @@
               </div>
 
               <!-- Estado / mensaje (debajo del input) -->
-              <p
-                class="checkin__status"
-                id="checkinStatus"
-                aria-live="polite"
-              ></p>
+              <p class="checkin__status" id="checkinStatus" aria-live="polite">
+                <svg class="icon">
+                  <use href="/public/icons/sprites.svg#calendar"></use>
+                </svg>
+              </p>
 
               <!-- dropdown de sugerencias -->
               <div

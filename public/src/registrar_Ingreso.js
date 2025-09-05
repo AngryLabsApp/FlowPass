@@ -16,7 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function registrarIngreso(user) {
     console.log(user);
-    user.clases_tomadas += 1;
+    const tomadas = Number(user.clases_tomadas) || 0;
+    const limite = Number(user.limite_clases);
+
+    // Validación: bloquear y mostrar chip desde que llega al límite (>=)
+    const limiteValido = Number.isFinite(limite) && limite > 0; // solo aplica si hay límite positivo
+    if (limiteValido && tomadas >= limite) {
+      setCheckInWarning(true, `El usuario llegó al máximo de clases que puede tomar (${tomadas}/${limite})`);
+      setCheckInButtonDisabled(true);
+      return;
+    }
+
+    const nuevasTomadas = tomadas + 1;
   try {
      showLoader('Registrando ingreso...');
     const res = await fetch(ENV_VARS.url_update, {
@@ -24,7 +35,7 @@ async function registrarIngreso(user) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: user.id,
-        clases_tomadas:{"value":user.clases_tomadas},
+        clases_tomadas: { value: nuevasTomadas },
       }),
     });
     loadUsers();

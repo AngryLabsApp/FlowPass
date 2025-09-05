@@ -1,5 +1,19 @@
 let user_selected = null;
 
+// UI helpers (visibles en global para reuso)
+function setCheckInWarning(show, message = "") {
+  const chip = document.getElementById("checkInStatusChip");
+  const text = document.getElementById("checkInStatusChipText");
+  if (!chip) return;
+  if (text) text.textContent = show ? String(message) : "";
+  chip.classList.toggle("hidden", !show);
+}
+
+function setCheckInButtonDisabled(disabled) {
+  const btn = document.getElementById("btnCheckIn");
+  if (btn) btn.disabled = !!disabled;
+}
+
 function openModal(user) {
   const m = $("#userModal");
   if (!m) return;
@@ -25,6 +39,17 @@ function openModal(user) {
   setField(m, "UserPatologias", user?.patologias.length > 0 ? user.patologias : "-");
   user_selected = user;
   $("#userModalTitle").textContent = user.nombre + " " + user.apellidos;
+
+  // Actualiza estado del botón de Check-In y chip de límite
+  try {
+    const tomadas = Number(user.clases_tomadas) || 0;
+    const limite = Number(user.limite_clases);
+    const limiteValido = Number.isFinite(limite) && limite > 0; // solo aplica si hay límite positivo
+    const atOrOver = limiteValido && tomadas >= limite; // deshabilitar desde el límite
+
+    setCheckInButtonDisabled(atOrOver);
+    setCheckInWarning(atOrOver, atOrOver ? "Límite de clases alcanzado" : "");
+  } catch (_) {}
 }
 
 function closeModal() {
@@ -33,6 +58,7 @@ function closeModal() {
   m.setAttribute("aria-hidden", "true");
   showUpdateForm(false);
   showSingleFormAside(false);
+  setCheckInWarning(false);
 }
 
 function getUserSelected() {

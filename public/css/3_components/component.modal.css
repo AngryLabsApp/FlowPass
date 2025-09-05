@@ -45,6 +45,8 @@
     font-weight: 700;
     margin: 0;
     color: var(--text);
+    display: flex;
+    gap: 0.5rem;
   }
 
   .modal__close {

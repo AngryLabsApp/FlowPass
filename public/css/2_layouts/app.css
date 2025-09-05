@@ -75,7 +75,7 @@
     .sidebar {
       position: sticky;
       top: 0;
-      height: auto; /* ya no 100vh */
+      height: 4.5rem;; /* ya no 100vh */
       border-right: none;
       border-bottom: 1px solid var(--border);
       padding: var(--space-4) max(var(--space-4), env(safe-area-inset-left))

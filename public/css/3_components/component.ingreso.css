@@ -78,7 +78,8 @@
     color: #0a6b3e;
   }
   .checkin__status--err {
-    color: #7a0930;
+    font-size: 40px;
+    color: #2724d6;
   }
 
   .card.checkin {
@@ -381,7 +382,7 @@
     border-radius: var(--radius-sm);
     padding: 8px 10px;
     font-weight: 600;
-    font-size: 14px; /* un poco más grande para legibilidad */
+    font-size: 40px; /* un poco más grande para legibilidad */
     animation: status-pop 160ms ease-out;
   }
 

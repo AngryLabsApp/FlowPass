@@ -1,5 +1,6 @@
 /* FlowPass — utilities.css */
 @layer utilities {
+  .hidden { display: none !important; }
   .u-sr-only {
     position: absolute;
     width: 1px;
