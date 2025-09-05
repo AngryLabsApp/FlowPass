@@ -36,7 +36,7 @@ function buildEditFormByField(field){
 
         showSingleFormAside(true);
 
-
+        fillDynamicGeneratedSelect();
 
 
     });
@@ -50,9 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
     showSingleFormAside(false);
   });
 
-    EDITABLE_FIELD.forEach( (field) =>{
-        buildEditFormByField(field);
-    });
+  EDITABLE_FIELD.forEach( (field) =>{
+    buildEditFormByField(field);
+  });
 
     update_single_form_submit();
 });

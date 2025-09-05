@@ -89,14 +89,15 @@ function handleOnSelectPlanChange() {
   const montoEl = document.getElementById("Monto");
 
   planEl.addEventListener("change", () => {
-    const plan = planEl.value; // cuando no hay value en <option>, usa el texto
-    const amount = planToAmount[plan];
+    const plan = planEl.value;
+
+    const plan_selected = PLANES.find( (item) => item.value == plan);
+    const amount = plan_selected.amount;
 
     if (typeof amount === "number") {
       montoEl.value = amount.toFixed(2);
-      // Si es gratis, bloquea edición; si no, permite editar por si quieres ajustar
-      const esGratis = plan === "Clase Gratis";
-      montoEl.readOnly = esGratis;
+      // Si es gratis, bloquea edición; si no, permite editar por si quieres ajustar 
+      montoEl.readOnly = !!plan_selected?.is_free;;
     } else {
       montoEl.value = "";
       montoEl.readOnly = false;

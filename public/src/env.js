@@ -8,17 +8,35 @@ const ENV_VARS = {
   url_ingreso:"https://n8n.angrylabs.app/webhook/b9a49ebc-c1cc-4551-bca6-21832295b34c"
 };
 
-const planToAmount = {
-    '12 Sesiones Mensuales': 150,
-    '16 Sesiones Mensuales': 180,
-    '20 Sesiones Mensuales': 200,
-    'Clase Libre': 15,
-    'Clase Gratis': 0,
-    '12 Sesiones Personalizadas': 0,
-    '16 Sesiones Personalizadas': 0,
-    '20 Sesiones Personalizadas': 0,
-};
+const PLANES = [
+    { value: "12 Sesiones Mensuales", label: "12 Sesiones Mensuales", amount:150 },
+    { value: "16 Sesiones Mensuales", label: "16 Sesiones Mensuales", amount:180  },
+    { value: "20 Sesiones Mensuales", label: "20 Sesiones Mensuales", amount:200  },
+    { value: "Clase Libre",        label: "Clase Libre", amount:15  },
+    { value: "Clase Gratis",       label: "Clase Gratis", amount:0 , is_free:true },
+    { value: "12 Sesiones Personalizadas",  label: "12 Sesiones Personalizadas",amount:0  },
+    { value: "16 Sesiones Personalizadas",  label: "16 Sesiones Personalizadas",amount:0  },
+    { value: "20 Sesiones Personalizadas",  label: "20 Sesiones Personalizadas",amount:0  },
+  ];
 
+  const ESTADO_PLAN = [
+    { value: "Activo", label: "Activo"},
+    { value: "Inactivo", label: "Inactivo"},
+    { value: "Pausado", label: "Pausado"},
+  ]; 
+
+  const METODO_DE_PAGO = [
+    { value: "Plin", label: "Plin"},
+    { value: "Yape", label: "Yape"},
+    { value: "Efectivo", label: "Efectivo"},
+    { value: "Transferencia", label: "Transferencia"},
+   
+  ]; 
+  const ESTADO_PAGO = [
+    { value: "Pagado", label: "Pagado"},
+    { value: "Pendiente", label: "Pendiente"},
+  ]; 
+//CAMPOR QUE SE PUEDEN EDITAR CON EL BOTON DE EDIT (LAPIZ)
 const EDITABLE_FIELD = ["phone","email","notify","patologias","status","clases","viaje","direccion"];
 const FIELD_VALUES ={
   "clases":{
@@ -188,9 +206,6 @@ function update_status_form(){
               <label class="form__label" for="Estado"> </label>
               <select class="form__control" id="edit-status" name="edit-status" required>
                 <option value="">Selecciona…</option>
-                <option>Activo</option>
-                <option>Inactivo</option>
-                <option>Pausado</option>
               </select>
             </div>
             <div class="form__row">
