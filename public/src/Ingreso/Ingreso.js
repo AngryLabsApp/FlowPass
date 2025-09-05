@@ -22,47 +22,38 @@ function applyCheckinUI({ ok, user, message }) {
 
   if (!statusEl) return;
 
-  // Limpia clases previas
+  // Limpia clases previas y asegura estructura (icono + texto)
   statusEl.classList.remove("checkin__status--ok", "checkin__status--err");
+  let iconEl = statusEl.querySelector('.checkin__status-icon');
+  let useEl = iconEl ? iconEl.querySelector('use') : null;
+  let textEl = statusEl.querySelector('.checkin__status-text');
+  if (!iconEl) {
+    iconEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    iconEl.setAttribute('class', 'icon checkin__status-icon');
+    useEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    iconEl.appendChild(useEl);
+    statusEl.prepend(iconEl);
+  }
+  if (!useEl) {
+    useEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    iconEl.appendChild(useEl);
+  }
+  if (!textEl) {
+    textEl = document.createElement('span');
+    textEl.className = 'checkin__status-text';
+    statusEl.appendChild(textEl);
+  }
 
   if (ok) {
-    // ✅ Éxito
-    const fullName = [user?.Nombre, user?.Apellidos].filter(Boolean).join(" ");
-    statusEl.textContent =
-      message || `Ingreso registrado para ${fullName || "usuario"} ✅`;
-    statusEl.classList.add("checkin__status--ok");
-
-    // Limpia timers/estilos de mensaje previo
-    if (statusEl) {
-      window.clearTimeout(statusEl.__msgTimer);
-      statusEl.style.removeProperty("opacity");
-      statusEl.style.removeProperty("transition");
-    }
-
-    // Limpia cualquier estado de error visual en el contenedor
-    const contentEl2 = document.querySelector(".content");
-    if (contentEl2) {
-      contentEl2.classList.remove("content--error");
-      window.clearTimeout(contentEl2.__errTimer);
-    }
-
-    // Oculta lista de resultados
-    resultsEl?.setAttribute("hidden", "");
-
-    // (Opcional) Limpia selección y el form
-    // Si quieres dejar seleccionado, comenta estas 2 líneas:
-    if (selEl) {
-      selEl.hidden = true;
-      selEl.innerHTML = "";
-    }
-    document.getElementById("checkinForm")?.reset();
-    if (!Is_Mobile) document.getElementById("checkinQuery")?.focus();
-    updateSubmitState();
+    // Para éxito no mostramos el toast; asegúralo oculto
+    textEl.textContent = "";
+    statusEl.classList.add('hidden');
   } else {
     // ❌ Error
-    statusEl.textContent =
-      message || "No se pudo registrar el ingreso. Intenta de nuevo.";
+    textEl.textContent = message || "No se pudo registrar el ingreso. Intenta de nuevo.";
+    useEl.setAttribute('href', '/public/icons/sprites.svg#error');
     statusEl.classList.add("checkin__status--err");
+    statusEl.classList.remove('hidden');
     // Asegura estado visible (por si venía saliendo)
     statusEl.classList.remove("checkin__status--slide-out");
 
@@ -87,9 +78,10 @@ function applyCheckinUI({ ok, user, message }) {
       statusEl.classList.add("checkin__status--slide-out");
 
       const cleanup = () => {
-        statusEl.textContent = "";
+        textEl.textContent = "";
         statusEl.classList.remove("checkin__status--err");
         statusEl.classList.remove("checkin__status--slide-out");
+        statusEl.classList.add('hidden');
         statusEl.removeEventListener("transitionend", onEnd);
       };
       const onEnd = (ev) => {
@@ -104,7 +96,7 @@ function applyCheckinUI({ ok, user, message }) {
       // Fallback por si el evento no dispara
       window.clearTimeout(statusEl.__msgHideTimer);
       statusEl.__msgHideTimer = window.setTimeout(cleanup, 320);
-    }, 4000);
+    }, 5000);
   }
 }
 

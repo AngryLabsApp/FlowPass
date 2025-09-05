@@ -69,18 +69,31 @@
 
   .checkin__status {
     margin-top: 8px;
-    font-size: 13px;
-    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     /* Transición para animar salida suave */
     transition: transform 220ms ease, opacity 220ms ease;
   }
   .checkin__status--ok {
-    color: #0a6b3e;
+    background: var(--bg-success);
+    color: var(--text-success);
+    border-color: var(--border-success);
   }
   .checkin__status--err {
-    font-size: 40px;
-    color: #2724d6;
+    background: var(--bg-danger);
+    color: var(--text-danger);
+    border-color: var(--border-danger);
   }
+  .checkin__status .icon { width: 18px; height: 18px; }
 
   .card.checkin {
     display: block;
@@ -376,15 +389,7 @@
   }
 
   /* Mensaje de error más claro y visible */
-  .checkin__status.checkin__status--err {
-    background: var(--bg-danger);
-    border: 1px solid var(--border-danger);
-    border-radius: var(--radius-sm);
-    padding: 8px 10px;
-    font-weight: 600;
-    font-size: 40px; /* un poco más grande para legibilidad */
-    animation: status-pop 160ms ease-out;
-  }
+  .checkin__status.checkin__status--err { animation: status-pop 160ms ease-out; }
 
   /* Estado de salida: desliza y desvanece el mensaje */
   .checkin__status--slide-out {
