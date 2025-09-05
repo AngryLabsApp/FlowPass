@@ -208,7 +208,7 @@
     display: flex;
     gap: 12px;
     position: sticky; /* se pega al fondo del contenedor scrolleable */
-    bottom: 0;
+    bottom: -25px;
     background: var(--surface, #fff);
     width: 100%;
     padding: 12px 16px 12px;
