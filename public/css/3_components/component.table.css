@@ -49,6 +49,17 @@
     .table__col--user-id {
       display: none;
     }
+    /* Mobile-only adjustments: fit table on small screens */
+    /* Hide the second status column (payment status) */
+    .table__head .table__head-cell.table__col--status:last-child,
+    .table__body .table__cell.table__col--status:last-child {
+      display: none;
+    }
+    /* Tighter spacing and allow wrapping to reduce horizontal overflow */
+    .table__head-cell,
+    .table__cell {
+      padding: 8px 10px;
+    }
   }
 
   .table__row[role="button"] {
