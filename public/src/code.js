@@ -56,10 +56,10 @@ function renderUserRow(user) {
       <td class="table__cell table__col--grace">${safe(
         user.dias_de_gracia
       )}</td>
-      <td class="table__cell table__col--start">${formatDate(
+      <td class="table__cell table__col--start">${formatDateDMY(
         user.fecha_inicio_plan
       )}</td>
-      <td class="table__cell table__col--end">${formatDate(
+      <td class="table__cell table__col--end">${formatDateDMY(
         user.proxima_fecha_pago
       )}</td>
       <td class="table__cell table__col--status">

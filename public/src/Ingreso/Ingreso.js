@@ -131,7 +131,7 @@ async function handleCheckin(query) {
         let text = "El código no existe.";
         switch(error_message){
             case "PLAN_VENCIDO":
-                text= `El plan de ${user.nombre} ${user.apellidos} venció el ${formatDate(user.proxima_fecha_pago)}.`;
+                text= `El plan de ${user.nombre} ${user.apellidos} venció el ${formatDateDMY(user.proxima_fecha_pago)}.`;
                 break;
             case "LIMITE_CLASES_SUPERADO":
                 text= `Límite de clases alcanzado (${user.clases_tomadas}/${user.limite_clases})`;
@@ -262,8 +262,8 @@ function openModal(user) {
   Is_Modal_Open = true;
   m.setAttribute("aria-hidden", "false");
   setField(m, "NumberOfClases",  `${user.clases_tomadas}/${user.limite_clases}`);
-  setField(m, "DateOfSubcription", formatDate(user.fecha_inicio_plan));
-  setField(m, "NextPaymentDay", formatDate(user.proxima_fecha_pago));
+  setField(m, "DateOfSubcription", formatDateDMY(user.fecha_inicio_plan));
+  setField(m, "NextPaymentDay", formatDateDMY(user.proxima_fecha_pago));
 
   $("#userModalTitle").textContent = user.nombre + " " + user.apellidos;
 

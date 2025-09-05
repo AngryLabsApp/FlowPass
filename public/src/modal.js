@@ -36,9 +36,9 @@ function openModal(user) {
   setField(m, "PaymentStatus", user.estado_pago);
   setField(m, "NumberOfClases", `${user.clases_tomadas}/${user.limite_clases}`);
   setField(m, "FreeDays", user.dias_de_gracia);
-  setField(m, "DateOfSubcription", formatDate(user.fecha_alta));
-  setField(m, "NextPaymentDay", formatDate(user.proxima_fecha_pago));
-  setField(m, "UserBirthday", formatDate(user.cumpleanos));
+  setField(m, "DateOfSubcription", formatDateDMY(user.fecha_alta));
+  setField(m, "NextPaymentDay", formatDateDMY(user.proxima_fecha_pago));
+  setField(m, "UserBirthday", formatDateDMY(user.cumpleanos));
   setField(m, "UserNotificar", user.notificar || "No");
   setField(
     m,
@@ -52,11 +52,17 @@ function openModal(user) {
   try {
     const tomadas = Number(user.clases_tomadas) || 0;
     const limite = Number(user.limite_clases);
-    const limiteValido = Number.isFinite(limite) && limite > 0; // solo aplica si hay límite positivo
-    const atOrOver = limiteValido && tomadas >= limite; // deshabilitar desde el límite
+    const limiteValido = Number.isFinite(limite) && limite > 0; // aplica si hay límite positivo
+    const atOrOver = limiteValido && tomadas >= limite; // alcanzó o superó el límite
 
-    setCheckInButtonDisabled(atOrOver);
-    setCheckInWarning(atOrOver, atOrOver ? "Límite de clases alcanzado" : "");
+    const estadoPlan = String(user.estado || '').trim().toLowerCase();
+    const planActivo = (estadoPlan === 'activo');
+
+    // El botón se deshabilita si el plan no está activo o ya no hay clases
+    setCheckInButtonDisabled(!planActivo || atOrOver);
+
+    // El chip amarillo SOLO se usa para el caso de límite de clases
+    setCheckInWarning(atOrOver, atOrOver ? `Límite de clases alcanzado (${tomadas}/${limite})` : "");
   } catch (_) {}
 }
 

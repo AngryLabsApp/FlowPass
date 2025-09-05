@@ -18,6 +18,13 @@ async function registrarIngreso(user) {
     console.log(user);
     const tomadas = Number(user.clases_tomadas) || 0;
     const limite = Number(user.limite_clases);
+    const estadoPlan = String(user.estado || '').trim().toLowerCase();
+
+    // Si el plan no está activo, no permitir registrar
+    if (estadoPlan !== 'activo') {
+      setCheckInButtonDisabled(true);
+      return;
+    }
 
     // Validación: bloquear y mostrar chip desde que llega al límite (>=)
     const limiteValido = Number.isFinite(limite) && limite > 0; // solo aplica si hay límite positivo

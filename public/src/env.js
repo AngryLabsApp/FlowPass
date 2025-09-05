@@ -89,6 +89,38 @@ function formatDate(value) {
   return `${d.getFullYear()}-${m}-${day}`;
 }
 
+/** Formatea fecha a DD-MM-YYYY si es posible (sin cambiar formato global existente) */
+function formatDateDMY(value) {
+  if (!value) return "-";
+  const raw = String(value).trim();
+
+  // Si viene en dd/mm/yyyy o dd-mm-yyyy, normaliza a dd-mm-yyyy
+  const dmy = raw.match(/^([0-3]?\d)[\/-]([0-1]?\d)[\/-](\d{4})$/);
+  if (dmy) {
+    const d = dmy[1].padStart(2, '0');
+    const m = dmy[2].padStart(2, '0');
+    const y = dmy[3];
+    return `${d}-${m}-${y}`;
+  }
+
+  // Si viene como yyyy-mm-dd (fecha pura), evita offsets de zona
+  const ymd = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (ymd) {
+    const y = ymd[1];
+    const m = ymd[2];
+    const d = ymd[3];
+    return `${d}-${m}-${y}`;
+  }
+
+  // Intento genérico con Date (ISO u otros); si no se puede, devuelve el raw
+  const dt = new Date(raw);
+  if (isNaN(dt)) return raw;
+  const d = String(dt.getDate()).padStart(2, '0');
+  const m = String(dt.getMonth() + 1).padStart(2, '0');
+  const y = String(dt.getFullYear());
+  return `${d}-${m}-${y}`;
+}
+
 /** Escapa texto para evitar inyecciones si renderizas con innerHTML */
 function safe(text) {
   const span = document.createElement("span");
@@ -195,4 +227,3 @@ function update_clases_form(){
             </div>
         `;
 }
-
