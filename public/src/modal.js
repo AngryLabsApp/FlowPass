@@ -15,6 +15,7 @@ function setCheckInButtonDisabled(disabled) {
 }
 
 function openModal(user) {
+  console.log("DATA USER : ", user);
   const m = $("#userModal");
   if (!m) return;
 
@@ -25,6 +26,8 @@ function openModal(user) {
   setField(m, "UserLastName", user.apellidos);
   setField(m, "UserPhone", user.telefono);
   setField(m, "UserEmail", user.email);
+  setField(m, "UserAddress", user.direccion);
+  setField(m, "UserIdentificationNumber", user.identificacion);
   setField(m, "UserPlan", user.plan);
   setField(m, "UserIsOnTravel", user.de_viaje);
   setField(m, "PaymentAmount", user.monto); // ya viene formateado en tu tabla
@@ -37,7 +40,11 @@ function openModal(user) {
   setField(m, "NextPaymentDay", formatDate(user.proxima_fecha_pago));
   setField(m, "UserBirthday", formatDate(user.cumpleanos));
   setField(m, "UserNotificar", user.notificar || "No");
-  setField(m, "UserPatologias", user?.patologias.length > 0 ? user.patologias : "-");
+  setField(
+    m,
+    "UserPatologias",
+    user?.patologias.length > 0 ? user.patologias : "-"
+  );
   user_selected = user;
   $("#userModalTitle").textContent = user.nombre + " " + user.apellidos;
 
@@ -102,7 +109,6 @@ function initModal() {
   });
 }
 
-
 // Agregar este código a tu archivo modal.js
 document.addEventListener("DOMContentLoaded", () => {
   // Elementos del modal
@@ -145,6 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Cancelar actualización
   btnCancelForm.addEventListener("click", () => {
-      showUpdateForm(false);
+    showUpdateForm(false);
   });
 });

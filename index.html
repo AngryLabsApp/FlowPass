@@ -216,6 +216,27 @@
           <section class="section">
             <h3 class="section__title">Datos personales</h3>
             <div class="info-grid">
+
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-code"></use>
+                  </svg>
+                  Codigo de ingreso
+                </div>
+                <div class="value" data-field="UserCode">—</div>
+              </div>
+
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-id-card"></use>
+                  </svg>
+                  DNI/Pasaporte/CE
+                </div>
+                <div class="value" data-field="UserIdentificationNumber">—</div>
+              </div>
+
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -249,14 +270,22 @@
                   <span class="value__content" data-field="UserEmail">—</span>
                 </div>
               </div>
+
               <div class="row">
                 <div class="label">
                   <svg class="icon">
-                    <use href="/public/icons/sprites.svg#user-code"></use>
+                    <use href="/public/icons/sprites.svg#home"></use>
                   </svg>
-                  Codigo de ingreso
+                  Dirección
+                  <button class="edit-btn" aria-label="Editar dirección" id="btn-edit-direccion">
+                    <svg class="icon icon-rose">
+                      <use href="/public/icons/sprites.svg#edit"></use>
+                    </svg>
+                  </button>
                 </div>
-                <div class="value" data-field="UserCode">—</div>
+                <div class="value value--editable">
+                  <span class="value__content" data-field="UserAddress">—</span>
+                </div>
               </div>
 
               <div class="row">
@@ -284,14 +313,7 @@
                   <span class="value__content" data-field="UserNotificar">—</span>
                 </div>
               </div>
-              <div class="row">
-                <div class="label">
-                  <svg class="icon">
-                    <use href="/public/icons/sprites.svg#user-id"></use>
-                  </svg>ID
-                </div>
-                <div class="value" data-field="UserID">—</div>
-              </div>
+
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -326,6 +348,15 @@
                 <div class="value value--editable">
                   <span class="value__content" data-field="UserIsOnTravel">—</span>
                 </div>
+              </div>
+
+              <div class="row">
+                <div class="label">
+                  <svg class="icon">
+                    <use href="/public/icons/sprites.svg#user-id"></use>
+                  </svg>Flowpass ID
+                </div>
+                <div class="value" data-field="UserID">—</div>
               </div>
             </div>
           </section>
