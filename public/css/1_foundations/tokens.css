@@ -27,6 +27,10 @@
     --warning-light: #fff4e5;
     --warning-lighter: #fff3b9;
 
+    --frozen: #0c4a6e;
+    --frozen-light: #e1eff9;
+    --frozen-lighter: #cfe6f6;
+
     /* Roles */
     --bg: #f6f7fb;
     --text: var(--c1);
@@ -42,6 +46,10 @@
     --text-warning: var(--warning);
     --border-warning: var(--warning-lighter);
     --bg-warning: var(--warning-light);
+
+    --text-frozen: var(--frozen);
+    --border-frozen: var(--frozen-lighter);
+    --bg-frozen: var(--frozen-light);
 
     --bg-hover: var(--danger-transparent);
     --muted: #6b7280;

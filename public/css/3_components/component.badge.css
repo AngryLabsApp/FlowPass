@@ -18,6 +18,10 @@ width: fit-content; */
     background: var(--bg-warning);
     color: var(--text-warning);
   }
+  .badge--frozen {
+    background: var(--bg-frozen);
+    color: var(--text-frozen);
+  }
   .badge--overdue {
     background: var(--bg-danger);
     color: var(--text-danger);
