@@ -8,6 +8,29 @@ const ENV_VARS = {
   url_ingreso:"https://n8n.angrylabs.app/webhook/b9a49ebc-c1cc-4551-bca6-21832295b34c"
 };
 
+const TABLE_COLUMNS = [
+  { key: 'nombre',              label: 'Nombre(s)',        headClass: 'table__head-cell table__col--first-name', cellClass: 'table__cell table__col--first-name',  visible: true },
+  { key: 'apellidos',           label: 'Apellido(s)',      headClass: 'table__head-cell table__col--last-name',  cellClass: 'table__cell table__col--last-name',   visible: true },
+  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--plan',       cellClass: 'table__cell table__col--plan',        visible: true },
+  // Columna "compuesta" clases tomadas / límite:
+  { key: 'clases',              label: 'Clases realizadas',headClass: 'table__head-cell table__col--classes',    cellClass: 'table__cell table__col--classes',     visible: true,
+    render: (u) => `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}`
+  },
+  { key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true },
+  { key: 'fecha_inicio_plan',   label: 'Inicio de plan',   headClass: 'table__head-cell table__col--start',      cellClass: 'table__cell table__col--start',       visible: true,
+    render: (u) => formatDateDMY(u.fecha_inicio_plan)
+  },
+  { key: 'proxima_fecha_pago',  label: 'Fin de plan',      headClass: 'table__head-cell table__col--end',        cellClass: 'table__cell table__col--end',         visible: true,
+    render: (u) => formatDateDMY(u.proxima_fecha_pago)
+  },
+  { key: 'estado',              label: 'Estado',           headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
+    render: (u) => `<span class="badge ${statusBadgeClass(u.estado)}">${safe(u.estado)}</span>`
+  },
+  { key: 'estado_pago',         label: 'Estatus de pago',  headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
+    render: (u) => `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`
+  },
+];
+
 const PLANES = [
     { value: "12 Sesiones Mensuales", label: "12 Sesiones Mensuales", amount:150 },
     { value: "16 Sesiones Mensuales", label: "16 Sesiones Mensuales", amount:180  },
@@ -166,6 +189,19 @@ function setField(modalEl, field, value) {
   if (el) el.textContent = value ?? "—";
 }
 
+/** Mapea estado a clase de badge (opcional) */
+function statusBadgeClass(status) {
+  const s = String(status || "").toLowerCase();
+  if (["pagado","activo", "paid", "completo", "completed"].includes(s))
+    return "badge--paid";
+  if (["pendiente", "pendiente de pago", "pending"].includes(s))
+    return "badge--pending";
+  if (["congelado", "frozen", "pausado"].includes(s))
+    return "badge--frozen";
+  if (["vencido","inactivo", "overdue", "failed", "atrasado"].includes(s))
+    return "badge--overdue";
+  return "badge--method";
+}
 
 
 function isMobile() {

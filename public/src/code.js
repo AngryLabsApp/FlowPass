@@ -23,58 +23,9 @@ function debounce(fn, wait = 300) {
 }
 
 
-
-/** Mapea estado a clase de badge (opcional) */
-function statusBadgeClass(status) {
-  const s = String(status || "").toLowerCase();
-  if (["pagado","activo", "paid", "completo", "completed"].includes(s))
-    return "badge--paid";
-  if (["pendiente", "pendiente de pago", "pending"].includes(s))
-    return "badge--pending";
-  if (["congelado", "frozen", "pausado"].includes(s))
-    return "badge--frozen";
-  if (["vencido","inactivo", "overdue", "failed", "atrasado"].includes(s))
-    return "badge--overdue";
-  return "badge--method";
-}
-
 // =======================
 // Render (Tabla)
 // =======================
-
-/** Renderiza una fila de usuario */
-function renderUserRow(user) {
-  const payload = encodeURIComponent(JSON.stringify(user));
-  return `
-    <tr class="table__row" role="button" tabindex="0" data-user="${payload}">
-      <td class="table__cell table__col--first-name">${safe(user.nombre)}</td>
-      <td class="table__cell table__col--last-name">${safe(user.apellidos)}</td>
-      <td class="table__cell table__col--plan">${safe(user.plan)}</td>
-      <td class="table__cell table__col--classes">${safe(
-        user.clases_tomadas
-      )}/${safe(user.limite_clases)}</td>
-      <td class="table__cell table__col--grace">${safe(
-        user.dias_de_gracia
-      )}</td>
-      <td class="table__cell table__col--start">${formatDateDMY(
-        user.fecha_inicio_plan
-      )}</td>
-      <td class="table__cell table__col--end">${formatDateDMY(
-        user.proxima_fecha_pago
-      )}</td>
-      <td class="table__cell table__col--status">
-        <span class="badge ${statusBadgeClass(user.estado)}">${safe(
-        user.estado
-        )}</span>
-      </td>
-       <td class="table__cell table__col--status">
-        <span class="badge ${statusBadgeClass(user.estado_pago)}">${safe(
-        user.estado_pago
-        )}</span>
-      </td>
-    </tr>
-  `;
-}
 
 /** Estados de tabla */
 function renderLoading(tbody) {
@@ -159,7 +110,8 @@ async function loadUsers(page) {
     const { total, data: users } = items[0] || {};
     if (!Array.isArray(users) || users.length === 0) return renderEmpty(tbody);
 
-    tbody.innerHTML = users.map(renderUserRow).join("");
+ 
+    renderTableRows(users,"usersTbody",TABLE_COLUMNS);
     renderPagination(total);
     // Si quieres usar 'total' para paginación o mostrar un contador:
     // console.log("Total:", total);
