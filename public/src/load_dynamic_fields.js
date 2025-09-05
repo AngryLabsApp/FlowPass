@@ -21,7 +21,7 @@ function renderHead(columns, theadId) {
   if (!thead) return;
   const visibleCols = columns.filter(c => c.visible !== false);
   const cells = visibleCols.map(c =>
-    `<th class="${c.className || 'table__head-cell'}"
+    `<th class="${c.headClass || 'table__head-cell'}"
          data-key="${c.key}"
          ${c.sortable ? 'data-sortable="true"' : ''}>
        ${c.label}
