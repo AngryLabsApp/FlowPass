@@ -24,3 +24,8 @@
 .icon-rose {
   fill: var(--c8);
 }
+
+/* Helper: flip horizontally (e.g., reuse arrow-right as arrow-left) */
+.icon--flip {
+  transform: scaleX(-1);
+}

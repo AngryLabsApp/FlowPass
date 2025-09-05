@@ -37,9 +37,9 @@ const PLANES = [
     { value: "20 Sesiones Mensuales", label: "20 Sesiones Mensuales", amount:200  },
     { value: "Clase Libre",        label: "Clase Libre", amount:15  },
     { value: "Clase Gratis",       label: "Clase Gratis", amount:0 , is_free:true },
-    { value: "12 Sesiones Personalizadas",  label: "12 Sesiones Personalizadas",amount:0  },
-    { value: "16 Sesiones Personalizadas",  label: "16 Sesiones Personalizadas",amount:0  },
-    { value: "20 Sesiones Personalizadas",  label: "20 Sesiones Personalizadas",amount:0  },
+    { value: "12 Sesiones Personalizadas",  label: "12 Sesiones Personalizadas",amount:150  },
+    { value: "16 Sesiones Personalizadas",  label: "16 Sesiones Personalizadas",amount:180  },
+    { value: "20 Sesiones Personalizadas",  label: "20 Sesiones Personalizadas",amount:200  },
   ];
 
   const ESTADO_PLAN = [

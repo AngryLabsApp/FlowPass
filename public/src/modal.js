@@ -79,6 +79,16 @@ function getUserSelected() {
   return user_selected;
 }
 
+// Actualiza el objeto seleccionado y refresca los campos del modal
+function patchSelectedUser(patch = {}) {
+  try {
+    if (!user_selected || !patch) return;
+    Object.assign(user_selected, patch);
+    // Reaplicar datos al modal visible
+    openModal(user_selected);
+  } catch (_) {}
+}
+
 function showUpdateForm(show) {
   const updateForm = document.getElementById("updateForm");
   updateForm.hidden = !show;
@@ -103,6 +113,26 @@ function handleOnSelectPlanChange() {
       montoEl.readOnly = false;
     }
   });
+}
+
+function prefillUpdateForm() {
+  try {
+    const user = getUserSelected();
+    if (!user) return;
+    const setVal = (id, val) => {
+      const el = document.getElementById(id);
+      if (el && val != null) el.value = String(val);
+      return el;
+    };
+    const planEl = setVal("Plan", user.plan);
+    // Disparar change para sincronizar monto por plan
+    if (planEl) planEl.dispatchEvent(new Event("change"));
+    // Si backend trae monto, lo priorizamos
+    setVal("Monto", user.monto);
+    setVal("Dias_de_Gracia", user.dias_de_gracia);
+    setVal("Medio_de_pago", user.medio_de_pago);
+    setVal("PaymentStatus", user.estado_pago);
+  } catch (_) {}
 }
 
 // =======================
@@ -144,16 +174,36 @@ document.addEventListener("DOMContentLoaded", () => {
       event.key === "Escape" &&
       modal.getAttribute("aria-hidden") === "false"
     ) {
+      // Si hay submodal abierto, ciérralo primero
+      try {
+        const sub = document.getElementById('userSubModal');
+        if (sub && sub.getAttribute('aria-hidden') === 'false' && window.__submodal) {
+          window.__submodal.closeSubModal();
+          return;
+        }
+      } catch (_) {}
       closeModal();
     }
   });
 
   // Toggle del formulario
   btnToggleForm.addEventListener("click", () => {
+    // En móvil: abrir submodal encima con el formulario
+    try {
+      if (window.__submodal && window.__submodal.isMobileViewport()) {
+        window.__submodal.openPlanSubmodal();
+        return;
+      }
+    } catch (_) {}
+    // Desktop/tablet: panel lateral como antes
     showSingleFormAside(false);
     const updateForm = document.getElementById("updateForm");
     const isHidden = updateForm.hidden;
     showUpdateForm(isHidden);
+    if (isHidden === true) {
+      // Se acaba de mostrar
+      prefillUpdateForm();
+    }
   });
 
   // Cancelar actualización

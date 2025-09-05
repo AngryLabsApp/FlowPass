@@ -400,6 +400,9 @@
             </button>
             <button class="btn btn--secondary" id="btnToggleForm" aria-expanded="false" aria-controls="updateForm">
               Renovar plan
+              <svg class="icon">
+                <use href="/public/icons/sprites.svg#arrow-right"></use>
+              </svg>
             </button>
           </div>
         </div>
@@ -484,8 +487,24 @@
       <p class="loader__text">Procesando...</p>
     </div>
   </div>
- <script src="/public/src/load_dynamic_fields.js"></script>
+
+  
+  <!-- Submodal (mobile): Formulario sobre la ficha -->
+  <div class="modal modal--child" id="userSubModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="userSubModalTitle">
+    <div class="modal__overlay" data-close-sub></div>
+    <div class="modal__dialog card submodal__dialog" role="document">
+      <header class="modal__header submodal__header">
+        <h3 class="modal__title" id="userSubModalTitle">Editar</h3>
+        <button class="modal__close" type="button" aria-label="Cerrar" data-close-sub>✕</button>
+      </header>
+      <div class="modal__body submodal__body">
+        <div id="subModalContent"></div>
+      </div>
+    </div>
+  </div>
   <script src="/public/src/env.js"></script>
+  <script src="/public/src/load_dynamic_fields.js"></script>
+  <script src="/public/src/submodal.js"></script>
   <script src="/public/src/update-single-form.js"></script>
   <script src="/public/src/pagination.js"></script>
   <script src="/public/src/update_user.js"></script>

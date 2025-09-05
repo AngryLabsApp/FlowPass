@@ -37,10 +37,14 @@
   }
   @media (width <= 900px) {
     .table__col--email,
-    .table__col--classes,
     .table__col--grace,
     .table__col--method {
       display: none;
+    }
+    /* Ensure "Clases realizadas" stays visible on tablets */
+    .table__head-cell.table__col--classes,
+    .table__cell.table__col--classes {
+      display: table-cell;
     }
   }
   @media (width <= 640px) {
@@ -59,11 +63,38 @@
     .table__head-cell,
     .table__cell {
       padding: 8px 10px;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
+
+    /* Ensure "Clases realizadas" is visible on mobile */
+    .table__head-cell.table__col--classes,
+    .table__cell.table__col--classes {
+      display: table-cell;
+    }
+  }
+
+  /* Extra-compact view for very small phones */
+  @media (width <= 480px) {
+    .table__col--last-name { display: none; }
+    .table__head-cell,
+    .table__cell { padding: 8px; }
   }
 
   .table__row[role="button"] {
     cursor: pointer;
+  }
+
+  /* Fechas: no envolver ni cortar (cuando sean visibles) */
+  .table__head-cell.table__col--start,
+  .table__cell.table__col--start,
+  .table__head-cell.table__col--end,
+  .table__cell.table__col--end,
+  .table__head-cell.table__col--birth,
+  .table__cell.table__col--birth {
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
   }
 
 }

@@ -26,6 +26,14 @@ function buildEditFormByField(field){
     const form_id = "edit-single-form";
 
     btnEdit.addEventListener("click", () => {
+        // En móvil: abrir submodal encima
+        try {
+          if (window.__submodal && window.__submodal.isMobileViewport()) {
+            window.__submodal.openSingleFieldSubmodal(field);
+            return;
+          }
+        } catch (_) {}
+        // Desktop/tablet: panel lateral como antes
         showUpdateForm(false);
         FIELD_SELECTED = field;
         setFormRows(form_id, FIELD_VALUES[FIELD_SELECTED].html);
@@ -33,12 +41,28 @@ function buildEditFormByField(field){
         if (title) {
           title.textContent = FIELD_VALUES[FIELD_SELECTED].title;
         }
-
         showSingleFormAside(true);
+        // Prefill valores actuales del usuario para el aside (desktop/tablet)
+        try {
+          const user = getUserSelected();
+          const meta = FIELD_VALUES[FIELD_SELECTED];
+          if (user && meta) {
+            const setVal = (id, val) => { const el = document.getElementById(id); if (el && val != null) el.value = String(val); };
+            switch (FIELD_SELECTED) {
+              case 'phone': setVal(meta.id, user.telefono); break;
+              case 'email': setVal(meta.id, user.email); break;
+              case 'notify': setVal(meta.id, user.notificar); break;
+              case 'patologias': setVal(meta.id, (user.patologias || '').toString()); break;
+              case 'status': setVal(meta.id, user.estado); setVal(meta.id2, user.dias_extra); break;
+              case 'clases': setVal(meta.id, user.clases_tomadas); if (meta.id2) setVal(meta.id2, user.limite_clases); break;
+              case 'viaje': setVal(meta.id, user.de_viaje); break;
+              case 'direccion': setVal(meta.id, user.direccion); break;
+            }
+          }
+        } catch (_) {}
 
-        fillDynamicGeneratedSelect();
-
-
+        // Rellenar selects dinámicos (por ejemplo, estado del plan)
+        try { if (typeof fillDynamicGeneratedSelect === 'function') fillDynamicGeneratedSelect(); } catch (_) {}
     });
 }
 document.addEventListener("DOMContentLoaded", () => {
@@ -71,6 +95,7 @@ function update_single_form_submit () {
 
     const submitBtn = form.querySelector('[type="submit"]');
     submitBtn.disabled = true;
+    let success = false;
 
     // Tomamos el ID de la ficha visible en el modal
     
@@ -111,13 +136,40 @@ function update_single_form_submit () {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       formEl.reset();
+      success = true;
     } catch (err) {
       console.error(err);
     } finally {
         submitBtn.disabled = false;
         loadUsers();
         hideLoader();
-        closeModal();
+        // Ocultar panel lateral de edición de un solo campo
+        const aside = document.getElementById('edit-single-form-aside');
+        if (aside) aside.hidden = true;
+
+        // Actualizar datos en el modal principal
+        try {
+          const meta = FIELD_VALUES[FIELD_SELECTED];
+          const patch = {};
+          const v1 = document.getElementById(meta.id)?.value;
+          if (v1) patch[meta.sheet_name] = v1;
+          if (meta.id2) {
+            const v2 = document.getElementById(meta.id2)?.value;
+            if (v2) patch[meta.sheet_name2] = v2;
+          }
+
+          // Campos compuestos o alias
+          if (FIELD_SELECTED === 'clases') {
+            // Nothing extra: clases_tomadas y limite_clases ya fueron seteados
+          }
+
+          if (typeof patchSelectedUser === 'function') patchSelectedUser(patch);
+        } catch (_) {}
+
+        // Forzar recarga total en éxito
+        if (success) {
+          try { location.reload(); } catch (_) {}
+        }
     }
 
   });

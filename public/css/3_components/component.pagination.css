@@ -65,4 +65,8 @@
     .pagination__status { order: 2; width: 100%; }
     .pagination__nav    { order: 1; margin-left: 0; }
   }
+  /* Ocultar contador en móviles para evitar desajuste visual */
+  @media (width <= 640px) {
+    .pagination__status { display: none; }
+  }
 }

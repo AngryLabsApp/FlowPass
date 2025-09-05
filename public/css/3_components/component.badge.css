@@ -9,6 +9,10 @@
     border: 1px solid rgba(0, 0, 0, 0.06);
     /* display: flex;
 width: fit-content; */
+    /* Evitar saltos de línea y cortes dentro del chip */
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
   }
   .badge--active {
     background: var(--c5);
@@ -44,5 +48,13 @@ width: fit-content; */
   .badge--flex {
     display: flex;
     align-items: center;
+  }
+
+  /* Asegurar no-wrap también dentro de celdas de tabla en mobile */
+  .table__cell .badge,
+  .table__head-cell .badge {
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
   }
 }

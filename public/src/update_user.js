@@ -10,6 +10,8 @@ function update_form_submit () {
     const submitBtn = form.querySelector('[type="submit"]');
     submitBtn.disabled = true;
 
+    let success = false;
+
     // Tomamos el ID de la ficha visible en el modal
  
     user = getUserSelected();
@@ -34,13 +36,34 @@ function update_form_submit () {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       formEl.reset();
+      success = true;
     } catch (err) {
       console.error(err);
     } finally {
         submitBtn.disabled = false;
         loadUsers();
         hideLoader();
-        closeModal();
+        // Ocultar panel lateral (si existe) y mantener el modal abierto
+        const aside = document.getElementById('updateForm');
+        if (aside) aside.hidden = true;
+
+        // Actualizar modal principal con los nuevos valores
+        try {
+          const patch = {
+            dias_de_gracia: document.getElementById('Dias_de_Gracia').value || 0,
+            monto: document.getElementById('Monto').value || 0,
+            medio_de_pago: document.getElementById('Medio_de_pago').value || '',
+            estado_pago: document.getElementById('PaymentStatus').value || '',
+          };
+          const planVal = document.getElementById('Plan').value;
+          if (planVal) patch.plan = planVal;
+          if (typeof patchSelectedUser === 'function') patchSelectedUser(patch);
+        } catch (_) {}
+
+        // Forzar recarga total en éxito
+        if (success) {
+          try { location.reload(); } catch (_) {}
+        }
     }
   });
 }

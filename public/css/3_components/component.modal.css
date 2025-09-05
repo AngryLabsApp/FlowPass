@@ -286,6 +286,12 @@
       width: 100%;
       justify-content: center;
     }
+
+    /* Submodal (mobile): ocultar botón "Volver" y dejar solo "Guardar cambios" */
+    .modal--child .modal__back { display: none; }
+    .modal--child .form__actions .btn--secondary,
+    .modal--child #subCancelForm,
+    .modal--child #subCancelSingle { display: none; }
   }
 
   @media (max-width: 480px) {
@@ -362,5 +368,30 @@
   .value.value--editable .icon {
     width: 1em;
     height: 1em;
+  }
+
+  /* ========== Stacked submodal (mobile-only UX) ========== */
+  .modal--child {
+    z-index: 1100; /* encima del modal principal */
+  }
+  .modal--child .submodal__dialog {
+    max-width: 420px;
+    width: min(92vw, 420px);
+  }
+  .submodal__header {
+    gap: 8px;
+  }
+  .modal__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .modal__back:hover {
+    background: rgba(0,0,0,0.04);
   }
 }
