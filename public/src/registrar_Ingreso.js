@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function registrarIngreso(user) {
     console.log(user);
-    user.Clases_tomadas += 1;
+    user.clases_tomadas += 1;
   try {
      showLoader('Registrando ingreso...');
     const res = await fetch(ENV_VARS.url_update, {

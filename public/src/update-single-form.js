@@ -77,8 +77,8 @@ function update_single_form_submit () {
     user = getUserSelected();
     // Leemos campos del form
     const payload = {
-        ID: user.ID,
-        Type: "SINGLE",
+        id: user.id,
+        type: "SINGLE",
         [FIELD_VALUES[FIELD_SELECTED].sheet_name]: {value:document.getElementById( FIELD_VALUES[FIELD_SELECTED].id).value},
     };
     let valid = false;
