@@ -4,7 +4,6 @@ const supabase = createClient(BD_PUBLIC_URL, BD_API_PUBLIC);
 
 export async function ensureSessionOrRedirect() {
     const { data: { session } } = await supabase.auth.getSession();
-    console.log(session);
     if (!session) {
       // no hay login → manda a tu página de login
       window.location.replace("/login.html");
