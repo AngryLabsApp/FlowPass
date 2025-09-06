@@ -91,7 +91,7 @@ async function loadUsers(page) {
     // arma tus query params como tu backend espera:
     const queryParams = buildQueryParams(page);
     const url = buildUrl(ENV_VARS.url_get_users, queryParams);
-    const res = await load_users();
+    const res = await load_users(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
