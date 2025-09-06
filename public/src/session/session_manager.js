@@ -2,7 +2,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const supabase = createClient(BD_PUBLIC_URL, BD_API_PUBLIC);
 
 
-async function ensureSessionOrRedirect() {
+export async function ensureSessionOrRedirect() {
     const { data: { session } } = await supabase.auth.getSession();
     console.log(session);
     if (!session) {
@@ -15,7 +15,7 @@ async function ensureSessionOrRedirect() {
 
 const session = await ensureSessionOrRedirect();
 if (!session) throw new Error("Sin sesión");
-test();
+//test();
 
 
   // (Opcional) reacciona a cambios (logout, refresh)

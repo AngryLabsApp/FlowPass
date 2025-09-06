@@ -91,7 +91,7 @@ async function loadUsers(page) {
     // arma tus query params como tu backend espera:
     const queryParams = buildQueryParams(page);
     const url = buildUrl(ENV_VARS.url_get_users, queryParams);
-    const res = await load_users(url);
+    const res = await load_users(url, currentAbort);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
@@ -109,8 +109,8 @@ async function loadUsers(page) {
     // Si quieres usar 'total' para paginación o mostrar un contador:
     // console.log("Total:", total);
   } catch (err) {
-    if (err.name === "AbortError") return; // petición cancelada: ignorar
-    console.error(err);
+    if (err?.name === "AbortError") return; // petición cancelada: ignorar
+    console.log(err);
     renderError(tbody);
     renderPagination(0);
   } finally {
@@ -156,7 +156,11 @@ function initSearch() {
 document.addEventListener("DOMContentLoaded", () => {
   initSearch();
   initAddNewUser();
-  loadUsers(); // carga inicial sin filtros
+  if (window.SessionManager) {
+    loadUsers();
+  } else {
+    window.addEventListener("session-ready", () => loadUsers(), { once: true });
+  }
 
   document.getElementById("statusSelect").addEventListener("change", () => {
     loadUsers(); // tu función que vuelve a cargar con filtros
