@@ -1,4 +1,4 @@
-async function load_users() {
+async function load_users(url) {
     return await fetch(url, {
       signal: currentAbort.signal,
       headers: { Accept: "application/json" },
