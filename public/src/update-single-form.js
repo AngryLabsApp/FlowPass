@@ -128,11 +128,8 @@ function update_single_form_submit () {
     showLoader('Actualizando los datos...');
 
     try {
-      const res = await fetch(ENV_VARS.url_update, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+     
+      const res = await update_users(payload);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       formEl.reset();

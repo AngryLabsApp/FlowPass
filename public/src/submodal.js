@@ -148,12 +148,8 @@
         const planVal = scope.querySelector('#sub-Plan')?.value;
         if (planVal) payload.plan = { value: planVal };
 
-        if (typeof showLoader === 'function') showLoader('Actualizando los datos...');
-        const res = await fetch(ENV_VARS.url_update, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
+        showLoader('Actualizando los datos...');
+        const res = await update_users(payload);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         success = true;
       } catch (err) {
@@ -269,12 +265,8 @@
           return;
         }
 
-        if (typeof showLoader === 'function') showLoader('Actualizando los datos...');
-        const res = await fetch(ENV_VARS.url_update, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
+        showLoader('Actualizando los datos...');
+        const res = await update_users(payload);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         success = true;
       } catch (err) {

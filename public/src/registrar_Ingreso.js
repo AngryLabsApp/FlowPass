@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function registrarIngreso(user) {
-    console.log(user);
     const tomadas = Number(user.clases_tomadas) || 0;
     const limite = Number(user.limite_clases);
     const estadoPlan = String(user.estado || '').trim().toLowerCase();
@@ -36,16 +35,8 @@ async function registrarIngreso(user) {
 
     const nuevasTomadas = tomadas + 1;
   try {
-     showLoader('Registrando ingreso...');
-    const res = await fetch(ENV_VARS.url_update, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: user.id,
-        type: "SINGLE",
-        clases_tomadas: { value: nuevasTomadas },
-      }),
-    });
+    showLoader('Registrando ingreso...');
+    const res = await registrar_ingreso(user, nuevasTomadas);
     loadUsers();
     hideLoader();
     closeModal();

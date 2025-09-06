@@ -45,9 +45,6 @@ function renderError(
   )}</td></tr>`;
 }
 
-// =======================
-// Data (Fetch)
-// =======================
 
 let currentAbort = null;
 
@@ -78,7 +75,6 @@ function buildQueryParams(page) {
 
   return queryParams;
 }
-
 async function loadUsers(page) {
     if (page){
         setPage(page);
@@ -95,10 +91,7 @@ async function loadUsers(page) {
     // arma tus query params como tu backend espera:
     const queryParams = buildQueryParams(page);
     const url = buildUrl(ENV_VARS.url_get_users, queryParams);
-    const res = await fetch(url, {
-      signal: currentAbort.signal,
-      headers: { Accept: "application/json" },
-    });
+    const res = await load_users();
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
@@ -134,7 +127,7 @@ function initAddNewUser() {
   const btn = $("#nuevoUsuario");
   if (!btn) return;
   btn.addEventListener("click", () => {
-    window.open(ENV_VARS.url_form, "_blank");
+  window.open(ENV_VARS.url_form, "_self");
   });
 }
 

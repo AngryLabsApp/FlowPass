@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Restablecer contraseña</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 420px; margin: 32px auto; padding: 0 16px; }
+    h1 { font-size: 1.25rem; margin-bottom: 12px; }
+    form { display: grid; gap: 12px; }
+    label { font-size: .9rem; color:#333 }
+    input, button { padding: 10px 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; }
+    button { cursor: pointer; background:#111; color:#fff; }
+    .row { display:flex; gap:8px; align-items:center }
+    .msg { min-height: 1.5em; font-size:.9rem }
+    .ok { color:#0a7c3a } .error { color:#b00020 }
+    .muted { color:#666; font-size:.9rem }
+    .hidden { display:none }
+  </style>
+</head>
+<body>
+  <h1>Restablecer contraseña</h1>
+
+  <p id="step-msg" class="muted">Validando enlace…</p>
+
+  <form id="reset-form" class="hidden" novalidate>
+    <div>
+      <label for="password">Nueva contraseña</label>
+      <div class="row">
+        <input id="password" type="password" placeholder="Nueva contraseña" minlength="8" required />
+        <button id="toggle1" type="button" title="Mostrar/ocultar">👁️</button>
+      </div>
+      <small class="muted">Mínimo 8 caracteres.</small>
+    </div>
+
+    <div>
+      <label for="confirm">Confirmar contraseña</label>
+      <div class="row">
+        <input id="confirm" type="password" placeholder="Confirma la contraseña" minlength="8" required />
+        <button id="toggle2" type="button" title="Mostrar/ocultar">👁️</button>
+      </div>
+    </div>
+
+    <button id="submit" type="submit">Guardar contraseña</button>
+    <div id="msg" class="msg"></div>
+  </form>
+
+  <p id="next-steps" class="hidden">
+    Contraseña actualizada ✅. <a id="login-link" href="/login.html">Ir al login</a>
+  </p>
+
+  <script src="./public/src/env.js"></script>
+  <script type="module" src="./public/src/login/reset_pass.js"></script>
+</body>
+</html>
