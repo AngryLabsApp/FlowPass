@@ -64,7 +64,8 @@
       if (!email) return;
 
       const isLocal = location.hostname.includes("localhost");
-      const redirectTo = (isLocal ? location.origin : location.origin) + "/reset.html"; // crea esa página si usas reset
+      
+      const redirectTo = (isLocal ? location.origin : `https://flow-pass-demo.angrylabs.app`) + "/reset.html"; // crea esa página si usas reset
 
       msg.textContent = "Enviando correo…"; msg.className = "msg";
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
