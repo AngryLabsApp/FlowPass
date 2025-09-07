@@ -19,9 +19,18 @@
     const toggle  = document.getElementById("toggle");
     const resetLink = document.getElementById("resetLink");
 
-    // Mostrar/ocultar contraseña
+    // Mostrar/ocultar contraseña + cambiar icono accesible
     toggle.addEventListener("click", () => {
-      passEl.type = passEl.type === "password" ? "text" : "password";
+      const showing = passEl.type === "password";
+      passEl.type = showing ? "text" : "password";
+      // Actualiza icono y atributos accesibles
+      const use = toggle.querySelector('use');
+      if (use) {
+        use.setAttribute('href', showing ? '/public/icons/sprites.svg#eye' : '/public/icons/sprites.svg#eye-close');
+      }
+      toggle.setAttribute('aria-pressed', String(showing));
+      toggle.setAttribute('title', showing ? 'Ocultar contraseña' : 'Mostrar contraseña');
+      toggle.setAttribute('aria-label', showing ? 'Ocultar contraseña' : 'Mostrar contraseña');
     });
 
     // Login email + password

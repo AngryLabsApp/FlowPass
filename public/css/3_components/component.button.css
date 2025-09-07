@@ -31,6 +31,11 @@
     font-size: 1.3rem;
   }
 
+  .btn-login {
+    width: 100%;
+    font-size: 1rem;
+  }
+
   .btn:not(:disabled):hover {
     background: color-mix(in oklab, var(--c8) 95%, black);
   }
@@ -43,6 +48,8 @@
   /* Hover específico para secundario: solo baja un poco la opacidad */
   .btn--secondary:not(:disabled):hover {
     opacity: 0.88;
-    background: var(--danger-transparent); /* mantiene el fondo, evita el mix del hover genérico */
+    background: var(
+      --danger-transparent
+    ); /* mantiene el fondo, evita el mix del hover genérico */
   }
 }
