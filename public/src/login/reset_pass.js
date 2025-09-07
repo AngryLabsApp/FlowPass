@@ -172,7 +172,7 @@
         // Configura el botón de ir al login en rosa
         const loginHref = (typeof LOGIN_PATH !== 'undefined' && LOGIN_PATH) ? LOGIN_PATH : '/login.html';
         loginLink.href = loginHref;
-        loginLink.textContent = 'Ir al login';
+        loginLink.textContent = 'Ir a la plataforma';
         loginLink.className = 'btn btn--primary btn--primary--large btn-login';
         // Muestra solo el botón en la sección de próximos pasos
         nextSteps.textContent = '';
