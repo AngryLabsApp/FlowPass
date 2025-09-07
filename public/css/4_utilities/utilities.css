@@ -17,4 +17,10 @@
   @media (max-width: 768px) {
     .u-hide-mobile { display: none !important; }
   }
+
+  /* Text color helpers */
+  .text-rose { color: var(--c8); }
+
+  /* Extra small text size */
+  .text-xs { font-size: 12px; }
 }
