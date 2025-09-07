@@ -1,5 +1,14 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-const supabase = createClient(BD_PUBLIC_URL, BD_API_PUBLIC);
+
+let supabase = null;
+
+
+try {
+  const supabase = createClient(BD_PUBLIC_URL, BD_API_PUBLIC);
+} catch (error) {
+   window.location.replace("/login.html");
+}
+
 
 
 export async function ensureSessionOrRedirect() {
