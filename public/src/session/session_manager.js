@@ -4,7 +4,7 @@ let supabase = null;
 
 
 try {
-  const supabase = createClient(BD_PUBLIC_URL, BD_API_PUBLIC);
+  supabase = createClient(BD_PUBLIC_URL, BD_API_PUBLIC);
 } catch (error) {
    window.location.replace("/login.html");
 }
