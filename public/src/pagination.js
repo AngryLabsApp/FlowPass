@@ -30,6 +30,7 @@ function setPage(page){
     usersState.page = page;
 
 }
+
 function renderPagination(_total) {
     usersState.total = _total;
 

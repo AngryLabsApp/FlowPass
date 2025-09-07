@@ -75,7 +75,8 @@ function buildQueryParams(page) {
 
   return queryParams;
 }
-async function loadUsers(page) {
+async function loadUsers(page = 1) {
+  
     if (page){
         setPage(page);
     }
