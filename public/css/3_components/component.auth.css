@@ -40,27 +40,35 @@
   }
 
   .auth__password {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 8px;
+    position: relative;
+    display: block;
+  }
+
+  /* Deja espacio para el icono dentro del input */
+  .auth__password .form__control {
+    padding-right: 44px;
   }
 
   .auth__toggle {
-    padding: 10px 12px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: #fff;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: transparent;
     color: var(--muted);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border-radius: 6px;
   }
 
-  .auth__toggle:hover {
-    background: rgba(0, 0, 0, 0.04);
-  }
+  .auth__toggle:hover { background: rgba(0, 0, 0, 0.04); }
+  .auth__toggle:focus-visible { outline: 2px solid var(--c8); outline-offset: 2px; }
 
   .auth__meta {
     display: flex;
