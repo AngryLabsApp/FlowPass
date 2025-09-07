@@ -9,7 +9,8 @@ const ENV_VARS = {
   url_get_users:
     "https://n8n.angrylabs.app/webhook/9ecc1791-c157-4084-8de6-6924235d95cd",
   url_update:
-    "https://n8n.angrylabs.app/webhook/9f4f06a9-a0a8-458d-9b88-ea80661ac154",
+    "https://n8n.angrylabs.app/webhook/afd7e9b5-36c7-40de-956c-c23631d804b1",
+    
   url_ingreso:"https://n8n.angrylabs.app/webhook/ed9bab5b-b3f6-4d75-ad65-ac5a33060c88"
 };
 
