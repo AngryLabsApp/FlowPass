@@ -31,8 +31,15 @@
       </a>
       <nav class="sidebar__nav" aria-label="Menú principal">
         <a href="index.html" class="sidebar__link sidebar__link--active">
-          Usuarios</a>
-        <a href="ingreso.html" class="sidebar__link">Ingreso</a>
+          Usuarios
+        </a>
+        <a href="ingreso.html" class="sidebar__link"> Ingreso </a>
+        <a href="logout.html" class="sidebar__link sidebar__link--logout">
+          Salir
+          <svg class="icon button__icon">
+            <use href="/public/icons/sprites.svg#logout"></use>
+          </svg>
+        </a>
       </nav>
       <nav class="sidebar__nav" aria-label="Menú principal"></nav>
     </aside>
@@ -217,7 +224,6 @@
           <section class="section">
             <h3 class="section__title">Datos personales</h3>
             <div class="info-grid">
-
               <div class="row">
                 <div class="label">
                   <svg class="icon">
@@ -235,7 +241,9 @@
                   </svg>
                   DNI/Pasaporte/CE
                 </div>
-                <div class="value" data-field="UserIdentificationNumber">—</div>
+                <div class="value" data-field="UserIdentificationNumber">
+                  —
+                </div>
               </div>
 
               <div class="row">
@@ -415,7 +423,7 @@
               <label class="form__label" for="Plan">Plan</label>
               <select class="form__control" id="Plan" name="Plan">
                 <option value="">Selecciona…</option>
-                          <!-- PLAN Se llena por codigo -->
+                <!-- PLAN Se llena por codigo -->
               </select>
             </div>
 
@@ -433,8 +441,7 @@
               <label class="form__label" for="Medio_de_pago">Método de pago</label>
               <select class="form__control" id="Medio_de_pago" name="Medio_de_pago">
                 <option value="">Selecciona…</option>
-                       <!-- METODO DE PAGO Se llena por codigo -->
-              
+                <!-- METODO DE PAGO Se llena por codigo -->
               </select>
             </div>
 
@@ -442,7 +449,7 @@
               <label class="form__label" for="Estado">Estado de pago</label>
               <select class="form__control" id="PaymentStatus" name="PaymentStatus" required>
                 <option value="">Selecciona…</option>
-               <!-- ESTADO PAGO Se llena por codigo -->
+                <!-- ESTADO PAGO Se llena por codigo -->
               </select>
             </div>
 
@@ -463,8 +470,7 @@
             Actualizar
           </h3>
           <form class="form" id="edit-single-form">
-           
-                <!-- Se llena por codigo -->
+            <!-- Se llena por codigo -->
             <div class="form__actions">
               <button class="btn btn--secondary" type="button" id="btnCancelForm-single">
                 Cancelar
@@ -488,29 +494,30 @@
     </div>
   </div>
 
-  
   <!-- Submodal (mobile): Formulario sobre la ficha -->
-  <div class="modal modal--child" id="userSubModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="userSubModalTitle">
+  <div class="modal modal--child" id="userSubModal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="userSubModalTitle">
     <div class="modal__overlay" data-close-sub></div>
     <div class="modal__dialog card submodal__dialog" role="document">
       <header class="modal__header submodal__header">
         <h3 class="modal__title" id="userSubModalTitle">Editar</h3>
-        <button class="modal__close" type="button" aria-label="Cerrar" data-close-sub>✕</button>
+        <button class="modal__close" type="button" aria-label="Cerrar" data-close-sub>
+          ✕
+        </button>
       </header>
       <div class="modal__body submodal__body">
         <div id="subModalContent"></div>
       </div>
     </div>
   </div>
-  
 
   <script src="/public/src/session/session_manager.js" type="module"></script>
 
   <script type="module">
-    import { ensureSessionOrRedirect } from '/public/src/session/session_manager.js';
+    import { ensureSessionOrRedirect } from "/public/src/session/session_manager.js";
     window.SessionManager = { ensureSessionOrRedirect };
     window.dispatchEvent(new Event("session-ready"));
-</script>
+  </script>
   <script src="/public/src/api/api.js" defer></script>
   <script src="/public/src/env.js"></script>
   <script src="/public/src/load_dynamic_fields.js"></script>
