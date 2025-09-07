@@ -94,4 +94,7 @@
     cursor: pointer;
   }
   .auth__forgot:hover { opacity: 0.9; }
+
+  /* Texto de éxito en reset password */
+  .reset-success-text { margin-bottom: 8px; }
 }
