@@ -46,6 +46,8 @@ async function registrarIngreso(user) {
     const data = await res.json();
     // Aquí podrías mostrar un mensaje de éxito en la UI
   } catch (err) {
+    showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+    hideLoader();
     console.error("Error al registrar ingreso:", err);
     // Aquí podrías mostrar un mensaje de error en la UI
   }

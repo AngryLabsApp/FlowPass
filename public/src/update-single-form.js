@@ -135,7 +135,9 @@ function update_single_form_submit () {
       formEl.reset();
       success = true;
     } catch (err) {
+      hideLoader();
       console.error(err);
+      showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
     } finally {
         submitBtn.disabled = false;
         loadUsers();

@@ -35,6 +35,8 @@ function update_form_submit () {
       success = true;
     } catch (err) {
       console.error(err);
+      showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+      hideLoader();
     } finally {
         submitBtn.disabled = false;
         loadUsers();
