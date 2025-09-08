@@ -36,7 +36,7 @@ function openModal(user) {
   setField(m, "PaymentStatus", user.estado_pago);
   setField(m, "NumberOfClases", `${user.clases_tomadas}/${user.limite_clases}`);
   setField(m, "FreeDays", user.dias_de_gracia);
-  setField(m, "DateOfSubcription", formatDateDMY(user.fecha_alta));
+  setField(m, "DateOfSubcription", formatDateDMY(user.fecha_inicio_plan));
   setField(m, "NextPaymentDay", formatDateDMY(user.proxima_fecha_pago));
   setField(m, "UserBirthday", formatDateDMY(user.cumpleanos));
   setField(m, "UserNotificar", user.notificar || "No");
