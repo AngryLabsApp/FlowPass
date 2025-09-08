@@ -1,5 +1,3 @@
-// FlowPass — shared sidebar renderer
-
 function getBrandHTML() {
   return `
     <a href="#" class="sidebar__brand">
