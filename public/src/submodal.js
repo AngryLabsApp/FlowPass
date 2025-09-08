@@ -200,7 +200,7 @@
   }
 
   function openPlanSubmodal() {
-    openSubModal("Actualizar plan", buildPlanFormHTML());
+    openSubModal("Renovar plan", buildPlanFormHTML());
     const scope = document.getElementById("subModalContent");
     attachPlanFormHandlers(scope);
   }
