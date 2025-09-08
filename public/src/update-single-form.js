@@ -58,6 +58,7 @@ function buildEditFormByField(field){
               case 'viaje': setVal(meta.id, user.de_viaje); break;
               case 'direccion': setVal(meta.id, user.direccion); break;
               case 'estado_pago': setVal(meta.id, user.estado_pago); break;
+              case 'fecha_inicio_plan': setVal(meta.id, user.fecha_inicio_plan); break;
             }
           }
         } catch (_) {}

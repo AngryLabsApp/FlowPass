@@ -1,5 +1,6 @@
 let Is_Modal_Open = false;
 let Is_Mobile = false;
+const SUCCESS_MODAL_TIMEOUT = 3500; // ms
 /** Devuelve mensaje claro cuando la suscripción no está activa */
 function buildNonActiveMsg(user) {
   const estado = String(user?.estado || "").trim();
@@ -271,16 +272,18 @@ function closeModal() {
   const m = document.getElementById("userModal");
   if (!m) return;
   Is_Modal_Open = false;
+  try { clearTimeout(m.__successTimer); } catch (_) {}
   m.setAttribute("aria-hidden", "true");
 }
 
 function initModal() {
   const btn = document.getElementById("ok_modal");
-  if (!btn) return;
-  btn.addEventListener("click", () => {
-    closeModal();
-  });
-  //BOTON X
+  if (btn) {
+    btn.addEventListener("click", () => {
+      closeModal();
+    });
+  }
+  // Botón X / Overlay
   document.querySelectorAll("[data-close]").forEach((element) => {
     element.addEventListener("click", closeModal);
   });
@@ -291,11 +294,22 @@ function openModal(user) {
   if (!m) return;
   Is_Modal_Open = true;
   m.setAttribute("aria-hidden", "false");
-  setField(m, "NumberOfClases", `${user.clases_tomadas}/${user.limite_clases}`);
-  setField(m, "DateOfSubcription", formatDateDMY(user.fecha_inicio_plan));
-  setField(m, "NextPaymentDay", formatDateDMY(user.proxima_fecha_pago));
+  // Título accesible (oculto visualmente)
+  const titleEl = document.getElementById("userModalTitle");
+  if (titleEl) titleEl.textContent = "Ingreso correcto";
+  // Contenido de éxito
+  const nameEl = document.getElementById("successUserName");
+  const classesEl = document.getElementById("successClassProgress");
+  if (nameEl) nameEl.textContent = `${user.nombre || ''} ${user.apellidos || ''}`.trim();
+  if (classesEl) classesEl.textContent = `${user.clases_tomadas ?? '-'}${user.limite_clases ? '/' + user.limite_clases : ''}`;
 
-  $("#userModalTitle").textContent = user.nombre + " " + user.apellidos;
+  // Autocerrar después de X ms (configurable desde env.js)
+  try {
+    clearTimeout(m.__successTimer);
+    m.__successTimer = setTimeout(() => {
+      closeModal();
+    }, SUCCESS_MODAL_TIMEOUT);
+  } catch (_) {}
 }
 
 document.addEventListener("DOMContentLoaded", () => {
