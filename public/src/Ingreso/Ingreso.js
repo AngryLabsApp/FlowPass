@@ -24,36 +24,37 @@ function applyCheckinUI({ ok, user, message }) {
 
   // Limpia clases previas y asegura estructura (icono + texto)
   statusEl.classList.remove("checkin__status--ok", "checkin__status--err");
-  let iconEl = statusEl.querySelector('.checkin__status-icon');
-  let useEl = iconEl ? iconEl.querySelector('use') : null;
-  let textEl = statusEl.querySelector('.checkin__status-text');
+  let iconEl = statusEl.querySelector(".checkin__status-icon");
+  let useEl = iconEl ? iconEl.querySelector("use") : null;
+  let textEl = statusEl.querySelector(".checkin__status-text");
   if (!iconEl) {
-    iconEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    iconEl.setAttribute('class', 'icon checkin__status-icon');
-    useEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    iconEl = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    iconEl.setAttribute("class", "icon checkin__status-icon");
+    useEl = document.createElementNS("http://www.w3.org/2000/svg", "use");
     iconEl.appendChild(useEl);
     statusEl.prepend(iconEl);
   }
   if (!useEl) {
-    useEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    useEl = document.createElementNS("http://www.w3.org/2000/svg", "use");
     iconEl.appendChild(useEl);
   }
   if (!textEl) {
-    textEl = document.createElement('span');
-    textEl.className = 'checkin__status-text';
+    textEl = document.createElement("span");
+    textEl.className = "checkin__status-text";
     statusEl.appendChild(textEl);
   }
 
   if (ok) {
     // Para éxito no mostramos el toast; asegúralo oculto
     textEl.textContent = "";
-    statusEl.classList.add('hidden');
+    statusEl.classList.add("hidden");
   } else {
     // ❌ Error
-    textEl.textContent = message || "No se pudo registrar el ingreso. Intenta de nuevo.";
-    useEl.setAttribute('href', '/public/icons/sprites.svg#error');
+    textEl.textContent =
+      message || "No se pudo registrar el ingreso. Intenta de nuevo.";
+    useEl.setAttribute("href", "/public/icons/sprites.svg#error");
     statusEl.classList.add("checkin__status--err");
-    statusEl.classList.remove('hidden');
+    statusEl.classList.remove("hidden");
     // Asegura estado visible (por si venía saliendo)
     statusEl.classList.remove("checkin__status--slide-out");
 
@@ -81,7 +82,7 @@ function applyCheckinUI({ ok, user, message }) {
         textEl.textContent = "";
         statusEl.classList.remove("checkin__status--err");
         statusEl.classList.remove("checkin__status--slide-out");
-        statusEl.classList.add('hidden');
+        statusEl.classList.add("hidden");
         statusEl.removeEventListener("transitionend", onEnd);
       };
       const onEnd = (ev) => {
@@ -308,8 +309,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function initCheckinAvatar() {
   try {
     const map = IMAGES_PATH_CHECKIN || {};
-    const key = typeof CHECKIN_ICON_KEY !== "undefined" ? CHECKIN_ICON_KEY : "gym";
-    const path = map[key] || map[Object.keys(map)[0]] || "/public/icons/sprites.svg#dumbbell-heart";
+    const key = CHECKIN_ICON_KEY || "gym";
+    const path = map[key] || "/public/icons/sprites.svg#dumbbell-heart";
     const useEl = document.querySelector("#checkinAvatar use");
     if (useEl && path) {
       useEl.setAttribute("href", path);
