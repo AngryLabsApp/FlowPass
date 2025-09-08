@@ -14,6 +14,7 @@
 
   function fillDynamicGeneratedSelect(){
         fillSelect("edit-status", ESTADO_PLAN);
+        fillSelect("edit-estado_pago", ESTADO_PAGO);
   }
 
 function renderHead(columns, theadId) {
