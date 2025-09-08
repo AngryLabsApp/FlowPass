@@ -302,4 +302,19 @@ document.addEventListener("DOMContentLoaded", () => {
   loadForm();
   initModal();
   initKeypad();
+  initCheckinAvatar();
 });
+
+function initCheckinAvatar() {
+  try {
+    const map = IMAGES_PATH_CHECKIN || {};
+    const key = typeof CHECKIN_ICON_KEY !== "undefined" ? CHECKIN_ICON_KEY : "gym";
+    const path = map[key] || map[Object.keys(map)[0]] || "/public/icons/sprites.svg#dumbbell-heart";
+    const useEl = document.querySelector("#checkinAvatar use");
+    if (useEl && path) {
+      useEl.setAttribute("href", path);
+    }
+  } catch (e) {
+    console.warn("No se pudo configurar el icono de checkin:", e);
+  }
+}

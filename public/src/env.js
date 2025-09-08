@@ -3,6 +3,13 @@ const BD_API_PUBLIC = "sb_publishable_xoykhydSmDArWUQydl_oLw_Ho0g1C64";
 const LOGIN_PATH = "/login.html";
 
 
+const CHECKIN_ICON_KEY = "salsa";
+
+const IMAGES_PATH_CHECKIN = {
+  gym: "/public/icons/sprites.svg#dumbbell-heart",
+  salsa: "/public/icons/sprites.svg#dance",
+};
+
 const ENV_VARS = {
   url_form:
     "https://n8n.angrylabs.app/form/54f40a75-b183-4483-9c51-82d281c6b504",
