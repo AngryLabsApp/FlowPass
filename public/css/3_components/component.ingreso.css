@@ -93,7 +93,13 @@
     color: var(--text-danger);
     border-color: var(--border-danger);
   }
-  .checkin__status .icon { width: 18px; height: 18px; }
+  .checkin__status .icon {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;   /* Evita que encoja en flex */
+    min-height: 18px;  /* Evita que encoja en flex */
+    flex: 0 0 18px;    /* Fija tamaño dentro del contenedor flex */
+  }
 
   .card.checkin {
     display: block;
