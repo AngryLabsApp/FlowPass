@@ -171,52 +171,23 @@
       aria-labelledby="userModalTitle"
     >
       <div class="modal__overlay" data-close></div>
-      <div class="modal__dialog card" role="document">
-        <!-- Header -->
-        <header class="modal__header">
-          <h2 class="modal__title" id="userModalTitle">INGRESO CORRECTO</h2>
-          <button
-            class="modal__close"
-            type="button"
-            aria-label="Cerrar"
-            data-close
-          >
-            ✕
-          </button>
+      <div class="modal__dialog card success-modal__dialog" role="document">
+        <header class="modal__header success-modal__header">
+          <h2 class="modal__title u-sr-only" id="userModalTitle">Ingreso correcto</h2>
+          <button class="modal__close" type="button" aria-label="Cerrar" data-close>✕</button>
         </header>
-
-        <div class="modal__body">
-          <!-- Panel principal -->
-          <div class="modal__main">
-            <!-- Sección: Datos personales -->
-            <section class="section">
-              <h3 class="section__title">Asistencia y fechas</h3>
-              <div class="info-grid">
-                <div class="row">
-                  <div class="label">
-                    <svg class="icon">
-                      <use href="/public/icons/sprites.svg#class-icon"></use>
-                    </svg>
-                    Clases realizadas
-                  </div>
-                  <div class="value" data-field="NumberOfClases">—</div>
-                </div>
-                <div class="row">
-                  <div class="label">Inicio del plan</div>
-                  <div class="value" data-field="DateOfSubcription">—</div>
-                </div>
-                <div class="row">
-                  <div class="label">Próximo pago</div>
-                  <div class="value" data-field="NextPaymentDay">—</div>
-                </div>
-              </div>
-            </section>
-          </div>
-
-          <!-- Acciones -->
-          <div class="modal__actions">
-            <button class="btn btn--primary" id="ok_modal">OK</button>
-          </div>
+        <div class="modal__body success-modal">
+          <img
+            src="/public/icons/animations/check.gif"
+            alt="Check animado"
+            width="150"
+            height="150"
+            class="success-modal__img"
+          />
+          <h3 class="success-modal__title">¡Bienvenido <span id="successUserName"></span>!</h3>
+          <p class="success-modal__subtitle">Disfruta de tu clase</p>
+          <p class="success-modal__classes">clase: <span id="successClassProgress"></span></p>
+          <p class="success-modal__thanks">¡Gracias!</p>
         </div>
       </div>
     </div>
