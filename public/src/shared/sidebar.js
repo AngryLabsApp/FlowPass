@@ -55,9 +55,107 @@ function detectActiveKey() {
   return file;
 }
 
-function renderSidebarInto(container) {
+function renderSidebarInto(aside) {
   const activeKey = detectActiveKey();
-  container.innerHTML = getBrandHTML() + getNavHTML(activeKey) + getFooterHTML();
+  const panelId = 'sidebar-panel';
+  aside.innerHTML = `
+    <div class="sidebar__bar">
+      ${getBrandHTML()}
+      <button class="sidebar__toggle" aria-controls="${panelId}" aria-expanded="false" aria-label="Abrir menú">
+        <svg class="icon button__icon" aria-hidden="true">
+          <use href="/public/icons/sprites.svg#menu-left"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="sidebar__container" id="${panelId}">
+      <button class="sidebar__close" type="button" aria-label="Cerrar menú">✕</button>
+      ${getNavHTML(activeKey)}
+      ${getFooterHTML()}
+    </div>
+    <div class="sidebar__overlay" data-overlay hidden></div>
+  `;
+
+  // Interacciones (solo necesarias en tablet/móvil)
+  const toggle = aside.querySelector('.sidebar__toggle');
+  const overlay = aside.querySelector('[data-overlay]');
+  const container = aside.querySelector('.sidebar__container');
+  const closeBtn = aside.querySelector('.sidebar__close');
+
+  // Cerrar al navegar (mejor UX en móvil)
+  container.addEventListener('click', (e) => {
+    const el = e.target;
+    if (el.closest && el.closest('a')) {
+      closeDrawer();
+    }
+  });
+
+  function getFocusable() {
+    return Array.from(
+      container.querySelectorAll(
+        'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((el) => !el.hasAttribute('disabled'));
+  }
+
+  let lastFocused = null;
+
+  function openDrawer() {
+    lastFocused = document.activeElement;
+    aside.classList.add('sidebar--open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Cerrar menú');
+    overlay && overlay.removeAttribute('hidden');
+    document.body.classList.add('body--no-scroll');
+    const focusables = getFocusable();
+    if (focusables.length) focusables[0].focus();
+    document.addEventListener('keydown', onKeyDown);
+  }
+
+  function closeDrawer() {
+    aside.classList.remove('sidebar--open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Abrir menú');
+    overlay && overlay.setAttribute('hidden', '');
+    document.body.classList.remove('body--no-scroll');
+    document.removeEventListener('keydown', onKeyDown);
+    if (lastFocused && lastFocused.focus) {
+      lastFocused.focus();
+    } else {
+      toggle.focus();
+    }
+  }
+
+  function onKeyDown(e) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeDrawer();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const focusables = getFocusable();
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  toggle.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    if (expanded) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  });
+  overlay && overlay.addEventListener('click', closeDrawer);
+  closeBtn && closeBtn.addEventListener('click', closeDrawer);
 }
 
 function mountSidebar() {
@@ -71,6 +169,3 @@ if (document.readyState === 'loading') {
 } else {
   mountSidebar();
 }
-
-export {}; // ES module marker
-

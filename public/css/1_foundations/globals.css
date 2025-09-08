@@ -11,4 +11,10 @@
     background: var(--bg);
     color: var(--text);
   }
+
+  /* No scroll helper (e.g., when sidebar drawer is open) */
+  .body--no-scroll {
+    overflow: hidden;
+    height: 100dvh;
+  }
 }
