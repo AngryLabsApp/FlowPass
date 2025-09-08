@@ -57,6 +57,7 @@ function buildEditFormByField(field){
               case 'clases': setVal(meta.id, user.clases_tomadas); if (meta.id2) setVal(meta.id2, user.limite_clases); break;
               case 'viaje': setVal(meta.id, user.de_viaje); break;
               case 'direccion': setVal(meta.id, user.direccion); break;
+              case 'estado_pago': setVal(meta.id, user.estado_pago); break;
             }
           }
         } catch (_) {}

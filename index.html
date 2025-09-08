@@ -370,6 +370,15 @@
                   <svg class="icon">
                     <use href="/public/icons/sprites.svg#user-status"></use>
                   </svg>Estado del Pago
+                  <button
+                      class="edit-btn"
+                      aria-label="Editar Estado del pago"
+                      id="btn-edit-estado_pago"
+                    >
+                      <svg class="icon icon-rose">
+                        <use href="/public/icons/sprites.svg#edit"></use>
+                      </svg>
+                    </button>
                 </div>
                 <div class="value" data-field="PaymentStatus">—</div>
               </div>
@@ -396,7 +405,7 @@
           <form class="form" id="updateUserForm">
             <div class="form__row">
               <label class="form__label" for="Plan">Plan</label>
-              <select class="form__control" id="Plan" name="Plan">
+              <select class="form__control" id="Plan" name="Plan" required>
                 <option value="">Selecciona…</option>
                 <!-- PLAN Se llena por codigo -->
               </select>
