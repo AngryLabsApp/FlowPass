@@ -2,11 +2,11 @@ const BD_PUBLIC_URL = "https://nujwzmwnptrsqojdjyjl.supabase.co";
 const BD_API_PUBLIC = "sb_publishable_xoykhydSmDArWUQydl_oLw_Ho0g1C64";
 const LOGIN_PATH = "/login.html";
 
-const CHECKIN_ICON_KEY = "gym";
+const CHECKIN_ICON_KEY = "salsa";
 
 const IMAGES_PATH_CHECKIN = {
   gym: "/public/icons/sprites.svg#dumbbell-heart",
-  salsa: "/public/icons/sprites.svg#dance",
+  salsa: "/public/icons/sprites.svg#salsa",
 };
 
 const ENV_VARS = {
