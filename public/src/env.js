@@ -18,7 +18,6 @@ const TABLE_COLUMNS = [
   { key: 'nombre',              label: 'Nombre(s)',        headClass: 'table__head-cell table__col--first-name', cellClass: 'table__cell table__col--first-name',  visible: true },
   { key: 'apellidos',           label: 'Apellido(s)',      headClass: 'table__head-cell table__col--last-name',  cellClass: 'table__cell table__col--last-name',   visible: true },
   { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--plan',       cellClass: 'table__cell table__col--plan',        visible: true },
-  // Columna "compuesta" clases tomadas / límite:
   { key: 'clases',              label: 'Clases realizadas',headClass: 'table__head-cell table__col--classes',    cellClass: 'table__cell table__col--classes',     visible: true,
     render: (u) => `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}`
   },
@@ -66,7 +65,7 @@ const PLANES = [
     { value: "Pendiente", label: "Pendiente"},
   ]; 
 //CAMPOR QUE SE PUEDEN EDITAR CON EL BOTON DE EDIT (LAPIZ)
-const EDITABLE_FIELD = ["phone","email","notify","patologias","status","clases","viaje","direccion"];
+const EDITABLE_FIELD = ["phone","email","notify","patologias","status","clases","viaje","direccion","estado_pago"];
 const FIELD_VALUES ={
   "clases":{
     title:"Clases",
@@ -114,11 +113,17 @@ const FIELD_VALUES ={
     id:"edit-viaje",
     sheet_name:"de_viaje"
   },
-    "direccion":{
+  "direccion":{
     title: "Dirección",
     html:update_direccion_form(),
     id:"edit-direccion",
     sheet_name:"direccion"
+  },
+  "estado_pago":{
+    title: "Estado pago",
+    html:update_estado_pago(),
+    id:"edit-estado_pago",
+    sheet_name:"estado_pago"
   },
 }
 
@@ -253,6 +258,16 @@ function update_status_form(){
             <div class="form__row">
               <label class="form__label" for="dias_extra">Agregar días extra</label>
               <input class="form__control" id="dias_extra" name="clases-limite" type="number" step="1" min="0" />
+            </div>
+        `;
+}
+function update_estado_pago(){
+  return `
+         <div class="form__row">
+              <label class="form__label" for="Estado"> </label>
+              <select class="form__control" id="edit-estado_pago" name="edit-estado_pago" required>
+                <option value="">Selecciona…</option>
+              </select>
             </div>
         `;
 }

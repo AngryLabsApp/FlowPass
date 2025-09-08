@@ -45,6 +45,7 @@ function buildEditFormByField(field){
         // Prefill valores actuales del usuario para el aside (desktop/tablet)
         try {
           const user = getUserSelected();
+          console.log(FIELD_SELECTED);
           const meta = FIELD_VALUES[FIELD_SELECTED];
           if (user && meta) {
             const setVal = (id, val) => { const el = document.getElementById(id); if (el && val != null) el.value = String(val); };
@@ -57,6 +58,7 @@ function buildEditFormByField(field){
               case 'clases': setVal(meta.id, user.clases_tomadas); if (meta.id2) setVal(meta.id2, user.limite_clases); break;
               case 'viaje': setVal(meta.id, user.de_viaje); break;
               case 'direccion': setVal(meta.id, user.direccion); break;
+              case 'estado_pago': setVal(meta.id, user.estado_pago); break;
             }
           }
         } catch (_) {}
