@@ -6,7 +6,7 @@ const CHECKIN_ICON_KEY = "gym";
 
 const IMAGES_PATH_CHECKIN = {
   gym: "/public/icons/sprites.svg#dumbbell-heart",
-  salsa: "/public/icons/sprites.svg#dance",
+  salsa: "/public/icons/sprites.svg#salsa",
 };
 
 const ENV_VARS = {
