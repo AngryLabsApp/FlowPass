@@ -30,7 +30,8 @@
     top: 0;
     height: 100dvh; /* ocupa todo el alto de la ventana en desktop */
     overflow-y: auto; /* scroll si el contenido excede */
-    align-items: end;
+    display: flex;
+    flex-direction: column;
   }
 
   .sidebar__brand {
@@ -51,12 +52,25 @@
     display: grid;
     gap: var(--space-2);
   }
+  .sidebar__footer {
+    margin-top: auto; /* envía este bloque al fondo en desktop */
+    padding-inline: max(var(--space-2), env(safe-area-inset-left));
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border); /* separador visual del menú */
+  }
   .sidebar__link {
     padding: 10px 12px;
     border-radius: 8px;
     font-weight: 600;
+    font-size: var(--font-size-body); /* tamaño consistente en todos los items */
     text-decoration: none;
     color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+    width: 100%; /* Botones del menú ocupan todo el ancho, misma huella */
+    min-height: 40px; /* Altura mínima consistente para todos */
   }
 
   .sidebar__link--logout {
@@ -82,13 +96,15 @@
     .sidebar {
       position: sticky;
       top: 0;
-      height: 4.5rem;; /* ya no 100vh */
+      height: 4.5rem; /* ya no 100vh */
       border-right: none;
       border-bottom: 1px solid var(--border);
       padding: var(--space-4) max(var(--space-4), env(safe-area-inset-left))
         var(--space-4) max(var(--space-4), env(safe-area-inset-left));
       z-index: 6; /* por encima del contenido */
       display: flex;
+      flex-direction: row; /* brand + nav + footer en una fila */
+      align-items: center;
     }
     .sidebar__nav {
       margin-top: var(--space-3);
@@ -104,6 +120,13 @@
       white-space: nowrap;
       scroll-snap-align: start;
       padding: 10px 14px;
+      width: auto; /* En tabs horizontales, ancho auto */
+    }
+    .sidebar__footer {
+      margin-top: 0;
+      margin-left: auto; /* empuja 'Cerrar sesión' al extremo derecho */
+      border-top: none; /* sin línea en mobile por ahora */
+      padding-top: 0;
     }
   }
 
