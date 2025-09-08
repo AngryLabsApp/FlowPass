@@ -45,7 +45,6 @@ function buildEditFormByField(field){
         // Prefill valores actuales del usuario para el aside (desktop/tablet)
         try {
           const user = getUserSelected();
-          console.log(FIELD_SELECTED);
           const meta = FIELD_VALUES[FIELD_SELECTED];
           if (user && meta) {
             const setVal = (id, val) => { const el = document.getElementById(id); if (el && val != null) el.value = String(val); };
