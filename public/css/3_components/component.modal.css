@@ -301,6 +301,10 @@
 
     .modal__title {
       font-size: 16px;
+      /* En móvil, apilar título y chip uno debajo del otro */
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
     }
 
     .section {

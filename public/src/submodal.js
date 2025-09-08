@@ -170,6 +170,8 @@
         success = true;
       } catch (err) {
         console.error(err);
+        showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+        hideLoader();
       } finally {
         if (typeof hideLoader === "function") hideLoader();
         if (typeof loadUsers === "function") loadUsers();
@@ -314,6 +316,8 @@
         success = true;
       } catch (err) {
         console.error(err);
+        showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+        hideLoader();
       } finally {
         if (typeof hideLoader === "function") hideLoader();
         if (typeof loadUsers === "function") loadUsers();

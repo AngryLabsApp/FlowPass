@@ -23,8 +23,6 @@ async function registrar_ingreso(user, nuevasTomadas) {
   
 }
 
-
-
 async function update_users(payload) {
     const local_session = await window.SessionManager.ensureSessionOrRedirect();
     return await fetch(ENV_VARS.url_update, {
