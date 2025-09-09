@@ -5,8 +5,8 @@ const LOGIN_PATH = "/login.html";
 const CHECKIN_ICON_KEY = "gym";
 
 const IMAGES_PATH_CHECKIN = {
-  gym: "/public/icons/sprites.svg#dumbbell-heart",
-  salsa: "/public/icons/sprites.svg#salsa",
+  gym: "/public/icons/animations/push-ups.webp",
+  salsa: "/public/icons/animations/salsa.webp",
 };
 
 const ENV_VARS = {
@@ -18,7 +18,8 @@ const ENV_VARS = {
     "https://n8n.angrylabs.app/webhook/56f432bf-ab71-4d87-87ca-3294a909c26f",
     
   url_ingreso:"https://n8n.angrylabs.app/webhook/ed9bab5b-b3f6-4d75-ad65-ac5a33060c88",
-    url_form_historico:"https://n8n.angrylabs.app/form/fadc3eea-ce91-406a-9783-aabb5dca1f1d",
+  
+  url_form_historico:"https://n8n.angrylabs.app/form/fadc3eea-ce91-406a-9783-aabb5dca1f1d",
 };
 
 const TABLE_COLUMNS = [
