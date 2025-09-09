@@ -1,5 +1,5 @@
 function resolveClientLogo() {
-  return "public/icons/client-logos/default.png";
+  return "public/icons/client-logos/pozito-logo.png";
 }
 
 function getBrandHTML() {
