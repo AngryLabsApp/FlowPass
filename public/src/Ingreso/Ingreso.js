@@ -300,8 +300,10 @@ function openModal(user) {
   // Contenido de éxito
   const nameEl = document.getElementById("successUserName");
   const classesEl = document.getElementById("successClassProgress");
+  const imgEl = document.querySelector('.success-modal__img');
   if (nameEl) nameEl.textContent = `${user.nombre || ''} ${user.apellidos || ''}`.trim();
   if (classesEl) classesEl.textContent = `${user.clases_tomadas ?? '-'}${user.limite_clases ? '/' + user.limite_clases : ''}`;
+  // Mantener imagen por defecto definida en el HTML (check.gif)
 
   // Autocerrar después de X ms (configurable desde env.js)
   try {
@@ -325,9 +327,41 @@ function initCheckinAvatar() {
     const map = IMAGES_PATH_CHECKIN || {};
     const key = CHECKIN_ICON_KEY || "gym";
     const path = map[key] || "/public/icons/sprites.svg#dumbbell-heart";
-    const useEl = document.querySelector("#checkinAvatar use");
-    if (useEl && path) {
-      useEl.setAttribute("href", path);
+    const wrap = document.getElementById("checkinAvatar");
+    if (!wrap) return;
+    // Ajuste opcional de tamaño vía variable global CHECKIN_AVATAR_SIZE (px)
+    let customSize;
+    try {
+      customSize = (typeof CHECKIN_AVATAR_SIZE !== 'undefined') ? CHECKIN_AVATAR_SIZE : window.CHECKIN_AVATAR_SIZE;
+    } catch (_) {
+      customSize = undefined;
+    }
+    const sizeNum = Number(customSize);
+    if (Number.isFinite(sizeNum) && sizeNum > 0) {
+      wrap.style.setProperty("--checkin-avatar-size", `${sizeNum}px`);
+    }
+    const svgEl = wrap.querySelector("svg");
+    const useEl = svgEl ? svgEl.querySelector("use") : null;
+
+    if (path.includes("#")) {
+      // Sprite SVG
+      if (useEl) useEl.setAttribute("href", path);
+      if (svgEl) svgEl.style.display = "";
+      // Limpia imagen si existiera
+      const img = wrap.querySelector("img");
+      if (img) img.remove();
+      wrap.classList.remove("checkin__avatar--has-img");
+    } else {
+      // Imagen (png, jpg, webp, gif)
+      let img = wrap.querySelector("img");
+      if (!img) {
+        img = document.createElement("img");
+        img.alt = "Logo del gym";
+        wrap.prepend(img);
+      }
+      img.src = path;
+      wrap.classList.add("checkin__avatar--has-img");
+      if (svgEl) svgEl.style.display = "none";
     }
   } catch (e) {
     console.warn("No se pudo configurar el icono de checkin:", e);

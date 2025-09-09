@@ -5,8 +5,8 @@ const LOGIN_PATH = "/login.html";
 const CHECKIN_ICON_KEY = "salsa";
 
 const IMAGES_PATH_CHECKIN = {
-  gym: "/public/icons/sprites.svg#dumbbell-heart",
-  salsa: "/public/icons/sprites.svg#salsa",
+  gym: "/public/icons/animations/push-ups.webp",
+  salsa: "/public/icons/animations/salsa.webp",
 };
 
 const ENV_VARS = {

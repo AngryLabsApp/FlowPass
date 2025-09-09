@@ -118,8 +118,8 @@
     margin: 8px 0 14px;
   }
   .checkin__avatar {
-    width: 96px;
-    height: 96px;
+    width: var(--checkin-avatar-size, 120px);
+    height: var(--checkin-avatar-size, 120px);
     border-radius: 999px;
     overflow: hidden;
     position: relative;
@@ -150,6 +150,8 @@
   }
   /* Movimiento sutil y brillo del ícono del avatar */
   .checkin__avatar .icon {
+    width: calc(var(--checkin-avatar-size, 120px) * 0.55);
+    height: calc(var(--checkin-avatar-size, 120px) * 0.55);
     color: var(--c10);
     transform-origin: 50% 50%;
     will-change: transform, color, filter;
@@ -251,6 +253,25 @@
 }
 
 @layer components {
+  /* Brand: colaboración logos */
+  .brand-logos {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0 12px;
+  }
+  .brand-logos__logo {
+    display: block;
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.06));
+  }
+  .brand-logos__logo--primary { opacity: 0.95; }
+  .brand-logos__logo--client { opacity: 0.95; }
+  @media (max-width: 480px) {
+    .brand-logos__logo { height: 24px; }
+  }
   /* Teclado numérico para checkin */
   .checkin__keypad {
     margin-top: 12px;
