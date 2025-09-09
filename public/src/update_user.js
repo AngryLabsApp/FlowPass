@@ -18,7 +18,7 @@ function update_form_submit () {
     // Leemos campos del form
     const payload = {
         id: user.id,
-        dias_de_gracia: {value:document.getElementById('Dias_de_Gracia').value || 0},
+        dias_de_gracia: {value:document.getElementById('Dias_de_Gracia')?.value || 0},
         monto: {value:document.getElementById('Monto').value || 0},
         medio_de_pago: {value:document.getElementById('Medio_de_pago').value},
         estado_pago: {value:document.getElementById('PaymentStatus').value},
