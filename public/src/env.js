@@ -11,13 +11,13 @@ const IMAGES_PATH_CHECKIN = {
 
 const ENV_VARS = {
   url_form:
-    "https://n8n.angrylabs.app/form/54f40a75-b183-4483-9c51-82d281c6b504",
+    "https://n8n.angrylabs.app/form/4a520fef-0a9b-453a-8b11-a1e10eae041e",
   url_get_users:
     "https://n8n.angrylabs.app/webhook/9ecc1791-c157-4084-8de6-6924235d95cd",
   url_update:
     "https://n8n.angrylabs.app/webhook/56f432bf-ab71-4d87-87ca-3294a909c26f",
-  url_ingreso:"https://n8n.angrylabs.app/webhook/b9a49ebc-c1cc-4551-bca6-21832295b34c",
-  url_form_historico:"https://n8n.angrylabs.app/form/1d2dd8b6-8778-4783-962f-71386411932b",
+  url_ingreso:"https://n8n.angrylabs.app/webhook/34578502-de20-42ad-8f17-4a6ee7d221c2",
+  url_form_historico:"https://n8n.angrylabs.app/form/90e18c52-079d-4004-876b-89911d4f5ae0",
 };
 
 const TABLE_COLUMNS = [
@@ -43,14 +43,11 @@ const TABLE_COLUMNS = [
 ];
 
 const PLANES = [
-    { value: "12 Sesiones Mensuales", label: "12 Sesiones Mensuales", amount:150 },
-    { value: "16 Sesiones Mensuales", label: "16 Sesiones Mensuales", amount:180  },
-    { value: "20 Sesiones Mensuales", label: "20 Sesiones Mensuales", amount:200  },
-    { value: "Clase Libre",        label: "Clase Libre", amount:15  },
-    { value: "Clase Gratis",       label: "Clase Gratis", amount:0 , is_free:true },
-    { value: "12 Sesiones Personalizadas",  label: "12 Sesiones Personalizadas",amount:150  },
-    { value: "16 Sesiones Personalizadas",  label: "16 Sesiones Personalizadas",amount:180  },
-    { value: "20 Sesiones Personalizadas",  label: "20 Sesiones Personalizadas",amount:200  },
+    { value: "Plan 8 Horas", label: "Plan 8 Horas", amount:120 },
+    { value: "Plan 16 Horas", label: "Plan 16 Horas", amount:220  },
+    { value: "Plan personalizado", label: "Plan personalizado", amount: 0  },
+    { value: "Plan 8 Horas Pareja", label: "Plan 8 Horas Pareja", amount:220,  with_partner: true },
+    { value: "Plan 16 Horas Pareja", label: "Plan 16 Horas Pareja", amount:380, with_partner: true },
   ];
 
   const ESTADO_PLAN = [
