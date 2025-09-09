@@ -25,7 +25,7 @@ const TABLE_COLUMNS = [
   { key: 'apellidos',           label: 'Apellido(s)',      headClass: 'table__head-cell table__col--last-name',  cellClass: 'table__cell table__col--last-name',   visible: true },
   { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--plan',       cellClass: 'table__cell table__col--plan',        visible: true },
   { key: 'clases',              label: 'Clases realizadas',headClass: 'table__head-cell table__col--classes',    cellClass: 'table__cell table__col--classes',     visible: true,
-    render: (u) => `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}`
+    render: (u) =>u.limite_clases ? `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}` : `${safe(u.clases_tomadas)}`
   },
   //{ key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true },
   { key: 'fecha_inicio_plan',   label: 'Inicio de plan',   headClass: 'table__head-cell table__col--start',      cellClass: 'table__cell table__col--start',       visible: true,
@@ -39,7 +39,7 @@ const TABLE_COLUMNS = [
     render: (u) => `<span class="badge ${statusBadgeClass(u.estado)}">${safe(u.estado)}</span>`
   },
   { key: 'estado_pago',         label: 'Estatus de pago',  headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
-    render: (u) => `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`
+    render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
   },
 ];
 
