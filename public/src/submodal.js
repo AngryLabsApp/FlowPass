@@ -29,6 +29,12 @@
   }
 
   // Build: Renovar Plan form (mobile)
+  /* SE QUITO DIAS DE GRACIA: 
+        <div class="form__row">
+          <label class="form__label" for="sub-Dias_de_Gracia">Días de gracia</label>
+          <input class="form__control" id="sub-Dias_de_Gracia" name="Dias_de_Gracia" type="number" step="1" min="0" />
+        </div>
+  */
   function buildPlanFormHTML() {
     return `
       <form class="form" id="sub-update-form">
@@ -45,10 +51,7 @@
           <input class="form__control" id="sub-Monto" name="Monto" type="number" step="0.01" min="0" />
         </div>
 
-        <div class="form__row">
-          <label class="form__label" for="sub-Dias_de_Gracia">Días de gracia</label>
-          <input class="form__control" id="sub-Dias_de_Gracia" name="Dias_de_Gracia" type="number" step="1" min="0" />
-        </div>
+
 
         <div class="form__row">
           <label class="form__label" for="sub-Medio_de_pago">Método de pago</label>
