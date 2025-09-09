@@ -27,13 +27,14 @@ const TABLE_COLUMNS = [
   { key: 'clases',              label: 'Clases realizadas',headClass: 'table__head-cell table__col--classes',    cellClass: 'table__cell table__col--classes',     visible: true,
     render: (u) => `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}`
   },
-  { key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true },
+  //{ key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true },
   { key: 'fecha_inicio_plan',   label: 'Inicio de plan',   headClass: 'table__head-cell table__col--start',      cellClass: 'table__cell table__col--start',       visible: true,
     render: (u) => formatDateDMY(u.fecha_inicio_plan)
   },
-  { key: 'proxima_fecha_pago',  label: 'Fin de plan',      headClass: 'table__head-cell table__col--end',        cellClass: 'table__cell table__col--end',         visible: true,
+  /*{ key: 'proxima_fecha_pago',  label: 'Fin de plan',      headClass: 'table__head-cell table__col--end',        cellClass: 'table__cell table__col--end',         visible: true,
     render: (u) => formatDateDMY(u.proxima_fecha_pago)
   },
+  */
   { key: 'estado',              label: 'Estado',           headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
     render: (u) => `<span class="badge ${statusBadgeClass(u.estado)}">${safe(u.estado)}</span>`
   },
