@@ -42,6 +42,23 @@
     align-items: center;
     padding-inline: max(var(--space-2), env(safe-area-inset-left));
   }
+  .sidebar__brand-collab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-inline: max(var(--space-2), env(safe-area-inset-left));
+  }
+  .sidebar__brand-collab .sidebar__collab-logo {
+    height: 30px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.06));
+  }
+  /* Cliente ligeramente más grande para balance visual */
+  .sidebar__brand-collab .sidebar__collab-logo--client {
+    height: 30px;
+  }
   /* Contenedor interior para nav + footer (permite fijar el footer al fondo en desktop) */
   .sidebar__container {
     display: flex;
@@ -74,6 +91,26 @@
     font-family: "Plus Jakarta Sans", sans-serif;
     font-weight: 800;
     font-size: 18px;
+  }
+  /* Colaboración de marcas dentro del sidebar */
+  .sidebar__collab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-inline: max(var(--space-2), env(safe-area-inset-left));
+    margin-top: var(--space-4);
+  }
+  .sidebar__collab-logo {
+    height: 30px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.06));
+  }
+  .sidebar__collab-sep {
+    color: var(--muted);
+    font-weight: 700;
+    opacity: .66;
   }
   .sidebar__nav {
     margin-top: var(--space-5);
@@ -119,6 +156,9 @@
     .sidebar__name {
       display: none;
     }
+    .sidebar__brand-collab .sidebar__collab-logo { height: 30px; }
+    .sidebar__brand-collab .sidebar__collab-logo--client { height: 30px; }
+    .sidebar__collab-logo { height: 30px; }
   }
 
   /* ======== Sidebar como tabs (horizontal) ======== */
@@ -171,6 +211,9 @@
       margin-left: auto; /* empuja 'Cerrar sesión' al extremo derecho */
       border-top: none; /* sin línea en mobile por ahora */
       padding-top: 0;
+    }
+    .sidebar__collab {
+      margin-top: var(--space-3);
     }
   }
 

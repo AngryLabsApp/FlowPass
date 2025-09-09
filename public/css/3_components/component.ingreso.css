@@ -253,6 +253,25 @@
 }
 
 @layer components {
+  /* Brand: colaboración logos */
+  .brand-logos {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0 12px;
+  }
+  .brand-logos__logo {
+    display: block;
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.06));
+  }
+  .brand-logos__logo--primary { opacity: 0.95; }
+  .brand-logos__logo--client { opacity: 0.95; }
+  @media (max-width: 480px) {
+    .brand-logos__logo { height: 24px; }
+  }
   /* Teclado numérico para checkin */
   .checkin__keypad {
     margin-top: 12px;
