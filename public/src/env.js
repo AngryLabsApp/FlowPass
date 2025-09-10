@@ -51,6 +51,7 @@ const PLANES = [
     { value: "12 Sesiones Personalizadas",  label: "12 Sesiones Personalizadas",amount:150  },
     { value: "16 Sesiones Personalizadas",  label: "16 Sesiones Personalizadas",amount:180  },
     { value: "20 Sesiones Personalizadas",  label: "20 Sesiones Personalizadas",amount:200  },
+    { value: "Parejas",  label: "Parejas",amount:200 , partners: true },
   ];
 
   const ESTADO_PLAN = [

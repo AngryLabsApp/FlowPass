@@ -375,15 +375,11 @@
                   <svg class="icon">
                     <use href="/public/icons/sprites.svg#user-status"></use>
                   </svg>Estado del Pago
-                  <button
-                      class="edit-btn"
-                      aria-label="Editar Estado del pago"
-                      id="btn-edit-estado_pago"
-                    >
-                      <svg class="icon icon-rose">
-                        <use href="/public/icons/sprites.svg#edit"></use>
-                      </svg>
-                    </button>
+                  <button class="edit-btn" aria-label="Editar Estado del pago" id="btn-edit-estado_pago">
+                    <svg class="icon icon-rose">
+                      <use href="/public/icons/sprites.svg#edit"></use>
+                    </svg>
+                  </button>
                 </div>
                 <div class="value" data-field="PaymentStatus">—</div>
               </div>
@@ -441,6 +437,20 @@
                 <!-- ESTADO PAGO Se llena por codigo -->
               </select>
             </div>
+
+                <!-- CODIGO DE PAREJA -->
+            
+           <div class="form__row" id="partner-row" style="display:none;">
+            <label class="form__label" for="partner-code">Código de pareja</label>
+            <input
+              class="form__control"
+              id="partner-code"
+              name="partner-code"
+              type="text"
+              placeholder="Escribe el código de tu pareja"
+            />
+          </div>
+
 
             <div class="form__actions">
               <button class="btn btn--secondary" type="button" id="btnCancelForm">
