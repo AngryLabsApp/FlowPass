@@ -107,11 +107,18 @@
         <h2 class="modal__title">
           <span id="userModalTitle">Ficha del usuario</span>
 
+          <span id="userPartnerChip" class="badge badge--info badge--flex">
+            <svg class="icon" aria-hidden="true">
+              <use href="/public/icons/sprites.svg#pair"></use>
+            </svg>
+            <span id="userPartnerChipText" class="chip-text"></span>
+          </span>
+
           <span id="checkInStatusChip" class="badge badge--pending badge--flex hidden">
             <svg class="icon" aria-hidden="true">
               <use href="/public/icons/sprites.svg#warn"></use>
             </svg>
-            <span id="checkInStatusChipText"></span>
+            <span class="chip-text-pareja" id="checkInStatusChipText"></span>
           </span>
         </h2>
         <button class="modal__close" type="button" aria-label="Cerrar" data-close>

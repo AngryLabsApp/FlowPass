@@ -23,6 +23,7 @@ function openModal(user) {
   $("#btn-edit-status").style.display = "";
   $("#btn-edit-fecha_inicio_plan").style.display = "";
   $("#btn-edit-estado_pago").style.display = "";
+  $("#userPartnerChipText").textContent = "";
 
   if (user?.is_plan_partner && !user?.is_plan_principal) {
     // Si es pareja, pero no el principal, ocultar solo botones de edición
@@ -60,14 +61,16 @@ function openModal(user) {
   );
   user_selected = user;
 
-  if (user?.is_plan_partner && !user?.is_plan_principal) {
-    $("#userModalTitle").textContent =
-      user.nombre + " " + user.apellidos + " (Pareja - Secundario)";
-  } else if (user?.is_plan_partner && user?.is_plan_principal) {
-    $("#userModalTitle").textContent =
-      user.nombre + " " + user.apellidos + " (Pareja - Principal)";
-  } else {
-    $("#userModalTitle").textContent = user.nombre + " " + user.apellidos;
+  $("#userModalTitle").textContent = `${user?.nombre || ""} ${
+    user?.apellidos || ""
+  }`.trim();
+  $("#userPartnerChipText").textContent = "";
+
+  if (user?.is_plan_partner && user.partner_nombre && user.partner_apellidos) {
+    const rol = user.is_plan_principal ? "Principal" : "Secundario";
+    $(
+      "#userPartnerChipText"
+    ).textContent = `Pareja (${rol}) de: ${user.partner_nombre} ${user.partner_apellidos}`;
   }
 
   // Actualiza estado del botón de Check-In y chip de límite
