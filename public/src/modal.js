@@ -65,7 +65,7 @@ function openModal(user) {
     user?.apellidos || ""
   }`.trim();
 
-  if (user?.is_plan_partner && user.partner_nombre && user.partner_apellidos) {
+  if (user?.is_plan_partner) {
     // Mostrar/ocultar el tag "Principal"
     document
       .querySelector(".modal__tag--principal")
@@ -75,10 +75,14 @@ function openModal(user) {
     const partnerChip = document.querySelector("#userPartnerChip");
     partnerChip.classList.remove("hidden");
 
+    // Determinar el texto del compañero
+    const partnerName =
+      user.partner_nombre && user.partner_apellidos
+        ? `${user.partner_nombre} ${user.partner_apellidos}`
+        : "Sin Pareja";
+
     // Actualizar el texto del chip
-    $(
-      "#userPartnerChipText"
-    ).textContent = `Compañero: ${user.partner_nombre} ${user.partner_apellidos}`;
+    $("#userPartnerChipText").textContent = `Compañero: ${partnerName}`;
   } else {
     // Si no es plan de pareja, ocultamos ambos
     document.querySelector(".modal__tag--principal").classList.add("hidden");
