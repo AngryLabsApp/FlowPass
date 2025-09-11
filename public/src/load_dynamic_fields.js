@@ -45,6 +45,8 @@ function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
     final_user.estado = final_user.partner_estado;
     final_user.dias_de_gracia = final_user.partner_dias_de_gracia;
     final_user.monto = final_user.partner_monto;
+    final_user.fecha_inicio_plan = final_user.partner_fecha_inicio_plan;
+    final_user.proxima_fecha_pago = final_user.partner_proxima_fecha_pago;
   }
 
   const payload = encodeURIComponent(JSON.stringify(final_user));
