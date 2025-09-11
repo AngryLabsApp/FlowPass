@@ -2,12 +2,21 @@
     const BD_PUBLIC_URL = "https://nujwzmwnptrsqojdjyjl.supabase.co";
     const BD_API_PUBLIC = "sb_publishable_xoykhydSmDArWUQydl_oLw_Ho0g1C64";
     const ADMIN_PATH = "/index.html";
-    const supabase = createClient(BD_PUBLIC_URL, BD_API_PUBLIC);
+    const supabase = createClient(BD_PUBLIC_URL, BD_API_PUBLIC, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+      },
+    });
 
     // Si ya hay sesión, pasa directo al panel
     (async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (session) window.location.replace(ADMIN_PATH);
+      //console.log(session);
+      if (session?.access_token) window.location.replace(ADMIN_PATH);
+
+
     })();
 
     // Referencias
@@ -51,7 +60,16 @@
       try {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        window.location.assign(ADMIN_PATH);
+
+
+        // opcional: confirma que hay sesión antes de redirigir
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          window.location.assign(ADMIN_PATH);
+        } else {
+          console.warn('Login aparente, pero sin sesión cargada aún.');
+        }
+
       } catch (err) {
         // Mensajes más claros
         const text =
