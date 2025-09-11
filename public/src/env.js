@@ -11,12 +11,12 @@ const IMAGES_PATH_CHECKIN = {
 
 const ENV_VARS = {
   url_form:
-    "https://n8n.angrylabs.app/form/e469d102-28de-40ab-ad6f-72e3f359d47a",
+    "https://n8n.angrylabs.app/form/ddffe362-567a-497b-a17f-cf2522fec9bb",
   url_get_users:
-    "https://n8n.angrylabs.app/webhook/9ecc1791-c157-4084-8de6-6924235d95cd",
+    "https://n8n.angrylabs.app/webhook/0768a235-0d92-41e5-93f8-fcb566c57d40",
   url_update:
-    "https://n8n.angrylabs.app/webhook/56f432bf-ab71-4d87-87ca-3294a909c26f",
-  url_ingreso:"https://n8n.angrylabs.app/webhook/34578502-de20-42ad-8f17-4a6ee7d221c2",
+    "https://n8n.angrylabs.app/webhook/e1b1b332-23b4-4a96-97a4-912ec7d73ffc",
+  url_ingreso:"https://n8n.angrylabs.app/webhook/5a728e05-a20a-4715-82af-dfeff5a21f5e",
   url_form_historico:"https://n8n.angrylabs.app/form/90e18c52-079d-4004-876b-89911d4f5ae0",
 };
 
@@ -47,8 +47,8 @@ const PLANES = [
     { value: "Plan 8 Horas", label: "Plan 8 Horas", amount:120 },
     { value: "Plan 16 Horas", label: "Plan 16 Horas", amount:220  },
     { value: "Plan personalizado", label: "Plan personalizado", amount: 0  },
-    { value: "Plan 8 Horas Pareja", label: "Plan 8 Horas Pareja", amount:220,  with_partner: true },
-    { value: "Plan 16 Horas Pareja", label: "Plan 16 Horas Pareja", amount:380, with_partner: true },
+    { value: "Plan 8 Horas Pareja", label: "Plan 8 Horas Pareja", amount:220, partners: true  },
+    { value: "Plan 16 Horas Pareja", label: "Plan 16 Horas Pareja", amount:380, partners: true  },
   ];
 
   const ESTADO_PLAN = [

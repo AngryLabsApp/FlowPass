@@ -25,7 +25,8 @@ function update_form_submit () {
     };
     if ( document.getElementById('Plan').value)
         payload.plan = {value:document.getElementById('Plan').value};
- 
+    if ( document.getElementById('partner-code').value)//AGREGAR VALIDACIONES
+        payload.partner_code = {value: document.getElementById('partner-code').value};
 
     try {
       const res = await update_users(payload);
@@ -66,9 +67,36 @@ function update_form_submit () {
   });
 }
 
+function planOnChange(sub_id = "", execute = false){
+  console.log("entro", sub_id);
+  const selectEl = document.getElementById(sub_id + "Plan");
+  if (execute){
+    execute_validation(selectEl.value);
+  }
+
+  function execute_validation(value){
+    const partnerRow = document.getElementById(sub_id + "partner-row");
+    const partnerInput = document.getElementById(sub_id + "partner-code");
+    const plan_selected = PLANES.find(item => item.value == value);
+
+    if (plan_selected && plan_selected?.partners){
+      partnerRow.style.display = "block";
+      partnerInput.required = true;
+    } else{
+      partnerRow.style.display = "none";
+      partnerInput.required = false; // deja de ser obligatorio
+      partnerInput.value = "";
+    }   
+  }
+  selectEl.addEventListener("change", function () {
+    execute_validation(this.value);
+  });
+}
+
 // =======================
 // Init
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
     update_form_submit();
+    planOnChange();
 });

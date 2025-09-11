@@ -69,6 +69,17 @@
           </select>
         </div>
 
+         <div class="form__row" id="sub-partner-row" style="display:none;">
+            <label class="form__label" for="partner-code">Código de pareja</label>
+            <input
+              class="form__control"
+              id="sub-partner-code"
+              name="partner-code"
+              type="text"
+              placeholder="Escribe el código de tu pareja"
+            />
+          </div>
+
         <div class="form__actions">
           <button class="btn btn--secondary" type="button" id="subCancelForm">Cancelar</button>
           <button class="btn btn--primary" type="submit">Guardar cambios</button>
@@ -167,6 +178,9 @@
         const planVal = scope.querySelector("#sub-Plan")?.value;
         if (planVal) payload.plan = { value: planVal };
 
+        const partner_code_value = scope.querySelector("#sub-partner-code")?.value;
+        if (partner_code_value) payload.partner_code = { value: partner_code_value };
+
         showLoader("Actualizando los datos...");
         const res = await update_users(payload);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -206,6 +220,7 @@
     openSubModal("Renovar plan", buildPlanFormHTML());
     const scope = document.getElementById("subModalContent");
     attachPlanFormHandlers(scope);
+    planOnChange("sub-", true);
   }
 
   // Build: Single-field edit form (mobile)
