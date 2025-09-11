@@ -19,8 +19,10 @@ function openModal(user) {
   if (!m) return;
 
   // Resetear secciones visibles por defecto
-  $("#userPlanSection").style.display = "";
-  $("#userPaymentSection").style.display = "";
+  $("#btn-edit-clases").style.display = "";
+  $("#btn-edit-status").style.display = "";
+  $("#btn-edit-fecha_inicio_plan").style.display = "";
+  $("#btn-edit-estado_pago").style.display = "";
 
   if (user?.is_plan_partner && !user?.is_plan_principal) {
     // Si es pareja, pero no el principal, ocultar solo botones de edición
