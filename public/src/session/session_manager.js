@@ -55,17 +55,3 @@ supabase.auth.onAuthStateChange((event, s) => {
 
 
 
-async function test(){
-    const local_session = await ensureSessionOrRedirect();
-    const res = await fetch("https://n8n.angrylabs.app/webhook/f723d083-b927-4ef0-bdaf-0df2bde6399a", {
-        signal: currentAbort.signal,
-        headers: { Authorization: `Bearer ${local_session.access_token}`, 'Content-Type': 'application/json',Accept: "application/json" },
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  
-    const data = await res.json();
-    console.log("response",data);
-}
-
-
-
