@@ -1,4 +1,24 @@
 @layer components {
+  .modal__tag--principal {
+    padding: 0px 8px;
+    position: absolute;
+    top: 14px;
+    right: 79px;
+    background-color: green;
+    color: white;
+    border-radius: 16px;
+    font-size: small;
+  }
+
+  .chip-text {
+    display: inline-block; /* o block si prefieres */
+    max-width: 150px; /* ajusta el ancho que quieras */
+    white-space: nowrap; /* que no haga salto de línea */
+    overflow: hidden; /* oculta lo que sobra */
+    text-overflow: ellipsis; /* agrega "..." */
+    vertical-align: middle; /* alinea con el ícono */
+  }
+
   .modal {
     position: fixed;
     inset: 0;
@@ -288,10 +308,14 @@
     }
 
     /* Submodal (mobile): ocultar botón "Volver" y dejar solo "Guardar cambios" */
-    .modal--child .modal__back { display: none; }
+    .modal--child .modal__back {
+      display: none;
+    }
     .modal--child .form__actions .btn--secondary,
     .modal--child #subCancelForm,
-    .modal--child #subCancelSingle { display: none; }
+    .modal--child #subCancelSingle {
+      display: none;
+    }
   }
 
   @media (max-width: 480px) {
@@ -396,6 +420,6 @@
     cursor: pointer;
   }
   .modal__back:hover {
-    background: rgba(0,0,0,0.04);
+    background: rgba(0, 0, 0, 0.04);
   }
 }

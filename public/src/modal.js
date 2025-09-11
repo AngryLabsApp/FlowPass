@@ -64,13 +64,25 @@ function openModal(user) {
   $("#userModalTitle").textContent = `${user?.nombre || ""} ${
     user?.apellidos || ""
   }`.trim();
-  $("#userPartnerChipText").textContent = "";
 
   if (user?.is_plan_partner && user.partner_nombre && user.partner_apellidos) {
-    const rol = user.is_plan_principal ? "Principal" : "Secundario";
+    // Mostrar/ocultar el tag "Principal"
+    document
+      .querySelector(".modal__tag--principal")
+      .classList.toggle("hidden", !user?.is_plan_principal);
+
+    // Mostrar siempre el chip cuando hay pareja
+    const partnerChip = document.querySelector("#userPartnerChip");
+    partnerChip.classList.remove("hidden");
+
+    // Actualizar el texto del chip
     $(
       "#userPartnerChipText"
-    ).textContent = `Pareja (${rol}) de: ${user.partner_nombre} ${user.partner_apellidos}`;
+    ).textContent = `Compañero: ${user.partner_nombre} ${user.partner_apellidos}`;
+  } else {
+    // Si no es plan de pareja, ocultamos ambos
+    document.querySelector(".modal__tag--principal").classList.add("hidden");
+    document.querySelector("#userPartnerChip").classList.add("hidden");
   }
 
   // Actualiza estado del botón de Check-In y chip de límite
