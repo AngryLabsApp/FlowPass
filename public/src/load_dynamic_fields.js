@@ -55,8 +55,12 @@ function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
       const cellClass = c.cellClass || "table__cell";
 
       if (final_user.is_plan_partner) {
+        const emojiHtml = `<svg class="icon icon--sm">
+                      <use href="/public/icons/sprites.svg#pair"></use>
+                    </svg>`;
+
         if (c.key === "clases") {
-          const emoji = final_user.is_plan_partner ? "🧑‍🤝‍🧑" : "";
+          const emoji = final_user.is_plan_partner ? emojiHtml : "";
           return `<td class="${cellClass}">${html} ${emoji}</td>`;
         }
       }
