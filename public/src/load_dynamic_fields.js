@@ -55,9 +55,9 @@ function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
       const cellClass = c.cellClass || "table__cell";
 
       if (final_user.is_plan_partner) {
-        if (c.key === "nombre") {
+        if (c.key === "clases") {
           const emoji = final_user.is_plan_partner ? "🧑‍🤝‍🧑" : "";
-          return `<td class="${cellClass}">${html} ${emoji}</td>`;
+          return `<td class="${cellClass}"> ${emoji} ${html}</td>`;
         }
       }
       return `<td class="${cellClass}">${html}</td>`;
