@@ -38,7 +38,7 @@ function renderHead(columns, theadId) {
 // === NUEVO: render de una fila usando TABLE_COLUMNS
 function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
   let final_user = { ...user };
-  if (final_user?.is_plan_partner && !final_user?.is_plan_principal) {
+  if (final_user?.is_plan_partner && !final_user?.is_plan_principal && final_user.partner_id) {
     final_user.clases_tomadas = final_user.partner_clases_tomadas;
     final_user.limite_clases = final_user.partner_limite_clases;
     final_user.estado_pago = final_user.partner_estado_pago;
