@@ -107,11 +107,22 @@
         <h2 class="modal__title">
           <span id="userModalTitle">Ficha del usuario</span>
 
+          <div class="modal__tag--principal hidden">
+            Principal
+          </div>
+
+          <span id="userPartnerChip" class="badge badge--info badge--flex hidden">
+            <svg class="icon" aria-hidden="true">
+              <use href="/public/icons/sprites.svg#pair"></use>
+            </svg>
+            <span id="userPartnerChipText" class="chip-text"></span>
+          </span>
+
           <span id="checkInStatusChip" class="badge badge--pending badge--flex hidden">
             <svg class="icon" aria-hidden="true">
               <use href="/public/icons/sprites.svg#warn"></use>
             </svg>
-            <span id="checkInStatusChipText"></span>
+            <span class="chip-text-pareja" id="checkInStatusChipText"></span>
           </span>
         </h2>
         <button class="modal__close" type="button" aria-label="Cerrar" data-close>
@@ -123,7 +134,7 @@
         <!-- Panel principal -->
         <div class="modal__main">
           <!-- Sección: Plan -->
-          <section class="section">
+          <section class="section" id="userPlanSection">
             <h3 class="section__title">Plan actual</h3>
             <div class="info-grid">
               <div class="row">
@@ -201,7 +212,7 @@
             </div>
           </section>
           <!-- Sección: Datos personales -->
-          <section class="section">
+          <section class="section" id="userPersonalDataSection">
             <h3 class="section__title">Datos personales</h3>
             <div class="info-grid">
               <div class="row">
@@ -351,7 +362,7 @@
           </section>
 
           <!-- Sección: Clases y Fechas -->
-          <section class="section">
+          <section class="section" id="userPaymentSection">
             <h3 class="section__title">Detalle del ultimo pago</h3>
             <div class="info-grid">
               <div class="row">
@@ -375,15 +386,11 @@
                   <svg class="icon">
                     <use href="/public/icons/sprites.svg#user-status"></use>
                   </svg>Estado del Pago
-                  <button
-                      class="edit-btn"
-                      aria-label="Editar Estado del pago"
-                      id="btn-edit-estado_pago"
-                    >
-                      <svg class="icon icon-rose">
-                        <use href="/public/icons/sprites.svg#edit"></use>
-                      </svg>
-                    </button>
+                  <button class="edit-btn" aria-label="Editar Estado del pago" id="btn-edit-estado_pago">
+                    <svg class="icon icon-rose">
+                      <use href="/public/icons/sprites.svg#edit"></use>
+                    </svg>
+                  </button>
                 </div>
                 <div class="value" data-field="PaymentStatus">—</div>
               </div>
@@ -441,6 +448,20 @@
                 <!-- ESTADO PAGO Se llena por codigo -->
               </select>
             </div>
+
+                <!-- CODIGO DE PAREJA -->
+            
+           <div class="form__row" id="partner-row" style="display:none;">
+            <label class="form__label" for="partner-code">Código de pareja</label>
+            <input
+              class="form__control"
+              id="partner-code"
+              name="partner-code"
+              type="text"
+              placeholder="Escribe el código de tu pareja"
+            />
+          </div>
+
 
             <div class="form__actions">
               <button class="btn btn--secondary" type="button" id="btnCancelForm">

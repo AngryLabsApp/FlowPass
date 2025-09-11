@@ -11,13 +11,13 @@ const IMAGES_PATH_CHECKIN = {
 
 const ENV_VARS = {
   url_form:
-    "https://n8n.angrylabs.app/form/3fdc05cb-4cf1-4a8d-a4cf-ec2760b88a88",
+    "https://n8n.angrylabs.app/form/37a54242-5c99-462a-98c7-bd927337943e",
   url_get_users:
-    "https://n8n.angrylabs.app/webhook/9ecc1791-c157-4084-8de6-6924235d95cd",
+    "https://n8n.angrylabs.app/webhook/0768a235-0d92-41e5-93f8-fcb566c57d40",
   url_update:
-    "https://n8n.angrylabs.app/webhook/56f432bf-ab71-4d87-87ca-3294a909c26f",
+    "https://n8n.angrylabs.app/webhook/e1b1b332-23b4-4a96-97a4-912ec7d73ffc",
     
-  url_ingreso:"https://n8n.angrylabs.app/webhook/ed9bab5b-b3f6-4d75-ad65-ac5a33060c88",
+  url_ingreso:"https://n8n.angrylabs.app/webhook/27ea8b03-6f22-4647-8a58-d10c8c424758",
   
   url_form_historico:"https://n8n.angrylabs.app/form/fadc3eea-ce91-406a-9783-aabb5dca1f1d",
 };
