@@ -42,6 +42,7 @@ function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
     final_user.estado_pago = final_user.partner_estado_pago; 
     final_user.estado = final_user.partner_estado; 
     final_user.dias_de_gracia = final_user.partner_dias_de_gracia; 
+    final_user.monto = final_user.partner_monto;
   }
 
 

@@ -15,9 +15,18 @@ function setCheckInButtonDisabled(disabled) {
 }
 
 function openModal(user) {
-  console.log("DATA USER : ", user);
   const m = $("#userModal");
   if (!m) return;
+
+  // Resetear secciones visibles por defecto
+  $("#userPlanSection").style.display = "";
+  $("#userPaymentSection").style.display = "";
+
+  if (user?.is_plan_partner && !user?.is_plan_principal) {
+    // Si es pareja, pero no el principal, ocultar secciones de plan y pago
+    $("#userPlanSection").style.display = "none";
+    $("#userPaymentSection").style.display = "none";
+  }
 
   m.setAttribute("aria-hidden", "false");
   setField(m, "UserID", user.id);
@@ -46,7 +55,16 @@ function openModal(user) {
     user?.patologias.length > 0 ? user.patologias : "-"
   );
   user_selected = user;
-  $("#userModalTitle").textContent = user.nombre + " " + user.apellidos;
+
+  if (user?.is_plan_partner && !user?.is_plan_principal) {
+    $("#userModalTitle").textContent =
+      user.nombre + " " + user.apellidos + " (Pareja - Secundario)";
+  } else if (user?.is_plan_partner && user?.is_plan_principal) {
+    $("#userModalTitle").textContent =
+      user.nombre + " " + user.apellidos + " (Pareja - Principal)";
+  } else {
+    $("#userModalTitle").textContent = user.nombre + " " + user.apellidos;
+  }
 
   // Actualiza estado del botón de Check-In y chip de límite
   try {
@@ -55,14 +73,19 @@ function openModal(user) {
     const limiteValido = Number.isFinite(limite) && limite > 0; // aplica si hay límite positivo
     const atOrOver = limiteValido && tomadas >= limite; // alcanzó o superó el límite
 
-    const estadoPlan = String(user.estado || '').trim().toLowerCase();
-    const planActivo = (estadoPlan === 'activo');
+    const estadoPlan = String(user.estado || "")
+      .trim()
+      .toLowerCase();
+    const planActivo = estadoPlan === "activo";
 
     // El botón se deshabilita si el plan no está activo o ya no hay clases
     setCheckInButtonDisabled(!planActivo || atOrOver);
 
     // El chip amarillo SOLO se usa para el caso de límite de clases
-    setCheckInWarning(atOrOver, atOrOver ? `Límite de clases alcanzado (${tomadas}/${limite})` : "");
+    setCheckInWarning(
+      atOrOver,
+      atOrOver ? `Límite de clases alcanzado (${tomadas}/${limite})` : ""
+    );
   } catch (_) {}
 }
 
@@ -101,13 +124,13 @@ function handleOnSelectPlanChange() {
   planEl.addEventListener("change", () => {
     const plan = planEl.value;
 
-    const plan_selected = PLANES.find( (item) => item.value == plan);
+    const plan_selected = PLANES.find((item) => item.value == plan);
     const amount = plan_selected.amount;
 
     if (typeof amount === "number") {
       montoEl.value = amount.toFixed(2);
-      // Si es gratis, bloquea edición; si no, permite editar por si quieres ajustar 
-      montoEl.readOnly = !!plan_selected?.is_free;;
+      // Si es gratis, bloquea edición; si no, permite editar por si quieres ajustar
+      montoEl.readOnly = !!plan_selected?.is_free;
     } else {
       montoEl.value = "";
       montoEl.readOnly = false;
@@ -176,8 +199,12 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
       // Si hay submodal abierto, ciérralo primero
       try {
-        const sub = document.getElementById('userSubModal');
-        if (sub && sub.getAttribute('aria-hidden') === 'false' && window.__submodal) {
+        const sub = document.getElementById("userSubModal");
+        if (
+          sub &&
+          sub.getAttribute("aria-hidden") === "false" &&
+          window.__submodal
+        ) {
           window.__submodal.closeSubModal();
           return;
         }
