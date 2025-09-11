@@ -23,9 +23,11 @@ function openModal(user) {
   $("#userPaymentSection").style.display = "";
 
   if (user?.is_plan_partner && !user?.is_plan_principal) {
-    // Si es pareja, pero no el principal, ocultar secciones de plan y pago
-    $("#userPlanSection").style.display = "none";
-    $("#userPaymentSection").style.display = "none";
+    // Si es pareja, pero no el principal, ocultar solo botones de edición
+    $("#btn-edit-clases").style.display = "none";
+    $("#btn-edit-status").style.display = "none";
+    $("#btn-edit-fecha_inicio_plan").style.display = "none";
+    $("#btn-edit-estado_pago").style.display = "none";
   }
 
   m.setAttribute("aria-hidden", "false");
