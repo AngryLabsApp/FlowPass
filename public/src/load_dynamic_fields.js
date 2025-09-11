@@ -35,11 +35,21 @@ function renderHead(columns, theadId) {
 
 // === NUEVO: render de una fila usando TABLE_COLUMNS
 function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
-  const payload = encodeURIComponent(JSON.stringify(user));
+  let final_user = {...user};
+  if (final_user?.is_plan_partner && !final_user?.is_plan_principal){
+    final_user.clases_tomadas = final_user.partner_clases_tomadas;
+    final_user.limite_clases = final_user.partner_limite_clases; 
+    final_user.estado_pago = final_user.partner_estado_pago; 
+    final_user.estado = final_user.partner_estado; 
+    final_user.dias_de_gracia = final_user.partner_dias_de_gracia; 
+  }
+
+
+  const payload = encodeURIComponent(JSON.stringify(final_user));
   const cells = columns
     .filter(c => c.visible !== false)
     .map(c => {
-      const html = c.render ? c.render(user) : safe(user[c.key]);
+      const html = c.render ? c.render(final_user) : safe(final_user[c.key]);
       const cellClass = c.cellClass || 'table__cell';
       return `<td class="${cellClass}">${html}</td>`;
     })
