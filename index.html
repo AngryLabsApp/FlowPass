@@ -222,7 +222,15 @@
                   </svg>
                   Codigo de ingreso
                 </div>
-                <div class="value" data-field="UserCode">—</div>
+                <div class="value value--inline">
+                  <span class="value__content" data-field="UserCode">-</span>
+                  <button class="btn btn--whatsapp" id="btnSendCodeWhatsApp" type="button">
+                    <svg class="icon icon--sm">
+                      <use href="/public/icons/sprites.svg#whatsapp"></use>
+                    </svg>
+                    Enviar Codigo
+                  </button>
+                </div>
               </div>
 
               <div class="row">
@@ -449,18 +457,13 @@
               </select>
             </div>
 
-                <!-- CODIGO DE PAREJA -->
-            
-           <div class="form__row" id="partner-row" style="display:none;">
-            <label class="form__label" for="partner-code">Código de pareja</label>
-            <input
-              class="form__control"
-              id="partner-code"
-              name="partner-code"
-              type="text"
-              placeholder="Escribe el código de tu pareja"
-            />
-          </div>
+            <!-- CODIGO DE PAREJA -->
+
+            <div class="form__row" id="partner-row" style="display:none;">
+              <label class="form__label" for="partner-code">Código de pareja</label>
+              <input class="form__control" id="partner-code" name="partner-code" type="text"
+                placeholder="Escribe el código de tu pareja" />
+            </div>
 
 
             <div class="form__actions">
