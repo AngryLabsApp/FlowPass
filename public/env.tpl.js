@@ -1,5 +1,0 @@
-window.__APP_CONFIG__ = {
-  API_BASE_URL: "${API_BASE_URL}",
-  WA_GATEWAY_URL: "${WA_GATEWAY_URL}",
-  ENV: "${NODE_ENV}"
-};
