@@ -130,46 +130,20 @@ function update_single_form_submit () {
     showLoader('Actualizando los datos...');
 
     try {
-     
       const res = await update_users(payload);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       formEl.reset();
       success = true;
     } catch (err) {
-      hideLoader();
       console.error(err);
       showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
     } finally {
         submitBtn.disabled = false;
         loadUsers();
         hideLoader();
-        // Ocultar panel lateral de edición de un solo campo
-        const aside = document.getElementById('edit-single-form-aside');
-        if (aside) aside.hidden = true;
-
-        // Actualizar datos en el modal principal
-        try {
-          const meta = FIELD_VALUES[FIELD_SELECTED];
-          const patch = {};
-          const v1 = document.getElementById(meta.id)?.value;
-          if (v1) patch[meta.sheet_name] = v1;
-          if (meta.id2) {
-            const v2 = document.getElementById(meta.id2)?.value;
-            if (v2) patch[meta.sheet_name2] = v2;
-          }
-
-          // Campos compuestos o alias
-          if (FIELD_SELECTED === 'clases') {
-            // Nothing extra: clases_tomadas y limite_clases ya fueron seteados
-          }
-
-          if (typeof patchSelectedUser === 'function') patchSelectedUser(patch);
-        } catch (_) {}
-
-        // Forzar recarga total en éxito
         if (success) {
-          try { location.reload(); } catch (_) {}
+          closeModal();
         }
     }
 
