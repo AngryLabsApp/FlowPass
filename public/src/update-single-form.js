@@ -143,6 +143,7 @@ function update_single_form_submit () {
         loadUsers();
         hideLoader();
         if (success) {
+          showToast("Actualizamos con éxito","success");
           closeModal();
         }
     }
