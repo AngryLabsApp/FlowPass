@@ -155,6 +155,9 @@ function initSearch() {
 // Init
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("TESTTTT");
+  console.log(window.__APP_CONFIG__);
+
   initSearch();
   initAddNewUser();
   if (window.SessionManager) {
