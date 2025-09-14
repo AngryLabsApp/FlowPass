@@ -2,6 +2,8 @@ const BD_PUBLIC_URL = "https://nujwzmwnptrsqojdjyjl.supabase.co";
 const BD_API_PUBLIC = "sb_publishable_xoykhydSmDArWUQydl_oLw_Ho0g1C64";
 const LOGIN_PATH = "/login.html";
 
+const SEND_CODE_VIA_WHATSAPP = true; 
+
 const CHECKIN_ICON_KEY = "gym";
 
 const IMAGES_PATH_CHECKIN = {
