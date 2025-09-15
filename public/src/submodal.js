@@ -188,28 +188,14 @@
       } catch (err) {
         console.error(err);
         showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
-        hideLoader();
       } finally {
-        if (typeof hideLoader === "function") hideLoader();
-        if (typeof loadUsers === "function") loadUsers();
-        // Actualizar modal principal con los nuevos valores
-        try {
-          const patch = {
-            dias_de_gracia:
-              scope.querySelector("#sub-Dias_de_Gracia")?.value || 0,
-            monto: scope.querySelector("#sub-Monto")?.value || 0,
-            medio_de_pago:
-              scope.querySelector("#sub-Medio_de_pago")?.value || "",
-            estado_pago: scope.querySelector("#sub-PaymentStatus")?.value || "",
-          };
-          const planVal = scope.querySelector("#sub-Plan")?.value;
-          if (planVal) patch.plan = planVal;
-          if (typeof patchSelectedUser === "function") patchSelectedUser(patch);
-        } catch (_) {}
+        hideLoader();
+        loadUsers();
         closeSubModal();
         if (success) {
+          showToast("Actualizamos tu plan con éxito","success");
           try {
-            location.reload();
+             closeModal(); 
           } catch (_) {}
         }
       }
@@ -337,30 +323,13 @@
         showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
         hideLoader();
       } finally {
-        if (typeof hideLoader === "function") hideLoader();
-        if (typeof loadUsers === "function") loadUsers();
-        // Refrescar modal principal con el nuevo valor
-        try {
-          const meta =
-            typeof FIELD_VALUES !== "undefined"
-              ? FIELD_VALUES[fieldKey]
-              : undefined;
-          if (meta) {
-            const patch = {};
-            const v1 = scope.querySelector(`#${meta.id}`)?.value;
-            if (v1) patch[meta.sheet_name] = v1;
-            if (meta.id2) {
-              const v2 = scope.querySelector(`#${meta.id2}`)?.value;
-              if (v2) patch[meta.sheet_name2] = v2;
-            }
-            if (typeof patchSelectedUser === "function")
-              patchSelectedUser(patch);
-          }
-        } catch (_) {}
+        hideLoader();
+        loadUsers();
         closeSubModal();
         if (success) {
+          showToast("Actualizamos con éxito","success");
           try {
-            location.reload();
+             closeModal(); 
           } catch (_) {}
         }
       }

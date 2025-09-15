@@ -3,7 +3,7 @@ const BD_API_PUBLIC = "sb_publishable_xoykhydSmDArWUQydl_oLw_Ho0g1C64";
 const LOGIN_PATH = "/login.html";
 
 const CHECKIN_ICON_KEY = "salsa";
-
+const SEND_CODE_VIA_WHATSAPP = false; 
 const IMAGES_PATH_CHECKIN = {
   gym: "/public/icons/animations/push-ups.webp",
   salsa: "/public/icons/animations/salsa.webp",
@@ -18,6 +18,7 @@ const ENV_VARS = {
     "https://n8n.angrylabs.app/webhook/e1b1b332-23b4-4a96-97a4-912ec7d73ffc",
   url_ingreso:"https://n8n.angrylabs.app/webhook/5a728e05-a20a-4715-82af-dfeff5a21f5e",
   url_form_historico:"https://n8n.angrylabs.app/form/90e18c52-079d-4004-876b-89911d4f5ae0",
+  url_send_code:"https://n8n.angrylabs.app/webhook/17c50d70-e48e-47a6-8f7d-4434759b4f73",
 };
 
 const TABLE_COLUMNS = [

@@ -42,33 +42,19 @@ function update_form_submit () {
         submitBtn.disabled = false;
         loadUsers();
         hideLoader();
-        // Ocultar panel lateral (si existe) y mantener el modal abierto
-        const aside = document.getElementById('updateForm');
-        if (aside) aside.hidden = true;
-
-        // Actualizar modal principal con los nuevos valores
-        try {
-          const patch = {
-            dias_de_gracia: document.getElementById('Dias_de_Gracia').value || 0,
-            monto: document.getElementById('Monto').value || 0,
-            medio_de_pago: document.getElementById('Medio_de_pago').value || '',
-            estado_pago: document.getElementById('PaymentStatus').value || '',
-          };
-          const planVal = document.getElementById('Plan').value;
-          if (planVal) patch.plan = planVal;
-          if (typeof patchSelectedUser === 'function') patchSelectedUser(patch);
-        } catch (_) {}
-
         // Forzar recarga total en éxito
         if (success) {
-          try { location.reload(); } catch (_) {}
+          //esto no se ve porque se recarga la pantallaa
+          showToast("Actualizamos tu plan con éxito","success");
+         
+          //CAMBIAR ESTO PARA QUE NO SE CIERRE EL MODAL, O SE VUELVA ABRIR
+          try { closeModal(); } catch (_) {}
         }
     }
   });
 }
 
 function planOnChange(sub_id = "", execute = false){
-  console.log("entro", sub_id);
   const selectEl = document.getElementById(sub_id + "Plan");
   if (execute){
     execute_validation(selectEl.value);
