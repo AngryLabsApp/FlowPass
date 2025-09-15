@@ -61,9 +61,8 @@ function openModal(user) {
   );
   user_selected = user;
 
-  $("#userModalTitle").textContent = `${user?.nombre || ""} ${
-    user?.apellidos || ""
-  }`.trim();
+  let modal_title = toTitleCase(user?.nombre || "") + " " + toTitleCase(user?.apellidos || "");
+  $("#userModalTitle").textContent = `${modal_title}`.trim();
 
   if (user?.is_plan_partner) {
     // Mostrar/ocultar el tag "Principal"
