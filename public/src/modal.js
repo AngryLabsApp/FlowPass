@@ -110,6 +110,24 @@ function openModal(user) {
       atOrOver ? `Límite de clases alcanzado (${tomadas}/${limite})` : ""
     );
   } catch (_) {}
+
+  // Actualiza estado del botón de WhatsApp (enviar código) según "notificar"
+  try {
+    const btnWhats = document.getElementById("btnSendCodeWhatsApp");
+    if (btnWhats) {
+      const v = String(user?.notificar ?? "")
+        .trim()
+        .toLowerCase();
+      const truthy =
+        v === "si" ||
+        v === "sí" ||
+        v === "true" ||
+        v === "1" ||
+        v === "yes" ||
+        user?.notificar === true;
+      btnWhats.disabled = !truthy;
+    }
+  } catch (_) {}
 }
 
 function closeModal() {

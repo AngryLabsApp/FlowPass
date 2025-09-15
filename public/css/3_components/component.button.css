@@ -11,6 +11,34 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    width: 100%;
+  }
+
+  .btn--whatsapp {
+    font-size: smaller;
+    background: var(--bg-success);
+    color: var(--text-success);
+    border-color: transparent;
+    width: auto !important; /* override base 100% to fit content */
+    padding: 6px 10px; /* smaller by default */
+    white-space: nowrap; /* keep icon + text in one line */
+  }
+
+  /* Keep WhatsApp icon size stable and avoid shrinking in flex */
+  .btn--whatsapp .icon {
+    flex-shrink: 0;
+  }
+
+  /* Preserve green tone on hover for WhatsApp button */
+  .btn.btn--whatsapp:not(:disabled):hover {
+    background: color-mix(in oklab, var(--bg-success) 92%, black);
+  }
+
+  /* Disabled state: turn gray and keep it obvious */
+  .btn--whatsapp:disabled {
+    background: var(--border);
+    color: var(--c2);
+    border-color: var(--border);
   }
 
   .btn--secondary {
@@ -51,5 +79,25 @@
     background: var(
       --danger-transparent
     ); /* mantiene el fondo, evita el mix del hover genérico */
+  }
+
+  /* Responsive sizing for WhatsApp button */
+  @media (width <= 900px) {
+    .btn--whatsapp {
+      font-size: 0.85rem;
+      padding: 5px 8px;
+    }
+  }
+  /* Tablet range: cap max width so it doesn't look too large */
+  @media (width >= 700px) and (width <= 900px) {
+    .btn--whatsapp {
+      max-width: 300px;
+    }
+  }
+  @media (width <= 600px) {
+    .btn--whatsapp {
+      font-size: 0.82rem;
+      padding: 4px 8px;
+    }
   }
 }

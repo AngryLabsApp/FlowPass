@@ -155,6 +155,7 @@ function initSearch() {
 // Init
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
+
   initSearch();
   initAddNewUser();
   if (window.SessionManager) {

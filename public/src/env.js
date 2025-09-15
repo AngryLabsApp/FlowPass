@@ -2,6 +2,8 @@ const BD_PUBLIC_URL = "https://nujwzmwnptrsqojdjyjl.supabase.co";
 const BD_API_PUBLIC = "sb_publishable_xoykhydSmDArWUQydl_oLw_Ho0g1C64";
 const LOGIN_PATH = "/login.html";
 
+const SEND_CODE_VIA_WHATSAPP = true; 
+
 const CHECKIN_ICON_KEY = "gym";
 
 const IMAGES_PATH_CHECKIN = {
@@ -20,6 +22,7 @@ const ENV_VARS = {
   url_ingreso:"https://n8n.angrylabs.app/webhook/27ea8b03-6f22-4647-8a58-d10c8c424758",
   
   url_form_historico:"https://n8n.angrylabs.app/form/fadc3eea-ce91-406a-9783-aabb5dca1f1d",
+  url_send_code:"https://n8n.angrylabs.app/webhook/17c50d70-e48e-47a6-8f7d-4434759b4f73",
 };
 
 const TABLE_COLUMNS = [

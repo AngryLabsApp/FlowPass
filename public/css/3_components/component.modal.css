@@ -160,10 +160,39 @@
     gap: 6px;
   }
 
+  .label-with-msg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap; /* allow button to move to next line on small screens */
+  }
+
   .value {
     color: var(--c2);
     font-size: 15px;
     font-weight: lighter;
+  }
+
+  /* Inline value with action (e.g., code + button) */
+  .value--inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap; /* allow wrap on small screens */
+    min-width: 0; /* allow flex items to shrink if needed */
+  }
+
+  /* Keep items in one line on tablet/desktop when there's space */
+  @media (width >= 700px) {
+    .value--inline {
+      flex-wrap: nowrap;
+    }
+  }
+
+  /* Avoid breaking the code content mid-word */
+  .value__content {
+    white-space: nowrap;
   }
 
   .value--muted {
