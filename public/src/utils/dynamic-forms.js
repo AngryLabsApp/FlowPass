@@ -58,6 +58,15 @@ function update_fecha_inicio_plan(){
         `;
 }
 
+function update_fecha_cumpleanos(){
+  return `
+         <div class="form__row">
+          <label class="form__label" for="fecha-cumpleanos"></label>
+          <input class="form__control" id="edit-cumpleanos" name="fecha-cumpleanos" type="date" />
+        </div>
+        `;
+}
+
 function update_phone_form(){
   return `
         <div class="form__row">
@@ -81,6 +90,21 @@ function update_direccion_form(){
             class="form__control" 
             id="edit-direccion" 
             name="edit-direccion" 
+            type="text" 
+            required 
+            placeholder="" />
+        </div>
+        `;
+}
+
+function update_identificacion_form(){
+  return `
+        <div class="form__row">
+          <label class="form__label" for="edit-identificacion"> </label>
+          <input 
+            class="form__control" 
+            id="edit-identificacion" 
+            name="edit-identificacion" 
             type="text" 
             required 
             placeholder="" />
