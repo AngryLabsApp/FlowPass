@@ -43,7 +43,7 @@ function buildEditFormByField(field){
         }
         showSingleFormAside(true);
         // Prefill valores actuales del usuario para el aside (desktop/tablet)
-        try {
+        try {        
           const user = getUserSelected();
           const meta = FIELD_VALUES[FIELD_SELECTED];
           if (user && meta) {
@@ -59,6 +59,8 @@ function buildEditFormByField(field){
               case 'direccion': setVal(meta.id, user.direccion); break;
               case 'estado_pago': setVal(meta.id, user.estado_pago); break;
               case 'fecha_inicio_plan': setVal(meta.id, user.fecha_inicio_plan); break;
+              case 'cumpleanos': setVal(meta.id, user.cumpleanos); break;
+              case 'identificacion': setVal(meta.id, user.identificacion); break;
             }
           }
         } catch (_) {}
