@@ -81,7 +81,7 @@ const PLANES = [
     { value: "Pendiente", label: "Pendiente"},
   ]; 
 //CAMPOR QUE SE PUEDEN EDITAR CON EL BOTON DE EDIT (LAPIZ)
-const EDITABLE_FIELD = ["phone","email","notify","patologias","status","clases","viaje","direccion","estado_pago","fecha_inicio_plan"];
+const EDITABLE_FIELD = ["phone","email","notify","patologias","status","clases","viaje","direccion","estado_pago","fecha_inicio_plan","cumpleanos","identificacion"];
 const FIELD_VALUES ={
   "clases":{
     title:"Clases",
@@ -146,5 +146,17 @@ const FIELD_VALUES ={
     html:update_fecha_inicio_plan(),
     id:"edit-fecha_inicio_plan",
     sheet_name:"fecha_inicio_plan"
+  },
+   "cumpleanos":{
+    title: "Fecha de cumpleaños",
+    html:update_fecha_cumpleanos(),
+    id:"edit-cumpleanos",
+    sheet_name:"cumpleanos"
+  },
+   "identificacion":{
+    title: "DNI/Pasaporte/CE",
+    html:update_identificacion_form(),
+    id:"edit-identificacion",
+    sheet_name:"identificacion"
   },
 }
