@@ -79,6 +79,10 @@ function planOnChange(sub_id = "", execute = false){
   });
 }
 
+function clean_subscription_form(){
+    const form = document.getElementById('updateUserForm');
+    form.reset();
+}
 // =======================
 // Init
 // =======================

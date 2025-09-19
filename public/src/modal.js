@@ -25,7 +25,11 @@ function openModal(user) {
   $("#btn-edit-estado_pago").style.display = "";
   $("#userPartnerChipText").textContent = "";
 
-  if (user?.is_plan_partner && !user?.is_plan_principal) {
+  if ( 
+      (user?.is_plan_partner && !user?.is_plan_principal) ||
+      (user.plan == null || !user.plan )
+  ) 
+  {
     // Si es pareja, pero no el principal, ocultar solo botones de edición
     $("#btn-edit-clases").style.display = "none";
     $("#btn-edit-status").style.display = "none";
@@ -129,13 +133,16 @@ function openModal(user) {
   } catch (_) {}
 }
 
+function close_edition_tab(){
+  showUpdateForm(false);
+  showSingleFormAside(false);
+  setCheckInWarning(false);
+}
 function closeModal() {
   const m = $("#userModal");
   if (!m) return;
   m.setAttribute("aria-hidden", "true");
-  showUpdateForm(false);
-  showSingleFormAside(false);
-  setCheckInWarning(false);
+  close_edition_tab();
 }
 
 function getUserSelected() {
@@ -180,8 +187,10 @@ function handleOnSelectPlanChange() {
 
 function prefillUpdateForm() {
   try {
+    clean_subscription_form();
     const user = getUserSelected();
-    if (!user) return;
+    if (!user || !user?.plan) return;
+
     const setVal = (id, val) => {
       const el = document.getElementById(id);
       if (el && val != null) el.value = String(val);
@@ -221,9 +230,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Manejadores para cerrar el modal
   const closeUpdateForm = () => {
+    close_edition_tab();
     modal.setAttribute("aria-hidden", "true");
     showUpdateForm(false);
     btnToggleForm.setAttribute("aria-expanded", "false");
+
+ 
   };
 
   // Cerrar con el botón X o click en overlay
