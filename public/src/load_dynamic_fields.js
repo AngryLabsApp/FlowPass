@@ -75,7 +75,6 @@ function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
 function renderLoading( tbodyId = "members-tbody", colspan = 14) {
 
   const tbody = document.getElementById(tbodyId);
-    console.log(tbody);
   tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${colspan}">Cargando...</td></tr>`;
 }
 

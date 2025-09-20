@@ -57,13 +57,10 @@ async function getPagos(page = 1) {
     // arma tus query params como tu backend espera:
     const queryParams = buildQueryParams(page);
     const url = buildUrl(ENV_VARS.url_get_pagos, queryParams);
-    console.log(queryParams);
     const res = await get_pagos(url, currentAbort);
-    
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
     const data = await res.json();
-    console.log(data);
+
 
     // Tu flujo actual devuelve algo como [{ total, data: [...] }]
     const items = Array.isArray(data) ? data : data?.data || [];
@@ -80,8 +77,6 @@ async function getPagos(page = 1) {
     renderPagination(total);
 
   } catch (err) {
-    console.log(err);
-
     if (err?.name === "AbortError") return; // petición cancelada: ignorar
     renderError("paymentsTableBody");
     renderPagination(0);
