@@ -39,9 +39,20 @@
       </div>
 
       <main class="main">
-         <h3 class="main__title" id="total_mensual">Total: 0</h1>
-
         <h1 class="main__title">Pagos</h1>
+
+        <section class="metrics">
+          <div class="metric-card" id="total_mensual" aria-live="polite">
+            <div class="metric-card__icon" aria-hidden="true">
+              <svg class="icon icon--lg">
+                <use href="/public/icons/sprites.svg#money-bag"></use>
+              </svg>
+            </div>
+            <p class="metric-card__value" id="total_mensual_value">S/. 0.00</p>
+            <p class="metric-card__label">Ingresos totales</p>
+            <p class="metric-card__period" id="total_mensual_period">Mes actual</p>
+          </div>
+        </section>
 
         <div class="card" aria-label="Tabla de pagos">
           <table class="table table--payments" aria-label="Tabla de pagos">

@@ -98,11 +98,64 @@ async function getTotalMes() {
     const data = await res.json();
 
     const items = Array.isArray(data) ? data : data?.data || [];
-    if (!items.length) return;
-    
-    const { total} = items[0] || {};
+    const { total } = items[0] || {};
 
-    document.getElementById('total_mensual').textContent = 'Total: '+ total;
+    const valueEl = document.getElementById('total_mensual_value');
+    if (valueEl) {
+      const sanitize = (input) => {
+        if (typeof input === 'number') return input;
+        if (typeof input === 'string') {
+          const parsed = Number(input);
+          if (Number.isFinite(parsed)) return parsed;
+        }
+        const cleaned = Number(String(input ?? '').replace(/[^0-9.-]+/g, ''));
+        return Number.isFinite(cleaned) ? cleaned : null;
+      };
+
+      const numericTotal = sanitize(total);
+      const amount = Number.isFinite(numericTotal) ? numericTotal : 0;
+      const formatter = typeof window.formatCurrency === 'function'
+        ? window.formatCurrency
+        : null;
+
+      if (formatter) {
+        valueEl.textContent = formatter('PEN', amount);
+      } else {
+        valueEl.textContent = `S/. ${amount.toLocaleString('es-PE', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}`;
+      }
+    }
+
+    const periodEl = document.getElementById('total_mensual_period');
+    if (periodEl) {
+      const monthInput = document.getElementById('paymentsMonthFilter');
+      const monthValue = monthInput?.value;
+      if (monthValue) {
+        const [year, month] = monthValue.split('-').map(Number);
+        const referenceDate = new Date(year, (month || 1) - 1, 1);
+        if (!Number.isNaN(referenceDate.getTime())) {
+          const formatter = new Intl.DateTimeFormat('es-PE', {
+            month: 'long',
+            year: 'numeric',
+          });
+          let formatted = formatter.format(referenceDate);
+          if (formatted.includes(' de ')) {
+            const [monthName, yearText] = formatted.split(' de ');
+            const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+            formatted = `${capitalizedMonth} ${yearText}`;
+          } else {
+            formatted = formatted.charAt(0).toUpperCase() + formatted.slice(1);
+          }
+          periodEl.textContent = formatted;
+        } else {
+          periodEl.textContent = 'Mes actual';
+        }
+      } else {
+        periodEl.textContent = 'Mes actual';
+      }
+    }
     
   } catch (err) {
     console.log(err);
