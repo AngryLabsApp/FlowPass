@@ -19,9 +19,8 @@ function buildQueryParams(page) {
   const queryParams = {};
 
   const input = $("#paymentsSearch").value;
-  const status = "";//$("#statusSelect").value;
+  const month = $("#paymentsMonthFilter").value;
   // const method = $("#methodSelect").value;
-
   if (page){
     queryParams.page = page
   }
@@ -30,13 +29,9 @@ function buildQueryParams(page) {
     queryParams.value1 = String(input).trim();
   }
 
-  if (status && String(status).trim() !== "") {
-    queryParams.field2 = "estado"; // <-- puedes cambiar a "Email" si buscas por email
-    queryParams.value2 = String(status).trim();
-  }
-  queryParams.start_date = "2025-09-01";
-  
-  queryParams.end_date = "2025-09-30";
+ 
+  queryParams.start_date = month;
+  queryParams.end_date = month;
   queryParams.type = "query";
   return queryParams;
 }
@@ -117,6 +112,10 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     window.addEventListener("session-ready", () => getPagos(), { once: true });
   }
+
+  document.getElementById("paymentsMonthFilter").addEventListener("change", () => {
+    getPagos();
+  });
 
 
 });
