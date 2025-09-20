@@ -84,6 +84,32 @@ async function getPagos(page = 1) {
   }
 }
 
+async function getTotalMes() {
+  try {
+    const base_queryParams = buildQueryParams();
+    const queryParams ={
+      type: "total",
+      start_date: base_queryParams.start_date,
+      end_date: base_queryParams.end_date,
+    };
+    const url = buildUrl(ENV_VARS.url_get_pagos, queryParams);
+    const res = await get_pagos(url, currentAbort);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    const items = Array.isArray(data) ? data : data?.data || [];
+    if (!items.length) return;
+    
+    const { total} = items[0] || {};
+
+    document.getElementById('total_mensual').textContent = 'Total: '+ total;
+    
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
 
 
 function initSearch() {
@@ -115,14 +141,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (window.SessionManager) {
       getPagos();
+      getTotalMes();
     } else {
-      window.addEventListener("session-ready", () => getPagos(), { once: true });
+      window.addEventListener("session-ready", () => {getPagos(); getTotalMes()}, { once: true });
     }
 
   DASHBOARD_PAGOS_FILTERS.forEach(item =>{
     if (item.onChange)
       document.getElementById(item.element_id).addEventListener("change", () => {
-        getPagos(); // tu función que vuelve a cargar con filtros
+        getPagos();
+        if (item.key == "fechas") getTotalMes();
       });
   });
 
