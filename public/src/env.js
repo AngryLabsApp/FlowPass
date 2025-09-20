@@ -182,3 +182,10 @@ const TABLE_PAYMENTS_COLUMNS = [
     render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
   },
 ];
+
+
+const DASHBOARD_FILTERS = [
+  {key:"nombre", element_id:"searchInput", onChange:false},
+  {key:"estado", element_id:"statusSelect", onChange:true},
+  {key:"plan", element_id:"FilterPlanSelect", onChange:true}
+];

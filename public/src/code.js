@@ -8,24 +8,21 @@ let currentAbort = null;
  */
 function buildQueryParams(page) {
   const queryParams = {};
-
-  const input = $("#searchInput").value;
-  const status = $("#statusSelect").value;
-  // const method = $("#methodSelect").value;
-
   if (page){
     queryParams.page = page
   }
-  if (input && String(input).trim() !== "") {
-    queryParams.field1 = "nombre";
-    queryParams.value1 = String(input).trim();
-  }
 
-  if (status && String(status).trim() !== "") {
-    queryParams.field2 = "estado"; // <-- puedes cambiar a "Email" si buscas por email
-    queryParams.value2 = String(status).trim();
-  }
+  let index = 1;
+  DASHBOARD_FILTERS.forEach(item =>{
+      const input = $("#"+item.element_id).value;
+       if (input && String(input).trim() !== "") {
+        queryParams["field"+index] = item.key;
+        queryParams["value"+index] = String(input).trim();
+        index ++;
+      }
+  });
 
+  
   return queryParams;
 }
 async function loadUsers(page = 1) {
@@ -115,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fillSelect("Plan", PLANES);
   fillSelect("Medio_de_pago", METODO_DE_PAGO);
   fillSelect("PaymentStatus", ESTADO_PAGO);
-
+  fillSelect("FilterPlanSelect", PLANES);
 
 
   initSearch();
@@ -126,9 +123,13 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("session-ready", () => loadUsers(), { once: true });
   }
 
-  document.getElementById("statusSelect").addEventListener("change", () => {
-    loadUsers(); // tu función que vuelve a cargar con filtros
+  DASHBOARD_FILTERS.forEach(item =>{
+    if (item.onChange)
+      document.getElementById(item.element_id).addEventListener("change", () => {
+        loadUsers(); // tu función que vuelve a cargar con filtros
+      });
   });
+  
   /*
     document.getElementById("methodSelect").addEventListener("change", () => {
         const value = document.getElementById("methodSelect").value;

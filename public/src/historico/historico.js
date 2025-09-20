@@ -20,7 +20,7 @@ function buildQueryParams(page) {
 
   const input = $("#paymentsSearch").value;
   const month = $("#paymentsMonthFilter").value;
-  // const method = $("#methodSelect").value;
+
   if (page){
     queryParams.page = page
   }
@@ -28,8 +28,8 @@ function buildQueryParams(page) {
     queryParams.field1 = "nombre";
     queryParams.value1 = String(input).trim();
   }
-
- 
+  
+  
   queryParams.start_date = month;
   queryParams.end_date = month;
   queryParams.type = "query";
