@@ -277,6 +277,7 @@
     padding: var(--space-6);
   }
   .main__title {
+    font-size: 30px;
     margin: 0 0 var(--space-4);
   }
 
