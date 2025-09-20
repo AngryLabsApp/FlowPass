@@ -85,10 +85,30 @@ async function getPagos(page = 1) {
   }
 }
 
+
+
+function initSearch() {
+  const input = $("#paymentsSearch");
+  if (!input) return;
+
+  const run = debounce(() => getPagos(), DEBOUNCE_MS);
+
+  input.addEventListener("input", run);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      getPagos();
+    } else if (e.key === "Escape") {
+      input.value = "";
+      getPagos();
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     renderHead(TABLE_PAYMENTS_COLUMNS, "payments_table");
 
-
+    initSearch();
     open_historico_form();
     setCurrentMonth();
 

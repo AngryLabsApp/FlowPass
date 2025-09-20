@@ -1,29 +1,4 @@
 
-// =======================
-// Config
-// =======================
-const DEBOUNCE_MS = 350;
-const TABLE_COLSPAN = 14; // cantidad de columnas de tu tabla
-
-// Espera que tengas estas variables definidas en algún lado
-// const ENV_VARS = { url_form: "...", url_get_users: "..." };
-
-// =======================
-// Utils
-// =======================
-
-
-/** Debounce sencillo */
-function debounce(fn, wait = 300) {
-  let t;
-  return (...args) => {
-    clearTimeout(t);
-    t = setTimeout(() => fn(...args), wait);
-  };
-}
-
-
-
 let currentAbort = null;
 
 /**
