@@ -61,6 +61,91 @@ function formatDateDMY(value) {
   return `${d}-${m}-${y}`;
 }
 
+function parseFlexibleDate(value) {
+  if (!value) return null;
+
+  if (value instanceof Date && !isNaN(value)) {
+    return value;
+  }
+
+  const raw = String(value).trim();
+  if (!raw) return null;
+
+  const ymd = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (ymd) {
+    const [, y, m, d] = ymd;
+    const year = Number(y);
+    const month = Number(m) - 1;
+    const day = Number(d);
+    const dt = new Date(year, month, day);
+    if (!isNaN(dt)) return dt;
+  }
+
+  const dmy = raw.match(/^([0-3]?\d)[\/-]([0-1]?\d)[\/-](\d{4})$/);
+  if (dmy) {
+    const [, d, m, y] = dmy;
+    const day = Number(d);
+    const month = Number(m) - 1;
+    const year = Number(y);
+    const dt = new Date(year, month, day);
+    if (!isNaN(dt)) return dt;
+  }
+
+  const timestamp = Date.parse(raw);
+  if (!Number.isNaN(timestamp)) {
+    const dt = new Date(timestamp);
+    if (!isNaN(dt)) return dt;
+  }
+
+  return null;
+}
+
+function formatDateLongSpanish(value) {
+  const date = parseFlexibleDate(value);
+  if (!date) return null;
+
+  try {
+    return new Intl.DateTimeFormat("es-ES", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(date);
+  } catch (_) {
+    return null;
+  }
+}
+
+function formatMemberSince(value) {
+  const formatted = formatDateLongSpanish(value);
+  return formatted ? `Miembro desde: ${formatted}` : "Miembro desde: —";
+}
+
+function getUserInitials(nombre, apellidos) {
+  const parts = [];
+  if (typeof nombre === "string") parts.push(...nombre.trim().split(/\s+/));
+  if (typeof apellidos === "string") parts.push(...apellidos.trim().split(/\s+/));
+  const filtered = parts.filter(Boolean);
+
+  if (filtered.length === 0) {
+    return "?";
+  }
+
+  const first = filtered[0];
+  const last = filtered.length > 1 ? filtered[filtered.length - 1] : filtered[0];
+
+  const firstInitial = first.charAt(0);
+  let secondInitial = "";
+
+  if (filtered.length > 1) {
+    secondInitial = last.charAt(0);
+  } else {
+    secondInitial = first.charAt(1) || "";
+  }
+
+  const initials = (firstInitial + secondInitial).toLocaleUpperCase("es-ES");
+  return initials || firstInitial.toLocaleUpperCase("es-ES");
+}
+
 /** Escapa texto para evitar inyecciones si renderizas con innerHTML */
 function safe(text) {
   const span = document.createElement("span");

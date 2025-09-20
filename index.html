@@ -104,27 +104,35 @@
     <div class="modal__dialog card" role="document">
       <!-- Header -->
       <header class="modal__header">
-        <h2 class="modal__title">
-          <span id="userModalTitle">Ficha del usuario</span>
 
-          <div class="modal__tag--principal hidden">
-            Principal
+        <div class="modal_header--user-data">
+          <div class="modal__photo" id="modalUserPhoto" aria-hidden="true"></div>
+          <div class="modal__headline">
+            <div class="modal__heading-row">
+              <h2 class="modal__title" id="userModalTitle">Ficha del usuario</h2>
+
+              <div class="modal__tag--principal hidden">
+                Principal
+              </div>
+
+              <span id="userPartnerChip" class="badge badge--info badge--flex hidden">
+                <svg class="icon" aria-hidden="true">
+                  <use href="/public/icons/sprites.svg#pair"></use>
+                </svg>
+                <span id="userPartnerChipText" class="chip-text"></span>
+              </span>
+
+              <span id="checkInStatusChip" class="badge badge--pending badge--flex hidden">
+                <svg class="icon" aria-hidden="true">
+                  <use href="/public/icons/sprites.svg#warn"></use>
+                </svg>
+                <span class="chip-text-pareja" id="checkInStatusChipText"></span>
+              </span>
+            </div>
+            <p class="modal__member-since" id="UserCreatedAt" data-field="UserCreatedAt"></p>
           </div>
+        </div>
 
-          <span id="userPartnerChip" class="badge badge--info badge--flex hidden">
-            <svg class="icon" aria-hidden="true">
-              <use href="/public/icons/sprites.svg#pair"></use>
-            </svg>
-            <span id="userPartnerChipText" class="chip-text"></span>
-          </span>
-
-          <span id="checkInStatusChip" class="badge badge--pending badge--flex hidden">
-            <svg class="icon" aria-hidden="true">
-              <use href="/public/icons/sprites.svg#warn"></use>
-            </svg>
-            <span class="chip-text-pareja" id="checkInStatusChipText"></span>
-          </span>
-        </h2>
         <button class="modal__close" type="button" aria-label="Cerrar" data-close>
           ✕
         </button>
@@ -560,7 +568,7 @@
   <script src="/public/src/modal.js"></script>
   <script src="/public/src/registrar_Ingreso.js"></script>
 
-    
+
 </body>
 
 </html>
