@@ -24,6 +24,7 @@ const ENV_VARS = {
   url_form_historico:"https://n8n.angrylabs.app/form/1d2dd8b6-8778-4783-962f-71386411932b",
 
   url_send_code:"https://n8n.angrylabs.app/webhook/17c50d70-e48e-47a6-8f7d-4434759b4f73",
+  url_get_pagos:"https://n8n.angrylabs.app/webhook/bcfb0eb3-b085-4413-a1a3-358cdff22b43"
 };
 
 const TABLE_COLUMNS = [
@@ -47,7 +48,7 @@ const TABLE_COLUMNS = [
   { key: 'estado',              label: 'Estado',           headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
     render: (u) => `<span class="badge ${statusBadgeClass(u.estado)}">${safe(u.estado)}</span>`
   },
-  { key: 'estado_pago',         label: 'Estatus de pago',  headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
+  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
     render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
   },
 ];
@@ -162,3 +163,22 @@ const FIELD_VALUES ={
     sheet_name:"identificacion"
   },
 }
+
+
+const TABLE_PAYMENTS_COLUMNS = [
+  { key: 'pago_id',                label: 'Payment ID',       headClass: 'table__head-cell',       cellClass: 'table__cell',        visible: true },
+  { key: 'full_name',              label: 'Usuario(s)',        headClass: 'table__head-cell', cellClass: 'table__cell',  visible: true,
+    render: (u) =>u.full_name ? `${toTitleCase(u.full_name)}` : `${safe(u.full_name)}`
+  },
+  { key: 'monto',               label: 'Monto',             headClass: 'table__head-cell',       cellClass: 'table__cell',        visible: true },
+  { key: 'fecha_pago',   label: 'Fecha',   headClass: 'table__head-cell',      cellClass: 'table__cell',       visible: true,
+    render: (u) => formatDateDMY(u.fecha_pago)
+  },
+  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell',       cellClass: 'table__cell',        visible: true },
+  { key: 'medio_de_pago',       label: 'Medio de pago',    headClass: 'table__head-cell', cellClass: 'table__cell',  visible: true,
+    render: (u) => `${safe(u.medio_de_pago)}`
+  },
+  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell',     cellClass: 'table__cell',      visible: true,
+    render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
+  },
+];

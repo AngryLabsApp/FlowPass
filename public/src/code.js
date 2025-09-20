@@ -23,28 +23,6 @@ function debounce(fn, wait = 300) {
 }
 
 
-// =======================
-// Render (Tabla)
-// =======================
-
-/** Estados de tabla */
-function renderLoading(tbody) {
-  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${TABLE_COLSPAN}">Cargando...</td></tr>`;
-}
-function renderEmpty(tbody, msg = "Sin registros") {
-  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${TABLE_COLSPAN}">${safe(
-    msg
-  )}</td></tr>`;
-}
-function renderError(
-  tbody,
-  msg = "Error al cargar datos. Intenta nuevamente."
-) {
-  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${TABLE_COLSPAN}">${safe(
-    msg
-  )}</td></tr>`;
-}
-
 
 let currentAbort = null;
 
@@ -80,9 +58,8 @@ async function loadUsers(page = 1) {
     if (page){
         setPage(page);
     }
-  const tbody = $("#usersTbody");
-  if (!tbody) return;
-  renderLoading(tbody);
+
+  renderLoading("usersTbody");
 
   // Cancela petición anterior si existe
   if (currentAbort) currentAbort.abort();
@@ -99,11 +76,13 @@ async function loadUsers(page = 1) {
 
     // Tu flujo actual devuelve algo como [{ total, data: [...] }]
     const items = Array.isArray(data) ? data : data?.data || [];
-    if (!items.length) return renderEmpty(tbody);
+    if (!items.length) return renderEmpty("usersTbody");
 
     const { total, data: users } = items[0] || {};
-    if (!Array.isArray(users) || users.length === 0) return renderEmpty(tbody);
-
+    if (!Array.isArray(users) || users.length === 0) {
+        renderPagination(0);
+      return renderEmpty("usersTbody");
+    }
  
     renderTableRows(users,"usersTbody",TABLE_COLUMNS);
     renderPagination(total);
@@ -112,7 +91,7 @@ async function loadUsers(page = 1) {
   } catch (err) {
     if (err?.name === "AbortError") return; // petición cancelada: ignorar
     console.log(err);
-    renderError(tbody);
+    renderError("usersTbody");
     renderPagination(0);
   } finally {
     currentAbort = null;
@@ -155,6 +134,14 @@ function initSearch() {
 // Init
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
+
+//LOAD DYNAMIC FIELDS
+  renderHead(TABLE_COLUMNS, "usersThead");
+  fillSelect("Plan", PLANES);
+  fillSelect("Medio_de_pago", METODO_DE_PAGO);
+  fillSelect("PaymentStatus", ESTADO_PAGO);
+
+
 
   initSearch();
   initAddNewUser();
