@@ -96,5 +96,45 @@
     word-break: normal;
     overflow-wrap: normal;
   }
+  /* Pagos: estilos responsivos */
+  @media (width <= 1024px) {
+    .table--payments .table__head-cell,
+    .table--payments .table__cell {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+  }
+
+  @media (width <= 768px) {
+    .table--payments .table__head-cell,
+    .table--payments .table__cell {
+      font-size: 12.5px;
+    }
+  }
+
+  @media (width <= 640px) {
+    .table--payments .table__head-cell,
+    .table--payments .table__cell {
+      font-size: 12px;
+      padding: 8px 10px;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .table--payments .table__head-cell.table__col--payment-id,
+    .table--payments .table__cell.table__col--payment-id,
+    .table--payments .table__head-cell.table__col--payment-date,
+    .table--payments .table__cell.table__col--payment-date,
+    .table--payments .table__head-cell.table__col--payment-method,
+    .table--payments .table__cell.table__col--payment-method,
+    .table--payments .table__head-cell.table__col--payment-status,
+    .table--payments .table__cell.table__col--payment-status {
+      display: none;
+    }
+
+    .table--payments .table__cell.table__col--payment-plan {
+      font-weight: 500;
+    }
+  }
 
 }

@@ -2,6 +2,69 @@ function toTitleCase(str) {
   return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
 }
 
+const CURRENCY_FORMAT_CONFIG = {
+  PEN: {
+    locale: "es-PE",
+    options: {
+      style: "currency",
+      currency: "PEN",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    },
+    normalize: (value) => value.replace(/^S\/\s/, "S/. "),
+  },
+  USD: {
+    locale: "en-US",
+    options: {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    },
+  },
+  MXN: {
+    locale: "es-MX",
+    options: {
+      style: "currency",
+      currency: "MXN",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    },
+    normalize: (value) => value.replace(/^\$/, "MX$"),
+  },
+};
+
+const CURRENCY_FORMATTER_CACHE = Object.create(null);
+
+function getCurrencyFormatter(code) {
+  const key = String(code || "").toUpperCase();
+  const config = CURRENCY_FORMAT_CONFIG[key];
+  if (!config) return null;
+  if (!CURRENCY_FORMATTER_CACHE[key]) {
+    CURRENCY_FORMATTER_CACHE[key] = new Intl.NumberFormat(
+      config.locale,
+      config.options
+    );
+  }
+  return { formatter: CURRENCY_FORMATTER_CACHE[key], normalize: config.normalize };
+}
+
+function formatCurrency(currency, amount) {
+  if (!Number.isFinite(amount)) return "";
+  const formatterEntry = getCurrencyFormatter(currency);
+  if (formatterEntry) {
+    const formatted = formatterEntry.formatter.format(amount);
+    return formatterEntry.normalize ? formatterEntry.normalize(formatted) : formatted;
+  }
+
+  const code = String(currency || "").toUpperCase();
+  const formatted = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+  return code ? `${code} ${formatted}` : formatted;
+}
+
 /** Atajo de querySelector */
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 
@@ -190,3 +253,5 @@ function debounce(fn, wait = 300) {
     t = setTimeout(() => fn(...args), wait);
   };
 }
+
+window.formatCurrency = formatCurrency;

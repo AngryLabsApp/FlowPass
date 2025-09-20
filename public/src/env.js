@@ -166,19 +166,25 @@ const FIELD_VALUES ={
 
 
 const TABLE_PAYMENTS_COLUMNS = [
-  { key: 'pago_id',                label: 'Payment ID',       headClass: 'table__head-cell',       cellClass: 'table__cell',        visible: true },
-  { key: 'full_name',              label: 'Usuario(s)',        headClass: 'table__head-cell', cellClass: 'table__cell',  visible: true,
+  { key: 'pago_id',                label: 'Payment ID',       headClass: 'table__head-cell table__col--payment-id',       cellClass: 'table__cell table__col--payment-id',        visible: false },
+  { key: 'full_name',              label: 'Alumno',        headClass: 'table__head-cell table__col--payment-user', cellClass: 'table__cell table__col--payment-user',  visible: true,
     render: (u) =>u.full_name ? `${toTitleCase(u.full_name)}` : `${safe(u.full_name)}`
   },
-  { key: 'monto',               label: 'Monto',             headClass: 'table__head-cell',       cellClass: 'table__cell',        visible: true },
-  { key: 'fecha_pago',   label: 'Fecha',   headClass: 'table__head-cell',      cellClass: 'table__cell',       visible: true,
+  { key: 'monto',               label: 'Monto',             headClass: 'table__head-cell table__col--payment-amount',       cellClass: 'table__cell table__col--payment-amount',        visible: true,
+    render: (u) => {
+      const rawAmount = u.monto;
+      if (!Number.isFinite(rawAmount)) return safe(rawAmount);
+      return formatCurrency('PEN', rawAmount);
+    }
+  },
+  { key: 'fecha_pago',   label: 'Fecha',   headClass: 'table__head-cell table__col--payment-date',      cellClass: 'table__cell table__col--payment-date',       visible: true,
     render: (u) => formatDateDMY(u.fecha_pago)
   },
-  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell',       cellClass: 'table__cell',        visible: true },
-  { key: 'medio_de_pago',       label: 'Medio de pago',    headClass: 'table__head-cell', cellClass: 'table__cell',  visible: true,
+  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--payment-plan',       cellClass: 'table__cell table__col--payment-plan',        visible: true },
+  { key: 'medio_de_pago',       label: 'Medio de pago',    headClass: 'table__head-cell table__col--payment-method', cellClass: 'table__cell table__col--payment-method',  visible: true,
     render: (u) => `${safe(u.medio_de_pago)}`
   },
-  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell',     cellClass: 'table__cell',      visible: true,
+  { key: 'estado_pago',         label: 'Estado',  headClass: 'table__head-cell table__col--payment-status',     cellClass: 'table__cell table__col--payment-status',      visible: true,
     render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
   },
 ];
