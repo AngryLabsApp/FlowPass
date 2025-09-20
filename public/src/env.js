@@ -6,6 +6,8 @@ const SEND_CODE_VIA_WHATSAPP = true;
 
 const CHECKIN_ICON_KEY = "gym";
 
+const NAME_OF_USERS = "Alumnos"
+
 const IMAGES_PATH_CHECKIN = {
   gym: "/public/icons/animations/push-ups.webp",
   salsa: "/public/icons/animations/salsa.webp",
