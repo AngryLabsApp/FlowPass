@@ -207,11 +207,18 @@
         <p class="loader__text">Procesando...</p>
       </div>
     </div>
+    <script src="/public/src/utils/dynamic-forms.js"></script>
     <script src="/public/src/utils/utils.js"></script>
     <script defer src="/public/src/shared/sidebar.js"></script>
     <script src="/public/src/spinner.js"></script>
+     <script src="/public/src/session/session_manager.js" type="module"></script>
+      <script type="module">
+      import { ensureSessionOrRedirect } from "/public/src/session/session_manager.js";
+      window.SessionManager = { ensureSessionOrRedirect };
+      window.dispatchEvent(new Event("session-ready"));
+    </script>
+    <script src="/public/src/api/api.js" defer></script>
     <script src="/public/src/env.js"></script>
     <script src="/public/src/Ingreso/Ingreso.js"></script>
-    <script src="/public/src/utils/utils.js"></script>
   </body>
 </html>

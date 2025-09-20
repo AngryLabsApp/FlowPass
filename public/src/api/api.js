@@ -9,6 +9,15 @@ async function load_users(url, currentAbort) {
     });
 }
 
+async function ingreso_by_code(url) {
+   const local_session = await window.SessionManager.ensureSessionOrRedirect();
+   if (!local_session) return; 
+   
+    return await fetch(url, {
+      headers: { Authorization: `Bearer ${local_session.access_token}`, 'Content-Type': 'application/json',Accept: "application/json" },
+    });
+}
+
 async function get_pagos(url, currentAbort) {
 
     const local_session = await window.SessionManager.ensureSessionOrRedirect();
