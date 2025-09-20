@@ -24,9 +24,12 @@
       <div class="topbar">
         <div class="topbar__filters">
           <input id="paymentsSearch" class="topbar__search-input" type="search"
-            placeholder="Buscar por nombre o apellido…" aria-label="Buscar por nombre o apellido" autocomplete="off" />
+            placeholder="Buscar por nombre, email o código" aria-label="Buscar por nombre o apellido" autocomplete="off" />
           <input id="paymentsMonthFilter" class="topbar__select topbar__select--month" type="month"
             aria-label="Filtrar por mes" name="paymentsMonth" />
+          <select id="FilterEstadoPagoSelect" class="topbar__select" aria-label="Filtrar por estado">
+            <option value="">Estado de pago: Todos</option>
+          </select>
         </div>
         <div class="topbar__actions">
           <button class="btn btn--primary" id="downloadHistory" type="button">

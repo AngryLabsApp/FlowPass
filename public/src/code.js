@@ -113,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fillSelect("Medio_de_pago", METODO_DE_PAGO);
   fillSelect("PaymentStatus", ESTADO_PAGO);
   fillSelect("FilterPlanSelect", PLANES);
+  fillSelect("statusSelect", ESTADO_PLAN);
 
 
   initSearch();

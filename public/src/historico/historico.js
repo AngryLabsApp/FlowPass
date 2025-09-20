@@ -17,21 +17,24 @@ function setCurrentMonth() {
 
 function buildQueryParams(page) {
   const queryParams = {};
-
-  const input = $("#paymentsSearch").value;
-  const month = $("#paymentsMonthFilter").value;
-
   if (page){
     queryParams.page = page
   }
-  if (input && String(input).trim() !== "") {
-    queryParams.field1 = "nombre";
-    queryParams.value1 = String(input).trim();
-  }
-  
-  
-  queryParams.start_date = month;
-  queryParams.end_date = month;
+
+  let index = 1;
+  DASHBOARD_PAGOS_FILTERS.forEach(item =>{
+      const input = $("#"+item.element_id).value;
+      if (item.key == "fechas"){
+        queryParams.start_date = input;
+        queryParams.end_date = input;
+        index ++;
+      } 
+      else if (input && String(input).trim() !== "") {
+        queryParams["field"+index] = item.key;
+        queryParams["value"+index] = String(input).trim();
+        index ++;
+      }
+  });
   queryParams.type = "query";
   return queryParams;
 }
@@ -72,6 +75,7 @@ async function getPagos(page = 1) {
     renderPagination(total);
 
   } catch (err) {
+    console.log(err);
     if (err?.name === "AbortError") return; // petición cancelada: ignorar
     renderError("paymentsTableBody");
     renderPagination(0);
@@ -101,7 +105,9 @@ function initSearch() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
     renderHead(TABLE_PAYMENTS_COLUMNS, "payments_table");
+    fillSelect("FilterEstadoPagoSelect", ESTADO_PAGO);
 
     initSearch();
     open_historico_form();
@@ -109,12 +115,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (window.SessionManager) {
       getPagos();
-  } else {
-    window.addEventListener("session-ready", () => getPagos(), { once: true });
-  }
+    } else {
+      window.addEventListener("session-ready", () => getPagos(), { once: true });
+    }
 
-  document.getElementById("paymentsMonthFilter").addEventListener("change", () => {
-    getPagos();
+  DASHBOARD_PAGOS_FILTERS.forEach(item =>{
+    if (item.onChange)
+      document.getElementById(item.element_id).addEventListener("change", () => {
+        getPagos(); // tu función que vuelve a cargar con filtros
+      });
   });
 
 
