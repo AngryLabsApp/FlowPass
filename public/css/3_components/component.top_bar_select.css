@@ -43,6 +43,9 @@
     cursor: not-allowed;
   }
 
-
-
+  .topbar__select--month {
+    padding-right: var(--sel-px);
+    background-image: none;
+    min-width: 180px;
+  }
 }

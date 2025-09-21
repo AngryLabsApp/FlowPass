@@ -1,51 +1,4 @@
 
-// =======================
-// Config
-// =======================
-const DEBOUNCE_MS = 350;
-const TABLE_COLSPAN = 14; // cantidad de columnas de tu tabla
-
-// Espera que tengas estas variables definidas en algún lado
-// const ENV_VARS = { url_form: "...", url_get_users: "..." };
-
-// =======================
-// Utils
-// =======================
-
-
-/** Debounce sencillo */
-function debounce(fn, wait = 300) {
-  let t;
-  return (...args) => {
-    clearTimeout(t);
-    t = setTimeout(() => fn(...args), wait);
-  };
-}
-
-
-// =======================
-// Render (Tabla)
-// =======================
-
-/** Estados de tabla */
-function renderLoading(tbody) {
-  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${TABLE_COLSPAN}">Cargando...</td></tr>`;
-}
-function renderEmpty(tbody, msg = "Sin registros") {
-  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${TABLE_COLSPAN}">${safe(
-    msg
-  )}</td></tr>`;
-}
-function renderError(
-  tbody,
-  msg = "Error al cargar datos. Intenta nuevamente."
-) {
-  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${TABLE_COLSPAN}">${safe(
-    msg
-  )}</td></tr>`;
-}
-
-
 let currentAbort = null;
 
 /**
@@ -55,24 +8,21 @@ let currentAbort = null;
  */
 function buildQueryParams(page) {
   const queryParams = {};
-
-  const input = $("#searchInput").value;
-  const status = $("#statusSelect").value;
-  // const method = $("#methodSelect").value;
-
   if (page){
     queryParams.page = page
   }
-  if (input && String(input).trim() !== "") {
-    queryParams.field1 = "nombre";
-    queryParams.value1 = String(input).trim();
-  }
 
-  if (status && String(status).trim() !== "") {
-    queryParams.field2 = "estado"; // <-- puedes cambiar a "Email" si buscas por email
-    queryParams.value2 = String(status).trim();
-  }
+  let index = 1;
+  DASHBOARD_FILTERS.forEach(item =>{
+      const input = $("#"+item.element_id).value;
+       if (input && String(input).trim() !== "") {
+        queryParams["field"+index] = item.key;
+        queryParams["value"+index] = String(input).trim();
+        index ++;
+      }
+  });
 
+  
   return queryParams;
 }
 async function loadUsers(page = 1) {
@@ -80,9 +30,8 @@ async function loadUsers(page = 1) {
     if (page){
         setPage(page);
     }
-  const tbody = $("#usersTbody");
-  if (!tbody) return;
-  renderLoading(tbody);
+
+  renderLoading("usersTbody");
 
   // Cancela petición anterior si existe
   if (currentAbort) currentAbort.abort();
@@ -99,11 +48,13 @@ async function loadUsers(page = 1) {
 
     // Tu flujo actual devuelve algo como [{ total, data: [...] }]
     const items = Array.isArray(data) ? data : data?.data || [];
-    if (!items.length) return renderEmpty(tbody);
+    if (!items.length) return renderEmpty("usersTbody");
 
     const { total, data: users } = items[0] || {};
-    if (!Array.isArray(users) || users.length === 0) return renderEmpty(tbody);
-
+    if (!Array.isArray(users) || users.length === 0) {
+        renderPagination(0);
+      return renderEmpty("usersTbody");
+    }
  
     renderTableRows(users,"usersTbody",TABLE_COLUMNS);
     renderPagination(total);
@@ -112,7 +63,7 @@ async function loadUsers(page = 1) {
   } catch (err) {
     if (err?.name === "AbortError") return; // petición cancelada: ignorar
     console.log(err);
-    renderError(tbody);
+    renderError("usersTbody");
     renderPagination(0);
   } finally {
     currentAbort = null;
@@ -156,6 +107,15 @@ function initSearch() {
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
 
+//LOAD DYNAMIC FIELDS
+  renderHead(TABLE_COLUMNS, "usersThead");
+  fillSelect("Plan", PLANES);
+  fillSelect("Medio_de_pago", METODO_DE_PAGO);
+  fillSelect("PaymentStatus", ESTADO_PAGO);
+  fillSelect("FilterPlanSelect", PLANES);
+  fillSelect("statusSelect", ESTADO_PLAN);
+
+
   initSearch();
   initAddNewUser();
   if (window.SessionManager) {
@@ -164,9 +124,13 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("session-ready", () => loadUsers(), { once: true });
   }
 
-  document.getElementById("statusSelect").addEventListener("change", () => {
-    loadUsers(); // tu función que vuelve a cargar con filtros
+  DASHBOARD_FILTERS.forEach(item =>{
+    if (item.onChange)
+      document.getElementById(item.element_id).addEventListener("change", () => {
+        loadUsers(); // tu función que vuelve a cargar con filtros
+      });
   });
+  
   /*
     document.getElementById("methodSelect").addEventListener("change", () => {
         const value = document.getElementById("methodSelect").value;

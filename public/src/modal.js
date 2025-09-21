@@ -25,11 +25,11 @@ function openModal(user) {
   $("#btn-edit-estado_pago").style.display = "";
   $("#userPartnerChipText").textContent = "";
 
-  if ( 
-      (user?.is_plan_partner && !user?.is_plan_principal) ||
-      (user.plan == null || !user.plan )
-  ) 
-  {
+  if (
+    (user?.is_plan_partner && !user?.is_plan_principal) ||
+    user.plan == null ||
+    !user.plan
+  ) {
     // Si es pareja, pero no el principal, ocultar solo botones de edición
     $("#btn-edit-clases").style.display = "none";
     $("#btn-edit-status").style.display = "none";
@@ -46,6 +46,7 @@ function openModal(user) {
   setField(m, "UserEmail", user.email);
   setField(m, "UserAddress", user.direccion);
   setField(m, "UserIdentificationNumber", user.identificacion);
+  setField(m, "UserCreatedAt", formatMemberSince(user.fecha_alta));
   setField(m, "UserPlan", user.plan);
   setField(m, "UserIsOnTravel", user.de_viaje);
   setField(m, "PaymentAmount", user.monto); // ya viene formateado en tu tabla
@@ -67,6 +68,16 @@ function openModal(user) {
 
   let modal_title = toTitleCase(user?.nombre || "") + " " + toTitleCase(user?.apellidos || "");
   $("#userModalTitle").textContent = `${modal_title}`.trim();
+
+  try {
+    const photoEl = document.getElementById("modalUserPhoto") ||
+      m.querySelector(".modal__photo");
+    if (photoEl) {
+      const initials = getUserInitials(user?.nombre, user?.apellidos);
+      photoEl.textContent = initials;
+      photoEl.title = modal_title ? `Iniciales de ${modal_title}`.trim() : "Iniciales del usuario";
+    }
+  } catch (_) {}
 
   if (user?.is_plan_partner) {
     // Mostrar/ocultar el tag "Principal"
@@ -234,8 +245,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.setAttribute("aria-hidden", "true");
     showUpdateForm(false);
     btnToggleForm.setAttribute("aria-expanded", "false");
-
- 
   };
 
   // Cerrar con el botón X o click en overlay

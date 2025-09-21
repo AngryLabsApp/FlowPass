@@ -25,18 +25,23 @@ function getBrandHTML() {
 
 function getNavHTML(activeKey) {
   const links = [
-    { href: "index.html", icon: "users", label: "Usuarios", key: "index.html" },
+    {
+      href: "index.html",
+      icon: "users",
+      label: `${NAME_OF_USERS ?? "Alumnos"}`,
+      key: "index.html",
+    },
     {
       href: "ingreso.html",
       icon: "key",
-      label: "Check-in",
+      label: "Ingreso",
       key: "ingreso.html",
     },
     {
-      href: "historial.html",
-      icon: "history",
-      label: "Historial",
-      key: "historial.html",
+      href: "pagos.html",
+      icon: "payment",
+      label: "Pagos",
+      key: "pagos.html",
     },
   ];
   const items = links
