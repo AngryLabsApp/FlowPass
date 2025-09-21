@@ -72,6 +72,29 @@ function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
   return `<tr class="table__row" role="button" tabindex="0" data-user="${payload}">${cells}</tr>`;
 }
 
+function renderLoading( tbodyId = "members-tbody", colspan = 14) {
+
+  const tbody = document.getElementById(tbodyId);
+  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${colspan}">Cargando...</td></tr>`;
+}
+
+function renderEmpty(tbodyId, msg = "Sin registros", colspan = 14) {
+   const tbody = document.getElementById(tbodyId);
+  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${colspan}">${safe(
+    msg
+  )}</td></tr>`;
+}
+function renderError(
+  tbodyId,
+  msg = "Error al cargar datos. Intenta nuevamente.",
+   colspan = 14
+) {
+   const tbody = document.getElementById(tbodyId);
+  tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${colspan}">${safe(
+    msg
+  )}</td></tr>`;
+}
+
 // === render de muchas filas al tbody
 function renderTableRows(
   users,
@@ -84,9 +107,3 @@ function renderTableRows(
   tbody.innerHTML = html;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderHead(TABLE_COLUMNS, "usersThead");
-  fillSelect("Plan", PLANES);
-  fillSelect("Medio_de_pago", METODO_DE_PAGO);
-  fillSelect("PaymentStatus", ESTADO_PAGO);
-});

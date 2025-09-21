@@ -4,6 +4,7 @@ const LOGIN_PATH = "/login.html";
 
 const CHECKIN_ICON_KEY = "salsa";
 const SEND_CODE_VIA_WHATSAPP = false; 
+const NAME_OF_USERS = "Alumnos";
 const IMAGES_PATH_CHECKIN = {
   gym: "/public/icons/animations/push-ups.webp",
   salsa: "/public/icons/animations/salsa.webp",
@@ -16,9 +17,10 @@ const ENV_VARS = {
     "https://n8n.angrylabs.app/webhook/0768a235-0d92-41e5-93f8-fcb566c57d40",
   url_update:
     "https://n8n.angrylabs.app/webhook/e1b1b332-23b4-4a96-97a4-912ec7d73ffc",
-  url_ingreso:"https://n8n.angrylabs.app/webhook/5a728e05-a20a-4715-82af-dfeff5a21f5e",
+  url_ingreso:"https://n8n.angrylabs.app/webhook/23c0319d-5248-4b38-8fe6-b72063c526df",
   url_form_historico:"https://n8n.angrylabs.app/form/90e18c52-079d-4004-876b-89911d4f5ae0",
   url_send_code:"https://n8n.angrylabs.app/webhook/17c50d70-e48e-47a6-8f7d-4434759b4f73",
+  url_get_pagos:"https://n8n.angrylabs.app/webhook/bcfb0eb3-b085-4413-a1a3-358cdff22b43"
 };
 
 const TABLE_COLUMNS = [
@@ -43,7 +45,7 @@ const TABLE_COLUMNS = [
   { key: 'estado',              label: 'Estado',           headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
     render: (u) => `<span class="badge ${statusBadgeClass(u.estado)}">${safe(u.estado)}</span>`
   },
-  { key: 'estado_pago',         label: 'Estatus de pago',  headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
+  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
     render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
   },
 ];
@@ -153,3 +155,40 @@ const FIELD_VALUES ={
     sheet_name:"identificacion"
   },
 }
+
+
+const TABLE_PAYMENTS_COLUMNS = [
+  { key: 'pago_id',                label: 'Payment ID',       headClass: 'table__head-cell table__col--payment-id',       cellClass: 'table__cell table__col--payment-id',        visible: false },
+  { key: 'full_name',              label: 'Alumno',        headClass: 'table__head-cell table__col--payment-user', cellClass: 'table__cell table__col--payment-user',  visible: true,
+    render: (u) =>u.full_name ? `${toTitleCase(u.full_name)}` : `${safe(u.full_name)}`
+  },
+  { key: 'monto',               label: 'Monto',             headClass: 'table__head-cell table__col--payment-amount',       cellClass: 'table__cell table__col--payment-amount',        visible: true,
+    render: (u) => {
+      const rawAmount = u.monto;
+      if (!Number.isFinite(rawAmount)) return safe(rawAmount);
+      return formatCurrency('PEN', rawAmount);
+    }
+  },
+  { key: 'fecha_pago',   label: 'Fecha',   headClass: 'table__head-cell table__col--payment-date',      cellClass: 'table__cell table__col--payment-date',       visible: true,
+    render: (u) => formatDateDMY(u.fecha_pago)
+  },
+  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--payment-plan',       cellClass: 'table__cell table__col--payment-plan',        visible: true },
+  { key: 'medio_de_pago',       label: 'Medio de pago',    headClass: 'table__head-cell table__col--payment-method', cellClass: 'table__cell table__col--payment-method',  visible: true,
+    render: (u) => `${safe(u.medio_de_pago)}`
+  },
+  { key: 'estado_pago',         label: 'Estado',  headClass: 'table__head-cell table__col--payment-status',     cellClass: 'table__cell table__col--payment-status',      visible: true,
+    render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
+  },
+];
+
+const DASHBOARD_FILTERS = [
+  {key:"nombre", element_id:"searchInput", onChange:false},
+  {key:"estado", element_id:"statusSelect", onChange:true},
+  {key:"plan", element_id:"FilterPlanSelect", onChange:true}
+];
+
+const DASHBOARD_PAGOS_FILTERS = [
+  {key:"nombre", element_id:"paymentsSearch", onChange:false},
+  {key:"fechas", element_id:"paymentsMonthFilter", onChange:true},
+  {key:"estado_pago", element_id:"FilterEstadoPagoSelect", onChange:true},
+];

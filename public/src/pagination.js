@@ -92,6 +92,13 @@ function makeChip(text, pageValue, opts = {}) {
   return a;
 }
 
+function execute_load_function(func,targetPage){
+    const fn = func // window en browser, global en Node
+    if (typeof fn === 'function') {
+      fn(targetPage);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // Delegación de clicks
     document.getElementById('pagination')?.addEventListener('click', (e) => {
@@ -102,7 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const targetPage = Number(btn.getAttribute('data-page'));
         if (!Number.isFinite(targetPage) || targetPage === usersState.page) return;
 
-        loadUsers(targetPage);
+
+        execute_load_function(globalThis.loadUsers, targetPage);
+        execute_load_function(globalThis.getPagos, targetPage);
+
     });
 
 });

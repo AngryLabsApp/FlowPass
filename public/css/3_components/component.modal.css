@@ -50,12 +50,57 @@
   }
 
   .modal__header {
+    position: relative;
     padding: 20px 24px;
     border-bottom: 1px solid var(--border);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: 16px;
     background: var(--surface, #fafafa);
+    flex-wrap: wrap;
+  }
+
+  .modal_header--user-data {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .modal__photo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--c4-lighter, #d9f8d0);
+    border: 2px solid var(--c4, #aceb98);
+    color: var(--text);
+    font-family: var(--family-heading);
+    font-weight: var(--font-weight-heading-bold);
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .modal__headline {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    padding-right: 48px;
+  }
+
+  .modal__heading-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   .modal__title {
@@ -63,11 +108,20 @@
     font-weight: 700;
     margin: 0;
     color: var(--text);
-    display: flex;
-    gap: 0.5rem;
+  }
+
+  .modal__member-since {
+    margin: 0;
+    color: var(--c2);
+    opacity: 0.5;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-heading-bold);
   }
 
   .modal__close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
     width: 32px;
     height: 32px;
     padding: 0;
@@ -82,6 +136,53 @@
   .modal__close:hover {
     background: rgba(0, 0, 0, 0.05);
     color: var(--text);
+  }
+
+  @media (max-width: 768px) {
+    .modal__header {
+      padding: 16px 20px;
+      gap: 12px;
+    }
+
+    .modal__photo {
+      width: 48px;
+      height: 48px;
+      font-size: 18px;
+    }
+
+    .modal__headline {
+      padding-right: 44px;
+    }
+
+    .modal__close {
+      top: 16px;
+      right: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .modal__header {
+      padding: 14px 16px;
+    }
+
+    .modal__headline {
+      padding-right: 40px;
+    }
+
+    .modal__photo {
+      width: 44px;
+      height: 44px;
+      font-size: 16px;
+    }
+
+    .modal__heading-row {
+      gap: 6px;
+    }
+
+    .modal__close {
+      top: 14px;
+      right: 16px;
+    }
   }
 
   .modal__body {

@@ -117,9 +117,7 @@ async function handleCheckin(query) {
     showLoader("Registrando ingreso...");
     const queryParams = { code: query };
     const url = buildUrl(ENV_VARS.url_ingreso, queryParams);
-    const res = await fetch(url, {
-      headers: { Accept: "application/json" },
-    });
+    const res = await ingreso_by_code(url);    
     console.log("Response!!!!", res);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
