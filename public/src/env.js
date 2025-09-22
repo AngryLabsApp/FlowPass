@@ -24,7 +24,8 @@ const ENV_VARS = {
   url_form_historico:"https://n8n.angrylabs.app/form/1d2dd8b6-8778-4783-962f-71386411932b",
 
   url_send_code:"https://n8n.angrylabs.app/webhook/17c50d70-e48e-47a6-8f7d-4434759b4f73",
-  url_get_pagos:"https://n8n.angrylabs.app/webhook/bcfb0eb3-b085-4413-a1a3-358cdff22b43"
+  url_get_pagos:"https://n8n.angrylabs.app/webhook/bcfb0eb3-b085-4413-a1a3-358cdff22b43",
+  url_delete_user:"https://n8n.angrylabs.app/webhook-test/911c3e6e-7548-4620-b86f-dc0f3cee0979"
 };
 
 const TABLE_COLUMNS = [
