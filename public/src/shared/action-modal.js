@@ -7,6 +7,7 @@ let confirmTitleEl = null;
 let confirmCancelBtn = null;
 let confirmConfirmBtn = null;
 let confirmOverlay = null;
+let user_to_delete = null;
 
 function createUsersMenu() {
   const menu = document.createElement("div");
@@ -160,6 +161,7 @@ function openConfirmDeleteDialog(row) {
     const raw = row.dataset.user || "";
     try {
       const user = raw ? JSON.parse(decodeURIComponent(raw)) : null;
+      user_to_delete = user;
       const nameParts = [user?.nombre, user?.apellidos]
         .map((part) => (part ? toTitleCase(String(part)) : ""))
         .filter(Boolean);
@@ -207,8 +209,31 @@ function initConfirmDeleteDialog() {
     closeConfirmDeleteDialog();
   });
 
-  confirmBtn?.addEventListener("click", () => {
+  confirmBtn?.addEventListener("click", async () => {
     // TODO: Conectar con la API real de eliminación.
+    console.log(user_to_delete);
+    const payload = {
+        id: user_to_delete.id,
+    };
+
+    try {
+      showLoader('Eliminando alumno...');
+      const res = await delete_users(payload);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      showToast("Actualizamos con éxito","success");
+    } catch (err) {
+      console.error(err);
+      showToast("Hubo un problema al eliminar. Reintenta en unos segundos.");
+    } finally {
+        loadUsers();
+        hideLoader();
+        //if (success) {
+        //  showToast("Actualizamos con éxito","success");
+        //}
+    }
+
+    closeConfirmDeleteDialog();
+    user_to_delete = null;
   });
 
   document.addEventListener("keydown", handleConfirmDialogKeydown);
