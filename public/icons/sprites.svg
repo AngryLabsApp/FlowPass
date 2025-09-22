@@ -175,10 +175,10 @@
       d="M22.948,9.525,18.362,4.939,16.241,7.061l3.413,3.412L5,10.5,5,13.5l14.7-.027-3.466,3.466,2.121,2.122,4.587-4.586A3.506,3.506,0,0,0,22.948,9.525Z" />
   </symbol>
 
-  <symbol id="menu-dots" viewBox="0 0 24 24">
-    <circle cx="256" cy="53.333" r="53.333" />
-    <circle cx="256" cy="256" r="53.333" />
-    <circle cx="256" cy="458.667" r="53.333" />
+  <symbol id="menu-dots-vertical" viewBox="0 0 24 24">
+    <circle cx="12" cy="2.5" r="2.5" />
+    <circle cx="12" cy="12" r="2.5" />
+    <circle cx="12" cy="21.5" r="2.5" />
   </symbol>
 
   <symbol id="apps" viewBox="0 0 24 24">

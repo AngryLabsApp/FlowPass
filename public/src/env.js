@@ -48,8 +48,16 @@ const TABLE_COLUMNS = [
   { key: 'estado',              label: 'Estado',           headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
     render: (u) => `<span class="badge ${statusBadgeClass(u.estado)}">${safe(u.estado)}</span>`
   },
-  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
+  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell table__col--status users-table__col--payment-status',     cellClass: 'table__cell table__col--status users-table__col--payment-status',      visible: true,
     render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
+  },
+  {
+    key: 'actions',
+    label: '',
+    headClass: 'table__head-cell table__col--actions',
+    cellClass: 'table__cell table__col--actions',
+    visible: true,
+    render: (u) => renderUserActionsCell(u),
   },
 ];
 

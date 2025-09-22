@@ -1,6 +1,121 @@
 
 let currentAbort = null;
 
+let usersMenu = null;
+let usersMenuTrigger = null;
+let usersMenuRow = null;
+
+function createUsersMenu() {
+  const menu = document.createElement("div");
+  menu.className = "users-menu";
+  menu.setAttribute("role", "menu");
+  menu.hidden = true;
+  menu.innerHTML = `
+    <button
+      type="button"
+      class="users-menu__item users-menu__item--danger"
+      role="menuitem"
+      data-action="delete"
+    >
+      Eliminar usuario
+    </button>
+  `;
+
+  menu.addEventListener("click", (event) => {
+    const item = event.target.closest("[data-action]");
+    if (!item) return;
+    event.preventDefault();
+    handleUsersMenuAction(item.dataset.action);
+  });
+
+  document.body.append(menu);
+  return menu;
+}
+
+function getUsersMenu() {
+  if (!usersMenu) usersMenu = createUsersMenu();
+  return usersMenu;
+}
+
+function hideUsersMenu() {
+  if (!usersMenu || usersMenu.hidden) return;
+  usersMenu.classList.remove("is-open");
+  usersMenu.hidden = true;
+  usersMenu.style.top = "";
+  usersMenu.style.left = "";
+
+  if (usersMenuTrigger) {
+    usersMenuTrigger.setAttribute("aria-expanded", "false");
+  }
+
+  usersMenuTrigger = null;
+  usersMenuRow = null;
+}
+
+function showUsersMenu(trigger) {
+  const menu = getUsersMenu();
+  if (usersMenuTrigger && usersMenuTrigger !== trigger) {
+    usersMenuTrigger.setAttribute("aria-expanded", "false");
+  }
+
+  menu.hidden = false;
+  menu.style.visibility = "hidden";
+  menu.style.top = "0px";
+  menu.style.left = "0px";
+
+  const triggerRect = trigger.getBoundingClientRect();
+  const menuRect = menu.getBoundingClientRect();
+  const margin = 8;
+  const top = triggerRect.bottom + window.scrollY + 4;
+  let left = triggerRect.right + window.scrollX - menuRect.width;
+  const maxLeft = window.scrollX + window.innerWidth - menuRect.width - margin;
+  const minLeft = window.scrollX + margin;
+  left = Math.min(Math.max(left, minLeft), maxLeft);
+
+  menu.style.top = `${Math.max(top, window.scrollY + margin)}px`;
+  menu.style.left = `${left}px`;
+  menu.style.visibility = "";
+  menu.classList.add("is-open");
+
+  trigger.setAttribute("aria-expanded", "true");
+  usersMenuTrigger = trigger;
+  usersMenuRow = trigger.closest(".table__row");
+}
+
+function toggleUsersMenu(trigger) {
+  const menu = getUsersMenu();
+  if (!menu.hidden && trigger === usersMenuTrigger) {
+    hideUsersMenu();
+  } else {
+    showUsersMenu(trigger);
+  }
+}
+
+function handleUsersMenuDocumentClick(event) {
+  if (event.target.closest("[data-users-menu-trigger]")) return;
+  if (usersMenu && usersMenu.contains(event.target)) return;
+  hideUsersMenu();
+}
+
+function handleUsersMenuKeydown(event) {
+  if (event.key === "Escape") hideUsersMenu();
+}
+
+function initUsersMenu() {
+  getUsersMenu();
+  document.addEventListener("click", handleUsersMenuDocumentClick);
+  document.addEventListener("keydown", handleUsersMenuKeydown);
+  window.addEventListener("resize", hideUsersMenu);
+  window.addEventListener("scroll", hideUsersMenu, true);
+}
+
+function handleUsersMenuAction(action) {
+  if (action === "delete") {
+    // TODO: agregar llamada real al backend usando usersMenuRow.dataset.userId.
+  }
+  hideUsersMenu();
+}
+
 /**
  * Carga usuarios desde el backend.
  * params: objeto de filtros. En tu backend actual usas:
@@ -118,6 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initSearch();
   initAddNewUser();
+  initUsersMenu();
   if (window.SessionManager) {
     loadUsers();
   } else {
@@ -141,6 +257,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tbody = $("#usersTbody");
   tbody.addEventListener("click", (e) => {
+    const menuTrigger = e.target.closest("[data-users-menu-trigger]");
+    if (menuTrigger) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleUsersMenu(menuTrigger);
+      return;
+    }
+
     const row = e.target.closest(".table__row");
     if (!row) return;
     const raw = row.dataset.user || "";

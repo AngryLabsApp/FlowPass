@@ -54,9 +54,9 @@
       display: none;
     }
     /* Mobile-only adjustments: fit table on small screens */
-    /* Hide the second status column (payment status) */
-    .table__head .table__head-cell.table__col--status:last-child,
-    .table__body .table__cell.table__col--status:last-child {
+    /* Hide el estado de pago en mobile */
+    .users-table__head .users-table__col--payment-status,
+    .users-table__body .users-table__col--payment-status {
       display: none;
     }
     /* Tighter spacing and allow wrapping to reduce horizontal overflow */
@@ -76,13 +76,158 @@
 
   /* Extra-compact view for very small phones */
   @media (width <= 480px) {
-    .table__col--last-name { display: none; }
+    .table__col--last-name {
+      display: none;
+    }
     .table__head-cell,
-    .table__cell { padding: 8px; }
+    .table__cell {
+      padding: 8px;
+    }
   }
 
   .table__row[role="button"] {
     cursor: pointer;
+  }
+
+  .table__col--actions {
+    width: 72px;
+  }
+
+  .table__head-cell.table__col--actions,
+  .table__cell.table__col--actions {
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .users-table__menu-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .users-table__menu-trigger:hover,
+  .users-table__menu-trigger:focus-visible {
+    background: rgba(0, 0, 0, 0.05);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+  }
+
+  .users-menu__icon {
+    width: 20px;
+    height: 20px;
+    color: var(--muted);
+  }
+
+  .users-menu__icon--disabled {
+    opacity: 0.5;
+  }
+
+  .users-menu {
+    position: absolute;
+    min-width: 168px;
+    padding: 4px 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+    z-index: 2200;
+  }
+
+  .users-menu.is-open {
+    animation: users-menu-fade-in 0.12s ease;
+  }
+
+  .users-menu[hidden] {
+    display: none;
+  }
+
+  .users-menu__item {
+    width: 100%;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .users-menu__item:hover,
+  .users-menu__item:focus-visible {
+    background: rgba(0, 0, 0, 0.04);
+    outline: none;
+  }
+
+  .users-menu__item--danger {
+    color: var(--text-danger);
+  }
+
+  .users-menu__item--danger:hover,
+  .users-menu__item--danger:focus-visible {
+    background: var(--bg-danger);
+    color: var(--danger);
+  }
+
+  @keyframes users-menu-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (width <= 768px) {
+    .table__col--actions {
+      width: 56px;
+    }
+    .users-table__menu-trigger {
+      width: 32px;
+      height: 32px;
+    }
+    .users-menu {
+      min-width: 152px;
+    }
+  }
+
+  @media (width <= 480px) {
+    .users-table {
+      table-layout: fixed;
+    }
+    .table__col--actions {
+      width: 48px;
+    }
+    .users-table__menu-trigger {
+      width: 28px;
+      height: 28px;
+    }
+    .users-menu {
+      min-width: 140px;
+    }
+    .users-table,
+    .users-table__head,
+    .users-table__body {
+      font-size: 12px;
+    }
+    .users-table__head .table__head-cell,
+    .users-table__body {
+      font-size: inherit;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: normal;
+      overflow-wrap: normal;
+    }
   }
 
   /* Fechas: no envolver ni cortar (cuando sean visibles) */
@@ -136,5 +281,4 @@
       font-weight: 500;
     }
   }
-
 }

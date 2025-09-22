@@ -52,8 +52,8 @@
       <main class="main">
         <h1 class="main__title">Alumnos</h1>
         <div class="card" aria-label="Tabla de usuarios">
-          <table class="table">
-            <thead class="table__head" id="usersThead">
+          <table class="table users-table" id="tabla-usuarios">
+            <thead class="table__head users-table__head" id="usersThead">
               <tr class="table__row">
                 <th class="table__head-cell table__col--first-name">
                   Nombre(s)
@@ -78,7 +78,7 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="table__body" id="usersTbody"></tbody>
+            <tbody class="table__body users-table__body" id="usersTbody"></tbody>
           </table>
           <div class="table__footer" id="usersPager">
             <div class="pagination">
@@ -550,6 +550,7 @@
   </script>
   <script src="/public/src/api/api.js" defer></script>
   <script src="/public/src/notificaciones/notificaciones.js"></script>
+  <script src="/public/src/users/table-helpers.js"></script>
   <script src="/public/src/env.js"></script>
   <script src="/public/src/load_dynamic_fields.js"></script>
   <script src="/public/src/submodal.js"></script>

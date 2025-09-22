@@ -38,7 +38,11 @@ function renderHead(columns, theadId) {
 // === NUEVO: render de una fila usando TABLE_COLUMNS
 function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
   let final_user = { ...user };
-  if (final_user?.is_plan_partner && !final_user?.is_plan_principal && final_user.partner_id) {
+  if (
+    final_user?.is_plan_partner &&
+    !final_user?.is_plan_principal &&
+    final_user.partner_id
+  ) {
     final_user.clases_tomadas = final_user.partner_clases_tomadas;
     final_user.limite_clases = final_user.partner_limite_clases;
     final_user.estado_pago = final_user.partner_estado_pago;
@@ -50,6 +54,7 @@ function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
   }
 
   const payload = encodeURIComponent(JSON.stringify(final_user));
+  const userId = final_user.id;
   const cells = columns
     .filter((c) => c.visible !== false)
     .map((c) => {
@@ -69,17 +74,18 @@ function renderUserRowDynamic(user, columns = TABLE_COLUMNS) {
       return `<td class="${cellClass}">${html}</td>`;
     })
     .join("");
-  return `<tr class="table__row" role="button" tabindex="0" data-user="${payload}">${cells}</tr>`;
+  return `<tr class="table__row users-table__row" role="button" tabindex="0" data-user="${payload}" data-user-id="${safe(
+    userId
+  )}">${cells}</tr>`;
 }
 
-function renderLoading( tbodyId = "members-tbody", colspan = 14) {
-
+function renderLoading(tbodyId = "members-tbody", colspan = 14) {
   const tbody = document.getElementById(tbodyId);
   tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${colspan}">Cargando...</td></tr>`;
 }
 
 function renderEmpty(tbodyId, msg = "Sin registros", colspan = 14) {
-   const tbody = document.getElementById(tbodyId);
+  const tbody = document.getElementById(tbodyId);
   tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${colspan}">${safe(
     msg
   )}</td></tr>`;
@@ -87,9 +93,9 @@ function renderEmpty(tbodyId, msg = "Sin registros", colspan = 14) {
 function renderError(
   tbodyId,
   msg = "Error al cargar datos. Intenta nuevamente.",
-   colspan = 14
+  colspan = 14
 ) {
-   const tbody = document.getElementById(tbodyId);
+  const tbody = document.getElementById(tbodyId);
   tbody.innerHTML = `<tr class="table__row"><td class="table__cell" colspan="${colspan}">${safe(
     msg
   )}</td></tr>`;
@@ -106,4 +112,3 @@ function renderTableRows(
   const html = users.map((u) => renderUserRowDynamic(u, columns)).join("");
   tbody.innerHTML = html;
 }
-
