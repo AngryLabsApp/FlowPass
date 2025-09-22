@@ -184,13 +184,13 @@
         success = true;
       } catch (err) {
         console.error(err);
-        showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+        FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
       } finally {
         hideLoader();
         loadUsers();
         closeSubModal();
         if (success) {
-          showToast("Actualizamos tu plan con éxito","success");
+          FP.toast.show("Actualizamos tu plan con éxito","success");
           try {
              closeModal(); 
           } catch (_) {}
@@ -317,14 +317,14 @@
         success = true;
       } catch (err) {
         console.error(err);
-        showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+        FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
         hideLoader();
       } finally {
         hideLoader();
         loadUsers();
         closeSubModal();
         if (success) {
-          showToast("Actualizamos con éxito","success");
+          FP.toast.show("Actualizamos con éxito","success");
           try {
              closeModal(); 
           } catch (_) {}

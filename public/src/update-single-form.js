@@ -139,13 +139,13 @@ function update_single_form_submit () {
       success = true;
     } catch (err) {
       console.error(err);
-      showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+      FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
     } finally {
         submitBtn.disabled = false;
         loadUsers();
         hideLoader();
         if (success) {
-          showToast("Actualizamos con éxito","success");
+          FP.toast.show("Actualizamos con éxito","success");
           closeModal();
         }
     }

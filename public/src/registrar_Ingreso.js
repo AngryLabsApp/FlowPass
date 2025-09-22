@@ -44,10 +44,10 @@ async function registrarIngreso(user) {
       throw new Error(`Error en la petición: ${res.status} ${res.statusText}`);
     }
     const data = await res.json();
-    showToast("¡Se registró el ingreso correctamente!","success");
+    FP.toast.show("¡Se registró el ingreso correctamente!","success");
     // Aquí podrías mostrar un mensaje de éxito en la UI
   } catch (err) {
-    showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+    FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
     hideLoader();
     console.error("Error al registrar ingreso:", err);
     // Aquí podrías mostrar un mensaje de error en la UI

@@ -36,7 +36,7 @@ function update_form_submit () {
       success = true;
     } catch (err) {
       console.error(err);
-      showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+      FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
       hideLoader();
     } finally {
         submitBtn.disabled = false;
@@ -45,7 +45,7 @@ function update_form_submit () {
         // Forzar recarga total en éxito
         if (success) {
           //esto no se ve porque se recarga la pantallaa
-          showToast("Actualizamos tu plan con éxito","success");
+          FP.toast.show("Actualizamos tu plan con éxito","success");
          
           //CAMBIAR ESTO PARA QUE NO SE CIERRE EL MODAL, O SE VUELVA ABRIR
           try { closeModal(); } catch (_) {}

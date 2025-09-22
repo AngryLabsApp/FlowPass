@@ -532,8 +532,9 @@
     </div>
   </div>
 
-  <!-- contenedor raíz para toasts -->
-  <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div>
+  <!-- contenedor raíz para toasts
+  <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div> -->
+  <fp-toast id="toast" class="toast" aria-live="assertive" aria-atomic="true"></fp-toast>
 
   <!-- Submodal (mobile): Formulario sobre la ficha -->
   <div class="modal modal--child" id="userSubModal" aria-hidden="true" role="dialog" aria-modal="true"
@@ -571,10 +572,11 @@
   <script src="/public/src/pagination.js"></script>
   <script src="/public/src/update_user.js"></script>
   <script src="/public/src/spinner.js"></script>
-  <script src="/public/src/error_toast.js"></script>
   <script src="/public/src/code.js"></script>
   <script src="/public/src/modal.js"></script>
   <script src="/public/src/registrar_Ingreso.js"></script>
+  
+  <script src="/public/components/toast/toast.js" type="module"></script>
 
 
 </body>
