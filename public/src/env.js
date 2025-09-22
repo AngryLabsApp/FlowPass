@@ -74,6 +74,7 @@ const PLANES = [
     { value: "4 Horas privadas", label: "4 Horas privadas", amount:460 },
     { value: "8 Horas privadas", label: "8 Horas privadas", amount:880 },
     { value: "12 Horas privadas", label: "12 Horas privadas", amount:1260 },
+    { value: "Clase Libre", label: "Clase Libre", amount:0 },
 ];
 
   const ESTADO_PLAN = [
