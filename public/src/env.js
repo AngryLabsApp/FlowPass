@@ -34,11 +34,15 @@ const TABLE_COLUMNS = [
   { key: 'apellidos',           label: 'Apellido(s)',      headClass: 'table__head-cell table__col--last-name',  cellClass: 'table__cell table__col--last-name',   visible: true,
     render: (u) =>u.apellidos ? `${toTitleCase(u.apellidos)}` : `${safe(u.apellidos)}`
   },
-  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--plan',       cellClass: 'table__cell table__col--plan',        visible: true },
+  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--plan',       cellClass: 'table__cell table__col--plan',        visible: true,
+      render: (u) =>!u?.plan ? "-" :  `${safe(u.plan)}`
+   },
   { key: 'clases',              label: 'Clases realizadas',headClass: 'table__head-cell table__col--classes',    cellClass: 'table__cell table__col--classes',     visible: true,
-    render: (u) =>u.limite_clases ? `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}` : `${safe(u.clases_tomadas)}`
+    render: (u) =>!u?.plan ? "-" :  u.limite_clases ? `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}` : `${safe(u.clases_tomadas)}`
   },
-  { key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true },
+  { key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true,
+     render: (u) =>!u?.plan ? "-" :  `${safe(u.dias_de_gracia)}`
+  },
   { key: 'fecha_inicio_plan',   label: 'Inicio de plan',   headClass: 'table__head-cell table__col--start',      cellClass: 'table__cell table__col--start',       visible: true,
     render: (u) => formatDateDMY(u.fecha_inicio_plan)
   },
@@ -49,7 +53,7 @@ const TABLE_COLUMNS = [
     render: (u) => `<span class="badge ${statusBadgeClass(u.estado)}">${safe(u.estado)}</span>`
   },
   { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell table__col--status users-table__col--payment-status',     cellClass: 'table__cell table__col--status users-table__col--payment-status',      visible: true,
-    render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
+    render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: "-"
   },
   {
     key: 'actions',
