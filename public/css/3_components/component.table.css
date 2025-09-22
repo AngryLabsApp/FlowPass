@@ -158,6 +158,9 @@
     text-align: left;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
   .users-menu__item:hover,

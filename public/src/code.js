@@ -1,4 +1,3 @@
-
 let currentAbort = null;
 
 let usersMenu = null;
@@ -17,7 +16,10 @@ function createUsersMenu() {
       role="menuitem"
       data-action="delete"
     >
-      Eliminar usuario
+      <svg class="icon" aria-hidden="true">
+        <use href="/public/icons/sprites.svg#trash"></use>
+       </svg>
+      Eliminar alumno
     </button>
   `;
 
@@ -123,28 +125,26 @@ function handleUsersMenuAction(action) {
  */
 function buildQueryParams(page) {
   const queryParams = {};
-  if (page){
-    queryParams.page = page
+  if (page) {
+    queryParams.page = page;
   }
 
   let index = 1;
-  DASHBOARD_FILTERS.forEach(item =>{
-      const input = $("#"+item.element_id).value;
-       if (input && String(input).trim() !== "") {
-        queryParams["field"+index] = item.key;
-        queryParams["value"+index] = String(input).trim();
-        index ++;
-      }
+  DASHBOARD_FILTERS.forEach((item) => {
+    const input = $("#" + item.element_id).value;
+    if (input && String(input).trim() !== "") {
+      queryParams["field" + index] = item.key;
+      queryParams["value" + index] = String(input).trim();
+      index++;
+    }
   });
 
-  
   return queryParams;
 }
 async function loadUsers(page = 1) {
-  
-    if (page){
-        setPage(page);
-    }
+  if (page) {
+    setPage(page);
+  }
 
   renderLoading("usersTbody");
 
@@ -167,11 +167,11 @@ async function loadUsers(page = 1) {
 
     const { total, data: users } = items[0] || {};
     if (!Array.isArray(users) || users.length === 0) {
-        renderPagination(0);
+      renderPagination(0);
       return renderEmpty("usersTbody");
     }
- 
-    renderTableRows(users,"usersTbody",TABLE_COLUMNS);
+
+    renderTableRows(users, "usersTbody", TABLE_COLUMNS);
     renderPagination(total);
     // Si quieres usar 'total' para paginación o mostrar un contador:
     // console.log("Total:", total);
@@ -194,7 +194,7 @@ function initAddNewUser() {
   const btn = $("#nuevoUsuario");
   if (!btn) return;
   btn.addEventListener("click", () => {
-  window.open(ENV_VARS.url_form, "_self");
+    window.open(ENV_VARS.url_form, "_self");
   });
 }
 
@@ -221,15 +221,13 @@ function initSearch() {
 // Init
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
-
-//LOAD DYNAMIC FIELDS
+  //LOAD DYNAMIC FIELDS
   renderHead(TABLE_COLUMNS, "usersThead");
   fillSelect("Plan", PLANES);
   fillSelect("Medio_de_pago", METODO_DE_PAGO);
   fillSelect("PaymentStatus", ESTADO_PAGO);
   fillSelect("FilterPlanSelect", PLANES);
   fillSelect("statusSelect", ESTADO_PLAN);
-
 
   initSearch();
   initAddNewUser();
@@ -240,13 +238,15 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("session-ready", () => loadUsers(), { once: true });
   }
 
-  DASHBOARD_FILTERS.forEach(item =>{
+  DASHBOARD_FILTERS.forEach((item) => {
     if (item.onChange)
-      document.getElementById(item.element_id).addEventListener("change", () => {
-        loadUsers(); // tu función que vuelve a cargar con filtros
-      });
+      document
+        .getElementById(item.element_id)
+        .addEventListener("change", () => {
+          loadUsers(); // tu función que vuelve a cargar con filtros
+        });
   });
-  
+
   /*
     document.getElementById("methodSelect").addEventListener("change", () => {
         const value = document.getElementById("methodSelect").value;
