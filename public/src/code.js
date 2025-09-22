@@ -4,6 +4,12 @@ let usersMenu = null;
 let usersMenuTrigger = null;
 let usersMenuRow = null;
 
+let confirmDialog = null;
+let confirmTitleEl = null;
+let confirmCancelBtn = null;
+let confirmConfirmBtn = null;
+let confirmOverlay = null;
+
 function createUsersMenu() {
   const menu = document.createElement("div");
   menu.className = "users-menu";
@@ -16,9 +22,9 @@ function createUsersMenu() {
       role="menuitem"
       data-action="delete"
     >
-      <svg class="icon" aria-hidden="true">
+      <svg class="icon users-menu__icon" aria-hidden="true">
         <use href="/public/icons/sprites.svg#trash"></use>
-       </svg>
+      </svg>
       Eliminar alumno
     </button>
   `;
@@ -113,9 +119,101 @@ function initUsersMenu() {
 
 function handleUsersMenuAction(action) {
   if (action === "delete") {
-    // TODO: agregar llamada real al backend usando usersMenuRow.dataset.userId.
+    openConfirmDeleteDialog(usersMenuRow);
   }
   hideUsersMenu();
+}
+
+function cacheConfirmDialogElements() {
+  if (confirmDialog) {
+    return {
+      dialog: confirmDialog,
+      title: confirmTitleEl,
+      cancelBtn: confirmCancelBtn,
+      confirmBtn: confirmConfirmBtn,
+      overlay: confirmOverlay,
+    };
+  }
+
+  const dialog = document.getElementById("confirmDeleteDialog");
+  if (!dialog) return {};
+
+  confirmDialog = dialog;
+  confirmTitleEl = dialog.querySelector("#confirmDeleteTitle");
+  confirmCancelBtn = dialog.querySelector("[data-dialog-cancel]");
+  confirmConfirmBtn = dialog.querySelector("[data-dialog-confirm]");
+  confirmOverlay = dialog.querySelector("[data-dialog-close]");
+
+  return {
+    dialog: confirmDialog,
+    title: confirmTitleEl,
+    cancelBtn: confirmCancelBtn,
+    confirmBtn: confirmConfirmBtn,
+    overlay: confirmOverlay,
+  };
+}
+
+function openConfirmDeleteDialog(row) {
+  const { dialog, title, cancelBtn } = cacheConfirmDialogElements();
+  if (!dialog) return;
+
+  let fullName = "este alumno";
+  if (row) {
+    const raw = row.dataset.user || "";
+    try {
+      const user = raw ? JSON.parse(decodeURIComponent(raw)) : null;
+      const nameParts = [user?.nombre, user?.apellidos]
+        .map((part) => (part ? toTitleCase(String(part)) : ""))
+        .filter(Boolean);
+      if (nameParts.length) fullName = nameParts.join(" ");
+    } catch (error) {
+      console.warn("No se pudo preparar el nombre del alumno", error);
+    }
+  }
+
+  if (title) {
+    title.textContent = `¿Seguro que quieres eliminar al alumno ${fullName}?`;
+  }
+
+  dialog.dataset.userId = row?.dataset.userId || "";
+  dialog.dataset.userPayload = row?.dataset.user || "";
+
+  dialog.setAttribute("aria-hidden", "false");
+  requestAnimationFrame(() => {
+    cancelBtn?.focus({ preventScroll: true });
+  });
+}
+
+function closeConfirmDeleteDialog() {
+  if (!confirmDialog || confirmDialog.getAttribute("aria-hidden") === "true") return;
+  confirmDialog.setAttribute("aria-hidden", "true");
+  confirmDialog.dataset.userId = "";
+  confirmDialog.dataset.userPayload = "";
+}
+
+function handleConfirmDialogKeydown(event) {
+  if (event.key === "Escape" && confirmDialog?.getAttribute("aria-hidden") === "false") {
+    closeConfirmDeleteDialog();
+  }
+}
+
+function initConfirmDeleteDialog() {
+  const { dialog, cancelBtn, confirmBtn, overlay } = cacheConfirmDialogElements();
+  if (!dialog) return;
+
+  cancelBtn?.addEventListener("click", () => {
+    closeConfirmDeleteDialog();
+  });
+
+  overlay?.addEventListener("click", () => {
+    closeConfirmDeleteDialog();
+  });
+
+  confirmBtn?.addEventListener("click", () => {
+    // TODO: Conectar con la API real de eliminación.
+  });
+
+  document.addEventListener("keydown", handleConfirmDialogKeydown);
 }
 
 /**
@@ -232,6 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSearch();
   initAddNewUser();
   initUsersMenu();
+  initConfirmDeleteDialog();
   if (window.SessionManager) {
     loadUsers();
   } else {

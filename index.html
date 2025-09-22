@@ -91,6 +91,19 @@
     </div>
   </div>
 
+  <!-- Modal: Confirmar eliminación -->
+  <div class="dialog" id="confirmDeleteDialog" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="confirmDeleteTitle">
+    <div class="dialog__overlay" data-dialog-close></div>
+    <div class="dialog__panel" role="document">
+      <h2 class="dialog__title" id="confirmDeleteTitle">¿Seguro que quieres eliminar al alumno?</h2>
+      <p class="dialog__note">Esta acción es irrevocable.</p>
+      <div class="dialog__actions">
+        <button type="button" class="dialog__btn dialog__btn--neutral" data-dialog-cancel>Cancelar</button>
+        <button type="button" class="dialog__btn dialog__btn--danger" data-dialog-confirm>Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: Ficha de usuario -->
   <div class="modal" id="userModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="userModalTitle">
     <div class="modal__overlay" data-close></div>

@@ -24,6 +24,7 @@
 @import url("./3_components/component.user.css")   layer(components);
 @import url("./3_components/component.search.css") layer(components);
 @import url("./3_components/component.modal.css") layer(components);
+@import url("./3_components/component.dialog.css") layer(components);
 @import url("./3_components/component.top_bar_select.css") layer(components);
 @import url("./3_components/component.loader.css") layer(components);
 @import url("./3_components/component.icon.css") layer(components);
