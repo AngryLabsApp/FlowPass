@@ -4,7 +4,7 @@ const LOGIN_PATH = "/login.html";
 
 const SEND_CODE_VIA_WHATSAPP = true; 
 
-const CHECKIN_ICON_KEY = "gym";
+const CHECKIN_ICON_KEY = "salsa";
 
 const NAME_OF_USERS = "Alumnos"
 
@@ -15,13 +15,13 @@ const IMAGES_PATH_CHECKIN = {
 
 const ENV_VARS = {
   url_form:
-    "https://n8n.angrylabs.app/form/3858af95-5038-4d61-ba84-4ee767accee2",
+    "https://n8n.angrylabs.app/form/6289ae4c-44af-475b-95ba-79c6a85c90b3",
   url_get_users:
     "https://n8n.angrylabs.app/webhook/0768a235-0d92-41e5-93f8-fcb566c57d40",
   url_update:
     "https://n8n.angrylabs.app/webhook/e1b1b332-23b4-4a96-97a4-912ec7d73ffc",
   url_ingreso:"https://n8n.angrylabs.app/webhook/23c0319d-5248-4b38-8fe6-b72063c526df",
-  url_form_historico:"https://n8n.angrylabs.app/form/1d2dd8b6-8778-4783-962f-71386411932b",
+  url_form_historico:"https://n8n.angrylabs.app/form/d0c2771d-933d-4ded-9a2f-d952f3c741f3",
 
   url_send_code:"https://n8n.angrylabs.app/webhook/17c50d70-e48e-47a6-8f7d-4434759b4f73",
   url_get_pagos:"https://n8n.angrylabs.app/webhook/bcfb0eb3-b085-4413-a1a3-358cdff22b43",
@@ -67,17 +67,14 @@ const TABLE_COLUMNS = [
 ];
 
 const PLANES = [
-    { value: "12 Sesiones Mensuales", label: "12 Sesiones Mensuales", amount:150 },
-    { value: "16 Sesiones Mensuales", label: "16 Sesiones Mensuales", amount:180  },
-    { value: "20 Sesiones Mensuales", label: "20 Sesiones Mensuales", amount:200  },
-    { value: "Clase Libre",        label: "Clase Libre", amount:15  },
-    { value: "Clase Gratis",       label: "Clase Gratis", amount:0 , is_free:true },
-    { value: "12 Sesiones Personalizadas",  label: "12 Sesiones Personalizadas",amount:150  },
-    { value: "16 Sesiones Personalizadas",  label: "16 Sesiones Personalizadas",amount:180  },
-    { value: "20 Sesiones Personalizadas",  label: "20 Sesiones Personalizadas",amount:200  },
-    { value: "Parejas",  label: "Parejas",amount:200 , partners: true },
-    { value: "Ilimitado",  label: "Ilimitado",amount:200 , ilimitado: true  },
-  ];
+    { value: "4 Horas grupales", label: "4 Horas grupales (30 días)", amount:200 },
+    { value: "8 Horas grupales", label: "8 Horas grupales (60 días)", amount:350 },
+    { value: "16 Horas grupales", label: "16 Horas grupales (90 días)", amount:600 },
+    { value: "1 Hora privada", label: "1 Hora privada", amount:120 },
+    { value: "4 Horas privadas", label: "4 Horas privadas", amount:460 },
+    { value: "8 Horas privadas", label: "8 Horas privadas", amount:880 },
+    { value: "12 Horas privadas", label: "12 Horas privadas", amount:1260 },
+];
 
   const ESTADO_PLAN = [
     { value: "Activo", label: "Activo"},
