@@ -524,16 +524,8 @@
   </div>
 
   <!-- Loader modal -->
-  <div class="modal" id="loaderModal" aria-hidden="true" role="alert" aria-modal="true">
-    <div class="modal__overlay"></div>
-    <div class="modal__dialog card loader__dialog">
-      <div class="loader__spinner"></div>
-      <p class="loader__text">Procesando...</p>
-    </div>
-  </div>
+  <fp-loader id="loader"></fp-loader>
 
-  <!-- contenedor raíz para toasts
-  <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div> -->
   <fp-toast id="toast" class="toast" aria-live="assertive" aria-atomic="true"></fp-toast>
 
   <!-- Submodal (mobile): Formulario sobre la ficha -->
@@ -571,12 +563,13 @@
   <script src="/public/src/update-single-form.js"></script>
   <script src="/public/src/pagination.js"></script>
   <script src="/public/src/update_user.js"></script>
-  <script src="/public/src/spinner.js"></script>
+
   <script src="/public/src/code.js"></script>
   <script src="/public/src/modal.js"></script>
   <script src="/public/src/registrar_Ingreso.js"></script>
   
-  <script src="/public/components/toast/toast.js" type="module"></script>
+  <script type="module" src="/public/components/toast/toast.js"></script>
+  <script type="module" src="/public/components/loader/loader.js"></script>
 
 
 </body>

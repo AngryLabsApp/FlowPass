@@ -129,7 +129,7 @@ function update_single_form_submit () {
       return;
     }
 
-    showLoader('Actualizando los datos...');
+    FP.loader.show('Actualizando los datos...');
 
     try {
       const res = await update_users(payload);
@@ -143,7 +143,7 @@ function update_single_form_submit () {
     } finally {
         submitBtn.disabled = false;
         loadUsers();
-        hideLoader();
+        FP.loader.hide();
         if (success) {
           FP.toast.show("Actualizamos con éxito","success");
           closeModal();

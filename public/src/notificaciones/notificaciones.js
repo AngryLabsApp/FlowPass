@@ -2,7 +2,7 @@ function send_user_code_submit() {
   const button = document.getElementById("btnSendCodeWhatsApp");
   if (!button) return;
   button.addEventListener("click", async () => {
-    showLoader("Enviando codigo...");
+    FP.loader.show("Enviando codigo...");
     user = getUserSelected();
     const payload = {
       id: user.id,
@@ -28,7 +28,7 @@ function send_user_code_submit() {
       }
       FP.toast.show(text, "error");
     }
-    hideLoader();
+    FP.loader.hide();
   });
 }
 

@@ -217,7 +217,7 @@ function initConfirmDeleteDialog() {
     };
 
     try {
-      showLoader('Eliminando alumno...');
+      FP.loader.show('Eliminando alumno...');
       const res = await delete_users(payload);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       FP.toast.show("Actualizamos con éxito","success");
@@ -226,7 +226,7 @@ function initConfirmDeleteDialog() {
       FP.toast.show("Hubo un problema al eliminar. Reintenta en unos segundos.");
     } finally {
         loadUsers();
-        hideLoader();
+        FP.loader.hide();
         //if (success) {
         //  FP.toast.show("Actualizamos con éxito","success");
         //}

@@ -3,7 +3,7 @@ function update_form_submit () {
   if (!form) return;
 
   form.addEventListener('submit', async (e) => {
-     showLoader('Actualizando los datos...');
+     FP.loader.show('Actualizando los datos...');
     e.preventDefault();
     const formEl = e.currentTarget;
 
@@ -37,11 +37,10 @@ function update_form_submit () {
     } catch (err) {
       console.error(err);
       FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
-      hideLoader();
     } finally {
         submitBtn.disabled = false;
         loadUsers();
-        hideLoader();
+        FP.loader.hide();
         // Forzar recarga total en éxito
         if (success) {
           //esto no se ve porque se recarga la pantallaa

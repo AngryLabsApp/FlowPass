@@ -35,10 +35,10 @@ async function registrarIngreso(user) {
 
     const nuevasTomadas = tomadas + 1;
   try {
-    showLoader('Registrando ingreso...');
+    FP.loader.show('Registrando ingreso...');
     const res = await registrar_ingreso(user, nuevasTomadas);
     loadUsers();
-    hideLoader();
+    FP.loader.hide();
     closeModal();
     if (!res.ok) {
       throw new Error(`Error en la petición: ${res.status} ${res.statusText}`);
@@ -48,7 +48,7 @@ async function registrarIngreso(user) {
     // Aquí podrías mostrar un mensaje de éxito en la UI
   } catch (err) {
     FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
-    hideLoader();
+    FP.loader.hide();
     console.error("Error al registrar ingreso:", err);
     // Aquí podrías mostrar un mensaje de error en la UI
   }

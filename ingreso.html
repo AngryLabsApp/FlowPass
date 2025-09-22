@@ -194,23 +194,12 @@
     </div>
 
     <!-- Loader modal -->
-    <div
-      class="modal"
-      id="loaderModal"
-      aria-hidden="true"
-      role="alert"
-      aria-modal="true"
-    >
-      <div class="modal__overlay"></div>
-      <div class="modal__dialog card loader__dialog">
-        <div class="loader__spinner"></div>
-        <p class="loader__text">Procesando...</p>
-      </div>
-    </div>
+    <fp-loader id="loader"></fp-loader>
+
+
     <script src="/public/src/utils/dynamic-forms.js"></script>
     <script src="/public/src/utils/utils.js"></script>
     <script defer src="/public/src/shared/sidebar.js"></script>
-    <script src="/public/src/spinner.js"></script>
      <script src="/public/src/session/session_manager.js" type="module"></script>
       <script type="module">
       import { ensureSessionOrRedirect } from "/public/src/session/session_manager.js";
@@ -220,5 +209,7 @@
     <script src="/public/src/api/api.js" defer></script>
     <script src="/public/src/env.js"></script>
     <script src="/public/src/Ingreso/Ingreso.js"></script>
+
+    <script type="module" src="/public/components/loader/loader.js"></script>
   </body>
 </html>
