@@ -51,6 +51,16 @@ async function update_users(payload) {
     });
 }
 
+async function delete_users(payload) {
+    const local_session = await window.SessionManager.ensureSessionOrRedirect();
+    return await fetch(ENV_VARS.url_delete_user, {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${local_session.access_token}`, 'Content-Type': 'application/json',Accept: "application/json" },
+          body: JSON.stringify(payload),
+    });
+}
+
+
 async function send_user_code(payload) {
     const local_session = await window.SessionManager.ensureSessionOrRedirect();
     return await fetch(ENV_VARS.url_send_code, {
