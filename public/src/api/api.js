@@ -37,6 +37,7 @@ async function registrar_ingreso(user, nuevasTomadas) {
         id: user.id,
         type: "SINGLE",
         clases_tomadas: { value: nuevasTomadas },
+        method:"MANUAL"
       }),
     });
   
