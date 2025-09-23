@@ -117,8 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
   initConfirmDeleteDialog();
   if (window.SessionManager) {
     loadUsers();
+
+
   } else {
-    window.addEventListener("session-ready", () => loadUsers(), { once: true });
+    window.addEventListener("session-ready", () => {
+      loadUsers();
+        //TEST
+    //  get_planes();
+    }, { once: true });
   }
 
   DASHBOARD_FILTERS.forEach((item) => {
