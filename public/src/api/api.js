@@ -9,6 +9,16 @@ async function load_users(url, currentAbort) {
     });
 }
 
+async function get_planes() {
+
+    const local_session = await window.SessionManager.ensureSessionOrRedirect();
+    if (!local_session) return; 
+    
+    return await fetch(ENV_VARS.url_get_planes, {
+      headers: { Authorization: `Bearer ${local_session.access_token}`, 'Content-Type': 'application/json',Accept: "application/json" },
+    });
+}
+
 async function ingreso_by_code(url) {
    const local_session = await window.SessionManager.ensureSessionOrRedirect();
    if (!local_session) return; 
