@@ -30,13 +30,18 @@
           <!-- Card de Ingreso -->
           <div class="card checkin" aria-label="Registro de ingreso">
             <!-- Boton para bloquear pantalla -->
-            <div class="lock-unclock-btn">
-              <button class="btn-circle">
-                <svg class="icon icon--sm">
+            <div class="lock-unclock-btn" id="block-button">
+              <button
+                class="btn-circle"
+                type="button"
+                aria-pressed="false"
+                aria-label="Desbloqueado"
+              >
+                <svg class="icon icon--sm lock-unclock-btn__icon" aria-hidden="true">
                   <use href="/public/icons/sprites.svg#unlock-code"></use>
                 </svg>
-                
               </button>
+              <div class="lock-unclock-msg" aria-live="polite" hidden></div>
             </div>
             <!-- Foto -->
             <div class="checkin__avatar-wrap">
@@ -229,7 +234,7 @@
     <script src="/public/src/api/api.js" defer></script>
     <script src="/public/src/env.js"></script>
     <script src="/public/src/Ingreso/Ingreso.js"></script>
-
+    <script type="module" src="/public/src/Ingreso/lock-unclock.js"></script>
     <script type="module" src="/public/components/loader/loader.js"></script>
   </body>
 </html>

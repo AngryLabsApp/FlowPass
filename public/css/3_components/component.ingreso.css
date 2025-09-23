@@ -104,6 +104,7 @@
   }
 
   .card.checkin {
+    position: relative;
     display: block;
     margin: 16px auto; /* ← centra horizontal */
     width: min(720px, 100%); /* ancho cómodo */
