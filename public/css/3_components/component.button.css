@@ -14,6 +14,25 @@
     width: 100%;
   }
 
+  .lock-unclock-btn {
+    justify-self: flex-end;
+  }
+  .btn-circle {
+    padding: 10px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+    background: #fff;
+    align-items: center;
+    border: 1px solid var(--border);
+    opacity: 0.4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+  }
+
   .btn--whatsapp {
     font-size: smaller;
     background: var(--bg-success);
