@@ -67,18 +67,13 @@ const TABLE_COLUMNS = [
   },
 ];
 
-const PLANES = [
-    { value: "12 Sesiones Mensuales", label: "12 Sesiones Mensuales", amount:150 },
-    { value: "16 Sesiones Mensuales", label: "16 Sesiones Mensuales", amount:180  },
-    { value: "20 Sesiones Mensuales", label: "20 Sesiones Mensuales", amount:200  },
-    { value: "Clase Libre",        label: "Clase Libre", amount:15  },
-    { value: "Clase Gratis",       label: "Clase Gratis", amount:0 , is_free:true },
-    { value: "12 Sesiones Personalizadas",  label: "12 Sesiones Personalizadas",amount:150  },
-    { value: "16 Sesiones Personalizadas",  label: "16 Sesiones Personalizadas",amount:180  },
-    { value: "20 Sesiones Personalizadas",  label: "20 Sesiones Personalizadas",amount:200  },
-    { value: "Parejas",  label: "Parejas",amount:200 , partners: true },
-    { value: "Ilimitado",  label: "Ilimitado",amount:200 , ilimitado: true  },
-  ];
+let PLANES = [];
+function ENV_SET_PLANES(_planes){
+  if (_planes && _planes.length > 0){
+    _planes.sort((a, b) => (Number(a.order ?? Infinity) - Number(b.order ?? Infinity)));
+  };
+  PLANES = _planes || [];
+}
 
   const ESTADO_PLAN = [
     { value: "Activo", label: "Activo"},
