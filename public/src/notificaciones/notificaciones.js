@@ -2,7 +2,7 @@ function send_user_code_submit() {
   const button = document.getElementById("btnSendCodeWhatsApp");
   if (!button) return;
   button.addEventListener("click", async () => {
-    showLoader("Enviando codigo...");
+    FP.loader.show("Enviando codigo...");
     user = getUserSelected();
     const payload = {
       id: user.id,
@@ -12,7 +12,7 @@ function send_user_code_submit() {
       const data = await res.json();
 
       if (!res.ok) throw new Error(data.reason);
-      showToast("El código de ingreso se envió con éxito.", "success");
+      FP.toast.show("El código de ingreso se envió con éxito.", "success");
     } catch (err) {
       let error_message = err.message;
       console.log("error", error_message);
@@ -26,9 +26,9 @@ function send_user_code_submit() {
           text = "El número de teléfono no es válido.";
           break;
       }
-      showToast(text, "error");
+      FP.toast.show(text, "error");
     }
-    hideLoader();
+    FP.loader.hide();
   });
 }
 

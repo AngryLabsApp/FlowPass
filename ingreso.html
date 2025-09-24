@@ -26,10 +26,23 @@
       <!-- Content -->
       <div class="content">
         <main class="main">
-          
           <h1 class="main__title u-hide-mobile">Ingreso</h1>
           <!-- Card de Ingreso -->
           <div class="card checkin" aria-label="Registro de ingreso">
+            <!-- Boton para bloquear pantalla -->
+            <div class="lock-unclock-btn" id="block-button">
+              <button
+                class="btn-circle"
+                type="button"
+                aria-pressed="false"
+                aria-label="Desbloqueado"
+              >
+                <svg class="icon icon--sm lock-unclock-btn__icon" aria-hidden="true">
+                  <use href="/public/icons/sprites.svg#unlock-code"></use>
+                </svg>
+              </button>
+              <div class="lock-unclock-msg" aria-live="polite" hidden></div>
+            </div>
             <!-- Foto -->
             <div class="checkin__avatar-wrap">
               <div
@@ -174,8 +187,17 @@
       <div class="modal__overlay" data-close></div>
       <div class="modal__dialog card success-modal__dialog" role="document">
         <header class="modal__header success-modal__header">
-          <h2 class="modal__title u-sr-only" id="userModalTitle">Ingreso correcto</h2>
-          <button class="modal__close" type="button" aria-label="Cerrar" data-close>✕</button>
+          <h2 class="modal__title u-sr-only" id="userModalTitle">
+            Ingreso correcto
+          </h2>
+          <button
+            class="modal__close"
+            type="button"
+            aria-label="Cerrar"
+            data-close
+          >
+            ✕
+          </button>
         </header>
         <div class="modal__body success-modal">
           <img
@@ -185,34 +207,26 @@
             height="150"
             class="success-modal__img"
           />
-          <h3 class="success-modal__title">¡Bienvenido <span id="successUserName"></span>!</h3>
+          <h3 class="success-modal__title">
+            ¡Bienvenido <span id="successUserName"></span>!
+          </h3>
           <p class="success-modal__subtitle">Disfruta de tu clase</p>
-          <p class="success-modal__classes">clase: <span id="successClassProgress"></span></p>
+          <p class="success-modal__classes">
+            clase: <span id="successClassProgress"></span>
+          </p>
           <p class="success-modal__thanks">¡Gracias!</p>
         </div>
       </div>
     </div>
 
     <!-- Loader modal -->
-    <div
-      class="modal"
-      id="loaderModal"
-      aria-hidden="true"
-      role="alert"
-      aria-modal="true"
-    >
-      <div class="modal__overlay"></div>
-      <div class="modal__dialog card loader__dialog">
-        <div class="loader__spinner"></div>
-        <p class="loader__text">Procesando...</p>
-      </div>
-    </div>
+    <fp-loader id="loader"></fp-loader>
+
     <script src="/public/src/utils/dynamic-forms.js"></script>
     <script src="/public/src/utils/utils.js"></script>
     <script defer src="/public/src/shared/sidebar.js"></script>
-    <script src="/public/src/spinner.js"></script>
-     <script src="/public/src/session/session_manager.js" type="module"></script>
-      <script type="module">
+    <script src="/public/src/session/session_manager.js" type="module"></script>
+    <script type="module">
       import { ensureSessionOrRedirect } from "/public/src/session/session_manager.js";
       window.SessionManager = { ensureSessionOrRedirect };
       window.dispatchEvent(new Event("session-ready"));
@@ -220,5 +234,7 @@
     <script src="/public/src/api/api.js" defer></script>
     <script src="/public/src/env.js"></script>
     <script src="/public/src/Ingreso/Ingreso.js"></script>
+    <script type="module" src="/public/src/Ingreso/lock-unclock.js"></script>
+    <script type="module" src="/public/components/loader/loader.js"></script>
   </body>
 </html>

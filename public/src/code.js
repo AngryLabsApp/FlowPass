@@ -105,10 +105,10 @@ function initSearch() {
 document.addEventListener("DOMContentLoaded", () => {
   //LOAD DYNAMIC FIELDS
   renderHead(TABLE_COLUMNS, "usersThead");
-  fillSelect("Plan", PLANES);
+
   fillSelect("Medio_de_pago", METODO_DE_PAGO);
   fillSelect("PaymentStatus", ESTADO_PAGO);
-  fillSelect("FilterPlanSelect", PLANES);
+
   fillSelect("statusSelect", ESTADO_PLAN);
 
   initSearch();
@@ -117,9 +117,18 @@ document.addEventListener("DOMContentLoaded", () => {
   initConfirmDeleteDialog();
   if (window.SessionManager) {
     loadUsers();
+
+
   } else {
-    window.addEventListener("session-ready", () => loadUsers(), { once: true });
+    window.addEventListener("session-ready", () => {
+      loadUsers();
+    }, { once: true });
   }
+
+  window.addEventListener("info_loaded", () => {
+    fillSelect("Plan", PLANES);
+    fillSelect("FilterPlanSelect", PLANES);
+  }, { once: true });
 
   DASHBOARD_FILTERS.forEach((item) => {
     if (item.onChange)

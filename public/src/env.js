@@ -25,7 +25,8 @@ const ENV_VARS = {
 
   url_send_code:"https://n8n.angrylabs.app/webhook/17c50d70-e48e-47a6-8f7d-4434759b4f73",
   url_get_pagos:"https://n8n.angrylabs.app/webhook/bcfb0eb3-b085-4413-a1a3-358cdff22b43",
-  url_delete_user:"https://n8n.angrylabs.app/webhook/911c3e6e-7548-4620-b86f-dc0f3cee0979"
+  url_delete_user:"https://n8n.angrylabs.app/webhook/911c3e6e-7548-4620-b86f-dc0f3cee0979",
+  url_get_planes: "https://n8n.angrylabs.app/webhook/e2b33545-4130-4699-8549-a30b03e39b16",
 };
 
 const TABLE_COLUMNS = [
@@ -66,16 +67,13 @@ const TABLE_COLUMNS = [
   },
 ];
 
-const PLANES = [
-    { value: "4 Horas grupales", label: "4 Horas grupales (30 días)", amount:200 },
-    { value: "8 Horas grupales", label: "8 Horas grupales (60 días)", amount:350 },
-    { value: "16 Horas grupales", label: "16 Horas grupales (90 días)", amount:600 },
-    { value: "1 Hora privada", label: "1 Hora privada", amount:120 },
-    { value: "4 Horas privadas", label: "4 Horas privadas", amount:460 },
-    { value: "8 Horas privadas", label: "8 Horas privadas", amount:880 },
-    { value: "12 Horas privadas", label: "12 Horas privadas", amount:1260 },
-    { value: "Clase Libre", label: "Clase Libre", amount:0 },
-];
+let PLANES = [];
+function ENV_SET_PLANES(_planes){
+  if (_planes && _planes.length > 0){
+    _planes.sort((a, b) => (Number(a.order ?? Infinity) - Number(b.order ?? Infinity)));
+  };
+  PLANES = _planes || [];
+}
 
   const ESTADO_PLAN = [
     { value: "Activo", label: "Activo"},

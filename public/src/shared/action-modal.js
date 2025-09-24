@@ -217,18 +217,18 @@ function initConfirmDeleteDialog() {
     };
 
     try {
-      showLoader('Eliminando alumno...');
+      FP.loader.show('Eliminando alumno...');
       const res = await delete_users(payload);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      showToast("Actualizamos con éxito","success");
+      FP.toast.show("Actualizamos con éxito","success");
     } catch (err) {
       console.error(err);
-      showToast("Hubo un problema al eliminar. Reintenta en unos segundos.");
+      FP.toast.show("Hubo un problema al eliminar. Reintenta en unos segundos.");
     } finally {
         loadUsers();
-        hideLoader();
+        FP.loader.hide();
         //if (success) {
-        //  showToast("Actualizamos con éxito","success");
+        //  FP.toast.show("Actualizamos con éxito","success");
         //}
     }
 
