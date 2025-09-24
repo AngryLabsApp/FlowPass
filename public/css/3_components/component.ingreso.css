@@ -2,6 +2,8 @@
   .checkin {
     padding: 16px;
     width: min(720px, 100%);
+    display: flex;
+    flex-direction: column;
   }
 
   .checkin__header {
@@ -79,7 +81,7 @@
     font-size: 14px;
     font-weight: 600;
     color: var(--text);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
     /* Transición para animar salida suave */
     transition: transform 220ms ease, opacity 220ms ease;
   }
@@ -96,18 +98,20 @@
   .checkin__status .icon {
     width: 18px;
     height: 18px;
-    min-width: 18px;   /* Evita que encoja en flex */
-    min-height: 18px;  /* Evita que encoja en flex */
-    flex: 0 0 18px;    /* Fija tamaño dentro del contenedor flex */
+    min-width: 18px; /* Evita que encoja en flex */
+    min-height: 18px; /* Evita que encoja en flex */
+    flex: 0 0 18px; /* Fija tamaño dentro del contenedor flex */
   }
 
   .card.checkin {
+    position: relative;
     display: block;
     margin: 16px auto; /* ← centra horizontal */
     width: min(720px, 100%); /* ancho cómodo */
     padding: 16px; /* ya tienes padding, por si acaso */
     /* Transiciones suaves al entrar/salir de estado de error */
-    transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+    transition: background-color 200ms ease, border-color 200ms ease,
+      box-shadow 200ms ease;
   }
 
   .checkin__avatar-wrap {
@@ -155,14 +159,25 @@
     color: var(--c10);
     transform-origin: 50% 50%;
     will-change: transform, color, filter;
-    filter: drop-shadow(0 2px 6px color-mix(in oklab, var(--c10) 25%, transparent));
+    filter: drop-shadow(
+      0 2px 6px color-mix(in oklab, var(--c10) 25%, transparent)
+    );
     animation: checkinIconPulse 2.6s ease-in-out infinite;
   }
 
   @keyframes checkinIconPulse {
-    0%   { transform: translateY(0) scale(1);   color: var(--c10); }
-    50%  { transform: translateY(-2px) scale(1.06); color: var(--c4); }
-    100% { transform: translateY(0) scale(1);  color: var(--c10); }
+    0% {
+      transform: translateY(0) scale(1);
+      color: var(--c10);
+    }
+    50% {
+      transform: translateY(-2px) scale(1.06);
+      color: var(--c4);
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      color: var(--c10);
+    }
   }
   .checkin__display-name {
     position: relative;
@@ -205,15 +220,30 @@
   }
 
   @keyframes checkinNameGradient {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   @keyframes checkinUnderlinePulse {
-    0%   { transform: scaleX(0.95); opacity: 0.9; }
-    50%  { transform: scaleX(1.06); opacity: 1; }
-    100% { transform: scaleX(0.95); opacity: 0.9; }
+    0% {
+      transform: scaleX(0.95);
+      opacity: 0.9;
+    }
+    50% {
+      transform: scaleX(1.06);
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(0.95);
+      opacity: 0.9;
+    }
   }
 
   /* Adaptaciones para tablets y móviles */
@@ -246,9 +276,15 @@
 
   /* Accesibilidad: reducir movimiento si el usuario lo prefiere */
   @media (prefers-reduced-motion: reduce) {
-    .checkin__display-name { animation: none; }
-    .checkin__display-name::after { animation: none; }
-    .checkin__avatar .icon { animation: none; }
+    .checkin__display-name {
+      animation: none;
+    }
+    .checkin__display-name::after {
+      animation: none;
+    }
+    .checkin__avatar .icon {
+      animation: none;
+    }
   }
 }
 
@@ -265,12 +301,18 @@
     height: 28px;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.06));
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.06));
   }
-  .brand-logos__logo--primary { opacity: 0.95; }
-  .brand-logos__logo--client { opacity: 0.95; }
+  .brand-logos__logo--primary {
+    opacity: 0.95;
+  }
+  .brand-logos__logo--client {
+    opacity: 0.95;
+  }
   @media (max-width: 480px) {
-    .brand-logos__logo { height: 24px; }
+    .brand-logos__logo {
+      height: 24px;
+    }
   }
   /* Teclado numérico para checkin */
   .checkin__keypad {
@@ -403,20 +445,35 @@
     background: var(--bg-danger);
     animation: content-error-shake 0.32s ease;
     /* Al salir del estado de error, que el retorno sea más suave */
-    transition: background-color 400ms ease, border-color 400ms ease, box-shadow 400ms ease;
+    transition: background-color 400ms ease, border-color 400ms ease,
+      box-shadow 400ms ease;
   }
 
   @keyframes content-error-shake {
-    0% { transform: translateX(0); }
-    20% { transform: translateX(-6px); }
-    40% { transform: translateX(6px); }
-    60% { transform: translateX(-4px); }
-    80% { transform: translateX(4px); }
-    100% { transform: translateX(0); }
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-6px);
+    }
+    40% {
+      transform: translateX(6px);
+    }
+    60% {
+      transform: translateX(-4px);
+    }
+    80% {
+      transform: translateX(4px);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
 
   /* Mensaje de error más claro y visible */
-  .checkin__status.checkin__status--err { animation: status-pop 160ms ease-out; }
+  .checkin__status.checkin__status--err {
+    animation: status-pop 160ms ease-out;
+  }
 
   /* Estado de salida: desliza y desvanece el mensaje */
   .checkin__status--slide-out {
@@ -425,14 +482,24 @@
   }
 
   @keyframes status-pop {
-    from { transform: scale(0.98); opacity: 0.75; }
-    to   { transform: scale(1); opacity: 1; }
+    from {
+      transform: scale(0.98);
+      opacity: 0.75;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 
   /* Respeta accesibilidad si el usuario prefiere menos movimiento */
   @media (prefers-reduced-motion: reduce) {
-    .content--error .card.checkin { animation: none; }
-    .checkin__status.checkin__status--err { animation: none; }
+    .content--error .card.checkin {
+      animation: none;
+    }
+    .checkin__status.checkin__status--err {
+      animation: none;
+    }
   }
 }
 
@@ -458,13 +525,13 @@
     height: 150px;
     object-fit: contain;
     flex: 0 0 auto;
-    filter: drop-shadow(0 4px 18px rgba(0,0,0,0.12));
+    filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.12));
   }
   .success-modal__title {
     margin: 6px 0 0;
     font-weight: 800;
     font-size: clamp(22px, 6vw, 32px);
-    letter-spacing: .01em;
+    letter-spacing: 0.01em;
     color: var(--c10);
   }
   .success-modal__subtitle {

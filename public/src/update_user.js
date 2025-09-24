@@ -3,7 +3,7 @@ function update_form_submit () {
   if (!form) return;
 
   form.addEventListener('submit', async (e) => {
-     showLoader('Actualizando los datos...');
+     FP.loader.show('Actualizando los datos...');
     e.preventDefault();
     const formEl = e.currentTarget;
 
@@ -36,16 +36,15 @@ function update_form_submit () {
       success = true;
     } catch (err) {
       console.error(err);
-      showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
-      hideLoader();
+      FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
     } finally {
         submitBtn.disabled = false;
         loadUsers();
-        hideLoader();
+        FP.loader.hide();
         // Forzar recarga total en éxito
         if (success) {
           //esto no se ve porque se recarga la pantallaa
-          showToast("Actualizamos tu plan con éxito","success");
+          FP.toast.show("Actualizamos tu plan con éxito","success");
          
           //CAMBIAR ESTO PARA QUE NO SE CIERRE EL MODAL, O SE VUELVA ABRIR
           try { closeModal(); } catch (_) {}

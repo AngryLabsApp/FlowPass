@@ -1,0 +1,107 @@
+@layer components {
+  .dialog {
+    position: fixed;
+    inset: 0;
+    z-index: 1500;
+    display: none;
+    padding: 16px;
+  }
+
+  .dialog[aria-hidden="false"] {
+    display: grid;
+    place-items: center;
+  }
+
+  .dialog__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+  }
+
+  .dialog__panel {
+    position: relative;
+    width: min(420px, 100%);
+    padding: 24px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+    display: grid;
+    gap: 16px;
+  }
+
+  .dialog__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .dialog__note {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-danger);
+  }
+
+  .dialog__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .dialog__btn {
+    min-width: 120px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .dialog__btn--neutral {
+    background: var(--danger-light);
+    color: var(--danger);
+  }
+
+  .dialog__btn--neutral:hover,
+  .dialog__btn--neutral:focus-visible {
+    background: var(--danger-lighter);
+    outline: none;
+  }
+
+  .dialog__btn--danger {
+    background: var(--danger);
+    color: var(--white);
+  }
+
+  .dialog__btn--danger:hover,
+  .dialog__btn--danger:focus-visible {
+    background: #5c0724;
+    outline: none;
+  }
+
+  @media (max-width: 480px) {
+    .dialog__panel {
+      padding: 20px;
+      gap: 12px;
+    }
+
+    .dialog__title {
+      font-size: 16px;
+    }
+
+    .dialog__note {
+      font-size: 13px;
+    }
+
+    .dialog__btn {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .dialog__actions {
+      gap: 8px;
+    }
+  }
+}

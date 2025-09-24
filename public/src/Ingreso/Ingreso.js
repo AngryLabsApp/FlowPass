@@ -114,7 +114,7 @@ async function handleCheckin(query) {
   }
   let user = null;
   try {
-    showLoader("Registrando ingreso...");
+    FP.loader.show("Registrando ingreso...");
     const queryParams = { code: query };
     const url = buildUrl(ENV_VARS.url_ingreso, queryParams);
     const res = await ingreso_by_code(url);    
@@ -135,7 +135,7 @@ async function handleCheckin(query) {
         const msg = buildNonActiveMsg(u);
         applyCheckinUI({ ok: false, message: msg });
         clean(true);
-        hideLoader();
+        FP.loader.hide();
         return;
       }
 
@@ -175,7 +175,7 @@ async function handleCheckin(query) {
     applyCheckinUI({ ok: false, message: text });
     clean(true);
   }
-  hideLoader();
+  FP.loader.hide();
 }
 
 function clean(onlyForm) {

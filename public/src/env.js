@@ -24,6 +24,8 @@ const ENV_VARS = {
   url_form_historico:"https://n8n.angrylabs.app/form/fadc3eea-ce91-406a-9783-aabb5dca1f1d",
   url_send_code:"https://n8n.angrylabs.app/webhook/17c50d70-e48e-47a6-8f7d-4434759b4f73",
   url_get_pagos:"https://n8n.angrylabs.app/webhook/bcfb0eb3-b085-4413-a1a3-358cdff22b43",
+  url_delete_user:"https://n8n.angrylabs.app/webhook/911c3e6e-7548-4620-b86f-dc0f3cee0979",
+  url_get_planes: "https://n8n.angrylabs.app/webhook/e2b33545-4130-4699-8549-a30b03e39b16",
 };
 
 const TABLE_COLUMNS = [
@@ -33,11 +35,15 @@ const TABLE_COLUMNS = [
   { key: 'apellidos',           label: 'Apellido(s)',      headClass: 'table__head-cell table__col--last-name',  cellClass: 'table__cell table__col--last-name',   visible: true,
     render: (u) =>u.apellidos ? `${toTitleCase(u.apellidos)}` : `${safe(u.apellidos)}`
   },
-  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--plan',       cellClass: 'table__cell table__col--plan',        visible: true },
+  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--plan',       cellClass: 'table__cell table__col--plan',        visible: true,
+      render: (u) =>!u?.plan ? "-" :  `${safe(u.plan)}`
+   },
   { key: 'clases',              label: 'Clases realizadas',headClass: 'table__head-cell table__col--classes',    cellClass: 'table__cell table__col--classes',     visible: true,
-    render: (u) =>u.limite_clases ? `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}` : `${safe(u.clases_tomadas)}`
+    render: (u) =>!u?.plan ? "-" :  u.limite_clases ? `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}` : `${safe(u.clases_tomadas)}`
   },
-  { key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true },
+  { key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true,
+     render: (u) =>!u?.plan ? "-" :  `${safe(u.dias_de_gracia)}`
+  },
   { key: 'fecha_inicio_plan',   label: 'Inicio de plan',   headClass: 'table__head-cell table__col--start',      cellClass: 'table__cell table__col--start',       visible: true,
     render: (u) => formatDateDMY(u.fecha_inicio_plan)
   },
@@ -47,21 +53,26 @@ const TABLE_COLUMNS = [
   { key: 'estado',              label: 'Estado',           headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
     render: (u) => `<span class="badge ${statusBadgeClass(u.estado)}">${safe(u.estado)}</span>`
   },
-  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
-    render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
+  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell table__col--status users-table__col--payment-status',     cellClass: 'table__cell table__col--status users-table__col--payment-status',      visible: true,
+    render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: "-"
+  },
+  {
+    key: 'actions',
+    label: '',
+    headClass: 'table__head-cell table__col--actions',
+    cellClass: 'table__cell table__col--actions',
+    visible: true,
+    render: (u) => renderUserActionsCell(u),
   },
 ];
 
-const PLANES = [
-    { value: "12 Sesiones Mensuales", label: "12 Sesiones Mensuales", amount:150 },
-    { value: "16 Sesiones Mensuales", label: "16 Sesiones Mensuales", amount:180  },
-    { value: "20 Sesiones Mensuales", label: "20 Sesiones Mensuales", amount:200  },
-    { value: "Clase Libre",        label: "Clase Libre", amount:15  },
-    { value: "Clase Gratis",       label: "Clase Gratis", amount:0 , is_free:true },
-    { value: "12 Sesiones Personalizadas",  label: "12 Sesiones Personalizadas",amount:150  },
-    { value: "16 Sesiones Personalizadas",  label: "16 Sesiones Personalizadas",amount:180  },
-    { value: "20 Sesiones Personalizadas",  label: "20 Sesiones Personalizadas",amount:200  },
-  ];
+let PLANES = [];
+function ENV_SET_PLANES(_planes){
+  if (_planes && _planes.length > 0){
+    _planes.sort((a, b) => (Number(a.order ?? Infinity) - Number(b.order ?? Infinity)));
+  };
+  PLANES = _planes || [];
+}
 
   const ESTADO_PLAN = [
     { value: "Activo", label: "Activo"},
