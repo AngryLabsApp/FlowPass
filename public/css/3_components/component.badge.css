@@ -7,12 +7,10 @@
     font-size: 12px;
     font-weight: 700;
     border: 1px solid rgba(0, 0, 0, 0.06);
-    /* display: flex;
-width: fit-content; */
     /* Evitar saltos de línea y cortes dentro del chip */
-    white-space: nowrap;
-    word-break: normal;
-    overflow-wrap: normal;
+    white-space:initial;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .badge--active {
     background: var(--c5);

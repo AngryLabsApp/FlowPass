@@ -20,7 +20,9 @@ const ENV_VARS = {
   url_ingreso:"https://n8n.angrylabs.app/webhook/23c0319d-5248-4b38-8fe6-b72063c526df",
   url_form_historico:"https://n8n.angrylabs.app/form/90e18c52-079d-4004-876b-89911d4f5ae0",
   url_send_code:"https://n8n.angrylabs.app/webhook/17c50d70-e48e-47a6-8f7d-4434759b4f73",
-  url_get_pagos:"https://n8n.angrylabs.app/webhook/bcfb0eb3-b085-4413-a1a3-358cdff22b43"
+  url_get_pagos:"https://n8n.angrylabs.app/webhook/bcfb0eb3-b085-4413-a1a3-358cdff22b43",
+  url_delete_user:"https://n8n.angrylabs.app/webhook/911c3e6e-7548-4620-b86f-dc0f3cee0979",
+  url_get_planes: "https://n8n.angrylabs.app/webhook/e2b33545-4130-4699-8549-a30b03e39b16",
 };
 
 const TABLE_COLUMNS = [
@@ -30,9 +32,14 @@ const TABLE_COLUMNS = [
   { key: 'apellidos',           label: 'Apellido(s)',      headClass: 'table__head-cell table__col--last-name',  cellClass: 'table__cell table__col--last-name',   visible: true,
     render: (u) =>u.apellidos ? `${toTitleCase(u.apellidos)}` : `${safe(u.apellidos)}`
   },
-  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--plan',       cellClass: 'table__cell table__col--plan',        visible: true },
+  { key: 'plan',                label: 'Plan',             headClass: 'table__head-cell table__col--plan',       cellClass: 'table__cell table__col--plan',        visible: true,
+      render: (u) =>!u?.plan ? "-" :  `${safe(u.plan)}`
+   },
   { key: 'clases',              label: 'Clases realizadas',headClass: 'table__head-cell table__col--classes',    cellClass: 'table__cell table__col--classes',     visible: true,
-    render: (u) =>u.limite_clases ? `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}` : `${safe(u.clases_tomadas)}`
+    render: (u) =>!u?.plan ? "-" :  u.limite_clases ? `${safe(u.clases_tomadas)}/${safe(u.limite_clases)}` : `${safe(u.clases_tomadas)}`
+  },
+  { key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true,
+     render: (u) =>!u?.plan ? "-" :  `${safe(u.dias_de_gracia)}`
   },
   //{ key: 'dias_de_gracia',      label: 'Días de cortesía', headClass: 'table__head-cell table__col--grace',      cellClass: 'table__cell table__col--grace',       visible: true },
   { key: 'fecha_inicio_plan',   label: 'Inicio de plan',   headClass: 'table__head-cell table__col--start',      cellClass: 'table__cell table__col--start',       visible: true,
@@ -45,18 +52,26 @@ const TABLE_COLUMNS = [
   { key: 'estado',              label: 'Estado',           headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
     render: (u) => `<span class="badge ${statusBadgeClass(u.estado)}">${safe(u.estado)}</span>`
   },
-  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell table__col--status',     cellClass: 'table__cell table__col--status',      visible: true,
-    render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: ""
+  { key: 'estado_pago',         label: 'Estado de pago',  headClass: 'table__head-cell table__col--status users-table__col--payment-status',     cellClass: 'table__cell table__col--status users-table__col--payment-status',      visible: true,
+    render: (u) => u.estado_pago ? `<span class="badge ${statusBadgeClass(u.estado_pago)}">${safe(u.estado_pago)}</span>`: "-"
+  },
+  {
+    key: 'actions',
+    label: '',
+    headClass: 'table__head-cell table__col--actions',
+    cellClass: 'table__cell table__col--actions',
+    visible: true,
+    render: (u) => renderUserActionsCell(u),
   },
 ];
 
-const PLANES = [
-    { value: "Plan 8 Horas", label: "Plan 8 Horas", amount:120 },
-    { value: "Plan 16 Horas", label: "Plan 16 Horas", amount:220  },
-    { value: "Plan personalizado", label: "Plan personalizado", amount: 0  },
-    { value: "Plan 8 Horas Pareja", label: "Plan 8 Horas Pareja", amount:220, partners: true  },
-    { value: "Plan 16 Horas Pareja", label: "Plan 16 Horas Pareja", amount:380, partners: true  },
-  ];
+let PLANES = [];
+function ENV_SET_PLANES(_planes){
+  if (_planes && _planes.length > 0){
+    _planes.sort((a, b) => (Number(a.order ?? Infinity) - Number(b.order ?? Infinity)));
+  };
+  PLANES = _planes || [];
+}
 
   const ESTADO_PLAN = [
     { value: "Activo", label: "Activo"},

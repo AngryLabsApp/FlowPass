@@ -181,19 +181,19 @@
         const partner_code_value = scope.querySelector("#sub-partner-code")?.value;
         if (partner_code_value) payload.partner_code = { value: partner_code_value };
 
-        showLoader("Actualizando los datos...");
+        FP.loader.show("Actualizando los datos...");
         const res = await update_users(payload);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         success = true;
       } catch (err) {
         console.error(err);
-        showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
+        FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
       } finally {
-        hideLoader();
+        FP.loader.hide();
         loadUsers();
         closeSubModal();
         if (success) {
-          showToast("Actualizamos tu plan con éxito","success");
+          FP.toast.show("Actualizamos tu plan con éxito","success");
           try {
              closeModal(); 
           } catch (_) {}
@@ -314,20 +314,20 @@
           return;
         }
 
-        showLoader("Actualizando los datos...");
+        FP.loader.show("Actualizando los datos...");
         const res = await update_users(payload);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         success = true;
       } catch (err) {
         console.error(err);
-        showToast("Hubo un problema al actualizar. Reintenta en unos segundos.");
-        hideLoader();
+        FP.toast.show("Hubo un problema al actualizar. Reintenta en unos segundos.");
+        FP.loader.hide();
       } finally {
-        hideLoader();
+        FP.loader.hide();
         loadUsers();
         closeSubModal();
         if (success) {
-          showToast("Actualizamos con éxito","success");
+          FP.toast.show("Actualizamos con éxito","success");
           try {
              closeModal(); 
           } catch (_) {}
