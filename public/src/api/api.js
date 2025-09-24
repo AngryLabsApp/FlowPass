@@ -76,7 +76,6 @@ async function get_planes({ force = false, maxAgeMs = 60 * 60 * 1000 } = {}) {
   const keyData = 'plans:data';
   const keyEtag = 'plans:etag';
   const keyTs   = 'plans:ts';
-
   const session = await window.SessionManager.ensureSessionOrRedirect();
   if (!session) return;
 
@@ -88,7 +87,6 @@ async function get_planes({ force = false, maxAgeMs = 60 * 60 * 1000 } = {}) {
   };
   if (cached?.etag) headers['If-None-Match'] = cached.etag;
 
-    console.log("cached headers", headers);
   // Cache-first si está fresco y no forzaste
   if (!force && isFresh(cached, maxAgeMs)) {
     // Revalidación en segundo plano (opcional)
@@ -102,7 +100,7 @@ async function get_planes({ force = false, maxAgeMs = 60 * 60 * 1000 } = {}) {
         }
       })
       .catch(() => {});
-    console.log("EL CACHADO",cached.data);
+    //console.log("EL CACHADO",cached.data);
     return cached.data;
   }
 
@@ -118,7 +116,7 @@ async function get_planes({ force = false, maxAgeMs = 60 * 60 * 1000 } = {}) {
   const planes = data.planes;
   const etag = data.etag;
   setCached({ keyData, keyEtag, keyTs, data:planes, etag });
-  console.log("EL ULTIMO",data.planes);
+  //console.log("EL ULTIMO",data.planes);
   return data.planes;
 }
 
