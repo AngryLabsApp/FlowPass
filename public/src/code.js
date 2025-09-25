@@ -14,7 +14,11 @@ function buildQueryParams(page) {
   let index = 1;
   DASHBOARD_FILTERS.forEach((item) => {
     const input = $("#" + item.element_id).value;
-    if (input && String(input).trim() !== "") {
+    console.log(item);
+    if (item.key == "sort"){
+      queryParams.sort = input;
+    }
+    else if (input && String(input).trim() !== "") {
       queryParams["field" + index] = item.key;
       queryParams["value" + index] = String(input).trim();
       index++;

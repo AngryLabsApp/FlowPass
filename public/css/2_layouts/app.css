@@ -276,9 +276,20 @@
   .main {
     padding: var(--space-6);
   }
+  .main__header {
+  display: flex;
+  justify-content: space-between; /* título izq, sort der */
+  align-items: center;            /* los alinea verticalmente */
+  margin-bottom: var(--space-4);  /* espacio hacia la tabla */
+}
+
+.main__sort-select:hover {
+  border-color: #d1d5db;
+}
+
   .main__title {
     font-size: 30px;
-    margin: 0 0 var(--space-4);
+    margin: 0; /* quitamos el margin-bottom del h1 */
   }
 
   /* ======== Card ======== */
@@ -362,5 +373,25 @@
       justify-content: center;
       z-index: 1;
     }
+  }
+}
+
+
+/* ===== Responsive: header título + sort ===== */
+@media (max-width: 768px) {
+  .main__header {
+    display: flex;            /* mantiene flex */
+    flex-wrap: wrap;          /* permite que baje a 2 líneas */
+    gap: .5rem 0;
+    margin-bottom: var(--space-4);
+  }
+
+  .main__title {
+    flex: 1 1 100%;           /* título ocupa la fila completa */
+    margin: 0;                /* sin margen extra */
+  }
+
+  .main__sort {
+    flex: 1 1 100%;           /* bloque del sort a la siguiente fila */
   }
 }

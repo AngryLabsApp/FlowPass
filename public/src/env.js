@@ -201,7 +201,8 @@ const TABLE_PAYMENTS_COLUMNS = [
 const DASHBOARD_FILTERS = [
   {key:"nombre", element_id:"searchInput", onChange:false},
   {key:"estado", element_id:"statusSelect", onChange:true},
-  {key:"plan", element_id:"FilterPlanSelect", onChange:true}
+  {key:"plan", element_id:"FilterPlanSelect", onChange:true},
+  {key:"sort", element_id:"sortSelect", onChange:true}
 ];
 
 const DASHBOARD_PAGOS_FILTERS = [

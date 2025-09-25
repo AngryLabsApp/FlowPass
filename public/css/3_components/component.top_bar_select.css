@@ -1,4 +1,17 @@
 @layer components {
+@media (max-width: 768px) {
+ .topbar__select {
+    width: 100%;              /* select de ancho completo */
+  }
+}
+  
+@media (max-width: 480px) {
+ .topbar__select {
+    padding: .5rem .65rem;    /* un pelín más compacto */
+    font-size: .95rem;
+  }
+}
+
   /* Selects del topbar */
   .topbar__select {
     /* tokens (puedes ajustar) */

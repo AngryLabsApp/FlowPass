@@ -1,140 +1,122 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FlowPass — Pagos</title>
-    <link
-      rel="icon"
-      href="/public/icons/logo-flowpass.svg"
-      type="image/svg+xml"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./public/css/index.css" />
-  </head>
 
-  <body>
-    <div class="layout">
-      <!-- Sidebar -->
-      <aside class="sidebar"></aside>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FlowPass — Pagos</title>
+  <link rel="icon" href="/public/icons/logo-flowpass.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./public/css/index.css" />
+</head>
 
-      <!-- Content -->
-      <div class="content">
-        <div class="topbar">
-          <div class="topbar__filters">
-            <input
-              id="paymentsSearch"
-              class="topbar__search-input"
-              type="search"
-              placeholder="Buscar por nombre, email o código"
-              aria-label="Buscar por nombre o apellido"
-              autocomplete="off"
-            />
-            <input
-              id="paymentsMonthFilter"
-              class="topbar__select topbar__select--month"
-              type="month"
-              aria-label="Filtrar por mes"
-              name="paymentsMonth"
-            />
-            <select
-              id="FilterEstadoPagoSelect"
-              class="topbar__select"
-              aria-label="Filtrar por estado"
-            >
-              <option value="">Estado de pago: Todos</option>
-            </select>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar"></aside>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="topbar">
+        <div class="topbar__filters">
+          <input id="paymentsSearch" class="topbar__search-input" type="search"
+            placeholder="Buscar por nombre, email o código" aria-label="Buscar por nombre o apellido"
+            autocomplete="off" />
+          <input id="paymentsMonthFilter" class="topbar__select topbar__select--month" type="month"
+            aria-label="Filtrar por mes" name="paymentsMonth" />
+          <select id="FilterEstadoPagoSelect" class="topbar__select" aria-label="Filtrar por estado">
+            <option value="">Estado de pago: Todos</option>
+          </select>
+        </div>
+        <div class="topbar__actions">
+          <button class="btn btn--primary" id="downloadHistory" type="button">
+            Descargar historial
+          </button>
+        </div>
+      </div>
+
+      <main class="main">
+        <section class="metrics">
+          <div class="metric-card" id="total_mensual" aria-live="polite">
+            <div class="metric-card__icon" aria-hidden="true">
+              <svg class="icon icon--lg">
+                <use href="/public/icons/sprites.svg#money-bag"></use>
+              </svg>
+            </div>
+            <p class="metric-card__value" id="total_mensual_value">
+              S/. 0.00
+            </p>
+            <p class="metric-card__label">Ingresos totales</p>
+            <p class="metric-card__period" id="total_mensual_period">
+              Mes actual
+            </p>
           </div>
-          <div class="topbar__actions">
-            <button class="btn btn--primary" id="downloadHistory" type="button">
-              Descargar historial
-            </button>
+        </section>
+
+        <div class="main__header">
+          <h1 class="main__title">Pagos</h1>
+        </div>
+        <div class="card" aria-label="Tabla de pagos">
+          <table class="table table--payments" aria-label="Tabla de pagos">
+            <thead class="table__head" id="payments_table">
+              <tr class="table__row">
+                <th class="table__head-cell table__col--payment-id">
+                  Payment ID
+                </th>
+                <th class="table__head-cell table__col--payment-user">
+                  Alumno
+                </th>
+                <th class="table__head-cell table__col--payment-amount">
+                  Monto
+                </th>
+                <th class="table__head-cell table__col--payment-date">
+                  Fecha
+                </th>
+                <th class="table__head-cell table__col--payment-plan">
+                  Plan
+                </th>
+                <th class="table__head-cell table__col--payment-method">
+                  Medio de pago
+                </th>
+                <th class="table__head-cell table__col--payment-status">
+                  Estado
+                </th>
+              </tr>
+            </thead>
+            <tbody class="table__body" id="paymentsTableBody">
+            </tbody>
+          </table>
+          <div class="table__footer" id="usersPager">
+            <div class="pagination">
+              <div class="pagination__status" id="pagerStatus"></div>
+              <nav class="pagination__nav" aria-label="Paginación" id="pagination"></nav>
+            </div>
           </div>
         </div>
-
-        <main class="main">
-          <section class="metrics">
-            <div class="metric-card" id="total_mensual" aria-live="polite">
-              <div class="metric-card__icon" aria-hidden="true">
-                <svg class="icon icon--lg">
-                  <use href="/public/icons/sprites.svg#money-bag"></use>
-                </svg>
-              </div>
-              <p class="metric-card__value" id="total_mensual_value">
-                S/. 0.00
-              </p>
-              <p class="metric-card__label">Ingresos totales</p>
-              <p class="metric-card__period" id="total_mensual_period">
-                Mes actual
-              </p>
-            </div>
-          </section>
-          <h1 class="main__title">Pagos</h1>
-          <div class="card" aria-label="Tabla de pagos">
-            <table class="table table--payments" aria-label="Tabla de pagos">
-              <thead class="table__head" id="payments_table">
-                <tr class="table__row">
-                  <th class="table__head-cell table__col--payment-id">
-                    Payment ID
-                  </th>
-                  <th class="table__head-cell table__col--payment-user">
-                    Alumno
-                  </th>
-                  <th class="table__head-cell table__col--payment-amount">
-                    Monto
-                  </th>
-                  <th class="table__head-cell table__col--payment-date">
-                    Fecha
-                  </th>
-                  <th class="table__head-cell table__col--payment-plan">
-                    Plan
-                  </th>
-                  <th class="table__head-cell table__col--payment-method">
-                    Medio de pago
-                  </th>
-                  <th class="table__head-cell table__col--payment-status">
-                    Estado
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="table__body" id="paymentsTableBody">                
-              </tbody>
-            </table>
-            <div class="table__footer" id="usersPager">
-              <div class="pagination">
-                <div class="pagination__status" id="pagerStatus"></div>
-                <nav
-                  class="pagination__nav"
-                  aria-label="Paginación"
-                  id="pagination"
-                ></nav>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
+      </main>
     </div>
-    <script src="/public/src/utils/dynamic-forms.js"></script>
-    <script src="/public/src/utils/utils.js"></script>
-    <script src="/public/src/load_dynamic_fields.js"></script>
-    <script src="/public/src/session/session_manager.js" type="module"></script>
-    <script type="module">
-      import { ensureSessionOrRedirect } from "/public/src/session/session_manager.js";
-      window.SessionManager = { ensureSessionOrRedirect };
-      window.dispatchEvent(new Event("session-ready"));
-    </script>
+  </div>
+  <script src="/public/src/utils/dynamic-forms.js"></script>
+  <script src="/public/src/utils/utils.js"></script>
+  <script src="/public/src/load_dynamic_fields.js"></script>
+  <script src="/public/src/session/session_manager.js" type="module"></script>
+  <script type="module">
+    import { ensureSessionOrRedirect } from "/public/src/session/session_manager.js";
+    window.SessionManager = { ensureSessionOrRedirect };
+    window.dispatchEvent(new Event("session-ready"));
+  </script>
 
-    <script src="/public/src/api/api.js" defer></script>
+  <script src="/public/src/api/api.js" defer></script>
 
-    <script src="/public/src/shared/sidebar.js"></script>
-    <script src="/public/src/env.js"></script>
-    <script src="/public/src/pagination.js"></script>
+  <script src="/public/src/shared/sidebar.js"></script>
+  <script src="/public/src/env.js"></script>
+  <script src="/public/src/pagination.js"></script>
 
-    <script src="/public/src/historico/historico.js"></script>
-  </body>
+  <script src="/public/src/historico/historico.js"></script>
+</body>
+
 </html>
